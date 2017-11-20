@@ -15,9 +15,9 @@
     <td><%= user.id %></td>
     <td><%= user.name %></td>
     <td><%= user.email %></td>
-    <td><a href="/user/show/<%=user.id%>">Show</a></td>
-    <td><a href="/user/edit/<%=user.id%>">Edit</a></td>
-    <td><a href="/user/destroy/<%=user.id%>">Delete</a></td>
+    <td><a href="/user/show/<%= user.id %>">Show</a></td>
+    <td><a href="/user/edit/<%= user.id %>">Edit</a></td>
+    <td><a href="/user/destroy/<%= user.id %>">Delete</a></td>
 </tr>
 <% }) %>
 </table>
