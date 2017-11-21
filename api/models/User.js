@@ -18,7 +18,22 @@ module.exports = {
     },
     state: {
       type: 'string'
+    },
+
+    //conecto con proyectos
+    projects_own: {
+      collection: 'project',
+      via: 'owner'
+    },
+    projects_team: {
+      collection: 'project',
+      via: 'team'
+    },
+    projects_guest: {
+      collection: 'project',
+      via: 'guest'
     }
+
 
   }
 };

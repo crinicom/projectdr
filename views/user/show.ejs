@@ -2,3 +2,8 @@
 <br>
 <h3>email: <%= user.email %></h3>
 <h3>state: <%= user.state %></h3>
+
+<form action="/project/new" method="POST">
+<input type="hidden" value="<%=user.id%>" name="owner">
+<input type="submit" value="Add project">
+</form>
