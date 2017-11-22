@@ -23,15 +23,15 @@ module.exports = {
     //conecto con proyectos
     projects_own: {
       collection: 'project',
-      via: 'owner'
+      via: 'owner' 
     },
     projects_team: {
       collection: 'project',
-      via: 'team'
+      via: 'team_members'
     },
     projects_guest: {
       collection: 'project',
-      via: 'guest'
+      via: 'guests'
     }
 
 

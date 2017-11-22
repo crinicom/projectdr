@@ -24,11 +24,13 @@ module.exports = {
       model: 'user',
       required: true
     },
-    team: {
-      model: 'user'
+    team_members: {
+      collection: 'user',
+      via: 'projects_team'
     },
-    guest: {
-      model: 'user'
+    guests: {
+      collection: 'user',
+      via: 'projects_guest'
     }
   }
 };

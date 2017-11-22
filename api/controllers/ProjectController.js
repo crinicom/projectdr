@@ -18,7 +18,8 @@ module.exports = {
         Project.create(req.params.all(), function projectCreated(err, project) {
             if (err) return next(err);
             
-            res.json(project);
+            //res.json(project);
+         res.redirect('/user/show/'+project.owner);
         });
     }
 };
