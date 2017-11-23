@@ -16,7 +16,7 @@ module.exports = {
       type: 'string',
       email: true
     },
-    state: {
+    pswd: {
       type: 'string'
     },
     projects: {

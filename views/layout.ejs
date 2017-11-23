@@ -30,13 +30,29 @@
 
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/custom.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
   </head>
 
   <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">Project Dr.</a>
+      </div>
+
+    </div>
+    
     <%- body %>
 
+    <div class="container">
+      <hr>
+      <footer class="footer pull-right">
+        <div>
+          <div>Project Doctor by CM 2017</div>
+        </div>
+      </footer>
+    </div>
 
 
     <!--
@@ -90,8 +106,8 @@
 
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/dependencies/jquery-3.2.1.js"></script>
     <script src="/js/bootstrap.js"></script>
-    <script src="/js/jquery-3.2.1.js"></script>
     <!--SCRIPTS END-->
   </body>
 </html>
