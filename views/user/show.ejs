@@ -2,8 +2,8 @@
 <br>
 <h3>email: <%= user.email %></h3>
 <h3>state: <%= user.state %></h3>
-<h2><%= user.projects_own[0]%></h2>
-
+<h2><%= user.projects_own%></h2>
+<hr>
 <H2>Proyectos</H2>
 <table>
     <tr>
@@ -15,9 +15,9 @@
         <th></th>
         <th></th>
     </tr>
-    <% _.each(user.projects_own, function(project) { %>
+    <% _.each(user.projects, function(project) { %>
         <tr data-id="<%= project.id%>" data-model="project">
-            <td><%=project.id%></td>
+            <!-- <td><%=project.id%></td> -->
             <td><%=project.name%></td>
             <td><%=project.description%></td>
             <td><%=project.scope%></td>

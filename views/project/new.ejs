@@ -1,5 +1,5 @@
 <form action="/project/create" method="POST">
-    <h2>New project for User <%=user.id%></h2>
+    <h2>New project for User <%=user.name%></h2>
 
     <input type="hidden" name="owner" value="<%=user.id%>" />
     <input type="text" placeholder="name" name="name"><br/>

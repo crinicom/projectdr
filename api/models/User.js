@@ -19,17 +19,15 @@ module.exports = {
     state: {
       type: 'string'
     },
-
-    //conecto con proyectos
-    projects_own: {
+    projects: {
       collection: 'project',
       via: 'owner' 
     },
-    projects_team: {
+    projectsTeam: {
       collection: 'project',
       via: 'team_members'
     },
-    projects_guest: {
+    projectsGuest: {
       collection: 'project',
       via: 'guests'
     }

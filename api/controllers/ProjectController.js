@@ -11,7 +11,7 @@ module.exports = {
             if (err) return next(err);
             if (!user) return next();
 
-            res.view({ user:user});
+            res.view({user:user});  
         });
     },
     create: function(req, res, next) {

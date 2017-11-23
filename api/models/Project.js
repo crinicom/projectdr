@@ -26,11 +26,11 @@ module.exports = {
     },
     team_members: {
       collection: 'user',
-      via: 'projects_team'
+      via: 'projectsTeam'
     },
     guests: {
       collection: 'user',
-      via: 'projects_guest'
+      via: 'projectsGuest'
     }
   }
 };
