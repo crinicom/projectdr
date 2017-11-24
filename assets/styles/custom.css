@@ -24,3 +24,19 @@ body {
     .footer {
         width: 25%;
     }
+.bg-inverse {
+    background-color: #292b2c;
+}
+.navbar-brand:hover, .navbar-inverse .navbar-toggler:focus, .navbar-inverse .navbar-toggler:hover {
+    color: #fff;
+}
+
+.navbar-brand {
+    display: inline-block;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    margin-right: 1rem;
+    font-size: 1.8rem;
+    line-height: inherit;
+    white-space: nowrap;
+}
