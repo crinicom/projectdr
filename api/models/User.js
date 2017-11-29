@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-
+schema: true,
   attributes: {
     name: {
       type: 'string',
@@ -19,6 +19,7 @@ module.exports = {
     pswd: {
       type: 'string'
     },
+    
     projects: {
       collection: 'project',
       via: 'owner' 
@@ -30,8 +31,18 @@ module.exports = {
     projectsGuest: {
       collection: 'project',
       via: 'guests'
-    }
+    },
+/*
+    toJSON: function () {
+      var obj = this.toObject();
+      delete obj.pswd;
+      delete obj.password;
+      delete obj.confirmation;
+      delete obj._csrf;
+      return obj;
 
+    }
+*/
 
   }
 };
