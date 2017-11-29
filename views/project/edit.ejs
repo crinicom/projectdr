@@ -1,0 +1,13 @@
+<form action="/project/update/<%=project.id%>" method="POST">
+    <h2>Edit project: <%=project.name%></h2>
+
+    <input cols="50" type="hidden" name="owner" value="<%=project.owner%>" />
+    <input cols="50" type="text" value="<%=project.name%>"  name="name"><br/>
+    <textarea rows="4" cols="50" type="text" value="<%=project.description%>" name="description"></textarea><br/>
+    <textarea rows="4" cols="50" type="text" value="<%=project.scope %>" name="scope" /></textarea><br/>
+    <input type="submit" value="Update" class="btn btn-lg btn-success" />
+    <a href="/user/show/<%= project.owner %>" class="btn btn-lg btn-danger">Cancel</a>
+    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+    
+</form>
+

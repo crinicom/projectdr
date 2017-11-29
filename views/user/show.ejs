@@ -33,4 +33,5 @@
 <form action="/project/new" method="POST">
 <input type="hidden" value="<%=user.id%>" name="owner">
 <input type="submit" value="Add project">
+<input type="hidden" value="<%=_csrf%>" name="_csrf">
 </form>

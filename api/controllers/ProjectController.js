@@ -21,6 +21,22 @@ module.exports = {
             //res.json(project);
          res.redirect('/user/show/'+project.owner);
         });
+    },
+    edit: function(req, res, next) {
+        Project.findOne(req.param('id'), function foundProject(err, project) {
+            if (err) return next(err);
+            if (!project) return next();
+            res.view({project:project});
+        }); 
+    },
+    update: function(req, res, next) {
+           Project.update(req.param('id'), req.params.all(), function projectUpdated(err) {
+            if (err) {
+                return res.redirect('/project/edit/'+ req.param('id'));
+            }
+            //return res.redirect('/user/show/'+ req.param('id'));
+            return res.redirect('/project/edit/'+ req.param('id'));
+        }); 
     }
 };
 
