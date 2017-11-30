@@ -37,6 +37,15 @@ module.exports = {
             //return res.redirect('/user/show/'+ req.param('id'));
             return res.redirect('/project/edit/'+ req.param('id'));
         }); 
+    },
+    show: function(req, res, next) {
+        
+        Project.findOne(req.param('id')).populateAll().exec(function(err,project) {
+            if (err) return next(err);
+            if (!project) return next();
+           res.view({project:project});
+           //res.json(user);
+        });
     }
 };
 

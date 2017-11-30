@@ -32,7 +32,7 @@ module.exports = {
         
         Objective.findOne(req.param('id')).populateAll().exec(function(err,objective) {
             if (err) return next(err);
-            if (!user) return next();
+            if (!objective) return next();
            res.view({objective:objective});
            //res.json(user);
         });
@@ -47,10 +47,10 @@ module.exports = {
     
    
     edit: function(req, res, next) {
-        User.findOne(req.param('id'), function foundUser(err, user) {
+        User.findOne(req.param('id'), function foundUser(err, objective) {
             if (err) return next(err);
-            if (!user) return next();
-            res.view({user:user});
+            if (!objective) return next();
+            res.view({objective:objective});
         }); 
     },
     update: function(req, res, next) {

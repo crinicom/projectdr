@@ -1,6 +1,6 @@
 
-<form action="/user/create" method="POST" id="sign-up-form" class="form-signin">
-<h2 class="form-signin-heading">Create user</h2>
+<form action="/objective/create" method="POST" id="new-obj-form" class="form-new-obj">
+<h2 class="form-signin-heading">Create objective</h2>
 
 <% if (flash && flash.err) { %>
     <ul class="alert alert-success">
@@ -12,19 +12,18 @@
 
 <% } %>
 <div class="control-group">
-<input type="text" class="form-control" placeholder="Name" name="name"></br>
+<input type="text" class="form-control" placeholder="Description" name="description"></br>
 </div>
 <div class="control-group">
-    <input type="text" class="form-control" placeholder="Email" name="email"></br>
+    <input type="text" class="form-control" placeholder="Formula" name="formula"></br>
 </div>
     <div class="control-group">
-            <input type="password" class="form-control" placeholder="pswd" name="pswd"></br>
+            <input type="text" class="form-control" placeholder="Goal" name="goal"></br>
 </div>
-<div class="control-group">        
-<input type="password" class="form-control" placeholder="confirm pswd" name="confirmation"></br>
+
 <br/>
 </div>
-<input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User">
+<input type="submit" class="btn btn-lg btn-primary btn-block" value="Create Objective">
 <input type="hidden" name="_csrf" value="<%=_csrf%>" />
 </form>
 

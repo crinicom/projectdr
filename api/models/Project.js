@@ -14,7 +14,7 @@ module.exports = {
     },
     sponsors: {
       type:"array",
-      required: true
+      required: false
     },
     description: {
       type:"text",
@@ -39,7 +39,7 @@ module.exports = {
     objectives: {
       collection: 'objective',
       via: 'pid'
-    }
+    },
     milestones: {
       collection: 'milestone',
       via: 'pid'

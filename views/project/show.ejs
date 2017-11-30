@@ -3,7 +3,6 @@
 
 <H2>Sponsors</H2>
 <table>
-   
     <% _.each(project.sponsors, function(sponsor) { %>
         <tr data-id="<%= project.id%>" data-model="project">
             <!-- <td><%=project.id%></td> -->
@@ -15,38 +14,40 @@
 </table>
 
 
-<h3>Description: <%= project.description %></h3>
-<h3>Scope: <%= project.scope %></h3>
-<h2><%= user.projects_own%></h2>
+<h3>Description: </h3>
+<h4><%= project.description %></p>
+<h3>Scope: </h3>
+<p><%= project.scope %></p>
+
 <hr>
-<H2>Proyectos</H2>
+<H2>Objectives</H2>
 <table>
     <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Scope</th>
+        <th>Objective</th>
+        <th>Formula</th>
+        <th>Goal</th>
         <th></th>
         <th></th>
         <th></th>
     </tr>
-    <% _.each(user.projects, function(project) { %>
-        <tr data-id="<%= project.id%>" data-model="project">
+    <% _.each(project.objectives, function(objective) { %>
+        <tr data-id="<%= objective.id%>" data-model="objective">
             <!-- <td><%=project.id%></td> -->
-            <td><%=project.name%></td>
-            <td><%=project.description%></td>
-            <td><%=project.scope%></td>
-            <td><a href="/project/show/<%=project.id%>">Show</a></td>
-            <td><a href="/project/edit/<%=project.id%>">Edit</a></td>
-            <td><a href="/project/destroy/<%=project.id%>">Delete</a></td>
+            <td><%=objective.description%></td>
+            <td><%=objective.formula%></td>
+            <td><%=objective.goal%></td>
+            <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
+            <td><a href="/objective/edit/<%=objective.id%>">Edit</a></td>
+            <td><a href="/objective/destroy/<%=objective.id%>">Delete</a></td>
           
         </tr>
    <% }); %>
 </table>
 
 
-<form action="/project/new" method="POST">
-<input type="hidden" value="<%=user.id%>" name="owner">
-<input type="submit" value="Add project">
+<form action="/objective/new" method="POST">
+<input type="hidden" value="<%=project.id%>" name="pid">
+<input type="submit" value="Add Objective">
 <input type="hidden" value="<%=_csrf%>" name="_csrf">
 </form>
