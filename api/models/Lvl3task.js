@@ -1,5 +1,5 @@
 /**
- * Milestone.js
+ * Lvl3task.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
@@ -8,9 +8,10 @@
 module.exports = {
 
   attributes: {
-    pid: { type: 'string', required:true},
-    description: { type: 'string', required:true},
-    date: { type: 'date'}
+    tid: {type: 'string', required:true},
+    text: {type: 'string', required:true},
+    lvl1tastks: {collection: 'lvl4task', via:'tid'},
+    status: {type: 'integer'}
   }
 };
 
