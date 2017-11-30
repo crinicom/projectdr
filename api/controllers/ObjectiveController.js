@@ -6,10 +6,13 @@
  */
 
 module.exports = {
-	"new": function(req, res) {
-        //res.locals.flash = _.clone(req.session.flash);
-        res.view();
-        //req.session.flash = {};
+	'new': function(req, res, err) {
+        Project.findOne(req.param('id'), function foundObjective(err, project) {
+            if (err) return next(err);
+            if (!project) return next();
+
+            res.view({project:project});  
+        });
     },
     create:function(req, res, next) {
         Objective.create(req.params.all(), function objectiveCreated(err, objective) {
