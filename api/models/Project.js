@@ -12,13 +12,17 @@ module.exports = {
       type:"string",
       required: true
     },
+    sponsors: {
+      type:"array",
+      required: true
+    },
     description: {
       type:"text",
       required: true
     },
     scope: {
       type:"text",
-      required: true
+      required: false
     },
     owner: {
       model: 'user',
@@ -31,6 +35,14 @@ module.exports = {
     guests: {
       collection: 'user',
       via: 'projectsGuest'
+    },
+    objectives: {
+      collection: 'objective',
+      via: 'pid'
+    }
+    milestones: {
+      collection: 'milestone',
+      via: 'pid'
     }
   }
 };
