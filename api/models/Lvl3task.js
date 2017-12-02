@@ -8,9 +8,9 @@
 module.exports = {
 
   attributes: {
-    tid: {type: 'string', required:true},
+    belongs_to_lvl2: {modelo: 'lvl2task', required:true},
     text: {type: 'string', required:true},
-    lvl1tastks: {collection: 'lvl4task', via:'tid'},
+    lvl1tastks: {collection: 'lvl4task', via:'belongs_to_lvl3'},
     status: {type: 'integer'}
   }
 };

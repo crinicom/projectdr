@@ -12,7 +12,7 @@ module.exports = {
     description: { type: 'string', required:true},
     formula: { type: 'string', required:true},
     goal: { type: 'string', required:true},
-    tasks: {collection: 'task', via: 'objid'}
+    tasks: {collection: 'task', via: 'belongs_to_obj'}
   }
 };
 

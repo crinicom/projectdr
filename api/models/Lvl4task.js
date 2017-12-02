@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-    tid: {type: 'string', required:true},
+    belongs_to_lvl3: {model: 'lvl3task', required:true},
     text: {type: 'string', required:true},
     status: {type: 'integer'}
   }

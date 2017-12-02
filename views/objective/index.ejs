@@ -29,6 +29,11 @@
                                 <input type="submit" class="btn btn-sm btn-danger" value="X" />
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
                             </form>
+                            <form action="/task/new" method="POST">
+                                <input type="hidden" value="<%=objective.id%>" name="belongs_to_obj">
+                                <input type="submit" class="btn btn-sm btn-success" value="New Task">
+                                <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                            </form>
                     </td>
                 
                 </tr>
