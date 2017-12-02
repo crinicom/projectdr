@@ -44,7 +44,7 @@ module.exports = {
             if (err) return next(err);
             if (!project) return next();
            res.view({project:project});
-           //res.json(user);
+           //res.json(project);
         });
     }
 };

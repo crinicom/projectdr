@@ -33,13 +33,20 @@
     </tr>
     <% _.each(project.objectives, function(objective) { %>
         <tr data-id="<%= objective.id%>" data-model="objective">
-            <!-- <td><%=project.id%></td> -->
-            <td><%=objective.description%></td>
-            <td><%=objective.formula%></td>
-            <td><%=objective.goal%></td>
+            <td><%= objective.id%></td>
+            <td><%= objective.description%></td>
+            <td><%= objective.formula%></td>
+            <td><%= objective.goal%></td>
             <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
             <td><a href="/objective/edit/<%=objective.id%>">Edit</a></td>
-            <td><a href="/objective/destroy/<%=objective.id%>">Delete</a></td>
+            <td>
+                    <form action="/objective/destroy/<%= objective.id %>" method="POST">
+                        <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" />
+                        <input type="hidden" name="_method" value="delete" />
+                        <input type="submit" class="btn btn-sm btn-danger" value="X" />
+                        <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                    </form>
+            </td>
           
         </tr>
    <% }); %>
@@ -47,7 +54,7 @@
 
 
 <form action="/objective/new" method="POST">
-<input type="hidden" value="<%=project.id%>" name="pid">
+<input type="hidden" value="<%=project.id%>" name="belongs_to_project">
 <input type="submit" value="Add Objective">
 <input type="hidden" value="<%=_csrf%>" name="_csrf">
 </form>

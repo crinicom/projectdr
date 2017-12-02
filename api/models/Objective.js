@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-    pid: { type: 'string', required:true},
+    belongs_to_project: { model: 'project', required: true},
     description: { type: 'string', required:true},
     formula: { type: 'string', required:true},
     goal: { type: 'string', required:true},

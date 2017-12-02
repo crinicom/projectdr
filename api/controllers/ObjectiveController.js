@@ -7,7 +7,7 @@
 
 module.exports = {
 	'new': function(req, res, err) {
-        Project.findOne(req.param('id'), function foundObjective(err, project) {
+        Project.findOne(req.param('belongs_to_project'), function foundObjective(err, project) {
             if (err) return next(err);
             if (!project) return next();
 
@@ -26,7 +26,8 @@ module.exports = {
                 
                 return res.redirect('/objective/new/');    
             }
-            res.redirect('/objective/show/' + objective.id ); 
+            res.redirect('/project/show/' + objective.belongs_to_project ); 
+            //res.json(objective);
            // req.session.flash = {};
         });
     },
@@ -50,7 +51,7 @@ module.exports = {
     
    
     edit: function(req, res, next) {
-        User.findOne(req.param('id'), function foundUser(err, objective) {
+        Objective.findOne(req.param('id'), function foundObjective(err, objective) {
             if (err) return next(err);
             if (!objective) return next();
             res.view({objective:objective});
@@ -65,10 +66,19 @@ module.exports = {
         }); 
     },
     destroy: function(req,res,next) {
+       Project.findOne(req.param('belongs_to_project'), function foundObjective(err, project) {
+            if (err) return next(err);
+            if (!project) return next();
+
         Objective.destroy(req.param('id')).exec(function() {
-            res.redirect("/objective/");
+            //res.redirect("/objective/");
+            //res.redirect('/project/show/' + objective.belongs_to_project );
+            
         }
-        );
+    );
+         res.redirect('/project/show/' + project.id );
+    });    
+    
     }
 };
 

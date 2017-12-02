@@ -1,9 +1,9 @@
 hola loco hasta acá todo bien!
 <form action="/objective/update/<%=objective.id%>" method="POST">
-    <h2>Modificar usuario</h2>
-    <input value="<%=objective.name%>" type="text" name="name"><br/>
-    <input value="<%=objective.email%>" type="text" name="email"><br/>
-    <input value="<%=objective.state%>" type="text" name="state"><br/>
-    <input  type="submit" value="Editar Usuario"/>
+    <h2>Modificar objetivo</h2>
+    <input value="<%=objective.description%>" type="text" name="description"><br/>
+    <input value="<%=objective.formula%>" type="text" name="formula"><br/>
+    <input value="<%=objective.goal%>" type="text" name="goal"><br/>
+    <input  type="submit" value="Confirmar"/>
     <input type="hidden" name="_csrf" value="<%=_csrf%>" />
 </form>

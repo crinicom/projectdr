@@ -38,7 +38,7 @@ module.exports = {
     },
     objectives: {
       collection: 'objective',
-      via: 'pid'
+      via: 'belongs_to_project'
     },
     milestones: {
       collection: 'milestone',

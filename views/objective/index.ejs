@@ -1,4 +1,4 @@
-<h1>Users</h1>
+<h1>objectives</h1>
 
 <table>
 <tr>
@@ -10,15 +10,16 @@
     <th>b</th>
     <th>c</th>
 </tr>
-<% _.each(users, function(user) { %>
-<tr data-id="<%= user.id%>" data-model="user">
-    <td><%= user.id %></td>
-    <td><%= user.name %></td>
-    <td><%= user.email %></td>
-    <td><a href="/user/show/<%= user.id %>" class="btn btn-sm btn-primary">Show</a></td>
-    <td><a href="/user/edit/<%= user.id %>" class="btn btn-sm btn-warning">Edit</a></td>
+<% _.each(objectives, function(objective) { %>
+<tr data-id="<%= objective.id%>" data-model="objective">
+    <td><%= objective.id %></td>
+    <td><%= objective.description %></td>
+    <td><%= objective.formula %></td>
+    <td><%= objective.goal %></td>
+    <td><a href="/objective/show/<%= objective.id %>" class="btn btn-sm btn-primary">Show</a></td>
+    <td><a href="/objective/edit/<%= objective.id %>" class="btn btn-sm btn-warning">Edit</a></td>
  
-    <td><form action="/user/destroy/<%= user.id %>" method="POST">
+    <td><form action="/objective/destroy/<%= objective.id %>" method="POST">
     <input type="hidden" name="_method" value="delete" />
     <input type="submit" class="btn btn-sm btn-danger" value="X" />
     <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
