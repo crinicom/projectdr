@@ -1,29 +1,39 @@
-<h1>objectives</h1>
+<div class="container">
+        <h1>Objectives</h1>
+        <br>
+    
+        <H2>Objectives</H2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Objective</th>
+                <th>Formula</th>
+                <th>Goal</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
 
-<table>
-<tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>email</th>
-    <th>state</th>
-    <th>a</th>
-    <th>b</th>
-    <th>c</th>
-</tr>
-<% _.each(objectives, function(objective) { %>
-<tr data-id="<%= objective.id%>" data-model="objective">
-    <td><%= objective.id %></td>
-    <td><%= objective.description %></td>
-    <td><%= objective.formula %></td>
-    <td><%= objective.goal %></td>
-    <td><a href="/objective/show/<%= objective.id %>" class="btn btn-sm btn-primary">Show</a></td>
-    <td><a href="/objective/edit/<%= objective.id %>" class="btn btn-sm btn-warning">Edit</a></td>
- 
-    <td><form action="/objective/destroy/<%= objective.id %>" method="POST">
-    <input type="hidden" name="_method" value="delete" />
-    <input type="submit" class="btn btn-sm btn-danger" value="X" />
-    <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
-    </form></td>
-</tr>
-<% }) %>
-</table>
+            <% _.each(objectives, function(objective) { %>
+                <tr data-id="<%= objective.id%>" data-model="objective">
+                    <td><%= objective.id%></td>
+                    <td><%= objective.description%></td>
+                    <td><%= objective.formula%></td>
+                    <td><%= objective.goal%></td>
+                    
+                    <td><a href="/objective/edit/<%=objective.id%>">Edit</a></td>
+                    <td>
+                            <form action="/objective/destroy/<%= objective.id %>" method="POST">
+                                <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" />
+                                <input type="hidden" name="_method" value="delete" />
+                                <input type="submit" class="btn btn-sm btn-danger" value="X" />
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                            </form>
+                    </td>
+                
+                </tr>
+        <% }); %>
+        </table>
+    
+  
+    </div>

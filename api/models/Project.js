@@ -42,7 +42,7 @@ module.exports = {
     },
     milestones: {
       collection: 'milestone',
-      via: 'pid'
+      via: 'belongs_to_project'
     }
   }
 };

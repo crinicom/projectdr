@@ -1,30 +1,30 @@
 
-<form action="/user/create" method="POST" id="sign-up-form" class="form-signin">
-<h2 class="form-signin-heading">Create user</h2>
-
-<% if (flash && flash.err) { %>
-    <ul class="alert alert-success">
-        <li>Existe flash</li>
-        <% Object.keys(flash.err).forEach(function(error) {%>
-        <li><%- JSON.stringify(flash.err[error]) %></li>
-        <% }); %>
-    </ul>
-
-<% } %>
-<div class="control-group">
-<input type="text" class="form-control" placeholder="Name" name="name"></br>
-</div>
-<div class="control-group">
-    <input type="text" class="form-control" placeholder="Email" name="email"></br>
-</div>
+<form action="/milestone/create" method="POST" id="new-obj-form" class="form-new-obj">
+    <h2 class="form-signin-heading">Create objective</h2>
+    
+    <% if (flash && flash.err) { %>
+        <ul class="alert alert-success">
+            <li>Existe flash</li>
+            <% Object.keys(flash.err).forEach(function(error) {%>
+            <li><%- JSON.stringify(flash.err[error]) %></li>
+            <% }); %>
+        </ul>
+    
+    <% } %>
+    <input type="hidden" name="belongs_to_project" value="<%=project.id%>" />
     <div class="control-group">
-            <input type="password" class="form-control" placeholder="pswd" name="pswd"></br>
-</div>
-<div class="control-group">        
-<input type="password" class="form-control" placeholder="confirm pswd" name="confirmation"></br>
-<br/>
-</div>
-<input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User">
-<input type="hidden" name="_csrf" value="<%=_csrf%>" />
-</form>
-
+    <input type="text" class="form-control" placeholder="Description" name="description"></br>
+    </div>
+    <div class="control-group">
+        <input type="date" class="form-control" placeholder="Date" name="date"></br>
+    </div>
+        <div class="control-group">
+                <input type="text" class="form-control" placeholder="Goal" name="goal"></br>
+    </div>
+    
+    <br/>
+    </div>
+    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create Milestone">
+    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+    </form>
+    

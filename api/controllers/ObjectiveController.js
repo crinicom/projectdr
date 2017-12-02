@@ -42,10 +42,16 @@ module.exports = {
         });
     },
     index: function(req, res, next) {
-        Objective.find(function foundObjectives(err, objectives) {
+        Project.findOne(req.param('belongs_to_project'), function foundObjective(err, project) {
             if (err) return next(err);
-            
-            res.view({objectives:objectives});
+            if (!project) return next();
+
+            // res.json(project); solo check
+            Objective.find({belongs_to_project: project.id}).exec(function foundObjectives(err, objectives) {
+                if (err) return next(err);
+                
+                res.view({objectives:objectives});
+           });
         });
     },
     
