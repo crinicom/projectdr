@@ -27,18 +27,26 @@
                 <td>
                     <table class="table table-sm">
                         <tr>
-                            <a href="/objective/edit/<%=objective.id%>">Edit</a>
-                            <form action="/task/new/" method="POST">
+                            
+                            <a href="/objective/edit/<%=objective.id%>" class="btn btn-sm btn-primary" role="button">
+                                <i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i>                                
+                            </a>
+                           <form action="/task/new/" method="POST">
                                 <input type="hidden" name="belongs_to_obj" value="<%= objective.id%>" >
                                 <input type="hidden" name="_method" value="new" >
-                                <input type="submit" class="btn btn-sm btn-success" value="Add task" >
+                             <!--    <input type="submit" class="btn btn-sm btn-success" value="Add task" > -->
+                             <button type="submit" class="btn btn-sm btn-success" >   
+                             <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
                             </form>
                         
                             <form action="/objective/destroy/<%= objective.id %>" method="POST">
                                 <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" >
                                 <input type="hidden" name="_method" value="delete" >
-                                <input type="submit" class="btn btn-sm btn-danger" value="X" >
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+                                </button>
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
                             </form>
                         </tr>

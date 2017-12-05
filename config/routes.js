@@ -35,6 +35,7 @@ module.exports.routes = {
   '/': {
   //  view: 'homepage'
     view: 'static/home'
+    //view: 'project/show/16'
 }
 
   /***************************************************************************
