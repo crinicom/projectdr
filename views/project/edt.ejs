@@ -7,7 +7,7 @@
     <table
     <hr>
     <H2>Objectives</H2>
-    <table>
+    <table class="table table-bordered">
         <tr>
             <th>ID</th>
             <th>Objective</th>
@@ -15,22 +15,23 @@
             <th>Goal</th>
             <th></th>
             <th></th>
-            <th></th>
+            
         </tr>
+        
         <% _.each(project.objectives, function(objective) { %>
             <tr data-id="<%= objective.id%>" data-model="objective">
                 <td><%= objective.id%></td>
                 <td><%= objective.description%></td>
                 <td><%= objective.formula%></td>
                 <td><%= objective.goal%></td>
-                <td><a href="/objective/edit/<%=objective.id%>">Edit</a></td>
-                <td><form action="/task/new/" method="POST">
+                <td><a href="/objective/edit/<%=objective.id%>">Edit</a>
+                <form action="/task/new/" method="POST">
                     <input type="hidden" name="belongs_to_obj" value="<%= objective.id%>" >
                     <input type="hidden" name="_method" value="new" >
                     <input type="submit" class="btn btn-sm btn-success" value="Add task" >
                     <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                </form></td>
-                <td>
+                </form>
+                
                         <form action="/objective/destroy/<%= objective.id %>" method="POST">
                             <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" >
                             <input type="hidden" name="_method" value="delete" >
@@ -38,16 +39,11 @@
                             <input type="hidden" name="_csrf" value="<%= _csrf%>">
                         </form>
                 </td>
-                <table>
-                    <th></th>    
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                <% _.each(objective.tasks, function(task) { %>
-        
-                    <tr data-id="<%= tast.id%>" data-model="task">
+                <td>
+                <table class="table table-bordered">
+                    
+                    <% _.each(objective.tasks, function(task) { %>
+                         <tr data-id="<%= task.id%>" data-model="task">
                             <td><%= task.id%></td>
                             <td><%= task.text%></td>
                             <td><%= task.status%></td>
@@ -66,11 +62,13 @@
                                         <input type="hidden" name="_csrf" value="<%= _csrf%>">
                                     </form>
                             </td>
-            </tr>
-            <% }); %>    
-            </table>    
-            </tr>
+            </tr> 
+            <% }); %>
+        </ol>    
+            </table></td>    
+            </tr> 
     <% }); %>
+</ol>
     </table>
 
 

@@ -43,9 +43,49 @@ module.exports = {
         Project.findOne(req.param('id')).populateAll().exec(function(err,project) {
             if (err) return next(err);
             if (!project) return next();
-           res.view({project:project});
+           
+            res.view({project:project});
            //res.json(project);
+       
+        
         });
+    },
+    edt: function(req, res, next) {
+       //Original mio 
+       /* 
+       Project.findOne(req.param('id')).populateAll().exec(function(err,project) {
+            if (err) return next(err);
+            if (!project) return next();
+            res.view({project:project});
+           //res.json(project);           
+        }); */
+        // https://stackoverflow.com/questions/26535727/sails-js-waterline-populate-deep-nested-association
+
+        Project
+        .findOne(req.param('belongs_to_project'))
+        .populateAll()      
+        .then(function (project){
+            var objectives = Objective.find({
+                "belongs_to_project": project.id
+            })
+            .populate('tasks')
+            //.populate('lvl1tasks')
+            .then(function (objectives){
+                return objectives;
+            });
+            return [project, objectives];
+        })
+        .spread(function (project, objectives){
+            project = project.toObject() // <- HERE IS THE CHANGE!
+            project.objectives = objectives; // It will work now
+            //res.json(project);
+            res.view({objectives:objectives, project:project});
+        }).catch(function (err){
+            if (err) return res.serverError(err);
+        });
+         
     }
+
+    
 };
 

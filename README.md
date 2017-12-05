@@ -3,6 +3,7 @@
 a [Sails](http://sailsjs.org) application
 # fuentes
 Modelos: http://dennisrongo.com/introduction-to-sails-js-models-and-orm/
+PopulateAll: https://imfly.gitbooks.io/sailsjs-docs-gitbook/en/reference/waterline/queries/populateAll.html
 
 # IDEAS
 - cada proyecto debe tener un owner y una lista de invitados (mas adelante puedo dar privilegios). Cuando vea mi lista de proyectos veo los MIOS y donde estoy como INVITADO

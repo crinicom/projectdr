@@ -10,7 +10,7 @@ module.exports = {
   attributes: {
     belongs_to_obj: {model: 'objective', required:true},
     text: {type: 'string', required:true},
-    lvl1tastks: {collection: 'lvl1task', via:'belongs_to_task'},
+    lvl1tasks: {collection: 'lvl1task', via:'belongs_to_task'},
     status: {type: 'integer'}
   }
 };
