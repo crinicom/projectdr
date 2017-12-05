@@ -62,7 +62,7 @@ module.exports = {
         // https://stackoverflow.com/questions/26535727/sails-js-waterline-populate-deep-nested-association
 
         Project
-        .findOne(req.param('belongs_to_project'))
+        .findOne(req.param('id'))
         .populateAll()      
         .then(function (project){
             var objectives = Objective.find({

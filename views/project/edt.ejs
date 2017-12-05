@@ -7,7 +7,7 @@
     <table
     <hr>
     <H2>Objectives</H2>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-sm">
         <tr>
             <th>ID</th>
             <th>Objective</th>
@@ -24,51 +24,62 @@
                 <td><%= objective.description%></td>
                 <td><%= objective.formula%></td>
                 <td><%= objective.goal%></td>
-                <td><a href="/objective/edit/<%=objective.id%>">Edit</a>
-                <form action="/task/new/" method="POST">
-                    <input type="hidden" name="belongs_to_obj" value="<%= objective.id%>" >
-                    <input type="hidden" name="_method" value="new" >
-                    <input type="submit" class="btn btn-sm btn-success" value="Add task" >
-                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                </form>
-                
-                        <form action="/objective/destroy/<%= objective.id %>" method="POST">
-                            <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" >
-                            <input type="hidden" name="_method" value="delete" >
-                            <input type="submit" class="btn btn-sm btn-danger" value="X" >
-                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                        </form>
+                <td>
+                    <table class="table table-sm">
+                        <tr>
+                            <a href="/objective/edit/<%=objective.id%>">Edit</a>
+                            <form action="/task/new/" method="POST">
+                                <input type="hidden" name="belongs_to_obj" value="<%= objective.id%>" >
+                                <input type="hidden" name="_method" value="new" >
+                                <input type="submit" class="btn btn-sm btn-success" value="Add task" >
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </form>
+                        
+                            <form action="/objective/destroy/<%= objective.id %>" method="POST">
+                                <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" >
+                                <input type="hidden" name="_method" value="delete" >
+                                <input type="submit" class="btn btn-sm btn-danger" value="X" >
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </form>
+                        </tr>
+                    </table>
                 </td>
                 <td>
-                <table class="table table-bordered">
+                <table class="table table-bordered table-sm">
                     
                     <% _.each(objective.tasks, function(task) { %>
                          <tr data-id="<%= task.id%>" data-model="task">
                             <td><%= task.id%></td>
                             <td><%= task.text%></td>
                             <td><%= task.status%></td>
-                            <td><a href="/task/edit/<%=task.id%>">Edit</a></td>
-                            <td><form action="/lvl1task/new/" method="POST">
-                                <input type="hidden" name="belongs_to_task" value="<%= task.id%>">
-                                <input type="hidden" name="_method" value="new" >
-                                <input type="submit" class="btn btn-sm btn-success" value="Add Subtask">
-                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                            </form></td>
                             <td>
-                                    <form action="/task/destroy/<%= task.id %>" method="POST">
-                                        <input type="hidden" name="belongs_to_objective" value="<%= objective.id %>" >
-                                        <input type="hidden" name="_method" value="delete" >
-                                        <input type="submit" class="btn btn-sm btn-danger" value="X" >
-                                        <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                                    </form>
-                            </td>
-            </tr> 
-            <% }); %>
-        </ol>    
-            </table></td>    
-            </tr> 
+                                <table class="table table-sm">
+                                    <tr>
+                                         <a href="/task/edit/<%=task.id%>">Edit</a>
+                                        <form action="/lvl1task/new/" method="POST">
+                                            <input type="hidden" name="belongs_to_task" value="<%= task.id%>">
+                                            <input type="hidden" name="_method" value="new" >
+                                            <input type="submit" class="btn btn-sm btn-success" value="Add Subtask">
+                                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                        </form>
+                            
+                                        <form action="/task/destroy/<%= task.id %>" method="POST">
+                                            <input type="hidden" name="belongs_to_objective" value="<%= objective.id %>" />
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <input type="submit" class="btn btn-sm btn-danger" value="X" />
+                                            <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                                        </form>
+                                    </tr>
+                                </table>
+                             </td>
+                            </tr> 
+                        <% }); %>
+          
+                </table>
+        </td>    
+     </tr> 
     <% }); %>
-</ol>
+
     </table>
 
 

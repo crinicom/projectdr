@@ -7,6 +7,9 @@ PopulateAll: https://imfly.gitbooks.io/sailsjs-docs-gitbook/en/reference/waterli
 
 # IDEAS
 - cada proyecto debe tener un owner y una lista de invitados (mas adelante puedo dar privilegios). Cuando vea mi lista de proyectos veo los MIOS y donde estoy como INVITADO
+- agregar font-awesome por los iconos
+- cambiar botones con texto por iconos en lineas
+- probar EDT como numbered list (<ol> + li) con sus botones a ver qué tal queda. Debe haber un tab antes de cada indented li. PARA PROBAR: puedo hacer una EDT_v2 direccionada de un boton 
 
 # MVP
 - Dashboard de mis proyectos, como dueño e invitado

@@ -15,15 +15,15 @@
         <input type="hidden" name="belongs_to_project" value="<%=objective.belongs_to_project%>" />
         
         <div class="control-group">
-        <input type="text" class="form-control" placeholder="Description" name="text"></br>
+            <input type="text" class="form-control" placeholder="Description" name="text"></br>
         </div>
         
-            <div class="control-group">
-                    <input type="number" class="form-control" placeholder="%advance" name="status"></br>
+        <div class="control-group">
+            <input type="number" class="form-control" placeholder="%advance" name="status"></br>
         </div>
     
         <br/>
-        </div>
+        
         <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create task">
         <input type="hidden" name="_csrf" value="<%=_csrf%>" />
         </form>
