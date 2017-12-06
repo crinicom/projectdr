@@ -84,7 +84,43 @@ module.exports = {
             if (err) return res.serverError(err);
         });
          
-    }
+    },
+
+    stakeholders: function(req, res, next) {
+       
+ 
+         Project
+         .findOne(req.param('id'))
+         .populateAll()      
+         .then(function (project){
+             var objectives = Objective.find({
+                 "belongs_to_project": project.id
+             })
+             .populate('tasks')
+             //.populate('lvl1tasks')
+             .then(function (objectives){
+                 return objectives;
+             });
+             var stakeholders = Stakeholder.find({
+                 "belongs_to_project": project.id
+             })
+             .populate('mails')
+             .then(function (stakeholders){
+                return stakeholders;
+            });
+             return [project, objectives, stakeholders];
+         })
+         .spread(function (project, objectives, stakeholders){
+             project = project.toObject() // <- HERE IS THE CHANGE!
+             project.objectives = objectives; // It will work now
+             project.stakeholders = stakeholders;
+             //res.json(project);
+             res.view({objectives:objectives, project:project, stakeholders:stakeholders});
+            }).catch(function (err){
+             if (err) return res.serverError(err);
+         });
+          
+     }
 
     
 };

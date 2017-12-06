@@ -15,53 +15,57 @@
         </tr>
         
         <% _.each(project.objectives, function(objective) { %>
-            <% _.each(objective.tasks, function(task) { %>
             <tr data-id="<%= objective.id%>" data-model="objective">
                 
-                <td class="vert-aligned"><%= objective.description%></td>
+                
+            <% _.each(objective.tasks, function(task) { %>
+               
+                    <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%></td>
                
                 <td>
                     <table class="table table-sm ">
                         <tr> 
                           
-                            <a href="/objective/edit/<%=objective.id%>" class="btn btn-sm btn-primary" role="button">
+                            <a href="/task/edit/<%=task.id%>" class="btn btn-sm btn-primary" role="button">
                                 <i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i>                                
                             </a>
-                           <form action="/task/new/" method="POST">
-                                <input type="hidden" name="belongs_to_obj" value="<%= objective.id%>" >
-                                <input type="hidden" name="_method" value="new" >
-                             
-                                <button type="submit" class="btn btn-sm btn-success" >   
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-                                
-                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                            </form>
+                           
                         
-                            <form action="/objective/destroy/<%= objective.id %>" method="POST">
-                                <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" >
+                            <form action="/task/destroy/<%= task.id %>" method="POST">
+                                <input type="hidden" name="belongs_to_obj" value="<%= objective.belongs_to_project %>" >
                                 <input type="hidden" name="_method" value="delete" >
                                 <button type="submit" class="btn btn-sm btn-danger">
                                     <i class="fa fa-trash fa-2" aria-hidden="true"></i>
                                 </button>
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
                             </form>
-                       
+                            <form action="/stakeholder/new/" method="POST">
+                                <input type="hidden" name="belongs_to_project" value="<%= project.id%>" >
+                                <input type="hidden" name="assoc_task" value="<%= task.id%>" >
+                                <input type="hidden" name="_method" value="new" >
+                             
+                                <button type="submit" class="btn btn-sm btn-success" >   
+                                <i class="fa fa-plus-square-o fa-2" aria-hidden="true"></i></button>
+                                
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </form>
                         </tr>
                     </table>
                 </td>
                
                 <td class="align-middle"><table class="table table-hover table-striped table-sm">
                     
-                    <% _.each(objective.tasks, function(task) { %>
-                         <tr data-id="<%= task.id%>" data-model="task" valign="middle">
+                    <% _.each(project.stakeholders, , function(stakeholder) { %>
+                         <tr data-id="<%= stakeholder.id%>" data-model="stakeholder" valign="middle">
                             
-                            <td><%= task.text%></td>
-                            <td><%= task.status%></td>
+                            <td><%= stakeholder.name%></td>
+                            <td><%= stakeholder.comm_plan%></td>
+                            <td><%= JSON.stringify(stakeholder.mails)%></td>
                             <td>
                                 <table class="table table-sm">
                                     <tr>
                                         
-                                        <form action="/task/edit/<%=task.id%>" method="POST">
+                                        <form action="/stakeholder/edit/<%=stakeholder.id%>" method="POST">
                                             <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
                                             <input type="hidden" name="_method" value="edit" >
                                             <button type="submit" class="btn btn-sm btn-primary">
@@ -70,8 +74,8 @@
                                             <input type="hidden" name="_csrf" value="<%= _csrf%>">
                                         </form>
 
-                                        <form action="/lvl1task/new/" method="POST">
-                                            <input type="hidden" name="belongs_to_task" value="<%= task.id%>">
+                                        <form action="/mail/new/" method="POST">
+                                            <input type="hidden" name="belongs_to_stk" value="<%= stakeholder.id%>">
                                             <input type="hidden" name="_method" value="new" >
                                             <button type="submit" class="btn btn-sm btn-success disabled">
                                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -79,8 +83,8 @@
                                             <input type="hidden" name="_csrf" value="<%= _csrf%>">
                                         </form>
                             
-                                        <form action="/task/destroy/<%= task.id %>" method="POST">
-                                            <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" >
+                                        <form action="/stakeholder/destroy/<%= task.id %>" method="POST">
+                                            <input type="hidden" name="belongs_to_project" value="<%= project.id %>" >
                                             <input type="hidden" name="_method" value="delete" >
                                             <button type="submit" class="btn btn-sm btn-danger" >
                                                     <i class="fa fa-trash fa-2" aria-hidden="true"></i>
@@ -96,7 +100,9 @@
                 </table></td>
              </tr>    
         </tr> 
-        <% }); %>
+       
+       
+       <% }); %>
     <% }); %>
 
     </table>

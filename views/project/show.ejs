@@ -108,10 +108,10 @@
                     </form>
             </td>
             <td>
-                <form action="/project/edt/<%=project.id%>" method="POST">
+                <form action="/project/stakeholders/<%=project.id%>" method="POST">
                     <!-- <input type="hidden" name="belongs_to_project" value="<%= project.id %>" /> -->
                     <input type="hidden" name="_method" value="delete" />
-                    <input type="submit" class="btn btn-lg btn-success" value="EDT" />
+                    <input type="submit" class="btn btn-lg btn-success" value="Stakeholders" />
                     <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
                 </form>
         </td>
