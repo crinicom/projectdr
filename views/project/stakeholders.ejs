@@ -1,0 +1,111 @@
+<div class="container">
+    <h1>Stakeholders y plan de comunicación</h1>
+    <h2><%= project.name %></h2>
+   
+    <hr>
+    <H2>Tareas de la EDT</H2>
+    <table class="table table table-sm table-vcenter">
+        <tr>
+            
+            <th class="align-middle">Tarea</th>
+            
+            <th></th>
+            <th></th>
+            
+        </tr>
+        
+        <% _.each(project.objectives, function(objective) { %>
+            <% _.each(objective.tasks, function(task) { %>
+            <tr data-id="<%= objective.id%>" data-model="objective">
+                
+                <td class="vert-aligned"><%= objective.description%></td>
+               
+                <td>
+                    <table class="table table-sm ">
+                        <tr> 
+                          
+                            <a href="/objective/edit/<%=objective.id%>" class="btn btn-sm btn-primary" role="button">
+                                <i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i>                                
+                            </a>
+                           <form action="/task/new/" method="POST">
+                                <input type="hidden" name="belongs_to_obj" value="<%= objective.id%>" >
+                                <input type="hidden" name="_method" value="new" >
+                             
+                                <button type="submit" class="btn btn-sm btn-success" >   
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </form>
+                        
+                            <form action="/objective/destroy/<%= objective.id %>" method="POST">
+                                <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" >
+                                <input type="hidden" name="_method" value="delete" >
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+                                </button>
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </form>
+                       
+                        </tr>
+                    </table>
+                </td>
+               
+                <td class="align-middle"><table class="table table-hover table-striped table-sm">
+                    
+                    <% _.each(objective.tasks, function(task) { %>
+                         <tr data-id="<%= task.id%>" data-model="task" valign="middle">
+                            
+                            <td><%= task.text%></td>
+                            <td><%= task.status%></td>
+                            <td>
+                                <table class="table table-sm">
+                                    <tr>
+                                        
+                                        <form action="/task/edit/<%=task.id%>" method="POST">
+                                            <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
+                                            <input type="hidden" name="_method" value="edit" >
+                                            <button type="submit" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                        </form>
+
+                                        <form action="/lvl1task/new/" method="POST">
+                                            <input type="hidden" name="belongs_to_task" value="<%= task.id%>">
+                                            <input type="hidden" name="_method" value="new" >
+                                            <button type="submit" class="btn btn-sm btn-success disabled">
+                                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                        </form>
+                            
+                                        <form action="/task/destroy/<%= task.id %>" method="POST">
+                                            <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" >
+                                            <input type="hidden" name="_method" value="delete" >
+                                            <button type="submit" class="btn btn-sm btn-danger" >
+                                                    <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                        </form>
+                                    </tr>
+                                </table>
+                             </td>
+                            </tr> 
+                        <% }); %>
+          
+                </table></td>
+             </tr>    
+        </tr> 
+        <% }); %>
+    <% }); %>
+
+    </table>
+
+
+    <form action="/objective/new" method="POST">
+    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+    <input type="submit" value="Add Objective">
+    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+    </form>
+
+</div>
