@@ -1,29 +1,33 @@
 <div class="container">
     <h1>EDT</h1>
     <h2><%= project.name %></h2>
-   
+    <br>
+
+    <H2>Sponsors</H2>
+    <table
     <hr>
     <H2>Objectives</H2>
-    <table class="table table table-sm">
+    <table class="table table-bordered table-sm">
         <tr>
-            
+            <th>ID</th>
             <th>Objective</th>
             <th>Formula</th>
             <th>Goal</th>
+            <th></th>
             <th></th>
             
         </tr>
         
         <% _.each(project.objectives, function(objective) { %>
             <tr data-id="<%= objective.id%>" data-model="objective">
-                
+                <td><%= objective.id%></td>
                 <td><%= objective.description%></td>
                 <td><%= objective.formula%></td>
                 <td><%= objective.goal%></td>
                 <td>
-                    <table class="table table-sm ">
-                        <tr> 
-                          
+                    <table class="table table-sm">
+                        <tr>
+                            
                             <a href="/objective/edit/<%=objective.id%>" class="btn btn-sm btn-primary" role="button">
                                 <i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i>                                
                             </a>
@@ -45,17 +49,15 @@
                                 </button>
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
                             </form>
-                       
                         </tr>
                     </table>
                 </td>
-                <tr>
-                <td></td>
-                <td colspan="3"><table class="table table-hover table-striped table-sm">
+                <td>
+                <table class="table table-bordered table-sm">
                     
                     <% _.each(objective.tasks, function(task) { %>
                          <tr data-id="<%= task.id%>" data-model="task">
-                            
+                            <td><%= task.id%></td>
                             <td><%= task.text%></td>
                             <td><%= task.status%></td>
                             <td>
@@ -86,9 +88,9 @@
                             </tr> 
                         <% }); %>
           
-                </table></td>
-             </tr>    
-        </tr> 
+                </table>
+        </td>    
+     </tr> 
     <% }); %>
 
     </table>
