@@ -58,33 +58,25 @@ module.exports = {
     
    
     edit: function(req, res, next) {
-        Objective.findOne(req.param('id'), function foundObjective(err, objective) {
+        Task.findOne(req.param('id'), function foundTask(err, task) {
             if (err) return next(err);
-            if (!objective) return next();
-            res.view({objective:objective});
+            if (!task) return next();
+            res.view({task:task, belongs_to_project:req.param('belongs_to_project')});
         }); 
     },
     update: function(req, res, next) {
-           Objective.update(req.param('id'), req.params.all(), function objectiveUpdated(err) {
+           Task.update(req.param('id'), req.params.all(), function taskUpdated(err) {
             if (err) {
-                return res.redirect('/objective/edit/'+ req.param('id'));
+                return res.redirect('/task/edit/'+ req.param('id'));
             }
-            return res.redirect('/objective/show/'+ req.param('id'));
+            res.redirect('/project/edt/' + req.param('belongs_to_project') );
         }); 
     },
     destroy: function(req,res,next) {
-       Project.findOne(req.param('belongs_to_project'), function foundObjective(err, project) {
-            if (err) return next(err);
-            if (!project) return next();
-
-        Objective.destroy(req.param('id')).exec(function() {
-            //res.redirect("/objective/");
-            //res.redirect('/project/show/' + objective.belongs_to_project );
-            
-        }
-    );
-         res.redirect('/project/show/' + project.id );
+    Task.destroy(req.param('id')).exec(function() {
+        res.redirect('/project/edt/' + req.param('belongs_to_project') );
     });    
+    
     
     }
 };

@@ -22,7 +22,7 @@
 
     <hr>
     <H2>Objectives</H2>
-    <table>
+    <table class="table table-sm table-hover table-bordered table-striped">
         <tr>
             <th>ID</th>
             <th>Objective</th>
@@ -62,7 +62,7 @@
 
     <hr>
     <H2>Milestones</H2>
-    <table>
+    <table class="table table-sm table-striped table-hover">
         <tr>
             <th>ID</th>
             <th>Milestone</th>
@@ -95,6 +95,7 @@
         <input type="submit" class="btn btn-sm btn-success" value="New Milestone">
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
+ 
     <hr>
     <table>
         <tr>
@@ -106,6 +107,14 @@
                         <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
                     </form>
             </td>
+            <td>
+                <form action="/project/edt/<%=project.id%>" method="POST">
+                    <!-- <input type="hidden" name="belongs_to_project" value="<%= project.id %>" /> -->
+                    <input type="hidden" name="_method" value="delete" />
+                    <input type="submit" class="btn btn-lg btn-success" value="EDT" />
+                    <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                </form>
+        </td>
         </tr>
     </table>
 </div>

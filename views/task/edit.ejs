@@ -1,9 +1,9 @@
-hola loco hasta acá todo bien!
-<form action="/user/update/<%=user.id%>" method="POST">
-    <h2>Modificar usuario</h2>
-    <input value="<%=user.name%>" type="text" name="name"><br/>
-    <input value="<%=user.email%>" type="text" name="email"><br/>
-    <input value="<%=user.state%>" type="text" name="state"><br/>
-    <input  type="submit" value="Editar Usuario"/>
+
+<form action="/task/update/<%=task.id%>" method="POST">
+    <h2>Modificar task</h2>
+    <input value="<%=task.text %>" type="text" name="text"><br/>
+    <input value="<%=task.status%>" type="number" name="status"><br/>
+    <input type="hidden" name="belongs_to_project" value="<%=belongs_to_project%>" />
+    <input  type="submit" value="Actualizar"/>
     <input type="hidden" name="_csrf" value="<%=_csrf%>" />
 </form>

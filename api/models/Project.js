@@ -43,6 +43,14 @@ module.exports = {
     milestones: {
       collection: 'milestone',
       via: 'belongs_to_project'
+    },
+    stakeholders: {
+      collection: 'stakeholder',
+      via: 'belongs_to_project'
+    },
+    risks: {
+      collection: 'risk',
+      via: 'belongs_to_project'
     }
   }
 };

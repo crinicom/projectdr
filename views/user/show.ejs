@@ -1,37 +1,39 @@
-<h1><%= user.name %></h1>
-<br>
-<h3>email: <%= user.email %></h3>
-<h3>state: <%= user.state %></h3>
-<h2><%= user.projects_own%></h2>
-<hr>
-<H2>Proyectos</H2>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Scope</th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-    <% _.each(user.projects, function(project) { %>
-        <tr data-id="<%= project.id%>" data-model="project">
-            <!-- <td><%=project.id%></td> -->
-            <td><%=project.name%></td>
-            <td><%=project.description%></td>
-            <td><%=project.scope%></td>
-            <td><a href="/project/show/<%=project.id%>">Show</a></td>
-            <td><a href="/project/edit/<%=project.id%>">Edit</a></td>
-            <td><a href="/project/destroy/<%=project.id%>">Delete</a></td>
-          
+<div class="container">
+    <h1><%= user.name %></h1>
+    <br>
+    <h3>email: <%= user.email %></h3>
+    <h3>state: <%= user.state %></h3>
+    <h2><%= user.projects_own%></h2>
+    <hr>
+    <H2>Proyectos</H2>
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Scope</th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
-   <% }); %>
-</table>
+        <% _.each(user.projects, function(project) { %>
+            <tr data-id="<%= project.id%>" data-model="project">
+                <!-- <td><%=project.id%></td> -->
+                <td><%=project.name%></td>
+                <td><%=project.description%></td>
+                <td><%=project.scope%></td>
+                <td><a href="/project/show/<%=project.id%>">Show</a></td>
+                <td><a href="/project/edit/<%=project.id%>">Edit</a></td>
+                <td><a href="/project/destroy/<%=project.id%>">Delete</a></td>
+            
+            </tr>
+    <% }); %>
+    </table>
 
 
-<form action="/project/new" method="POST">
-<input type="hidden" value="<%=user.id%>" name="owner">
-<input type="submit" value="Add project">
-<input type="hidden" value="<%=_csrf%>" name="_csrf">
-</form>
+    <form action="/project/new" method="POST">
+    <input type="hidden" value="<%=user.id%>" name="owner">
+    <button type="submit" class="btn btn-large btn-success">Add Project</button>
+    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+    </form>
+</div>

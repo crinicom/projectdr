@@ -40,3 +40,9 @@ body {
     line-height: inherit;
     white-space: nowrap;
 }
+.table tbody > tr > td.vert-aligned {
+    vertical-align: middle;
+}
+.table-vcenter td {
+    vertical-align: middle!important;
+ }
