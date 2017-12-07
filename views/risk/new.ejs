@@ -1,0 +1,31 @@
+<div class="container">
+    <form action="/risk/create" method="POST" id="new-risk-form">
+        <h2 class="form-signin-heading">Create Risk</h2>
+
+        <% if (flash && flash.err) { %>
+            <ul class="alert alert-success">
+                <li>Existe flash</li>
+                <% Object.keys(flash.err).forEach(function(error) {%>
+                <li><%- JSON.stringify(flash.err[error]) %></li>
+                <% }); %>
+            </ul>
+
+        <% } %>
+        <div class="form-group">
+            <input type="hidden" name="belongs_to_project" value="<%=project.id%>" />
+        
+        
+            
+            <input type="text" class="form-control" placeholder="detected risk" name="description" autofocus></br>
+            <input type="text" class="form-control" placeholder="impact on project" name="impact"></br>
+            <input type="text" class="form-control" placeholder="mitigation plan" name="mitigation" cols="60"></br>
+       
+        
+        <input type="hidden" name="assoc_stakeholder" value="<%=assoc_stakeholder%>" />
+        <br/>
+        
+        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create risk">
+        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+    </div>
+   </form>
+</div>

@@ -1,0 +1,109 @@
+<div class="container">
+    <h1>Risks</h1>
+    <h2><%= project.name %></h2>
+   
+    <hr>
+    <H2>Stakeholders</H2>
+    <table class="table table table-sm table-vcenter">
+        <tr>
+            
+            <th class="align-middle">Stakeholder</th>
+            
+            <th></th>
+            <th></th>
+            
+        </tr>
+        
+        <% _.each(project.stakeholders, function(stakeholder) { %>
+            <tr data-id="<%= stakeholder.id%>" data-model="stakeholder">
+                
+                <td class="vert-aligned"><%= stakeholder.name%></td>
+               
+                <td>
+                    <table class="table table-sm ">
+                        <tr> 
+                          
+                            <form action="/stakeholder/edit/<%=stakeholder.id%>" method="POST">
+                                <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
+                                <input type="hidden" name="_method" value="edit" >
+                                <input type="hidden" name="assoc_task" value="<%= stakeholder.assoc_task%>" >
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i>
+                                </button>
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </form>
+                                                    
+                            <form action="/stakeholder/destroy/<%= stakeholder.id %>" method="POST">
+                                <input type="hidden" name="belongs_to_project" value="<%= stakeholder.belongs_to_project %>" >
+                                <input type="hidden" name="_method" value="delete" >
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+                                </button>
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </form>
+                            
+                            <form action="/risk/new/" method="POST">
+                                <input type="hidden" name="belongs_to_project" value="<%= project.id%>" >
+                                <input type="hidden" name="assoc_stakeholder" value="<%= stakeholder.id%>" >
+                                <input type="hidden" name="_method" value="new" >
+                             
+                                <button type="submit" class="btn btn-sm btn-success" >   
+                                <i class="fa fa-plus-square-o fa-2" aria-hidden="true"></i></button>
+                                
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </form>
+                        </tr>
+                    </table>
+                </td>
+               
+                <td class="align-middle"><table class="table table-hover table-striped table-sm">
+                    
+                    <% _.each(project.risks, function(risk) { if (risk.assoc_stakeholder==stakeholder.id) { %>
+                         <tr data-id="<%= risk.id%>" data-model="risk" valign="middle">
+                            
+                            <td><%= risk.description%></td>
+                            <td><%= risk.impact%></td>
+                            <td><%= risk.mitigation%></td>
+                            <td>
+                                <table class="table table-sm">
+                                    <tr>
+                                        
+                                        <form action="/risk/edit/<%=risk.id%>" method="POST">
+                                            <input type="hidden" name="belongs_to_project" value="<%= risk.belongs_to_project%>">
+                                            <input type="hidden" name="_method" value="edit" >
+                                            <button type="submit" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                        </form>
+
+                                                                    
+                                        <form action="/risk/destroy/<%= risk.id %>" method="POST">
+                                            <input type="hidden" name="belongs_to_project" value="<%= risk.belongs_to_project %>" >
+                                            <input type="hidden" name="_method" value="delete" >
+                                            <button type="submit" class="btn btn-sm btn-danger" >
+                                                    <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                        </form>
+                                    </tr>
+                                </table>
+                             </td>
+                            </tr> 
+                        <% }}); %>
+          
+                </table></td>
+             </tr>    
+        </tr> 
+    <% }); %>
+
+    </table>
+
+
+    <form action="/project/show/<%=project.id%>" method="POST">
+    
+    <button type="submit" class="btn btn-primary">Regresar al proyecto </button>
+    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+    </form>
+
+</div>

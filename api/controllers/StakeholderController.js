@@ -15,6 +15,8 @@ module.exports = {
         });
     },
     create:function(req, res, next) {
+       var mails_array = req.param('mails');
+       req.param.mails = mails_array.split(';');
         Stakeholder.create(req.params.all(), function stkCreated(err, stakeholder) {
             //if (err) return next(err);
             if (err) {
@@ -43,38 +45,43 @@ module.exports = {
         });
     },
     index: function(req, res, next) {
-        Project.findOne(req.param('belongs_to_project'), function foundObjective(err, project) {
+       /* Project.findOne(req.param('belongs_to_project'), function foundObjective(err, project) {
             if (err) return next(err);
             if (!project) return next();
 
             // res.json(project); solo check
-            Objective.find({belongs_to_project: project.id}).exec(function foundObjectives(err, objectives) {
+            Stakeholder.find({belongs_to_project: project.id}).exec(function foundObjectives(err, objectives) {
                 if (err) return next(err);
                 
                 res.view({objectives:objectives});
            });
+        });*/
+        Stakeholder.find(function foundStk(err, stakeholders) {
+            if (err) return next(err);
+            
+            res.json(stakeholders);
+            
         });
     },
-    
-   
+     
     edit: function(req, res, next) {
-        Task.findOne(req.param('id'), function foundTask(err, task) {
+        Stakeholder.findOne(req.param('id'), function foundStk(err, stakeholder) {
             if (err) return next(err);
-            if (!task) return next();
-            res.view({task:task, belongs_to_project:req.param('belongs_to_project')});
+            if (!stakeholder) return next();
+            res.view({stakeholder:stakeholder,belongs_to_project:req.param('belongs_to_project'), assoc_task:req.param('assoc_task')});
         }); 
     },
     update: function(req, res, next) {
-           Task.update(req.param('id'), req.params.all(), function taskUpdated(err) {
+           Stakeholder.update(req.param('id'), req.params.all(), function stakeholderkUpdated(err) {
             if (err) {
-                return res.redirect('/task/edit/'+ req.param('id'));
+                return res.redirect('/stakeholder/edit/'+ req.param('id'));
             }
-            res.redirect('/project/edt/' + req.param('belongs_to_project') );
+            res.redirect('/project/stakeholders/' + req.param('belongs_to_project') );
         }); 
     },
     destroy: function(req,res,next) {
-    Task.destroy(req.param('id')).exec(function() {
-        res.redirect('/project/edt/' + req.param('belongs_to_project') );
+    Stakeholder.destroy(req.param('id')).exec(function() {
+        res.redirect('/project/stakeholders/' + req.param('belongs_to_project') );
     });    
     
     

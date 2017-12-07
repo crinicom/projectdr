@@ -1,0 +1,32 @@
+<div class="container">
+    <form action="/stakeholder/update/<%=stakeholder.id%>" method="POST" id="new-stakeholder-form">
+        <h2 class="form-signin-heading">Update Stakeholder</h2>
+
+        <% if (flash && flash.err) { %>
+            <ul class="alert alert-success">
+                <li>Existe flash</li>
+                <% Object.keys(flash.err).forEach(function(error) {%>
+                <li><%- JSON.stringify(flash.err[error]) %></li>
+                <% }); %>
+            </ul>
+
+        <% } %>
+        <div class="form-group">
+            <input type="hidden" name="belongs_to_project" value="<%=belongs_to_project%>" />
+            <input type="hidden" name="assoc_task" value="<%=stakeholder.assoc_task%>" />
+
+            <input type="text" class="form-control"  name="name" value="<%=stakeholder.name%>"size="5" autofocus></br>
+            <input type="text" class="form-control"  value="<%=stakeholder.comm_plan%>" name="comm_plan" size="100"></br>
+            <input type="textarea" class="form-control" value="<%=stakeholder.mails%>" name="mails" size="100"></br>
+            <label for="<%=assoc_task%>"></label>
+            <label for="<%=belongs_to_project%>"></label>
+        
+        
+        <br/>
+        
+        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create stakeholder">
+        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+     </div>
+   </form>
+
+</div>

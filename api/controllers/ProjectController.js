@@ -50,15 +50,8 @@ module.exports = {
         
         });
     },
+    // RESPONDO A LA LLAMADA PARA VER LA EDT
     edt: function(req, res, next) {
-       //Original mio 
-       /* 
-       Project.findOne(req.param('id')).populateAll().exec(function(err,project) {
-            if (err) return next(err);
-            if (!project) return next();
-            res.view({project:project});
-           //res.json(project);           
-        }); */
         // https://stackoverflow.com/questions/26535727/sails-js-waterline-populate-deep-nested-association
 
         Project
@@ -85,7 +78,7 @@ module.exports = {
         });
          
     },
-
+ // RESPONDO A LA LLAMADA PARA VER LA STAKEHOLDERS
     stakeholders: function(req, res, next) {
        
  
@@ -104,7 +97,7 @@ module.exports = {
              var stakeholders = Stakeholder.find({
                  "belongs_to_project": project.id
              })
-             .populate('mails')
+             //.populate('mails')
              .then(function (stakeholders){
                 return stakeholders;
             });
@@ -120,7 +113,44 @@ module.exports = {
              if (err) return res.serverError(err);
          });
           
-     }
+     },
+
+     // RESPONDO A LA LLAMADA PARA VER RIESGOS
+    risks: function(req, res, next) {
+     
+          Project
+          .findOne(req.param('id'))
+          .populateAll()      
+          .then(function (project){
+              var stakeholders = Stakeholder.find({
+                  "belongs_to_project": project.id
+              })
+              //.populate('tasks')
+              //.populate('lvl1tasks')
+              .then(function (stakeholders){
+                  return stakeholders;
+              });
+              var risks = Risk.find({
+                "belongs_to_project": project.id
+            })
+            //.populate('tasks')
+            //.populate('lvl1tasks')
+            .then(function (risks){
+                return risks;
+            });
+              return [project, stakeholders, risks];
+          })
+          .spread(function (project, stakeholders, risks){
+              project = project.toObject() // <- HERE IS THE CHANGE!
+              project.stakeholders = stakeholders;
+              project.risks = risks; // It will work now
+              //res.json(project);
+              res.view({risks:risks, project:project, stakeholders:stakeholders});
+             }).catch(function (err){
+              if (err) return res.serverError(err);
+          });
+           
+      }
 
     
 };

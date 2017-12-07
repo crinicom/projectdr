@@ -11,7 +11,8 @@ module.exports = {
     belongs_to_project: {model: 'project', required:true},
     name: {type: 'string', required:true},
     comm_plan: {type: 'string', required:true},
-    mails: {collection: 'mail', via:'stk'},
+    //mails: {collection: 'mail', via:'stk'},
+    mails: {type: "array"},
     status: {type: 'integer'},
     assoc_task: {model: 'task', via: 'id'}
   }
