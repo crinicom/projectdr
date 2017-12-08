@@ -123,6 +123,14 @@
                 <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
             </form>
     </td>
+    <td>
+            <form action="/project/gantt/<%=project.id%>" method="POST">
+                <!-- <input type="hidden" name="belongs_to_project" value="<%= project.id %>" /> -->
+                <input type="hidden" name="_method" value="delete" />
+                <input type="submit" class="btn btn-lg btn-success" value="Carta Gantt" />
+                <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+            </form>
+    </td>
         </tr>
     </table>
 </div>

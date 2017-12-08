@@ -150,7 +150,46 @@ module.exports = {
               if (err) return res.serverError(err);
           });
            
-      }
+      },
+
+       // RESPONDO A LA LLAMADA PARA VER RIESGOS
+       gantt: function(req, res, next) {
+        // https://stackoverflow.com/questions/26535727/sails-js-waterline-populate-deep-nested-association
+
+        Project
+        .findOne(req.param('id'))
+        .populateAll()      
+        .then(function (project){
+            var objectives = Objective.find({
+                "belongs_to_project": project.id
+            })
+            .populate('tasks')
+            .then(function (objectives){
+                return objectives;
+            });
+            var stakeholders = Stakeholder.find({
+                "belongs_to_project": project.id
+            })
+            .then(function (stakeholders){
+                return stakeholders;
+            });
+            var risks = Risk.find({
+              "belongs_to_project": project.id
+          })
+            return [project, objectives, stakeholders, risks];
+        })
+        .spread(function (project, objectives, stakeholders, risks){
+            project = project.toObject() // <- HERE IS THE CHANGE!
+            project.objectives = objectives; // It will work now
+            project.stakeholders = stakeholders;
+            project.risks = risks;
+            //res.json(project);
+            res.view({objectives:objectives, project:project, stakeholders:stakeholders, risks:risks});
+        }).catch(function (err){
+            if (err) return res.serverError(err);
+        });
+         
+    }
 
     
 };

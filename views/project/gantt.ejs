@@ -1,0 +1,52 @@
+<div class="container">
+        <h1>Carta Gantt</h1>
+        <h2><%= project.name %></h2>
+       
+        <hr>
+        <H2>Tareas de la EDT</H2>
+        
+        <table class="table table table-sm table-vcenter">
+            <tr>
+                <th class="align-middle">Tarea</th>
+                <th></th>
+                <th></th>
+            </tr>
+            
+            <% _.each(project.objectives, function(objective) { %>
+                <tr data-id="<%= objective.id%>" data-model="objective">
+                <% _.each(objective.tasks, function(task) { %>
+                        <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%></td>
+                        <td>SLIDER AQUI!</td>
+                 </tr>    
+            </tr> 
+           <% }); %>
+        <% }); %>
+    
+        <% _.each(project.stakeholders, function(stakeholder) { %>
+            <tr data-id="<%= stakeholder.id%>" data-model="stakeholder">
+           
+                    <td class="vert-aligned"><%= stakeholder.name%> <-- <%=stakeholder.comm_plan%></td>
+                    <td>SLIDER AQUI!</td>
+             </tr>    
+        </tr> 
+       <% }); %>
+    
+       <% _.each(project.risks, function(risk) { %>
+        <tr data-id="<%= risk.id%>" data-model="risk">
+       
+                <td class="vert-aligned"><%= risk.description%> <-- <%=risk.mitigation%></td>
+                <td>SLIDER AQUI!</td>
+         </tr>    
+    </tr> 
+   <% }); %>
+
+        </table>
+    
+    
+        <form action="/project/show/<%=project.id%>" method="POST">
+            
+            <button type="submit" class="btn btn-primary">Regresar al proyecto </button>
+            <input type="hidden" value="<%=_csrf%>" name="_csrf">
+        </form>
+    
+    </div>
