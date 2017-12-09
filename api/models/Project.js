@@ -51,6 +51,11 @@ module.exports = {
     risks: {
       collection: 'risk',
       via: 'belongs_to_project'
+    },
+    edt_in_progress: {
+      type: 'string',
+      enum: ['no', 'wip', 'finished'],
+      default: 'no'
     }
   }
 };

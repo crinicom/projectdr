@@ -97,13 +97,21 @@
         </tr> 
     <% }); %>
 
+    
+
     </table>
-
-
-    <form action="/objective/new" method="POST">
-    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
-    <input type="submit" value="Add Objective">
-    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+    <% if (edt_in_progress != "finished") {%>
+    <form action="/project/show/<%=project.id%>" method="POST">
+        <button type="submit" class="btn btn-success btn-block">
+            <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
+            Finalizar ediciòn de Estructura de Desglose de Trabajo
+        </button>
+        <input type="hidden" value="<%=_csrf%>" name="_csrf">
+        <input type="hidden"  name="edt_in_progress" value="finished">
     </form>
+<% }%>
+    <br><br><br>
+    <%- partial('../navbuttons.ejs') %>
+
 
 </div>

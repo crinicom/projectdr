@@ -53,7 +53,8 @@ module.exports = {
     // RESPONDO A LA LLAMADA PARA VER LA EDT
     edt: function(req, res, next) {
         // https://stackoverflow.com/questions/26535727/sails-js-waterline-populate-deep-nested-association
-
+        var edt_in_progress ="";
+        if (req.param('edt_in_progress') == "finished") { edt_in_progres = "finished"}
         Project
         .findOne(req.param('id'))
         .populateAll()      
@@ -72,7 +73,7 @@ module.exports = {
             project = project.toObject() // <- HERE IS THE CHANGE!
             project.objectives = objectives; // It will work now
             //res.json(project);
-            res.view({objectives:objectives, project:project});
+            res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress});
         }).catch(function (err){
             if (err) return res.serverError(err);
         });

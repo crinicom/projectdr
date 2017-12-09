@@ -1,0 +1,49 @@
+<table class="table">
+<td>
+    <form action="/project/show/<%=project.id%>" method="POST">
+    <button type="submit" class="btn btn-primary">
+        <i class="fa fa-home fa-4x" aria-hidden="true"></i><br>
+        Regresar al proyecto 
+    </button>
+    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+</form>
+</td>
+
+<td>
+        <form action="/project/edt/<%=project.id%>" method="POST">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i><br>
+            Estructura de desglose de trabajo 
+        </button>
+        <input type="hidden" value="<%=_csrf%>" name="_csrf">
+    </form>
+    </td>
+
+<td>
+    <form action="/project/stakeholders/<%=project.id%>" method="POST">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-share-alt fa-4x" aria-hidden="true"></i><br>
+            Stakeholders y plan de comunicación 
+        </button>
+        <input type="hidden" value="<%=_csrf%>" name="_csrf">
+    </form>
+</td>
+<td>
+        <form action="/project/risks/<%=project.id%>" method="POST">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i><br>
+                Riesgos plan de mitigación 
+            </button>
+            <input type="hidden" value="<%=_csrf%>" name="_csrf">
+        </form>
+    </td>
+    <td>
+            <form action="/project/gantt/<%=project.id%>" method="POST">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i><br>
+                    Carta Gantt
+                </button>
+                <input type="hidden" value="<%=_csrf%>" name="_csrf">
+            </form>
+        </td>
+</table>
