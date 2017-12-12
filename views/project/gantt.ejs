@@ -42,11 +42,8 @@
 
         </table>
     
+        <br><br><br>
+        <%- partial('../navbuttons.ejs') %>
     
-        <form action="/project/show/<%=project.id%>" method="POST">
-            
-            <button type="submit" class="btn btn-primary">Regresar al proyecto </button>
-            <input type="hidden" value="<%=_csrf%>" name="_csrf">
-        </form>
     
     </div>
