@@ -44,11 +44,56 @@ You can modify, omit, or replace any of these Grunt tasks to fit your requiremen
 Nope! To disable Grunt integration in Sails, just delete your Gruntfile or disable the Grunt hook.
 
 
-### What if I'm not building a web frontend?
+### Comentarios con Javier
+- posibilidad de fundir o merge de tareas
+- asignar responsable según la lista de participantes
+- mail semanal con TODO por persona y resto del equipo, con el último comentario
+# MVP GANTT
+- Fecha de inicio, duración, responsable
+- Si están vigentes, fondo verde claro
+- en rojo las vencidas
+- ordenadas por fecha de inicio
+- completadas al fondo
+- boton de finalizada y status
+- comentarios como lo llevamos ahora
 
-That's ok! A core tenant of Sails is client-agnosticism-- it's especially designed for building APIs used by all sorts of clients; native Android/iOS/Cordova, serverside SDKs, etc.
-
-You can completely disable Grunt by following the instructions above.
-
-If you still want to use Grunt for other purposes, but don't want any of the default web front-end stuff, just delete your project's `assets` folder and remove the front-end oriented tasks from the `grunt/register` and `grunt/config` folders.  You can also run `sails new myCoolApi --no-frontend` to omit the `assets` folder and front-end-oriented Grunt tasks for future projects.  You can also replace your `sails-generate-frontend` module with alternative community generators, or create your own.  This allows `sails new` to create the boilerplate for native iOS apps, Android apps, Cordova apps, SteroidsJS apps, etc.
-
+# CASOS DE USO DE LA HERRAMIENTA
+- Ingresar con usuario y contrseña
+- _ver lista de proyectos_:
+    - mis proyectos
+    - proyectos en los que participo
+    - proyectos en los que estoy invitado
+    - cada proyecto tiene una serie de indicadores de avance: se hizo e el project charter? los stakeholders? etc.
+    - % de avance de la gantt de cada proyecto
+- CRUD de proyectos
+- _trabajar un proyecto (Project Charter):_
+    - Definir nombre, descripción, alcance, antecedentes (texto libre, uni o multilinea)
+    - asignar uno o más sponsors: nombre y correo. CRUD
+    - asignar uno o más hitos: cada hito tiene texto+fecha. CRUD
+    - asignar uno o más objetivos: cada objetivo tiene descripción, fórmula, meta. CRUD
+    - asignar uno o más miembros del equipo (personas)
+    - acceder desde el proyecto a las páginas de:
+        - EDT, estructura de desglose de trabajo
+        - Stakeholders y plan de comunicación
+        - Riesgos
+        - Carta Gantt
+-_trabajar la EDT_:
+    - trae del project charter la lista de OBJETIVOS
+    - Permite asignar a cada objetivo una o más TAREAS (solo texto). CRUD.
+-_trabajar stakeholders y plan de comm_:
+    - trae de EDT las TAREAS.
+    - permite asignar a cada tarea uno o más Stakeholders+plan de comunicación+mail (texto, texto, email)
+ -_trabajar riesgos y plan de mitigación_:
+    - trae los stakeholders de la otra tabla
+    - permite asignar a cada stakeholder uno o más riesgos+ímpacto+plan de mitigación (texto, texto, texto)
+-_trabajar carta GANTT_:
+    - trae planes de comunicación de tabla de stakeholders
+    - trae planes de mitigación de riesgos de donde corresponde
+    - trae tareas de la EDT
+    - permite determinar la escala de tiempo (de una lista desplegable)
+    - permite asignar a cada item: 
+        - responsable (de entre los miembros del equipo)
+        - duración (numero)
+        - fecha de inicio
+        - uno o más comentarios de avance
+        - estado (no iniciado, en proceso, finalizado)
