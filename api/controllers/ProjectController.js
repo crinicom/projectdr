@@ -54,6 +54,7 @@ module.exports = {
     edt: function(req, res, next) {
         // https://stackoverflow.com/questions/26535727/sails-js-waterline-populate-deep-nested-association
         var edt_in_progress ="";
+        
         if (req.param('edt_in_progress') == "finished") { edt_in_progres = "finished"}
         Project
         .findOne(req.param('id'))
@@ -72,6 +73,7 @@ module.exports = {
         .spread(function (project, objectives){
             project = project.toObject() // <- HERE IS THE CHANGE!
             project.objectives = objectives; // It will work now
+            project.status = { "pcharter":"no", "edt":"no", "stk": "no", "risk": "no", "gantt": "no", "work": 0};
             //res.json(project);
             res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress});
         }).catch(function (err){
@@ -193,14 +195,45 @@ module.exports = {
     },
 
     save_state: function(req, res, next) {
-        Project.update(req.param('id'), req.param('edt_in_progress'), function stateUpdated(err) {
+      /*   var pro = Project.findOne(req.param('id'), function foundProject(err, project) {
+            if (err) return next(err);
+            if (!project) return next();
+            return project;
+        }); 
+
+        pro.status[req.param('key')] = req.param('state');
+        Project.update(req.param('id'), status, function stateUpdated(err) {
          if (err) {
              //return res.redirect('/project/edit/'+ req.param('id'));
             return res.json("error");
             }
          //return res.redirect('/user/show/'+ req.param('id'));
          res.json(req.url);
-     }); 
+     });  */
+
+     // MODIFICAR!!!
+     Project
+     .findOne(req.param('id'))     
+     .then(function (project){
+         
+         return project;
+     })
+     .spread(function (project){
+         project = project.toObject() // <- HERE IS THE CHANGE!
+         project.status[req.param('key')] = req.param('state');
+         //res.json(project);
+         Project.update(req.param('id'), status, function stateUpdated(err) {
+            if (err) {
+                //return res.redirect('/project/edit/'+ req.param('id'));
+               return res.json("error");
+               }
+            //return res.redirect('/user/show/'+ req.param('id'));
+            res.json(req.url);
+        
+        }).catch(function (err){
+         if (err) return res.serverError(err);
+     });
+    });
  }
 
     

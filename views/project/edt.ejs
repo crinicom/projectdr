@@ -100,15 +100,16 @@
     
 
     </table>
-    <p><%=project.edt_in_progress%></p>
-    <% if (project.edt_in_progress != "finished") {%>
+    <p><%=JSON.stringify(project.status)%></p>
+    <% if (project.status.edt != "finished") {%>
     <form action="/project/save_state/<%=project.id%>" method="POST">
         <button type="submit" class="btn btn-success btn-block">
             <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
             Finalizar ediciòn de Estructura de Desglose de Trabajo
         </button>
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
-        <input type="hidden"  name="edt_in_progress" value="finished">
+        <input type="hidden"  name="key" value="edt">
+        <input type="hidden"  name="state" value="finished">
     </form>
 <% }%>
     <br><br><br>

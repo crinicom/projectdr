@@ -56,7 +56,12 @@ module.exports = {
       type: 'string',
       enum: ['no', 'wip', 'finished'],
       default: 'no'
-    }
+    },
+    status: {
+      type: 'json',
+      default: { "pcharter":"no", "edt":"no", "stk": "no", "risk": "no", "gantt": "no", work: 0}
+      }
+    
   }
 };
 
