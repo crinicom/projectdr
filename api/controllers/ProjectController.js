@@ -190,7 +190,18 @@ module.exports = {
             if (err) return res.serverError(err);
         });
          
-    }
+    },
+
+    save_state: function(req, res, next) {
+        Project.update(req.param('id'), req.param('edt_in_progress'), function stateUpdated(err) {
+         if (err) {
+             //return res.redirect('/project/edit/'+ req.param('id'));
+            return res.json("error");
+            }
+         //return res.redirect('/user/show/'+ req.param('id'));
+         res.json(req.url);
+     }); 
+ }
 
     
 };
