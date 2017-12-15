@@ -59,7 +59,7 @@ module.exports = {
     },
     status: {
       type: 'json',
-      default: { "pcharter":"no", "edt":"no", "stk": "no", "risk": "no", "gantt": "no", work: 0}
+      //default: { "pcharter":"no", "edt":"no", "stk": "no", "risk": "no", "gantt": "no", work: 0}
       }
     
   }

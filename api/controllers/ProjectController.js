@@ -215,6 +215,8 @@ module.exports = {
         if (err) return next(err);
         if (!project) return next();
         
+        var status = {};
+
         //project = project.toObject() // <- HERE IS THE CHANGE!
         //project.status[req.param('key')] = req.param('state');
         res.json([project, req.param('key'),req.param('state') ]);
