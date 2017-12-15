@@ -211,8 +211,26 @@ module.exports = {
          res.json(req.url);
      });  */
 
+     Project.findOne(req.param('id'), function foundProject(err, project) {
+        if (err) return next(err);
+        if (!project) return next();
+        
+        //project = project.toObject() // <- HERE IS THE CHANGE!
+        //project.status[req.param('key')] = req.param('state');
+        res.json([project, req.param('key'),req.param('state') ]);
+        //res.json(project);
+       /*  Project.update(req.param('id'), status, function stateUpdated(err) {
+           if (err) {
+               //return res.redirect('/project/edit/'+ req.param('id'));
+              return res.json("error");
+              }
+           //return res.redirect('/user/show/'+ req.param('id'));
+           res.json(req.url);
+    });  */
+});
+
      // MODIFICAR!!!
-     Project
+    /*  Project
      .findOne(req.param('id'))     
      .then(function (project){
          
@@ -233,7 +251,7 @@ module.exports = {
         }).catch(function (err){
          if (err) return res.serverError(err);
      });
-    });
+    }); */
  }
 
     
