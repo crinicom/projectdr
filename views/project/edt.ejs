@@ -20,6 +20,7 @@
                 <td class="vert-aligned"><%= objective.description%></td>
                
                 <td>
+                        <% if (project.edt != "finished") {%>
                     <table class="table table-sm ">
                         <tr> 
                           
@@ -47,6 +48,7 @@
                        
                         </tr>
                     </table>
+                    <% }%>
                 </td>
                
                 <td class="align-middle"><table class="table table-hover table-striped table-sm">
@@ -56,7 +58,7 @@
                             
                             <td><%= task.text%></td>
                             <td><%= task.status%></td>
-                            <td>
+                            <td> <% if (project.edt != "finished") {%>
                                 <table class="table table-sm">
                                     <tr>
                                         
@@ -87,7 +89,7 @@
                                             <input type="hidden" name="_csrf" value="<%= _csrf%>">
                                         </form>
                                     </tr>
-                                </table>
+                                </table> <%}%>
                              </td>
                             </tr> 
                         <% }); %>
@@ -102,21 +104,30 @@
     </table>
     <p><%=JSON.stringify(project.status)%></p>
    
+    <% if (project.edt != "finished") {%>
+    <form action="/project/show/<%=project.id%>" method="POST">
+        <button type="submit" class="btn btn-primary btn-block">
+            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+            Guardar y continuar más tarde
+        </button>
+        <input type="hidden" value="<%=_csrf%>" name="_csrf">
+    </form> <%}%>
+
     <form action="/project/save_state/<%=project.id%>" method="POST">
         <% if (project.edt != "finished") {%>
         <button type="submit" class="btn btn-success btn-block">
             <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
-            Finalizar ediciòn de Estructura de Desglose de Trabajo
+            Guardar y finalizar edición de Estructura de Desglose de Trabajo
         </button>
         <input type="hidden"  name="key" value="edt">
         <input type="hidden"  name="state" value="finished">
         <% } else {%>
             <button type="submit" class="btn btn-success btn-block">
                 <i class="fa fa-unlock fa-2x" aria-hidden="true"></i>    
-                Continuar ediciòn de Estructura de Desglose de Trabajo
+                Continuar edición de Estructura de Desglose de Trabajo
             </button>
             <input type="hidden"  name="key" value="edt">
-            <input type="hidden"  name="state" value="process">
+            <input type="hidden"  name="state" value="wip">
             <%}%>            
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>

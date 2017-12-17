@@ -209,7 +209,11 @@ module.exports = {
             return res.json("error");
             }
          //return res.redirect('/user/show/'+ req.param('id'));
-         res.json(upd);
+        // res.json(upd);
+        if (status[req.param('key')] == "wip") {  
+            return res.redirect('/project/'+ req.param('key')+"/"+ req.param('id'));
+        }
+        else return res.redirect('/project/show/'+ req.param('id'));
      });  
 
     

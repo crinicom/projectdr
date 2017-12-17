@@ -11,10 +11,20 @@
 
 <td>
         <form action="/project/edt/<%=project.id%>" method="POST">
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i><br>
-            Estructura de desglose de trabajo 
-        </button>
+            <% if (project.edt == "finished") {%>    
+                <button type="submit" class="btn btn-success">
+                <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i>
+                   
+                    <i class="fa fa-check fa-4x" aria-hidden="true"></i>    
+                    
+            <%} else if (project.edt == "wip") {%>
+                <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i>
+                        <i class="fa fa-play fa-4x " aria-hidden="true"></i>
+                              
+            <%}%>
+                <br>Estructura de desglose de trabajo 
+            </button>
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
     </td>
