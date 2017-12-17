@@ -224,7 +224,8 @@ module.exports = {
          //res.json(project);
          Project.update(req.param('id'), status, function stateUpdated(err) {
             if (err) {
-                //return res.redirect('/project/edit/'+ req.param('id'));
+                //return res.redirect
+                project/edit/'+ req.param('id'));
                return res.json("error");
                }
             //return res.redirect('/user/show/'+ req.param('id'));
