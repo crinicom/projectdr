@@ -42,7 +42,9 @@
 
         </table>
     
-        <% if (project.gantt_page != "finished") {%>
+
+        <p><%=JSON.stringify(project.status)%></p>
+        <% if (project.gantt != "finished") {%>
             <form action="/project/show/<%=project.id%>" method="POST">
                 <button type="submit" class="btn btn-primary btn-block">
                     <i class="fa fa-home fa-2x" aria-hidden="true"></i>
@@ -57,14 +59,14 @@
                     <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
                     Guardar y finalizar edición
                 </button>
-                <input type="hidden"  name="key" value="edt">
+                <input type="hidden"  name="key" value="gantt">
                 <input type="hidden"  name="state" value="finished">
                 <% } else {%>
                     <button type="submit" class="btn btn-success btn-block">
                         <i class="fa fa-unlock fa-2x" aria-hidden="true"></i>    
                         Continuar edición
                     </button>
-                    <input type="hidden"  name="key" value="edt">
+                    <input type="hidden"  name="key" value="gantt">
                     <input type="hidden"  name="state" value="wip">
                     <%}%>            
                 <input type="hidden" value="<%=_csrf%>" name="_csrf">

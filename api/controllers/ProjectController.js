@@ -203,7 +203,7 @@ module.exports = {
         
         Project.update(req.param('id'), status, function stateUpdated(err, upd) {
          if (err) {
-            return res.json("error");
+            return res.json({err});
             }
         if (status[req.param('key')] == "wip") {  
             return res.redirect('/project/'+ req.param('key')+"/"+ req.param('id'));
