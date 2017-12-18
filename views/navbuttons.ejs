@@ -73,11 +73,11 @@
     </td>
     <td>
             <form action="/project/gantt/<%=project.id%>" method="POST">
-                <% if (project.risk_page == "finished") {%>   
+                <% if (project.gantt_page == "finished") {%>   
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i>
                     <i class="fa fa-check fa-4x" aria-hidden="true"></i>  
-                <%} else if (project.risk_page == "wip") {%>
+                <%} else if (project.gantt_page == "wip") {%>
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i>
                         <i class="fa fa-play fa-4x " aria-hidden="true"></i>

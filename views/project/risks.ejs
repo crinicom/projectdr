@@ -97,7 +97,34 @@
         </tr> 
     <% }); %>
 
-    <br><br><br>
-    <%- partial('../navbuttons.ejs') %>
+    <% if (project.risk_page != "finished") {%>
+        <form action="/project/show/<%=project.id%>" method="POST">
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                Guardar y continuar más tarde
+            </button>
+            <input type="hidden" value="<%=_csrf%>" name="_csrf">
+        </form> <%}%>
+    
+        <form action="/project/save_state/<%=project.id%>" method="POST">
+            <% if (project.risk_page != "finished") {%>
+            <button type="submit" class="btn btn-success btn-block">
+                <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
+                Guardar y finalizar edición
+            </button>
+            <input type="hidden"  name="key" value="edt">
+            <input type="hidden"  name="state" value="finished">
+            <% } else {%>
+                <button type="submit" class="btn btn-success btn-block">
+                    <i class="fa fa-unlock fa-2x" aria-hidden="true"></i>    
+                    Continuar edición
+                </button>
+                <input type="hidden"  name="key" value="edt">
+                <input type="hidden"  name="state" value="wip">
+                <%}%>            
+            <input type="hidden" value="<%=_csrf%>" name="_csrf">
+        </form>
+        <br><br><br>
+        <%- partial('../navbuttons.ejs') %>
 
 </div>

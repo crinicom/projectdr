@@ -15,6 +15,8 @@ module.exports = {
         });
     },
     create: function(req, res, next) {
+       
+
         Project.create(req.params.all(), function projectCreated(err, project) {
             if (err) return next(err);
             
@@ -55,7 +57,7 @@ module.exports = {
         // https://stackoverflow.com/questions/26535727/sails-js-waterline-populate-deep-nested-association
         var edt_in_progress ="";
         
-        if (req.param('edt_in_progress') == "finished") { edt_in_progres = "finished"}
+        //if (req.param('edt_in_progress') == "finished") { edt_in_progres = "finished"}
         Project
         .findOne(req.param('id'))
         .populateAll()      
@@ -73,7 +75,7 @@ module.exports = {
         .spread(function (project, objectives){
             project = project.toObject() // <- HERE IS THE CHANGE!
             project.objectives = objectives; // It will work now
-            project.status = { "pcharter":"no", "edt":"no", "stk": "no", "risk": "no", "gantt": "no", "work": 0};
+            //project.status = { "pcharter":"no", "edt":"no", "stk": "no", "risk_page": "no", "gantt_page": "no", "work": 0};
             //res.json(project);
             res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress});
         }).catch(function (err){
