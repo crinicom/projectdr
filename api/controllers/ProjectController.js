@@ -195,21 +195,14 @@ module.exports = {
     },
 
     save_state: function(req, res, next) {
-      /*   var pro = Project.findOne(req.param('id'), function foundProject(err, project) {
-            if (err) return next(err);
-            if (!project) return next();
-            return project;
-        }); */
+     
         var status = {};
         status[req.param('key')] = req.param('state');
         
         Project.update(req.param('id'), status, function stateUpdated(err, upd) {
          if (err) {
-             //return res.redirect('/project/edit/'+ req.param('id'));
             return res.json("error");
             }
-         //return res.redirect('/user/show/'+ req.param('id'));
-        // res.json(upd);
         if (status[req.param('key')] == "wip") {  
             return res.redirect('/project/'+ req.param('key')+"/"+ req.param('id'));
         }

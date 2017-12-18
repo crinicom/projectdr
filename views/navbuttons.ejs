@@ -14,15 +14,17 @@
             <% if (project.edt == "finished") {%>    
                 <button type="submit" class="btn btn-success">
                 <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i>
-                   
-                    <i class="fa fa-check fa-4x" aria-hidden="true"></i>    
+                <i class="fa fa-check fa-4x" aria-hidden="true"></i>    
                     
             <%} else if (project.edt == "wip") {%>
                 <button type="submit" class="btn btn-primary">
                         <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i>
                         <i class="fa fa-play fa-4x " aria-hidden="true"></i>
                               
-            <%}%>
+            <%} else {%>
+                <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i>
+            <% } %>
                 <br>Estructura de desglose de trabajo 
             </button>
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
@@ -31,27 +33,60 @@
 
 <td>
     <form action="/project/stakeholders/<%=project.id%>" method="POST">
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-share-alt fa-4x" aria-hidden="true"></i><br>
-            Stakeholders y plan de comunicación 
+        <% if (project.stk == "finished") {%>    
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-share-alt fa-4x" aria-hidden="true"></i>
+                <i class="fa fa-check fa-4x" aria-hidden="true"></i>  
+        <%} else if (project.stk == "wip") {%>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-share-alt fa-4x" aria-hidden="true"></i>
+                    <i class="fa fa-play fa-4x " aria-hidden="true"></i>
+        <%} else {%>
+                 <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-share-alt fa-4x" aria-hidden="true"></i>
+         <% } %>    
+            <br>Stakeholders y plan de comunicación 
         </button>
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
 </td>
 <td>
         <form action="/project/risks/<%=project.id%>" method="POST">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i><br>
-                Riesgos plan de mitigación 
+            <% if (project.risk_page == "finished") {%>    
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i>
+                <i class="fa fa-check fa-4x" aria-hidden="true"></i>  
+            <%} else if (project.risk_page == "wip") {%>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i>
+                    <i class="fa fa-play fa-4x " aria-hidden="true"></i>
+            <%} else {%>
+            
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i>
+            <% } %>  
+                
+                <br>Riesgos plan de mitigación 
             </button>
             <input type="hidden" value="<%=_csrf%>" name="_csrf">
         </form>
     </td>
     <td>
             <form action="/project/gantt/<%=project.id%>" method="POST">
+                <% if (project.risk_page == "finished") {%>   
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i><br>
-                    Carta Gantt
+                    <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i>
+                    <i class="fa fa-check fa-4x" aria-hidden="true"></i>  
+                <%} else if (project.risk_page == "wip") {%>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i>
+                        <i class="fa fa-play fa-4x " aria-hidden="true"></i>
+                <%} else {%>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i>
+                <% } %>      
+                    <br>Carta Gantt
                 </button>
                 <input type="hidden" value="<%=_csrf%>" name="_csrf">
             </form>
