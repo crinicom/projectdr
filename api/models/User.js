@@ -16,7 +16,7 @@ schema: true,
       type: 'string',
       email: true
     },
-    pswd: {
+    encryptedPassword: {
       type: 'string'
     },
     
@@ -32,18 +32,29 @@ schema: true,
       collection: 'project',
       via: 'guests'
     },
-/*
+
     toJSON: function () {
       var obj = this.toObject();
-      delete obj.pswd;
+      delete obj.encryptedPassword;
       delete obj.password;
       delete obj.confirmation;
       delete obj._csrf;
       return obj;
 
     }
-*/
 
+
+  },
+
+  beforeCreate: function (values, next) {
+    if(!values.password || values.password != values.confirmation) {
+      return next({err: ["password mismatch"]});
+    }
+    require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
+      if (err) return next(err);
+      values.encryptedPassword = encryptedPassword;
+      next();
+    });
   }
 };
 
