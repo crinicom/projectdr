@@ -68,7 +68,7 @@ module.exports = {
 
     },
     destroy: function(req,res,next) {
-        req.session.detroy();
+        req.session.destroy();
         res.redirect('/session/new');
     }
 };
