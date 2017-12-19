@@ -15,9 +15,12 @@ module.exports = {
         });
     },
     create: function(req, res, next) {
-       
+        var status_init= [{ pcharter:"no", edt:"no", stakeholders: "no", risks: "no", gantt: "no", work: 0}];
+        var params = req.params.all();
+        params['status'] = status_init;
 
-        Project.create(req.params.all(), function projectCreated(err, project) {
+        //Project.create(req.params.all(), function projectCreated(err, project) {
+            Project.create(params, function projectCreated(err, project) {
             if (err) return next(err);
             
             //res.json(project);
@@ -39,6 +42,12 @@ module.exports = {
             //return res.redirect('/user/show/'+ req.param('id'));
             return res.redirect('/project/edit/'+ req.param('id'));
         }); 
+    },
+    destroy: function(req,res,next) {
+        Project.destroy(req.param('id')).exec(function() {
+            res.redirect("/user/show/"+req.param('owner'));
+        }
+        );
     },
     show: function(req, res, next) {
         

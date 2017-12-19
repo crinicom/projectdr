@@ -20,23 +20,23 @@
             <th></th>
             <th></th>
         </tr>
-        <% if (!user.projects) {%>
-            <tr><td>Sin proyectos</td></tr>
-         <%} else {%>
+        
+         
                 <% _.each(user.projects, function(project) { %>
                     <tr data-id="<%= project.id%>" data-model="project">
                         <!-- <td><%=project.id%></td> -->
                         <td><%=project.name%></td>
                         <td><%=project.description%></td>
                         <td><%=project.scope%></td>
+                        <%if (project.status) {%>
                         <td><% if (project.status.edt == "wip") {%>
                             <i class="fa fa-play" aria-hidden="true"></i>
-                            <%} else {%>
+                            <% } else {%>
                             <% if (project.status.edt == "finished") {%>
                                 <i class="fa fa-check" aria-hidden="true"></i>
-                            <%} else {%>
+                            <% } else {%>
                                 <i class="fa fa-question" aria-hidden="true"></i>
-                                <%}}%>
+                                <% }}%>
                         </td>
                         <td><% if (project.status.stakeholders == "wip") {%>
                             <i class="fa fa-play" aria-hidden="true"></i>
@@ -64,15 +64,27 @@
                             <%} else {%>
                                 <i class="fa fa-question" aria-hidden="true"></i>
                                 <%}}%>
+
+                                <%}%>
                         </td>
-                        <td></td>
-                        <td><a href="/project/show/<%=project.id%>">Show</a></td>
-                        <td><a href="/project/edit/<%=project.id%>">Edit</a></td>
-                        <td><a href="/project/destroy/<%=project.id%>">Delete</a></td>
-                    
+                        <td>
+                        <table class="table table-sm ">
+                            <tr> 
+                                <a href="/project/show/<%=project.id%>">Show</a>
+                                <a href="/project/edit/<%=project.id%>">Edit</a>
+                                <form action="/project/destroy/<%= project.id %>" method="POST">
+                                    <input type="hidden" name="owner" value="<%= project.owner %>" >
+                                    <input type="hidden" name="_method" value="delete" >
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+                                    </button>
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                </form></td>
+                            </tr>
+                        </table>
                     </tr>
             <% }); %>
-        <%}%>
+        
     </table>
 
 
