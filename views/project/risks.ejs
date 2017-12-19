@@ -3,7 +3,7 @@
     <h2><%= project.name %></h2>
    
     <hr>
-    <H2>Stakeholders</H2>
+    <H2>Risks</H2>
     <table class="table table table-sm table-vcenter">
         <tr>
             
@@ -96,11 +96,11 @@
              </tr>    
         </tr> 
     <% }); %>
-
+    </table>
 
 
     <p><%=JSON.stringify(project.status)%></p>
-    <% if (project.risks != "finished") {%>
+    <% if (project.status.risks != "finished") {%>
         <form action="/project/show/<%=project.id%>" method="POST">
             <button type="submit" class="btn btn-primary btn-block">
                 <i class="fa fa-home fa-2x" aria-hidden="true"></i>
@@ -110,7 +110,7 @@
         </form> <%}%>
     
         <form action="/project/save_state/<%=project.id%>" method="POST">
-            <% if (project.risks != "finished") {%>
+            <% if (project.status.risks != "finished") {%>
             <button type="submit" class="btn btn-success btn-block">
                 <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
                 Guardar y finalizar edición

@@ -20,7 +20,7 @@
                 <td class="vert-aligned"><%= objective.description%></td>
                
                 <td>
-                        <% if (project.edt != "finished") {%>
+                        <% if (project.status.edt != "finished") {%>
                     <table class="table table-sm ">
                         <tr> 
                           
@@ -58,7 +58,7 @@
                             
                             <td><%= task.text%></td>
                             <td><%= task.status%></td>
-                            <td> <% if (project.edt != "finished") {%>
+                            <td> <% if (project.status.edt != "finished") {%>
                                 <table class="table table-sm">
                                     <tr>
                                         
@@ -102,9 +102,9 @@
     
 
     </table>
-    <p><%=JSON.stringify(project.status)%></p>
+    <p><%=JSON.stringify(project.status.edt)%></p>
    
-    <% if (project.edt != "finished") {%>
+    <% if (project.status.edt != "finished") {%>
     <form action="/project/show/<%=project.id%>" method="POST">
         <button type="submit" class="btn btn-primary btn-block">
             <i class="fa fa-home fa-2x" aria-hidden="true"></i>
@@ -114,7 +114,7 @@
     </form> <%}%>
 
     <form action="/project/save_state/<%=project.id%>" method="POST">
-        <% if (project.edt != "finished") {%>
+        <% if (project.status.edt != "finished") {%>
         <button type="submit" class="btn btn-success btn-block">
             <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
             Guardar y finalizar edición de Estructura de Desglose de Trabajo

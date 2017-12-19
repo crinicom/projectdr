@@ -11,12 +11,12 @@
 
 <td>
         <form action="/project/edt/<%=project.id%>" method="POST">
-            <% if (project.edt == "finished") {%>    
+            <% if (project.status.edt == "finished") {%>    
                 <button type="submit" class="btn btn-success">
                 <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i>
                 <i class="fa fa-check fa-4x" aria-hidden="true"></i>    
                     
-            <%} else if (project.edt == "wip") {%>
+            <%} else if (project.status.edt == "wip") {%>
                 <button type="submit" class="btn btn-primary">
                         <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i>
                         <i class="fa fa-play fa-4x " aria-hidden="true"></i>
@@ -33,11 +33,11 @@
 
 <td>
     <form action="/project/stakeholders/<%=project.id%>" method="POST">
-        <% if (project.stk == "finished") {%>    
+        <% if (project.status.stakeholders == "finished") {%>    
             <button type="submit" class="btn btn-success">
                 <i class="fa fa-share-alt fa-4x" aria-hidden="true"></i>
                 <i class="fa fa-check fa-4x" aria-hidden="true"></i>  
-        <%} else if (project.stk == "wip") {%>
+        <%} else if (project.status.stakeholders == "wip") {%>
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-share-alt fa-4x" aria-hidden="true"></i>
                     <i class="fa fa-play fa-4x " aria-hidden="true"></i>
@@ -52,11 +52,11 @@
 </td>
 <td>
         <form action="/project/risks/<%=project.id%>" method="POST">
-            <% if (project.risk_page == "finished") {%>    
+            <% if (project.status.risks == "finished") {%>    
             <button type="submit" class="btn btn-success">
                 <i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i>
                 <i class="fa fa-check fa-4x" aria-hidden="true"></i>  
-            <%} else if (project.risk_page == "wip") {%>
+            <%} else if (project.status.risks == "wip") {%>
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i>
                     <i class="fa fa-play fa-4x " aria-hidden="true"></i>
@@ -73,11 +73,11 @@
     </td>
     <td>
             <form action="/project/gantt/<%=project.id%>" method="POST">
-                <% if (project.gantt_page == "finished") {%>   
-                <button type="submit" class="btn btn-primary">
+                <% if (project.status.gantt == "finished") {%>   
+                <button type="submit" class="btn btn-success">
                     <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i>
                     <i class="fa fa-check fa-4x" aria-hidden="true"></i>  
-                <%} else if (project.gantt_page == "wip") {%>
+                <%} else if (project.status.gantt == "wip") {%>
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i>
                         <i class="fa fa-play fa-4x " aria-hidden="true"></i>

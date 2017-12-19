@@ -73,7 +73,7 @@ module.exports = {
             return [project, objectives];
         })
         .spread(function (project, objectives){
-            project = project.toObject() // <- HERE IS THE CHANGE!
+            project = project.toObject(); // <- HERE IS THE CHANGE!
             project.objectives = objectives; // It will work now
             //project.status = { "pcharter":"no", "edt":"no", "stk": "no", "risk_page": "no", "gantt_page": "no", "work": 0};
             //res.json(project);
@@ -109,7 +109,7 @@ module.exports = {
              return [project, objectives, stakeholders];
          })
          .spread(function (project, objectives, stakeholders){
-             project = project.toObject() // <- HERE IS THE CHANGE!
+             project = project.toObject(); // <- HERE IS THE CHANGE!
              project.objectives = objectives; // It will work now
              project.stakeholders = stakeholders;
              //res.json(project);
@@ -146,7 +146,7 @@ module.exports = {
               return [project, stakeholders, risks];
           })
           .spread(function (project, stakeholders, risks){
-              project = project.toObject() // <- HERE IS THE CHANGE!
+              project = project.toObject(); // <- HERE IS THE CHANGE!
               project.stakeholders = stakeholders;
               project.risks = risks; // It will work now
               //res.json(project);
@@ -184,7 +184,7 @@ module.exports = {
             return [project, objectives, stakeholders, risks];
         })
         .spread(function (project, objectives, stakeholders, risks){
-            project = project.toObject() // <- HERE IS THE CHANGE!
+            project = project.toObject(); // <- HERE IS THE CHANGE!
             project.objectives = objectives; // It will work now
             project.stakeholders = stakeholders;
             project.risks = risks;
@@ -196,7 +196,8 @@ module.exports = {
          
     },
 
-    save_state: function(req, res, next) {
+   /*  FUNCIONA MASO
+   save_state: function(req, res, next) {
      
         var status = {};
         status[req.param('key')] = req.param('state');
@@ -208,12 +209,35 @@ module.exports = {
         if (status[req.param('key')] == "wip") {  
             return res.redirect('/project/'+ req.param('key')+"/"+ req.param('id'));
         }
+        else //return res.redirect('/project/show/'+ req.param('id'));
+        res.json({upd, status});
+     });    
+ } */
+ save_state: function(req, res, next) {
+    Project.findOne(req.param('id'), function foundProject(err, project) {
+        if (err) return next(err);
+        if (!project) return next();
+        
+        var project_obj = project.toObject();
+        var status = project_obj.status;
+        status[req.param('key')] = req.param('state');
+
+        
+        project.status = status;
+
+        project.save(function(err){
+            if (err) {
+                return res.json({err});
+                } else console.log(project.status);
+          });
+          if (status[req.param('key')] == "wip") {  
+            return res.redirect('/project/'+ req.param('key')+"/"+ req.param('id'));
+        }
         else return res.redirect('/project/show/'+ req.param('id'));
-     });  
+        //res.json({status});
 
-    
- }
-
+    }); 
+}
     
 };
 
