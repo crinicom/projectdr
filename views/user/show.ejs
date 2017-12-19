@@ -20,55 +20,59 @@
             <th></th>
             <th></th>
         </tr>
-        <% _.each(user.projects, function(project) { %>
-            <tr data-id="<%= project.id%>" data-model="project">
-                <!-- <td><%=project.id%></td> -->
-                <td><%=project.name%></td>
-                <td><%=project.description%></td>
-                <td><%=project.scope%></td>
-                <td><% if (project.status.edt == "wip") {%>
-                    <i class="fa fa-play" aria-hidden="true"></i>
-                    <%} else {%>
-                    <% if (project.status.edt == "finished") {%>
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                    <%} else {%>
-                        <i class="fa fa-question" aria-hidden="true"></i>
-                        <%}}%>
-                </td>
-                <td><% if (project.status.stakeholders == "wip") {%>
-                    <i class="fa fa-play" aria-hidden="true"></i>
-                    <%} else {%>
-                    <% if (project.status.stakeholders == "finished") {%>
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                    <%} else {%>
-                        <i class="fa fa-question" aria-hidden="true"></i>
-                        <%}}%>
-                </td>
-                <td><% if (project.status.risks == "wip") {%>
-                    <i class="fa fa-play" aria-hidden="true"></i>
-                    <%} else {%>
-                    <% if (project.status.risks == "finished") {%>
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                    <%} else {%>
-                        <i class="fa fa-question" aria-hidden="true"></i>
-                        <%}}%>
-                </td>
-                <td><% if (project.status.gantt == "wip") {%>
-                    <i class="fa fa-play" aria-hidden="true"></i>
-                    <%} else {%>
-                    <% if (project.status.gantt == "finished") {%>
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                    <%} else {%>
-                        <i class="fa fa-question" aria-hidden="true"></i>
-                        <%}}%>
-                </td>
-                <td></td>
-                <td><a href="/project/show/<%=project.id%>">Show</a></td>
-                <td><a href="/project/edit/<%=project.id%>">Edit</a></td>
-                <td><a href="/project/destroy/<%=project.id%>">Delete</a></td>
-            
-            </tr>
-    <% }); %>
+        <% if (!user.projects) {%>
+            <tr><td>Sin proyectos</td></tr>
+         <%} else {%>
+                <% _.each(user.projects, function(project) { %>
+                    <tr data-id="<%= project.id%>" data-model="project">
+                        <!-- <td><%=project.id%></td> -->
+                        <td><%=project.name%></td>
+                        <td><%=project.description%></td>
+                        <td><%=project.scope%></td>
+                        <td><% if (project.status.edt == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <%} else {%>
+                            <% if (project.status.edt == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <%} else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <%}}%>
+                        </td>
+                        <td><% if (project.status.stakeholders == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <%} else {%>
+                            <% if (project.status.stakeholders == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <%} else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <%}}%>
+                        </td>
+                        <td><% if (project.status.risks == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <%} else {%>
+                            <% if (project.status.risks == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <%} else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <%}}%>
+                        </td>
+                        <td><% if (project.status.gantt == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <%} else {%>
+                            <% if (project.status.gantt == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <%} else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <%}}%>
+                        </td>
+                        <td></td>
+                        <td><a href="/project/show/<%=project.id%>">Show</a></td>
+                        <td><a href="/project/edit/<%=project.id%>">Edit</a></td>
+                        <td><a href="/project/destroy/<%=project.id%>">Delete</a></td>
+                    
+                    </tr>
+            <% }); %>
+        <%}%>
     </table>
 
 

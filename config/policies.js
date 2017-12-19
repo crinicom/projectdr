@@ -26,8 +26,13 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': 'flash'
-
+  '*': 'flash',
+/*
+  user: {
+    'new': 'flash',
+    '*': 'sessionAuth'
+  }
+*/
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *
