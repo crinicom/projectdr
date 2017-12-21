@@ -227,19 +227,19 @@ module.exports = {
         if (err) return next(err);
         if (!project) return next();
         
-        var project_obj = project.toObject();
-        var status = project_obj.status;
-        status[req.param('key')] = req.param('state');
+        //var project_obj = project.toObject();
+        //var status = {};
+        project.status[req.param('key')] = req.param('state');
 
         
-        project.status = status;
+        //project.status = status;
 
         project.save(function(err){
             if (err) {
                 return res.json({err});
-                } else console.log(project.status);
+                } else console.log( '\n', project.status,'\n');
           });
-          if (status[req.param('key')] == "wip") {  
+          if (project.status[req.param('key')] == "wip") {  
             return res.redirect('/project/'+ req.param('key')+"/"+ req.param('id'));
         }
         else return res.redirect('/project/show/'+ req.param('id'));

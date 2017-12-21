@@ -62,11 +62,11 @@
           </div>
           <%if (!session.authenticated) {%>
             <form class="navbar-form navbar-right" action="/session/create">
-            <div class="form-group">
-              <input type="text" placeholder="email" name="email" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="password" placeholder="password" name="password" class="form-control">
+              <div class="form-group">
+                <input type="text" placeholder="email" name="email" class="form-control">
+              </div>
+              <div class="form-group">
+                  <input type="password" placeholder="password" name="password" class="form-control">
               </div>
               <button type="submit" class="btn btn-success">Sign in</button>
               <input type="hidden" name="_csrf" value="<%=_csrf%>"/>
