@@ -16,6 +16,10 @@ schema: true,
       type: 'string',
       email: true
     },
+    admin: {
+      type:'boolean',
+      defaultsTo: false
+    },
     encryptedPassword: {
       type: 'string'
     },
@@ -44,6 +48,18 @@ schema: true,
     }
 
 
+  },
+
+  beforeValidate: function(values, next) {
+    console.log(values);
+    if (typeof values.admin !== 'undefined') {
+      if( values.admin === "unchecked") {
+        values.admin = false;
+      } else if (values.admin[1] === 'on') {
+        values.admin = true;
+      }
+    }
+    next();
   },
 
   beforeCreate: function (values, next) {

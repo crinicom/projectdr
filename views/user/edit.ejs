@@ -1,9 +1,21 @@
-hola loco hasta acá todo bien!
-<form action="/user/update/<%=user.id%>" method="POST">
-    <h2>Modificar usuario</h2>
-    <input value="<%=user.name%>" type="text" name="name"><br/>
-    <input value="<%=user.email%>" type="text" name="email"><br/>
-    <input value="<%=user.state%>" type="text" name="state"><br/>
-    <input  type="submit" value="Editar Usuario"/>
-    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-</form>
+<div class="container">
+    <form action="/user/update/<%=user.id%>" method="POST">
+        <h2>Modificar usuario</h2>
+        <input value="<%=user.name%>" type="text" name="name"><br/>
+        <input value="<%=user.email%>" type="text" name="email"><br/>
+        <input value="<%=user.state%>" type="text" name="state"><br/>
+
+        <% if (session.authenticated && session.User.admin) {%>
+            <% if (user.admin) {%>
+                <input type="hidden" name="admin" value="unchecked">
+                <label class="checkbox"><input type="checkbox" name="admin" checked>Admin</label>
+            <%} else {%>
+                <input type="hidden" name="admin" value="unchecked">
+                <label class="checkbox"><input type="checkbox" name="admin">Admin</label>
+        <%}%>
+        <%}%>
+
+        <input  type="submit" value="Editar Usuario" class="btn btn-lg btn-primary btn-block"/>
+        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+    </form>
+</div>

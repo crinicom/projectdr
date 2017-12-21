@@ -59,8 +59,13 @@ module.exports = {
                 }
 
                 //si todo lo anterior está OK significa que existe usuario y coincide la pass
-                req.session.authenticated =true;
+                req.session.authenticated = true;
                 req.session.User = user;
+
+                if (req.session.User.admin) {
+                    res.redirect('/user');
+                    return;
+                }
 
                 res.redirect('/user/show/'+user.id);
             });

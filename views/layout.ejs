@@ -37,29 +37,36 @@
   </head>
 
   <body>
-    <div class="navbar navbar-inverse bg-inverse navbar-fixed-top">
-      <div class="container">
+
+     
+
+    <nav class="navbar navbar-inverse bg-inverse navbar-fixed-top">
+      <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
+          </button> -->
           <a class="navbar-brand" href="/">Project Dr.</a>
         </div>
-        <div class="navbar-collapse collapse">
+         <!-- <div class="navbar-collapse collapse"> -->
           <ul class="nav navbar-nav">
             <% if (session.authenticated) {%>
             <li class="active"><a href="/user/show/<%= session.User.id%>"><%= session.User.name%></a> </li>
+            <%}%>
+            <% if (session.authenticated && session.User.admin) {%>
             <li><a href="/user">User admin</a></li>
             <li><a href="#">Placeholder2</a></li>
             <%}%>
-          </ul>
-          <div class="navbar-right">
-            <% if (session.authenticated) {%>
-              <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy">Sign out</a>
+          
+         <!--  <div class="navbar-right"> -->
+           
+          <% if (session.authenticated) {%>
+          <li>    <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy">Sign out</a></li>
             <%}%>
-          </div>
+          <!-- </div> -->
+          <li>
           <%if (!session.authenticated) {%>
             <form class="navbar-form navbar-right" action="/session/create">
               <div class="form-group">
@@ -71,10 +78,12 @@
               <button type="submit" class="btn btn-success">Sign in</button>
               <input type="hidden" name="_csrf" value="<%=_csrf%>"/>
             </form>
+          </li>
             <%}%>
-        </div>
+          </ul>
+        <!-- </div> -->
     </div>
-</div>
+  </nav>
     
     <%- body %>
 

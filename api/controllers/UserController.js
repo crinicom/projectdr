@@ -15,14 +15,21 @@ module.exports = {
         User.create(req.params.all(), function userCreated(err, user) {
             //if (err) return next(err);
             if (err) {
-            
                 console.log(JSON.stringify(err)); 
                 req.session.flash = {
                     err: err
                 }
-                
                 return res.redirect('/user/new/');    
             }
+            // si logro crear el usuario, ya lo dejo autenticado para la sesión
+            req.session.authenticated = true;
+            req.session.User = user;
+
+            if(req.session.User.admin){
+                res.redirect('/user');
+                return;
+            }
+
             res.redirect('/user/show/' + user.id ); 
            // req.session.flash = {};
         });
