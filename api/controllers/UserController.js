@@ -29,9 +29,14 @@ module.exports = {
                 res.redirect('/user');
                 return;
             }
+            user.online =true;
+            user.save(function (err) {
+                if (err) return next(err);
+            
 
             res.redirect('/user/show/' + user.id ); 
            // req.session.flash = {};
+        });
         });
     },
 

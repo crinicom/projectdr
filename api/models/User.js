@@ -23,6 +23,11 @@ schema: true,
     encryptedPassword: {
       type: 'string'
     },
+
+    online: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     
     projects: {
       collection: 'project',

@@ -43,14 +43,15 @@
     <nav class="navbar navbar-inverse bg-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button> -->
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              
+            <span class="icon-bar"><i class="fa fa-bars" aria-hidden="true"></i></span>
+          <!--   <span class="icon-bar"></span>
+            <span class="icon-bar"></span> -->
+          </button>
           <a class="navbar-brand" href="/">Project Dr.</a>
         </div>
-         <!-- <div class="navbar-collapse collapse"> -->
+         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <% if (session.authenticated) {%>
             <li class="active"><a href="/user/show/<%= session.User.id%>"><%= session.User.name%></a> </li>
@@ -59,16 +60,27 @@
             <li><a href="/user">User admin</a></li>
             <li><a href="#">Placeholder2</a></li>
             <%}%>
-          
-         <!--  <div class="navbar-right"> -->
-           
+          </ul>
+          <div class="nav navbar-nav navbar-right"> 
+              <ul class="nav navbar-nav navbar-right"> 
           <% if (session.authenticated) {%>
-          <li>    <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy">Sign out</a></li>
-            <%}%>
-          <!-- </div> -->
+<!--           <li>    <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy">Sign out</a></li>
+ -->          
           <li>
+              <form class="navbar-form navbar-nav navbar-right" action="/session/destroy">
+                
+                <button type="submit" class="btn btn-success">Sign out</button>
+                <input type="hidden" name="_csrf" value="<%=_csrf%>"/>
+              </form>
+          </li>
+        </ul>
+          <%}%>
+          </div> 
           <%if (!session.authenticated) {%>
-            <form class="navbar-form navbar-right" action="/session/create">
+            <ul class="nav navbar-nav navbar-right"> 
+            <li>
+         
+            <form class="navbar-form navbar-nav navbar-right" action="/session/create">
               <div class="form-group">
                 <input type="text" placeholder="email" name="email" class="form-control">
               </div>
@@ -81,7 +93,7 @@
           </li>
             <%}%>
           </ul>
-        <!-- </div> -->
+        </div>
     </div>
   </nav>
     

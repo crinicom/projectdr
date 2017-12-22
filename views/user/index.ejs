@@ -3,6 +3,7 @@
 
 <table>
 <tr>
+    <th>Status</th>
     <th>ID</th>
     <th>Name</th>
     <th>email</th>
@@ -13,11 +14,16 @@
 </tr>
 <% _.each(users, function(user) { %>
 <tr data-id="<%= user.id%>" data-model="user">
+    <%if (user.online) {%>
+        <td> <i class="fa fa-sun-o fa-2x" aria-hidden="true"></i></td>
+    <%} else {%>
+        <td>  <i class="fa fa-moon-o fa-2x" aria-hidden="true"></i></td>
+        <%} %>
     <td><%= user.id %></td>
     <td><%= user.name %></td>
     <td><%= user.email %></td>
     <td><% if (user.admin) {%>
-        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+        <i class="fa fa-user fa-2x" aria-hidden="true"></i>
     <%} else {%>
         <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
     <%} %></td>
