@@ -15,7 +15,7 @@ module.exports = {
         });
     },
     create: function(req, res, next) {
-        var status_init= [{ pcharter:"no", edt:"no", stakeholders: "no", risks: "no", gantt: "no", work: 0}];
+        var status_init= { "pcharter":"no", "edt":"no", "stakeholders": "no", "risks": "no", "gantt": "no", work: 0};
         var params = req.params.all();
         params['status'] = status_init;
 
@@ -231,18 +231,21 @@ module.exports = {
         //var status = {};
         project.status[req.param('key')] = req.param('state');
 
-        
         //project.status = status;
 
         project.save(function(err){
             if (err) {
                 return res.json({err});
-                } else console.log( '\n', project.status,'\n');
-          });
-          if (project.status[req.param('key')] == "wip") {  
-            return res.redirect('/project/'+ req.param('key')+"/"+ req.param('id'));
-        }
-        else return res.redirect('/project/show/'+ req.param('id'));
+            } else {
+                console.log( '\n', req.param('key'),'\n');
+                console.log( '\n',req.param('state'),'\n');
+                console.log( '\n', project.status,'\n');
+            }
+        });
+          
+            if (project.status[req.param('key')] == "wip") {  
+                return res.redirect('/project/'+ req.param('key')+"/"+ req.param('id'));
+            }  else return res.redirect('/project/show/'+ req.param('id'));
         //res.json({status});
 
     }); 

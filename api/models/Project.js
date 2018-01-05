@@ -58,7 +58,7 @@ module.exports = {
       default: 'no'
     },
     status: {
-      type: 'json',
+      type: 'json'
       //default: [{ "pcharter":"no", "edt":"no", "stakeholders": "no", "risks": "no", "gantt": "no", "work": 0}]
       }
     

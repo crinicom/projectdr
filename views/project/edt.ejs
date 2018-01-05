@@ -102,7 +102,7 @@
     
 
     </table>
-    <p><%=JSON.stringify(project.status.edt)%></p>
+    <p><%=JSON.stringify(project.status)%></p>
    
     <% if (project.status.edt != "finished") {%>
     <form action="/project/show/<%=project.id%>" method="POST">
