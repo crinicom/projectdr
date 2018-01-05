@@ -243,7 +243,8 @@ module.exports = {
             }
         });
           
-            if (project.status[req.param('key')] == "wip") {  
+            if (project.status[req.param('state')] == "wip" && project.status[req.param('key')] != "pcharter") {  
+
                 return res.redirect('/project/'+ req.param('key')+"/"+ req.param('id'));
             }  else return res.redirect('/project/show/'+ req.param('id'));
         //res.json({status});
