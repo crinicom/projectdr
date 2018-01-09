@@ -23,3 +23,7 @@ PopulateAll: https://imfly.gitbooks.io/sailsjs-docs-gitbook/en/reference/waterli
     - POR LO MENOS un ordenador
     - Concepto mínimo (1er tercio, 2o tercio, 3er tercio)    
 
+# BUGS
+- Destroy de proyectos. Agregar confirmación. No funciona CSRF porque no es un form.
+- Tamaños de campos deben ser acordes.
+- User tiene un campo "state" que se quiere mostrar en el edit.ejs
