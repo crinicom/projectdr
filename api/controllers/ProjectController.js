@@ -49,6 +49,29 @@ module.exports = {
         }
         );
     },
+
+    index: function(req, res, next) {
+        /* solo para ep13
+                console.log(new Date());
+                console.log(req.session.authenticated);
+        */
+        Project.find(function foundProjects(err, projects) {
+            if (err) return next(err);
+            
+            User.find(function foundProjects(err, users) {
+                if (err) return next(err);
+            
+                //res.json(users[1].name);
+                res.view({projects:projects, users:users});
+        
+            });
+            
+            
+        });
+       
+       
+    },
+
     show: function(req, res, next) {
         
         Project.findOne(req.param('id')).populateAll().exec(function(err,project) {
@@ -94,8 +117,7 @@ module.exports = {
     },
  // RESPONDO A LA LLAMADA PARA VER LA STAKEHOLDERS
     stakeholders: function(req, res, next) {
-       
- 
+      
          Project
          .findOne(req.param('id'))
          .populateAll()      
@@ -205,23 +227,7 @@ module.exports = {
          
     },
 
-   /*  FUNCIONA MASO
-   save_state: function(req, res, next) {
-     
-        var status = {};
-        status[req.param('key')] = req.param('state');
-        
-        Project.update(req.param('id'), status, function stateUpdated(err, upd) {
-         if (err) {
-            return res.json({err});
-            }
-        if (status[req.param('key')] == "wip") {  
-            return res.redirect('/project/'+ req.param('key')+"/"+ req.param('id'));
-        }
-        else //return res.redirect('/project/show/'+ req.param('id'));
-        res.json({upd, status});
-     });    
- } */
+   
  save_state: function(req, res, next) {
     Project.findOne(req.param('id'), function foundProject(err, project) {
         if (err) return next(err);

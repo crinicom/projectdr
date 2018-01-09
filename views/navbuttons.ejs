@@ -1,5 +1,5 @@
-<table class="table">
-<td>
+<table class="table ">
+<td class="span2">
     <form action="/project/show/<%=project.id%>" method="POST">
         <% if (project.status.pcharter == "finished") {%>    
             <button type="submit" class="btn btn-success">
@@ -17,13 +17,11 @@
         <% } %>
             <br>Project Charter 
         </button>
-    <input type="hidden" value="<%=_csrf%>" name="_csrf">
-    
-    
+    <input type="hidden" value="<%=_csrf%>" name="_csrf"> 
 </form>
 </td>
 
-<td>
+<td class="span2">
         <form action="/project/edt/<%=project.id%>" method="POST">
             <% if (project.status.edt == "finished") {%>    
                 <button type="submit" class="btn btn-success">
@@ -45,7 +43,7 @@
     </form>
     </td>
 
-<td>
+<td class="span2">
     <form action="/project/stakeholders/<%=project.id%>" method="POST">
         <% if (project.status.stakeholders == "finished") {%>    
             <button type="submit" class="btn btn-success">
@@ -64,7 +62,7 @@
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
 </td>
-<td>
+<td class="span2">
         <form action="/project/risks/<%=project.id%>" method="POST">
             <% if (project.status.risks == "finished") {%>    
             <button type="submit" class="btn btn-success">
@@ -85,7 +83,7 @@
             <input type="hidden" value="<%=_csrf%>" name="_csrf">
         </form>
     </td>
-    <td>
+    <td class="span2">
             <form action="/project/gantt/<%=project.id%>" method="POST">
                 <% if (project.status.gantt == "finished") {%>   
                 <button type="submit" class="btn btn-success">

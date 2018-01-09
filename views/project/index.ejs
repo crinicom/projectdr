@@ -1,0 +1,105 @@
+<div class="container">
+    <H2>Proyectos</H2>
+    <table class="table table-striped table-hover">
+        <tr>
+            
+            <th>Owner</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Scope</th>
+            <th>Project Charter</th>
+            <th>EDT</th>
+            <th>Stakeholders</th>
+            <th>Risks</th>
+            <th>Gantt</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        
+         
+                <% _.each(projects, function(project) { %>
+                    <tr data-id="<%= project.id%>" data-model="project">
+                        
+                        <td><%= _.findWhere(users, users[project.owner]).name %></td>
+                        
+                        <td><%=project.name%></td>
+                        <td><%=project.description%></td>
+                        <td><%=project.scope%></td>
+                        <%if (project.status) {%>
+                            <td><% if (project.status.pcharter == "wip") {%>
+                                <i class="fa fa-play" aria-hidden="true"></i>
+                                <% } else {%>
+                                <% if (project.status.pcharter == "finished") {%>
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                <% } else {%>
+                                    <i class="fa fa-question" aria-hidden="true"></i>
+                                    <% }}%>
+                            </td>
+                        <td><% if (project.status.edt == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <% } else {%>
+                            <% if (project.status.edt == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <% } else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <% }}%>
+                        </td>
+                        <td><% if (project.status.stakeholders == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <%} else {%>
+                            <% if (project.status.stakeholders == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <%} else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <%}}%>
+                        </td>
+                        <td><% if (project.status.risks == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <%} else {%>
+                            <% if (project.status.risks == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <%} else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <%}}%>
+                        </td>
+                        <td><% if (project.status.gantt == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <%} else {%>
+                            <% if (project.status.gantt == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <%} else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <%}}%>
+
+                                <%}%>
+                        </td>
+                        <td>
+                        <table class="table table-sm ">
+                            <tr> 
+                                <form action="/project/show/<%=project.id%>" method="POST">
+                                    <input type="hidden" name="_method" value="show" >
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </button>
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                    </form>
+                               
+                                
+                                <!-- <form action="/project/destroy/<%= project.id %>" method="POST">
+                                    <input type="hidden" name="owner" value="<%= project.owner %>" >
+                                    <input type="hidden" name="_method" value="delete" >
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+                                    </button>
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                </form> -->
+                            </td>
+                            </tr>
+                        </table>
+                    </tr>
+            <% }); %>
+        
+    </table>
+
+</div>  

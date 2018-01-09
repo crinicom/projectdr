@@ -62,11 +62,11 @@
             </tr>
     <% }); %>
     </table>
-
+   
 
     <form action="/objective/new" method="POST">
     <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
-    <input type="submit" value="Add Objective">
+    <input type="submit" class="btn btn-sm btn-success" value="Add Objective">
     <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
 
@@ -107,11 +107,9 @@
     </form>
  
     <hr>
-    <table>
+    <!-- <table>
         <tr>
             <td>
-                    <form action="/project/edt/<%=project.id%>" method="POST">
-                        <!-- <input type="hidden" name="belongs_to_project" value="<%= project.id %>" /> -->
                         <input type="hidden" name="_method" value="delete" />
                         <input type="submit" class="btn btn-lg btn-success" value="EDT" />
                         <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
@@ -119,7 +117,6 @@
             </td>
             <td>
                 <form action="/project/stakeholders/<%=project.id%>" method="POST">
-                    <!-- <input type="hidden" name="belongs_to_project" value="<%= project.id %>" /> -->
                     <input type="hidden" name="_method" value="delete" />
                     <input type="submit" class="btn btn-lg btn-success" value="Stakeholders" />
                     <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
@@ -127,7 +124,6 @@
         </td>
         <td>
             <form action="/project/risks/<%=project.id%>" method="POST">
-                <!-- <input type="hidden" name="belongs_to_project" value="<%= project.id %>" /> -->
                 <input type="hidden" name="_method" value="delete" />
                 <input type="submit" class="btn btn-lg btn-success" value="Risks" />
                 <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
@@ -135,7 +131,7 @@
     </td>
     <td>
             <form action="/project/gantt/<%=project.id%>" method="POST">
-                <!-- <input type="hidden" name="belongs_to_project" value="<%= project.id %>" /> -->
+               
                 <input type="hidden" name="_method" value="delete" />
                 <input type="submit" class="btn btn-lg btn-success" value="Carta Gantt" />
                 <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
@@ -144,7 +140,7 @@
         </tr>
     </table>
 
-    <p><%=JSON.stringify(project.status)%></p>
+    <p><%=JSON.stringify(project.status)%></p> -->
     <% if (project.status.pcharter != "finished") {%>
     <form action="/project/show/<%=project.id%>" method="POST">
         <button type="submit" class="btn btn-primary btn-block">
@@ -175,8 +171,9 @@
 
 
 
-    <p><%=JSON.stringify(project.status)%></p>
-    <br><br><br>
+    <!-- <p><%=JSON.stringify(project.status)%></p>
+     -->
+     <br><br><br>
     <%- partial('../navbuttons.ejs') %>
 
 </div>
