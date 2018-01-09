@@ -39,8 +39,8 @@ module.exports = {
             if (err) {
                 return res.redirect('/project/edit/'+ req.param('id'));
             }
-            //return res.redirect('/user/show/'+ req.param('id'));
-            return res.redirect('/project/edit/'+ req.param('id'));
+            return res.redirect('/project/show/'+ req.param('id'));
+            //return res.redirect('/project/edit/'+ req.param('id'));
         }); 
     },
     destroy: function(req,res,next) {

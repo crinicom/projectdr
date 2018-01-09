@@ -47,3 +47,6 @@ body {
     vertical-align: middle!important;
  }
  
+ input, textarea, .uneditable-input {
+    width: 100%;
+}
