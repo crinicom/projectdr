@@ -1,0 +1,9 @@
+hola loco hasta acá todo bien!
+<form action="/comment/update/<%=comment.id%>" method="POST">
+    <h2>Modificar comment</h2>
+    <input value="<%=comment.text%>" type="text" name="text"><br/>
+    <input value="<%=comment.status%>" type="text" name="status"><br/>
+    <input value="<%=comment.user%>" type="text" name="user"><br/>
+    <input  type="submit" value="Editar Comment"/>
+    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+</form>

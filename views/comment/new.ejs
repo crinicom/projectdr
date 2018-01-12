@@ -1,0 +1,18 @@
+
+<form action="/comment/create" method="POST" id="sign-up-form" class="form-signin">
+<h2 class="form-signin-heading">Create comment</h2>
+
+
+<<div class="control-group">
+<input type="text" class="form-control" placeholder="<%// =comes_from%>" name="text"></br>
+</div>
+<div class="control-group">
+    <input type="text" class="form-control" placeholder="belongs_to" name="belongs_to"></br>
+</div>
+<div class="control-group">
+<input type="text" class="form-control" placeholder="user" name="user"></br>
+</div>
+<input type="submit" class="btn btn-lg btn-primary btn-block" value="Create Comment">
+<input type="hidden" name="_csrf" value="<%=_csrf%>" />
+</form>
+

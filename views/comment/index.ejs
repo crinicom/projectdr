@@ -1,0 +1,30 @@
+<h1>Comments</h1>
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Text</th>
+    <th>belongs_to</th>
+    <th>user</th>
+    <th>a</th>
+    <th>b</th>
+    <th>c</th>
+</tr>
+<% _.each(comments, function(comment) { %>
+<tr data-id="<%= comment.id%>" data-model="comment">
+    <td><%= comment.id %></td>
+    <td><%= comment.text %></td>
+    <td><%= comment.belongs_to %></td>
+    <td><%= comment.user %></td>
+    
+    <td><a href="/comment/show/<%= comment.id %>" class="btn btn-sm btn-primary">Show</a></td>
+    <td><a href="/comment/edit/<%= comment.id %>" class="btn btn-sm btn-warning">Edit</a></td>
+ 
+    <td><form action="/comment/destroy/<%= comment.id %>" method="POST">
+    <input type="hidden" name="_method" value="delete" />
+    <input type="submit" class="btn btn-sm btn-danger" value="X" />
+    <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+    </form></td>
+</tr>
+<% }) %>
+</table>
