@@ -4,9 +4,10 @@
 
     <input type="hidden" name="owner" value="<%=user.id%>" />
     <input type="text" placeholder="name" name="name"><br/>
-    <input type="text" placeholder="description" name="description"><br/>
-    <input type="text" placeholder="scope" name="scope">
-    <input type="submit" value="Add project" />
+  
+    <textarea rows="6" cols="200" type="text" placeholder="project description" name="description"></textarea><br/>
+    <textarea rows="6" cols="100" type="text" placeholder="project scope" name="scope" /></textarea><br/>
+    <input type="submit" value="Add project" class="btn btn-success"/>
     <input type="hidden" value="<%=_csrf%>" name="_csrf">
 
 </form>

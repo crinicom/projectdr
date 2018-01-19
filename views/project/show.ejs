@@ -20,6 +20,26 @@
     <h3>Scope: </h3>
     <p><%= project.scope %></p>
 
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Ver comentarios
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+                
+                <%- partial('../comment/new.ejs') %>
+            
+            <form action="/comment/new" method="POST">
+                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                    <input type="submit" class="btn btn-sm btn-success" value="New Milestone">
+                    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                </form>
+        </div>
+    </div>
+
+
+<!-- Boton de edición de los datos básicos de proyecto, lleva a update -->
     <a href="/project/edit/<%=project.id%>">Edit</a>
     <form action="/project/edit/<%=project.id%>" method="POST">
         <button type="submit" class="btn btn-primary btn-block">
@@ -107,40 +127,7 @@
     </form>
  
     <hr>
-    <!-- <table>
-        <tr>
-            <td>
-                        <input type="hidden" name="_method" value="delete" />
-                        <input type="submit" class="btn btn-lg btn-success" value="EDT" />
-                        <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
-                    </form>
-            </td>
-            <td>
-                <form action="/project/stakeholders/<%=project.id%>" method="POST">
-                    <input type="hidden" name="_method" value="delete" />
-                    <input type="submit" class="btn btn-lg btn-success" value="Stakeholders" />
-                    <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
-                </form>
-        </td>
-        <td>
-            <form action="/project/risks/<%=project.id%>" method="POST">
-                <input type="hidden" name="_method" value="delete" />
-                <input type="submit" class="btn btn-lg btn-success" value="Risks" />
-                <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
-            </form>
-    </td>
-    <td>
-            <form action="/project/gantt/<%=project.id%>" method="POST">
-               
-                <input type="hidden" name="_method" value="delete" />
-                <input type="submit" class="btn btn-lg btn-success" value="Carta Gantt" />
-                <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
-            </form>
-    </td>
-        </tr>
-    </table>
-
-    <p><%=JSON.stringify(project.status)%></p> -->
+    
     <% if (project.status.pcharter != "finished") {%>
     <form action="/project/show/<%=project.id%>" method="POST">
         <button type="submit" class="btn btn-primary btn-block">
