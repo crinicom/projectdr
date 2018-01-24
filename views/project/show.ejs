@@ -28,11 +28,12 @@
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
                 
-                <%- partial('../comment/new.ejs') %>
+                <%// partial('../comment/new.ejs') %>
             
             <form action="/comment/new" method="POST">
-                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
-                    <input type="submit" class="btn btn-sm btn-success" value="New Milestone">
+                    <input type="hidden" value="<%=project.id%>" name="belongs_to">
+                    <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                    <input type="submit" class="btn btn-sm btn-success" value="New comment">
                     <input type="hidden" value="<%=_csrf%>" name="_csrf">
                 </form>
         </div>
