@@ -28,10 +28,35 @@
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
                 
-                <%// partial('../comment/new.ejs') %>
+           
+            <table class="table table-sm table-hover table-bordered table-striped">
+                
+                <% _.each(comments, function(comment) { %>
+                    <tr data-id="<%= comment.id%>" data-model="comment">
+                        <td><%= comment.id%></td>
+                        <td><%= comment.text%></td>
+                        <td><%= comment.user%></td>
+                        <td><%= comment.date%></td>
+                        <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
+                        <td><a href="/comment/edit/<%=comment.id%>">Edit</a></td>
+                        <td>
+                                <form action="/comment/destroy/<%= comment.id %>" method="POST">
+                                    <input type="hidden" name="belongs_to_project" value="<%= comment.belongs_to_project %>" />
+                                    <input type="hidden" name="_method" value="delete" />
+                                    <input type="submit" class="btn btn-sm btn-danger" value="X" />
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                                </form>
+                        </td>
+                    
+                    </tr>
+            <% }); %>
+            </table>
             
             <form action="/comment/new" method="POST">
-                    <input type="hidden" value="<%=project.id%>" name="belongs_to">
+                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                    <input type="hidden" value="project" name="belongs_to">
+                    <input type="hidden" value="header" name="section">
+                    <input type="hidden" value=0 name="item">
                     <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
                     <input type="submit" class="btn btn-sm btn-success" value="New comment">
                     <input type="hidden" value="<%=_csrf%>" name="_csrf">

@@ -8,10 +8,13 @@
 module.exports = {
 
   attributes: {
-    
-      belongs_to: {type: 'string', required:true},
-      text: {type: 'string', required:true},
+    text: {type: 'string', required:true},
+    belongs_to_project: { model: 'project', required:true},
+    belongs_to: {type: 'string', required:true},
+      section: {type: 'string', required:true},
+      item: {type: 'integer', required:true},
       user: {model: 'user', required:false},
+      date: {type: 'date', required:false},
       status: {type: 'integer'}
   }
 };

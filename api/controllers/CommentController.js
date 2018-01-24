@@ -7,10 +7,13 @@
 
 module.exports = {
 	'new': function(req, res, err) {
+        var belongs_to_project = req.param('belongs_to_project');
         var belongs_to = req.param('belongs_to');
+        var section = req.param('section');
+        var item = req.param('item');
         var comes_from = req.param('comes_from'); // funciona!! me permite saber de que URL llamè el new
         console.log(comes_from);
-        res.view({belongs_to:belongs_to, comes_from:comes_from});
+        res.view({belongs_to_project:belongs_to_project,belongs_to:belongs_to, comes_from:comes_from, item:item, section:section});
 /* 
         Comment.findOne(req.param('belongs_to'), function foundComment(err, comment) {
             if (err) return next(err);
@@ -32,12 +35,10 @@ module.exports = {
                 return res.redirect('/comment/new/');  //si hay un error redirecciono a la página de creación
             }
             //si está todo bien lo ideal sería redireccionar a la misma URL desde donde salí, incluso como AJAX
-            //res.redirect('/project/edt/' + req.param('belongs_to_project') ); 
+            
             console.log(req.param("comes_from"));
             res.redirect(req.param("comes_from"));
-            //res.json(objective);
-           // req.session.flash = {};
-           //return res.ok();
+            
         });
     },
 
