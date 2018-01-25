@@ -20,10 +20,16 @@
     <h3>Scope: </h3>
     <p><%= project.scope %></p>
     <p>
+            <p><%= comments.length %></p>
     <div class="pull-right"> 
         <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Ver comentarios
+            <% if (comments.length > 0) {%>
+            <i class="fa fa-comments" aria-hidden="true"></i>
+            <% } else {%>
+            <i class="fa fa-commenting-o" aria-hidden="true"></i>
+            <% }%>
         </a>
+        
     </div>
 </p>
     
@@ -31,18 +37,29 @@
         <div class="card card-body">
                 <div class="pull-right">    
                 <form action="/comment/new" method="POST">
-                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
-                    <input type="hidden" value="project" name="belongs_to">
-                    <input type="hidden" value="header" name="section">
-                    <input type="hidden" value=0 name="item">
-                    <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
-                    <input type="submit" class="btn btn-sm btn-success" value="New comment">
-                    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                    <div class="control-group" style="display:none;">    
+                        <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                        <input type="hidden" value="project" name="belongs_to">
+                        <input type="hidden" value="header" name="section">
+                        <input type="hidden" value=0 name="item">
+                        <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                        <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-success" >
+                        
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                       
+                    </button>
+              
+              
                 </form>
                 </div>
             
             <table class="table table-sm table-hover table-striped">
-                
+                    <% if (comments.length > 0) {%>
+                       
+             
+                       
                 <% _.each(comments, function(comment) { %>
                     <tr data-id="<%= comment.id%>" data-model="comment">
                         <td><span class="badge badge-default"><%= comment.user_name%></span>
@@ -50,22 +67,41 @@
                         <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
                         <td>
                             <form action="/comment/edit/<%= comment.id %>" method="POST">
-                                <input type="hidden" name="_method" value="edit" >
-                                <input type="submit" class="btn btn-xs btn-alert" value="Edit" />
-                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                               
+                                <button type="submit" class="btn btn-sm btn-success" >
+                        
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                       
+                                    </button>
+                               
+                                <div class="control-group" style="display:none;"> 
+                                        <input type="hidden" name="_method" value="edit" >
+                                        <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                                        <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                </div>
                             </form> 
                          </td>
                         <td>
                                 <form action="/comment/destroy/<%= comment.id %>" method="POST">
-                                    <input type="hidden" name="belongs_to_project" value="<%= comment.belongs_to_project %>" />
+                                    <button type="submit" class="btn btn-sm btn-danger" >
+                        
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                           
+                                        </button>
+                                <div class="control-group" style="display:none;">    
+                                    <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
                                     <input type="hidden" name="_method" value="delete" />
-                                    <input type="submit" class="btn btn-xs btn-danger" value="X" />
                                     <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                                </div>
                                 </form>
                         </td>
                     
                     </tr>
             <% }); %>
+            <% } else {%>
+            <tr><td><p style="color:rgba(184, 180, 180, 0.692);">No hay comentarios para esta sección</p></td></tr>
+            <%}%>
+
             </table>
             
            
@@ -76,9 +112,9 @@
 
 
 <!-- Boton de edición de los datos básicos de proyecto, lleva a update -->
-    <a href="/project/edit/<%=project.id%>">Edit</a>
+   
     <form action="/project/edit/<%=project.id%>" method="POST">
-        <button type="submit" class="btn btn-primary btn-block">
+        <button type="submit" class="btn btn-primary">
             <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
             Editar
         </button>

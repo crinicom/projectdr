@@ -67,7 +67,9 @@ module.exports = {
         Comment.findOne(req.param('id'), function foundComment(err, comment) {
             if (err) return next(err);
             if (!comment) return next();
-            res.view({comment:comment});
+            var comes_from = req.param('comes_from');
+
+            res.view({comment:comment, comes_from:comes_from});
         }); 
     },
     update: function(req, res, next) {
@@ -80,7 +82,8 @@ module.exports = {
     },
     destroy: function(req,res,next) {
     Comment.destroy(req.param('id')).exec(function() {
-        res.redirect(req.url);
+        var comes_from = req.param('comes_from');
+        res.redirect(comes_from);
     });    
     
     
