@@ -80,10 +80,11 @@ module.exports = {
            
             var comments = Comment.find({belongs_to:"project"}, function foundComments(err, comments) {
                 if (err) return next(err);
+                var revcoms=comments.reverse();
                 console.log(comments);
                 //return comments;
                 //res.json(users[1].name);
-                res.view({project:project, comments:comments});
+                res.view({project:project, comments:revcoms});
         
             });
             
