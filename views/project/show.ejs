@@ -19,40 +19,18 @@
     <h4><%= project.description %></p>
     <h3>Scope: </h3>
     <p><%= project.scope %></p>
-
     <p>
+    <div class="pull-right"> 
         <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             Ver comentarios
         </a>
-    </p>
+    </div>
+</p>
+    
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
-                
-           
-            <table class="table table-sm table-hover table-bordered table-striped">
-                
-                <% _.each(comments, function(comment) { %>
-                    <tr data-id="<%= comment.id%>" data-model="comment">
-                        <td><%= comment.id%></td>
-                        <td><%= comment.text%></td>
-                        <td><%= comment.user%></td>
-                        <td><%= comment.date%></td>
-                        <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
-                        <td><a href="/comment/edit/<%=comment.id%>">Edit</a></td>
-                        <td>
-                                <form action="/comment/destroy/<%= comment.id %>" method="POST">
-                                    <input type="hidden" name="belongs_to_project" value="<%= comment.belongs_to_project %>" />
-                                    <input type="hidden" name="_method" value="delete" />
-                                    <input type="submit" class="btn btn-sm btn-danger" value="X" />
-                                    <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
-                                </form>
-                        </td>
-                    
-                    </tr>
-            <% }); %>
-            </table>
-            
-            <form action="/comment/new" method="POST">
+                <div class="pull-right">    
+                <form action="/comment/new" method="POST">
                     <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
                     <input type="hidden" value="project" name="belongs_to">
                     <input type="hidden" value="header" name="section">
@@ -61,27 +39,38 @@
                     <input type="submit" class="btn btn-sm btn-success" value="New comment">
                     <input type="hidden" value="<%=_csrf%>" name="_csrf">
                 </form>
-
+                </div>
+            
+            <table class="table table-sm table-hover table-striped">
+                
                 <% _.each(comments, function(comment) { %>
                     <tr data-id="<%= comment.id%>" data-model="comment">
-                            <td><span class="badge badge-default"><%= comment.user%></span>
-                                <%= comment.text%> - <cite> <%= comment.date%></cite>
-                            
-                            </td>
+                        <td><span class="badge badge-default"><%= comment.user_name%></span>
+                            <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                        <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
+                        <td>
                             <form action="/comment/edit/<%= comment.id %>" method="POST">
                                 <input type="hidden" name="_method" value="edit" >
-                                <input type="submit" class="btn btn-sm btn-alert" value="Edit">
+                                <input type="submit" class="btn btn-xs btn-alert" value="Edit" />
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                            </form>    
-                        <form action="/comment/destroy/<%= comment.id %>" method="POST">
-                                <input type="hidden" name="belongs_to_project" value="<%= comment.belongs_to_project %>" >
-                                <input type="hidden" name="_method" value="delete" >
-                                <input type="submit" class="btn btn-sm btn-danger" value="Delete" >
-                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                            </form>
+                            </form> 
+                         </td>
+                        <td>
+                                <form action="/comment/destroy/<%= comment.id %>" method="POST">
+                                    <input type="hidden" name="belongs_to_project" value="<%= comment.belongs_to_project %>" />
+                                    <input type="hidden" name="_method" value="delete" />
+                                    <input type="submit" class="btn btn-xs btn-danger" value="X" />
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                                </form>
+                        </td>
                     
                     </tr>
             <% }); %>
+            </table>
+            
+           
+
+               
         </div>
     </div>
 

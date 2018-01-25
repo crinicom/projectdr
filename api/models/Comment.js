@@ -14,6 +14,7 @@ module.exports = {
       section: {type: 'string', required:true},
       item: {type: 'integer', required:true},
       user: {model: 'user', required:false},
+      user_name: {type: 'string', required:false},
       date: {type: 'date', required:false},
       status: {type: 'integer'}
   }

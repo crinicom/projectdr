@@ -10,12 +10,13 @@
     
     <div class="control-group">
         <p>
-        <%=Date.now()%>
+        <%=Date()%>
         <%=session.User.name%>
         </p>
     </div>
     <div class="control-group">
         <input type="hidden" class="form-control" value="<%=session.User.id%>" name="user"></br>
+        <input type="hidden" class="form-control" value="<%=session.User.name%>" name="user_name"></br>
         <input type="hidden" class="form-control" value="<%=Date()%>" name="date"></br>
     </div>
 
