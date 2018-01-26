@@ -78,7 +78,7 @@ module.exports = {
             if (err) return next(err);
             if (!project) return next();
            
-            var comments = Comment.find({belongs_to:"project"}, function foundComments(err, comments) {
+            var comments = Comment.find({belongs_to_project: req.param('id'), belongs_to:"project"}, function foundComments(err, comments) {
                 if (err) return next(err);
                 var revcoms=comments.reverse();
                 console.log(comments);
@@ -119,7 +119,20 @@ module.exports = {
             project.objectives = objectives; // It will work now
             //project.status = { "pcharter":"no", "edt":"no", "stk": "no", "risk_page": "no", "gantt_page": "no", "work": 0};
             //res.json(project);
-            res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress});
+
+            var comments = Comment.find({belongs_to_project: project.id, belongs_to:"edt"}, function foundComments(err, comments) {
+                if (err) return next(err);
+                var revcoms=comments.reverse();
+                console.log(comments);
+                //return comments;
+                //res.json(users[1].name);
+                res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress, comments:revcoms});
+        
+            });
+
+
+
+            //res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress});
         }).catch(function (err){
             if (err) return res.serverError(err);
         });
