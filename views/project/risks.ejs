@@ -98,6 +98,78 @@
     <% }); %>
     </table>
 
+<!-- Comentarios sección de Riesgos -->
+<p><div class="pull-right"> 
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseRiskComments" aria-expanded="false" aria-controls="collapseRiskComments">
+            <% if (comments.filter(function thisSection(comment) { return comment.section == 'risks'}).length > 0) {%>
+                 <i class="fa fa-comments" aria-hidden="true"></i>
+            <% } else {%>
+                 <i class="fa fa-commenting-o" aria-hidden="true"></i>
+            <% }%>
+        </a>
+    </div> </p>
+
+    <div class="collapse" id="collapseRiskComments">
+    <div class="card card-body">
+        <div class="pull-right">    
+            <form action="/comment/new" method="POST">
+                <div class="control-group" style="display:none;">    
+                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                    <input type="hidden" value="risks" name="belongs_to">
+                    <input type="hidden" value="risks" name="section">
+                    <input type="hidden" value=0 name="item">
+                    <input type="hidden" value="/project/risks/<%=project.id%>" name="comes_from">
+                    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                </div>
+                <button type="submit" class="btn btn-sm btn-success" >
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+        
+        <table class="table table-sm table-hover table-striped">
+            <% if (comments.filter(function thisSection(comment) { return comment.section == 'risks'}).length > 0) {%>
+         
+            <% _.each(comments, function(comment) { if(comment.section == 'risks') { %>
+                <tr data-id="<%= comment.id%>" data-model="comment">
+                    <td><span class="badge badge-default"><%= comment.user_name%></span>
+                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                    <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
+                    <td>
+                        <form action="/comment/edit/<%= comment.id %>" method="POST">
+                           <button type="submit" class="btn btn-sm btn-success" >
+                             <i class="fa fa-pencil" aria-hidden="true"></i>
+                           </button>
+                           <div class="control-group" style="display:none;"> 
+                                <input type="hidden" name="_method" value="edit" >
+                                <input type="hidden" value="/project/risks/<%=project.id%>" name="comes_from">
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </div>
+                        </form> 
+                     </td>
+                    <td>
+                            <form action="/comment/destroy/<%= comment.id %>" method="POST">
+                                <button type="submit" class="btn btn-sm btn-danger" >
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            <div class="control-group" style="display:none;">    
+                                <input type="hidden" value="/project/risks/<%=project.id%>" name="comes_from">
+                                <input type="hidden" name="_method" value="delete" />
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                            </div>
+                            </form>
+                    </td>
+                
+                </tr>
+              <% }}); %> <!-- fin de ciclo -->
+            <% } else {%>
+                <tr><td><p style="color:rgba(184, 180, 180, 0.692);">No hay comentarios para esta sección</p></td></tr>
+            <%}%>
+        </table>
+    </div>
+</div>
+<!-- FIN comentarios riesgos -->
+
 
     <p><%=JSON.stringify(project.status)%></p>
     <% if (project.status.risks != "finished") {%>

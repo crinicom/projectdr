@@ -167,7 +167,20 @@ module.exports = {
              project.objectives = objectives; // It will work now
              project.stakeholders = stakeholders;
              //res.json(project);
-             res.view({objectives:objectives, project:project, stakeholders:stakeholders});
+             
+             var comments = Comment.find({belongs_to_project: project.id, belongs_to:"stk"}, function foundComments(err, comments) {
+                if (err) return next(err);
+                var revcoms=comments.reverse();
+                console.log(comments);
+                //return comments;
+                //res.json(users[1].name);
+                res.view({objectives:objectives, project:project, stakeholders:stakeholders,comments:revcoms});
+        
+            });
+             
+             
+             
+            
             }).catch(function (err){
              if (err) return res.serverError(err);
          });
@@ -204,7 +217,19 @@ module.exports = {
               project.stakeholders = stakeholders;
               project.risks = risks; // It will work now
               //res.json(project);
-              res.view({risks:risks, project:project, stakeholders:stakeholders});
+              
+              var comments = Comment.find({belongs_to_project: req.param('id'), belongs_to:"risks"}, function foundComments(err, comments) {
+                if (err) return next(err);
+                var revcoms=comments.reverse();
+                console.log(comments);
+                //return comments;
+                //res.json(users[1].name);
+                res.view({risks:risks, project:project, stakeholders:stakeholders, comments:revcoms});
+        
+            });
+              
+              
+             
              }).catch(function (err){
               if (err) return res.serverError(err);
           });
