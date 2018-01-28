@@ -236,7 +236,7 @@ module.exports = {
            
       },
 
-       // RESPONDO A LA LLAMADA PARA VER RIESGOS
+       // RESPONDO A LA LLAMADA PARA VER GANTT----
        gantt: function(req, res, next) {
         // https://stackoverflow.com/questions/26535727/sails-js-waterline-populate-deep-nested-association
 
@@ -257,18 +257,23 @@ module.exports = {
             .then(function (stakeholders){
                 return stakeholders;
             });
+            var comments = Comment.find({ "belongs_to_project": project.id, belongs_to:'gantt'})
+            .then (function(comm) { return comm;});
+            //var comments = comm.reverse();  
+            
             var risks = Risk.find({
               "belongs_to_project": project.id
           })
-            return [project, objectives, stakeholders, risks];
+          
+          return [project, objectives, stakeholders, risks,comments];
         })
-        .spread(function (project, objectives, stakeholders, risks){
+        .spread(function (project, objectives, stakeholders, risks,comments){
             project = project.toObject(); // <- HERE IS THE CHANGE!
             project.objectives = objectives; // It will work now
             project.stakeholders = stakeholders;
             project.risks = risks;
             //res.json(project);
-            res.view({objectives:objectives, project:project, stakeholders:stakeholders, risks:risks});
+            res.view({objectives:objectives, project:project, stakeholders:stakeholders, risks:risks, comments:comments});
         }).catch(function (err){
             if (err) return res.serverError(err);
         });

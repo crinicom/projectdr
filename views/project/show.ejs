@@ -124,10 +124,12 @@
                 <td><a href="/objective/edit/<%=objective.id%>">Edit</a></td>
                 <td>
                         <form action="/objective/destroy/<%= objective.id %>" method="POST">
-                            <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" />
-                            <input type="hidden" name="_method" value="delete" />
-                            <input type="submit" class="btn btn-sm btn-danger" value="X" />
-                            <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                            <input type="submit" class="btn btn-sm btn-danger" value="X">
+                            <div class="control-group" style="display:none;">            
+                                <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>">
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </div>
                         </form>
                 </td>
             
