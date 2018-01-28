@@ -14,7 +14,8 @@ module.exports = {
     //mails: {collection: 'mail', via:'stk'},
     mails: {type: "array"},
     status: {type: 'integer'},
-    assoc_task: {model: 'task', via: 'id'}
+    assoc_task: {model: 'task', via: 'id'},
+    responsible: {type: 'string'}
   }
 };
 

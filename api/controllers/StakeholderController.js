@@ -71,6 +71,22 @@ module.exports = {
             res.view({stakeholder:stakeholder,belongs_to_project:req.param('belongs_to_project'), assoc_task:req.param('assoc_task')});
         }); 
     },
+    assign: function(req, res, next) {
+        Stakeholder.findOne(req.param('id'), function foundStk(err, stakeholder) {
+            if (err) return next(err);
+            if (!stakeholder) return next();
+            res.view({stakeholder:stakeholder,belongs_to_project:req.param('belongs_to_project'), assoc_task:req.param('assoc_task')});
+        }); 
+     
+    },
+    update_assign: function(req, res, next) {
+        Stakeholder.update(req.param('id'), req.params.all(), function stakeholderkUpdated(err) {
+            if (err) {
+                return res.redirect('/stakeholder/edit/'+ req.param('id'));
+            }
+            res.redirect('/project/gantt/' + req.param('belongs_to_project') );
+        }); 
+    },
     update: function(req, res, next) {
            Stakeholder.update(req.param('id'), req.params.all(), function stakeholderkUpdated(err) {
             if (err) {

@@ -18,14 +18,21 @@
                         <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%></td>
                         <td>SLIDER AQUI! </td>
                         <td>
-                            <a href="/task/assign/<%=task.id%>"><%=task.responsible%></a>
+                            
                             <form action="/task/assign/<%=task.id%>" method="POST">
-                                <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
-                                <input type="hidden" name="_method" value="edit" >
+                                
                                 <button type="submit" class="btn btn-sm btn-primary">
+                                    <%if (task.responsible) {%>        
                                         <%=task.responsible%>
+                                    <%} else {%> 
+                                    ?
+                                    <%}%>
                                 </button>
-                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                <div class="control-group" style="display:none;">  
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                    <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
+                                    <input type="hidden" name="_method" value="edit" >
+                                </div>
                             </form>
                             
                         </td>
@@ -34,10 +41,10 @@
                             <p><div class="pull-right"> 
                                 <a class="btn btn-primary" data-toggle="collapse" href="#collapseObjectiveComments" aria-expanded="false" aria-controls="collapseObjectiveComments">
                                     <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
-                                         <i class="fa fa-comments" aria-hidden="true"></i>
-                                    <% } else {%>
-                                         <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                                    <% }%>
+                                         <i class="fa fa-comments" aria-hidden="true"></i> 
+                                         <% } else {%>
+                                            <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                                        <% }%>
                                 </a>
                             </div> </p>
                     
@@ -112,6 +119,20 @@
            
                     <td class="vert-aligned"><%= stakeholder.name%> <-- <%=stakeholder.comm_plan%></td>
                     <td>SLIDER AQUI!</td>
+                    <td>
+                            <form action="/stakeholder/assign/<%=stakeholder.id%>" method="POST">
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    <%if (stakeholder.responsible) {%>        
+                                        <%=stakeholder.responsible%>
+                                    <%} else {%> ?  <%}%>
+                                </button>
+                                <div class="control-group" style="display:none;">  
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                    <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
+                                    <input type="hidden" name="_method" value="edit" >
+                                </div>
+                            </form>
+                    </td>
              </tr>    
         </tr> 
        <% }); %>
@@ -121,6 +142,20 @@
        
                 <td class="vert-aligned"><%= risk.description%> <-- <%=risk.mitigation%></td>
                 <td>SLIDER AQUI!</td>
+                <td>
+                        <form action="/risk/assign/<%=risk.id%>" method="POST">
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                <%if (risk.responsible) {%>        
+                                    <%=risk.responsible%>
+                                <%} else {%> ?  <%}%>
+                            </button>
+                            <div class="control-group" style="display:none;">  
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
+                                <input type="hidden" name="_method" value="edit" >
+                            </div>
+                        </form>
+                </td>
          </tr>    
     </tr> 
    <% }); %>

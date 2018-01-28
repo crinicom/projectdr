@@ -1,5 +1,5 @@
 <div class="container">
-    <form action="/risk/update/<%=risk.id%>" method="POST" id="new-risk-form">
+    <form action="/risk/update_assign/<%=risk.id%>" method="POST" id="new-risk-form">
         <h2 class="form-signin-heading">Create Risk</h2>
 
         <% if (flash && flash.err) { %>
@@ -15,13 +15,13 @@
            <input type="text" class="form-control" placeholder="<%=risk.description%>" name="description" autofocus></br>
             <input type="text" class="form-control" placeholder="<%=risk.impact%>" name="impact"></br>
             <input type="text" class="form-control" placeholder="<%=risk.mitigation%>" name="mitigation" cols="60"></br>
-       
+            <input type="text" class="form-control" placeholder="<%=risk.responsible%>" name="responsible" cols="60">
         
        <br/>
         
         <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create risk">
         <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-        <input type="hidden" name="belongs_to_project" value="<%=project.id%>" />
+        <input type="hidden" name="belongs_to_project" value="<%belongs_to_project%>" />
         <input type="hidden" name="assoc_stakeholder" value="<%=assoc_stakeholder%>" />
         
         

@@ -13,7 +13,8 @@ module.exports = {
     impact: {type: 'string', required:true},
     mitigation: {type: 'string', required:true},
     status: {type: 'integer'},
-    assoc_stakeholder: {type: 'string'}
+    assoc_stakeholder: {type: 'string'},
+    responsible: {type: 'string'}
   }
 };
 
