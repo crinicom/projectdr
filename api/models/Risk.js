@@ -14,7 +14,7 @@ module.exports = {
     mitigation: {type: 'string', required:true},
     status: {type: 'integer'},
     assoc_stakeholder: {type: 'string'},
-    responsible: {type: 'string'}
+    responsible: {type: 'string', required:false}
   }
 };
 

@@ -12,16 +12,16 @@
 
         <% } %>
         <div class="form-group">
-           <input type="text" class="form-control" placeholder="<%=risk.description%>" name="description" autofocus></br>
-            <input type="text" class="form-control" placeholder="<%=risk.impact%>" name="impact"></br>
-            <input type="text" class="form-control" placeholder="<%=risk.mitigation%>" name="mitigation" cols="60"></br>
+           <%=risk.description%><br>
+            <%=risk.impact%><br>
+            <%=risk.mitigation%><br>
             <input type="text" class="form-control" placeholder="<%=risk.responsible%>" name="responsible" cols="60">
         
        <br/>
         
         <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create risk">
         <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-        <input type="hidden" name="belongs_to_project" value="<%belongs_to_project%>" />
+        <input type="hidden" name="belongs_to_project" value="<%=belongs_to_project%>" />
         <input type="hidden" name="assoc_stakeholder" value="<%=assoc_stakeholder%>" />
         
         
