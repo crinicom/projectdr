@@ -11,7 +11,9 @@ module.exports = {
     belongs_to_obj: {model: 'objective', required:true},
     text: {type: 'string', required:true},
     lvl1tasks: {collection: 'lvl1task', via:'belongs_to_task'},
-    status: {type: 'integer'}
+    status: {type: 'integer'},
+    //responsible: {model: 'user', required:false},
+    responsible: {type: 'string', required:false}
   }
 };
 

@@ -72,6 +72,14 @@ module.exports = {
             res.redirect('/project/edt/' + req.param('belongs_to_project') );
         }); 
     },
+    assign: function(req, res, next) {
+        Task.findOne(req.param('id'), function foundTask(err, task) {
+            if (err) return next(err);
+            if (!task) return next();
+            res.view({task:task, belongs_to_project:req.param('belongs_to_project')});
+        }); 
+     
+ },
     destroy: function(req,res,next) {
     Task.destroy(req.param('id')).exec(function() {
         res.redirect('/project/edt/' + req.param('belongs_to_project') );

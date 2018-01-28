@@ -272,6 +272,7 @@ module.exports = {
             project.objectives = objectives; // It will work now
             project.stakeholders = stakeholders;
             project.risks = risks;
+            var comments = comments.reverse();
             //res.json(project);
             res.view({objectives:objectives, project:project, stakeholders:stakeholders, risks:risks, comments:comments});
         }).catch(function (err){

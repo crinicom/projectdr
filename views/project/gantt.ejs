@@ -16,7 +16,19 @@
                 <tr data-id="<%= objective.id%>" data-model="objective">
                 <% _.each(objective.tasks, function(task) { %>
                         <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%></td>
-                        <td>SLIDER AQUI!</td>
+                        <td>SLIDER AQUI! </td>
+                        <td>
+                            <a href="/task/assign/<%=task.id%>"><%=task.responsible%></a>
+                            <form action="/task/assign/<%=task.id%>" method="POST">
+                                <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
+                                <input type="hidden" name="_method" value="edit" >
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                        <%=task.responsible%>
+                                </button>
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </form>
+                            
+                        </td>
                         <td> 
                             <!-- Comentarios sección de OBJETIVOS -->
                             <p><div class="pull-right"> 
