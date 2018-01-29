@@ -1,0 +1,248 @@
+<div class="container">
+        <h1>Carta Gantt</h1>
+        <h2><%= project.name %></h2>
+       
+        <hr>
+        <H2>Plan de trabajo</H2>
+        
+        <table class="table table table-sm table-vcenter">
+            <tr>
+                <th class="align-middle">Tarea</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                 <th></th>
+                
+            </tr>
+            
+            <% _.each(project.objectives, function(objective) { %> 
+            <tr data-id="<%= objective.id%>" data-model="objective">
+            
+          
+                <% _.each(objective.tasks, function(task) { %>
+                    <tr>
+                    <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%></td>
+                     <td>Avance aqui! </td>
+                    <td> <!-- Boton que muestra un responsable-->
+                            
+                            <form action="/task/assign/<%=task.id%>" method="POST">
+                                
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    <%if (task.responsible) {%>        
+                                        <%=task.responsible%>
+                                    <%} else {%> 
+                                    ?
+                                    <%}%>
+                                </button>
+                                <div class="control-group" style="display:none;">  
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                    <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
+                                    <input type="hidden" name="_method" value="edit" >
+                                </div>
+                            </form>
+                            
+                        </td><!-- fin de boton de responsable-->
+                        
+                        <!-- SECCION DE COMENTARIOS-->
+                        <td>
+                            <table>  
+                             <tr>  
+                            <!-- muestro badge y texto de último comentario cronológico, si existe-->
+                                <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
+                                
+                                    <span class="badge badge-default">
+                                            <%= comments.find(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).user_name %>
+                                    </span>
+                                    <%= comments.find(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).text %>
+                                    <p style="color:rgba(184, 180, 180, 0.692);">
+                                        <small>
+                                                <%= comments.find(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).date %>      
+                                        </small>
+                                    </p>
+                                    <div class="pull-right">     <!-- Botón de nuevo comentario-->
+                                            <form action="/comment/new" method="POST">
+                                                <div class="control-group" style="display:none;">    
+                                                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                                                    <input type="hidden" value="gantt" name="belongs_to">
+                                                    <input type="hidden" value="objectives" name="section">
+                                                    <input type="hidden" value="<%=task.id%>" name="item">
+                                                    <input type="hidden" value="/project/gantt/<%=project.id%>" name="comes_from">
+                                                    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                                                </div>
+                                                <button type="submit" class="btn btn-sm btn-success" >
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                    </div> <!-- Fin botón de nuevo comentario-->
+                    
+                                    <div class="pull-right"> <!-- Boton que despliega lista de comentarios históricos-->
+                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapse<%=task.id%>" aria-expanded="false" aria-controls="collapse<%=task.id%>">
+                                                <i class="fa fa-comments" aria-hidden="true">
+                                                </i> 
+                                            </a>
+                                    </div>    <!-- FIN Boton que despliega lista de comentarios históricos-->                 
+                                
+                                
+                                    
+                                <% } else {%>
+                                    
+                                <!-- Si no existen comentarios sólo muestro el botón que de comentarios pendientes -->
+                                
+                                    <div class="pull-right"> 
+                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapse<%=task.id%>" aria-expanded="false" aria-controls="collapse<%=task.id%>">
+                                                    <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                                    
+                                        </a>
+                                    </div>
+                            
+                                <% }%>
+                        
+                            <div class="collapse" id="collapse<%=task.id%>">
+                                <div class="card card-body">
+                                
+                                    <table>
+                                        <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
+                                    
+                                        <% _.each(comments, function(comment) { if(comment.section == 'objectives' && comment.item == task.id) { %>
+                                            <tr data-id="<%= comment.id%>" data-model="comment">
+                                                <td><span class="badge badge-default"><%= comment.user_name%></span>
+                                                    <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                                                <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
+                                                <td>
+                                                    <form action="/comment/edit/<%= comment.id %>" method="POST">
+                                                    <button type="submit" class="btn btn-sm btn-success" >
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    </button>
+                                                    <div class="control-group" style="display:none;"> 
+                                                            <input type="hidden" name="_method" value="edit" >
+                                                            <input type="hidden" value="/project/gantt/<%=project.id%>" name="comes_from">
+                                                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                                        </div>
+                                                    </form> 
+                                                </td>
+                                                <td>
+                                                        <form action="/comment/destroy/<%= comment.id %>" method="POST">
+                                                            <button type="submit" class="btn btn-sm btn-danger" >
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </button>
+                                                        <div class="control-group" style="display:none;">    
+                                                            <input type="hidden" value="/project/gantt/<%=project.id%>" name="comes_from">
+                                                            <input type="hidden" name="_method" value="delete" />
+                                                            <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                                                        </div>
+                                                        </form>
+                                                </td>
+                                            
+                                            </tr>
+                                        <% }}); %> <!-- fin de ciclo -->
+                                        <% } else {%>
+                                            <tr><td><p style="color:rgba(184, 180, 180, 0.692);">No hay comentarios para esta sección</p></td></tr>
+                                        <%}%>
+                                    </table>
+                                
+                                </div>
+                            </div>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+              
+                <!-- FIN comentarios objetivos -->
+           
+          
+                   
+                     
+           <% }); %>
+            </tr>   <% }); %>
+    
+     <table class="table table table-sm table-vcenter">
+                    <tr>
+                        <th class="align-middle">Tarea</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                         <th></th>
+                        
+                    </tr>
+
+
+        <% _.each(project.stakeholders, function(stakeholder) { %>
+            <tr data-id="<%= stakeholder.id%>" data-model="stakeholder">
+           
+                    <td class="vert-aligned"><%= stakeholder.name%> <-- <%=stakeholder.comm_plan%></td>
+                    <td>SLIDER AQUI!</td>
+                    <td>
+                            <form action="/stakeholder/assign/<%=stakeholder.id%>" method="POST">
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    <%if (stakeholder.responsible) {%>        
+                                        <%=stakeholder.responsible%>
+                                    <%} else {%> ?  <%}%>
+                                </button>
+                                <div class="control-group" style="display:none;">  
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                    <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
+                                    <input type="hidden" name="_method" value="edit" >
+                                </div>
+                            </form>
+                    </td>
+             </tr>  <% }); %>
+    
+       <% _.each(project.risks, function(risk) { %>
+        <tr data-id="<%= risk.id%>" data-model="risk">
+       
+                <td class="vert-aligned"><%= risk.description%> <-- <%=risk.mitigation%></td>
+                <td>SLIDER AQUI!</td>
+                <td>
+                        <form action="/risk/assign/<%=risk.id%>" method="POST">
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                <%if (risk.responsible) {%>        
+                                    <%=risk.responsible%>
+                                <%} else {%> ?  <%}%>
+                            </button>
+                            <div class="control-group" style="display:none;">  
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
+                                <input type="hidden" name="_method" value="edit" >
+                            </div>
+                        </form>
+                </td>
+         </tr>    <% }); %>
+
+        </table>
+    
+
+        <p><%=JSON.stringify(project.status)%></p>
+        <% if (project.status.gantt != "finished") {%>
+            <form action="/project/show/<%=project.id%>" method="POST">
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                    Guardar y continuar más tarde
+                </button>
+                <input type="hidden" value="<%=_csrf%>" name="_csrf">
+            </form> <%}%>
+        
+            <form action="/project/save_state/<%=project.id%>" method="POST">
+                <% if (project.status.gantt != "finished") {%>
+                <button type="submit" class="btn btn-success btn-block">
+                    <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
+                    Guardar y finalizar edición
+                </button>
+                <input type="hidden"  name="key" value="gantt">
+                <input type="hidden"  name="state" value="finished">
+                <% } else {%>
+                    <button type="submit" class="btn btn-success btn-block">
+                        <i class="fa fa-unlock fa-2x" aria-hidden="true"></i>    
+                        Continuar edición
+                    </button>
+                    <input type="hidden"  name="key" value="gantt">
+                    <input type="hidden"  name="state" value="wip">
+                    <%}%>            
+                <input type="hidden" value="<%=_csrf%>" name="_csrf">
+            </form>
+            <br><br><br>
+            <%- partial('../navbuttons.ejs') %>
+    
+    
+    </div>
