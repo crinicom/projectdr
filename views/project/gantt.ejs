@@ -18,8 +18,8 @@
                 <tr data-id="<%= objective.id%>" data-model="objective">
                 <% _.each(objective.tasks, function(task) { %>
                         <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%></td>
-                        <td>SLIDER AQUI! </td>
-                        <td>
+                        <td>Avance aqui! </td>
+                        <td> <!-- Boton que muestra un responsable-->
                             
                             <form action="/task/assign/<%=task.id%>" method="POST">
                                 
@@ -37,7 +37,7 @@
                                 </div>
                             </form>
                             
-                        </td>
+                        </td><!-- fin de boton de responsable-->
                         
                         <!-- SECCION DE COMENTARIOS-->
                         <td>
@@ -45,7 +45,7 @@
                                     <tr>
 
                                
-                           
+                           <!-- muestro badge y texto de último comentario cronológico, si existe-->
                             <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
                             
                                 <span class="badge badge-default">
@@ -57,7 +57,7 @@
                                             <%= comments.find(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).date %>      
                                     </small>
                                 </p>
-                                <div class="pull-right">    
+                                <div class="pull-right">     <!-- Botón de nuevo comentario-->
                                         <form action="/comment/new" method="POST">
                                             <div class="control-group" style="display:none;">    
                                                 <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
@@ -71,20 +71,20 @@
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                             </button>
                                         </form>
-                                    </div>
+                                    </div> <!-- Fin botón de nuevo comentario-->
                 
-                                    <div class="pull-right"> 
+                                    <div class="pull-right"> <!-- Boton que despliega lista de comentarios históricos-->
                                         <a class="btn btn-primary" data-toggle="collapse" href="#collapse<%=task.id%>" aria-expanded="false" aria-controls="collapse<%=task.id%>">
                                                 <i class="fa fa-comments" aria-hidden="true">
                                                 </i> 
                                             </a>
-                                        </div>                    
+                                        </div>    <!-- FIN Boton que despliega lista de comentarios históricos-->                 
                             
                             
                                 
                             <% } else {%>
                                 
-                            <!-- Comentarios sección de OBJETIVOS -->
+                            <!-- Si no existen comentarios sólo muestro el botón que de comentarios pendientes -->
                             
                                 <div class="pull-right"> 
                                     <a class="btn btn-primary" data-toggle="collapse" href="#collapse<%=task.id%>" aria-expanded="false" aria-controls="collapse<%=task.id%>">
@@ -98,7 +98,7 @@
                         <tr>
                             <div class="collapse" id="collapse<%=task.id%>">
                             <div class="card card-body">
-                             <tr>
+                             
                                 <table class="table table-sm table-hover table-striped">
                                     <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
                                  
@@ -138,16 +138,19 @@
                                         <tr><td><p style="color:rgba(184, 180, 180, 0.692);">No hay comentarios para esta sección</p></td></tr>
                                     <%}%>
                                 </table>
-                            </tr>
+                            
                             </div>
                         </div>
-                    <!-- FIN comentarios objetivos -->
-                </td>
-            </tr>
-        </table>  
-                 </tr>    
-            </tr> 
+                        </tr>
+                                </table>
+                    
+                </td> <!-- FIN comentarios objetivos -->
+           
+          
+                   
+             
            <% }); %>
+        </tr>
         <% }); %>
     
         <% _.each(project.stakeholders, function(stakeholder) { %>
@@ -170,7 +173,7 @@
                             </form>
                     </td>
              </tr>    
-        </tr> 
+         
        <% }); %>
     
        <% _.each(project.risks, function(risk) { %>
@@ -193,7 +196,7 @@
                         </form>
                 </td>
          </tr>    
-    </tr> 
+     
    <% }); %>
 
         </table>
