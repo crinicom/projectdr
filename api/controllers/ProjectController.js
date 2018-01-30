@@ -274,6 +274,61 @@ module.exports = {
             project.risks = risks;
             var comments = comments.reverse();
             //res.json(project);
+
+// Calculo avance cada vez que muestro, y guardo en un campo de Project
+            
+            var tasks =[];
+            _.each(project.objectives, function(objective) {
+                _.each(objective.tasks, function(task) {
+                    tasks.push(task);
+                });
+            });
+            var comms = [];
+            _.each(stakeholders, function(stk) {
+                if(stk.comm_plan) {comms.push(stk.comm_plan) }
+            });
+            console.log(comms);
+
+            var mitigations = [];
+            _.each(risks, function(risk) {
+                if(risk.mitigation) {mitigations.push(risk.mitigation) }
+            });
+            console.log(mitigations);
+
+            var task_advance = 
+                (
+                    tasks.filter(function Advance(task) { return (task.status == "En proceso" )}).length * 50  +
+                    tasks.filter(function Advance(task) { return (task.status == "Finalizada" )}).length * 100)
+                    / tasks.length*100;
+            console.log("task advance: " + task_advance);
+
+            var stk_advance = 
+                (
+                    stakeholders.filter(function Advance(stk) { return (stk.status == "En proceso" )}).length * 50  +
+                    stakeholders.filter(function Advance(stk) { return (stk.status == "Finalizada" )}).length * 100)
+                    / comms.length*100;
+            console.log("comms advance: " + stk_advance);
+//  
+            var risk_advance = 
+                (
+                    risks.filter(function Advance(risk) { return (risk.status == "En proceso" )}).length * 50  +
+                    risks.filter(function Advance(risk) { return (risk.status == "Finalizada" )}).length * 100)
+                    / mitigations.length*100;
+            console.log("mitigations advance: " + risk_advance);
+
+            var advance = ((
+                tasks.filter(function Advance(task) { return (task.status == "En proceso" )}).length * 50  +
+                tasks.filter(function Advance(task) { return (task.status == "Finalizada" )}).length * 100 +
+                stakeholders.filter(function Advance(stk) { return (stk.status == "En proceso" )}).length * 50  +
+                stakeholders.filter(function Advance(stk) { return (stk.status == "Finalizada" )}).length * 100 +
+                risks.filter(function Advance(risk) { return (risk.status == "En proceso" )}).length * 50  +
+                risks.filter(function Advance(risk) { return (risk.status == "Finalizada" )}).length * 100
+
+            ) / (tasks.length*100 + comms.length*100 + mitigations.length*100))*100;
+            console.log("General advance: " + advance);
+        //FIN calculo de avance
+
+
             res.view({objectives:objectives, project:project, stakeholders:stakeholders, risks:risks, comments:comments});
         }).catch(function (err){
             if (err) return res.serverError(err);
