@@ -50,3 +50,17 @@ body {
  input, textarea, .uneditable-input {
     width: 100%;
 }
+.table-borderless td,
+.table-borderless th {
+    border: 0;
+}
+table {
+    table-layout: fixed;
+}
+
+.container,
+.navbar-static-top .container,
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+  width: 80%;
+}

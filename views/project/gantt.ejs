@@ -6,12 +6,13 @@
         <H2>Plan de trabajo</H2>
         
         <table class="table table table-sm table-vcenter">
+           
             <tr>
-                <th class="align-middle">Tarea</th>
-                <th></th>
-                <th></th>
-                <th></th>
-          
+                <th class="align-middle" style="width: 30%">Tarea</th>
+                <th class="align-middle" ></th>
+                <th class="align-middle" ></th>
+                <th class="align-middle" ></th>
+                <th class="align-middle" style="width: 50%"></th>
                 
             </tr>
             
@@ -61,10 +62,11 @@
 
 
          <% _.each(project.objectives, function(objective) { %> 
-            <tr data-id="<%= objective.id%>" data-model="objective">
-            <td>
           
+            <tr data-id="<%= objective.id%>" data-model="objective">
+                <td>
                 <% _.each(objective.tasks, function(task) { %>
+                    <%if (task.text) {%>  
                     <tr data-id="<%= task.id%>" data-model="task">
                     <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%></td>
                      <td>Avance aqui! </td>
@@ -116,25 +118,27 @@
                                     <% } else {%>
                                        
                                     <!-- Si no existen comentarios sólo muestro el botón que de comentarios pendientes -->
-                                    
+                                    <!-- 
                                         <div class="pull-right"> 
-                                            <a class="btn btn-primary" data-toggle="collapse" href="#collapse<%=task.id%>" aria-expanded="false" aria-controls="collapse<%=task.id%>">
+                                            <a class="btn btn-primary" data-toggle="collapse" href="#collapse<%//=task.id%>" aria-expanded="false" aria-controls="collapse<%=task.id%>">
                                                         <i class="fa fa-commenting-o" aria-hidden="true"></i>
                                         
                                             </a>
-                                        </div>
+                                        </div> -->
                                     
                                     <% }%>
                             
                             
                                 </div>
-                            <table>
+                            </td>
+                         <td>
+                                <table class="table table-sm table-borderless table-condensed">
 
                              <tr>  
                             <!-- muestro badge y texto de último comentario cronológico, si existe-->
-                                <td>
+                               
                                     <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
-                                        
+                                      <td>  
 
                                         <span class="badge badge-default">
                                                 <%= comments.find(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).user_name %>
@@ -146,7 +150,7 @@
                                             </small>
                                         </p>
                                     
-                        
+                                    </td>
                                     <% } else {%>
                                     
                                     <!-- Si no existen comentarios sólo muestro el botón que de comentarios pendientes -->
@@ -154,15 +158,17 @@
                                     <p>Sin comentarios</p>
                                  -->
                                     <% }%>
-                                </td>
+                               
                              </tr>
+                             
+                             <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
                              <tr>
                                 <td>
                                 <div class="collapse" id="collapse<%=task.id%>">
                                     <div class="card card-body">
                                         
-                                        <table>
-                                            <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
+                                        <table class="table table-sm table-borderless table-condensed">
+                                           
                                         
                                             <% _.each(comments, function(comment) { if(comment.section == 'objectives' && comment.item == task.id) { %>
                                                 <tr data-id="<%= comment.id%>" data-model="comment">
@@ -196,30 +202,25 @@
                                                 
                                                 </tr>
                                             <% }}); %> <!-- fin de ciclo -->
-                                            <% } else {%>
-                                                <tr><td><p style="color:rgba(184, 180, 180, 0.692);">No hay comentarios para esta sección</p></td></tr>
-                                            <% } %>
+                                            
                                         </table>
                                     
                                     </div>
                                 </div>
                             </td>
                         </tr>
+                        <% } else {%>
+                            <tr><td><p style="color:rgba(184, 180, 180, 0.692);">No hay comentarios para esta sección</p></td></tr>
+                        <% } %>
                             </table>
                         </td>
                         </tr>
-                        <% }); %> 
-                </td>
+                    <%}%>
+                        <% }); %> <!--fin ciclo tareas-->
+                    </td>   
             </tr>
-              
-                <!-- FIN comentarios objetivos -->
-           
-          
-                   
-                     
-                
-               
-              <% }); %>
+            
+              <% }); %> <!--fin ciclo objetivos-->
     
     
         </table> <!-- cierre tabla grande-->
