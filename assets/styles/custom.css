@@ -65,3 +65,5 @@ body {
 .navbar-fixed-bottom .container {
   width: 80%;
 }
+
+.progress {height: 60px;}

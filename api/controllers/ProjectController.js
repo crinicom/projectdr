@@ -325,28 +325,31 @@ module.exports = {
                 risks.filter(function Advance(risk) { return (risk.status == "Finalizada" )}).length * 100
 
             ) / (tasks.length*100 + comms.length*100 + mitigations.length*100))*100;
-            console.log("General advance: " + advance);
+            console.log("General advance: " + parseInt(advance,10) + typeof parseInt(advance,10));
         //FIN calculo de avance
 
-        project.advance = advance;
+        advance = parseInt(advance,10);
 
         //project.status = status;
-        Project.findOne(req.param('id'), function foundProject(err, project) {
-            if (err) return next(err);
-            if (!project) return next();
-        project.save(function(err){
-            if (err) {
-                return res.json({err});
-            } else {
-                console.log(" Project advance saved: " + project.advance );
-               
-            }
-        });
-
-
-
-
-            res.view({objectives:objectives, project:project, stakeholders:stakeholders, risks:risks, comments:comments});
+        Project.findOne(project.id, function foundProject(err, proj) {
+                if (err) return next(err);
+                if (!proj) return next();
+                proj.advance = 0;
+                proj.advance = advance;
+                console.log("General advance: " + proj.advance + " type: " + typeof proj.advance);
+            proj.save(function(err){
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(" Project advance saved: " + proj.advance );
+                   
+                    res.view({objectives:objectives, project:project, stakeholders:stakeholders, risks:risks, comments:comments, advance:advance});
+                   
+                    
+                }
+            });
+        }); 
+        
         }).catch(function (err){
             if (err) return res.serverError(err);
         });

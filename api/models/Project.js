@@ -57,7 +57,7 @@ module.exports = {
       enum: ['no', 'wip', 'finished'],
       default: 'no'
     },
-    advance: {type: 'number', defaultsTo: 0},
+    advance: {type: 'integer', defaultsTo: 0},
     status: {
       type: 'json'
       //default: [{ "pcharter":"no", "edt":"no", "stakeholders": "no", "risks": "no", "gantt": "no", "work": 0}]

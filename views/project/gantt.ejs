@@ -1,7 +1,16 @@
 <div class="container">
         <h1>Carta Gantt</h1>
         <h2><%= project.name %></h2>
+        <div class="pull-right">
+            
+        </div>
        
+        <div class="progress ">
+            <div class="bar bar-striped" role="progressbar" aria-valuenow="<%=advance%>"
+            aria-valuemin="0" aria-valuemax="100" style="width:<%=advance%>%">
+           <h1> <%=advance%>%</h1>
+            </div>
+          </div>
         <hr>
         <H2>Plan de trabajo</H2>
         
