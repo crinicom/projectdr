@@ -57,6 +57,15 @@ module.exports = {
             res.redirect('/project/gantt/' + req.param('belongs_to_project') );
         }); 
     },
+    update_status: function(req, res, next) {
+        Risk.update(req.param('id'), req.params.all(), function riskkUpdated(err) {
+            if (err) {
+                console.log(err);
+                res.redirect('/project/gantt/' + req.param('belongs_to_project') );
+            }
+            res.redirect('/project/gantt/' + req.param('belongs_to_project') );
+        }); 
+    },
     update: function(req, res, next) {
            Risk.update(req.param('id'), req.params.all(), function riskkUpdated(err) {
             if (err) {

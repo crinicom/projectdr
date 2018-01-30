@@ -12,7 +12,7 @@ module.exports = {
     description: {type: 'string', required:true},
     impact: {type: 'string', required:true},
     mitigation: {type: 'string', required:true},
-    status: {type: 'integer'},
+    status: {type: 'string', defaultsTo:'Pendiente'},
     assoc_stakeholder: {type: 'string'},
     responsible: {type: 'string', required:false}
   }

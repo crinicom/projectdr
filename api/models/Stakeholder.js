@@ -13,7 +13,7 @@ module.exports = {
     comm_plan: {type: 'string', required:true},
     //mails: {collection: 'mail', via:'stk'},
     mails: {type: "array"},
-    status: {type: 'integer'},
+    status: {type: 'string', defaultsTo:'Pendiente'},
     assoc_task: {model: 'task', via: 'id'},
     responsible: {type: 'string'}
   }

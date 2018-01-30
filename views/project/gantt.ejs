@@ -22,7 +22,28 @@
             <tr data-id="<%= stakeholder.id%>" data-model="stakeholder">
            
                     <td class="vert-aligned"><%= stakeholder.name%> <-- <%=stakeholder.comm_plan%></td>
-                    <td>SLIDER AQUI!</td>
+                    <td>
+                            <form action="/stakeholder/update_status/<%=stakeholder.id%>" method="POST" id="status<%=stakeholder.id%>">
+                                <div class="form-inline">
+                                        <div class="form-group">
+                                            
+                                                <select name="status" width="100" style="width: 100px">
+                                                    <option value="<%=stakeholder.status%>"><%=stakeholder.status%></option>  
+                                                    <option value="Pendiente">Pendiente</option>
+                                                    <option value="En proceso">En proceso</option>
+                                                    <option value="Finalizada">Finalizada</option>
+                                                </select>
+                                                <div style="display:none;">  
+                                                        <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                                                        <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                                </div>
+                                            <button type="submit" class="btn btn-default" ><i class="fa fa-save" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                </div>
+                            </form>
+                             
+                    </td>
                     <td>
                             <form action="/stakeholder/assign/<%=stakeholder.id%>" method="POST">
                                 <button type="submit" class="btn btn-sm btn-primary">
@@ -43,7 +64,28 @@
         <tr data-id="<%= risk.id%>" data-model="risk">
        
                 <td class="vert-aligned"><%= risk.description%> <-- <%=risk.mitigation%></td>
-                <td>SLIDER AQUI!</td>
+                <td>
+                    
+                        <form action="/risk/update_status/<%=risk.id%>" method="POST" id="status<%=risk.id%>">
+                            <div class="form-inline">
+                                    <div class="form-group">
+                                        
+                                            <select name="status" width="100" style="width: 100px">
+                                                <option value="<%=risk.status%>"><%=risk.status%></option>  
+                                                <option value="Pendiente">Pendiente</option>
+                                                <option value="En proceso">En proceso</option>
+                                                <option value="Finalizada">Finalizada</option>
+                                            </select>
+                                            <div style="display:none;">  
+                                                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                            </div>
+                                        <button type="submit" class="btn btn-default" ><i class="fa fa-save" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                            </div>
+                        </form>
+                </td>
                 <td>
                         <form action="/risk/assign/<%=risk.id%>" method="POST">
                             <button type="submit" class="btn btn-sm btn-primary">
@@ -71,7 +113,7 @@
                     <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%>
                        
                     </td>
-                     <td>
+                     <td> <!--ESTADO DE AVANCE-->
                         <form action="/task/update_status/<%=task.id%>">
                             <div class="form-inline">
                                     <div class="form-group">
@@ -90,11 +132,9 @@
                                     </div>
                             </div>
                           </form>
-
-                          
-
-                     </td>
-                    <td> <!-- Boton que muestra un responsable-->
+                     </td> <!--FIN ESTADO DE AVANCE-->
+                    
+                     <td> <!-- Boton que muestra un responsable-->
                             
                             <form action="/task/assign/<%=task.id%>" method="POST">
                                 
