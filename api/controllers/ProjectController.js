@@ -328,6 +328,23 @@ module.exports = {
             console.log("General advance: " + advance);
         //FIN calculo de avance
 
+        project.advance = advance;
+
+        //project.status = status;
+        Project.findOne(req.param('id'), function foundProject(err, project) {
+            if (err) return next(err);
+            if (!project) return next();
+        project.save(function(err){
+            if (err) {
+                return res.json({err});
+            } else {
+                console.log(" Project advance saved: " + project.advance );
+               
+            }
+        });
+
+
+
 
             res.view({objectives:objectives, project:project, stakeholders:stakeholders, risks:risks, comments:comments});
         }).catch(function (err){
