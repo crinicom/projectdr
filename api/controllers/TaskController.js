@@ -80,6 +80,14 @@ module.exports = {
          res.redirect('/project/gantt/' + req.param('belongs_to_project') );
      }); 
  },
+ update_status: function(req, res, next) {
+    Task.update(req.param('id'), req.params.all(), function taskUpdated(err) {
+     if (err) {
+         return res.redirect('/project/gantt/' + req.param('belongs_to_project') );
+     }
+     res.redirect('/project/gantt/' + req.param('belongs_to_project') );
+ }); 
+},
     update: function(req, res, next) {
            Task.update(req.param('id'), req.params.all(), function taskUpdated(err) {
             if (err) {

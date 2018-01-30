@@ -9,7 +9,7 @@
            
             <tr>
                 <th class="align-middle" style="width: 30%">Tarea</th>
-                <th class="align-middle" ></th>
+                <th class="align-middle" style="width: 15%"></th>
                 <th class="align-middle" ></th>
                 <th class="align-middle" ></th>
                 <th class="align-middle" style="width: 50%"></th>
@@ -68,8 +68,32 @@
                 <% _.each(objective.tasks, function(task) { %>
                     <%if (task.text) {%>  
                     <tr data-id="<%= task.id%>" data-model="task">
-                    <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%></td>
-                     <td>Avance aqui! </td>
+                    <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%>
+                       
+                    </td>
+                     <td>
+                        <form action="/task/update_status/<%=task.id%>">
+                            <div class="form-inline">
+                                    <div class="form-group">
+                                        
+                                            <select name="status" width="100" style="width: 100px">
+                                                <option value="<%=task.status%>"><%=task.status%></option>  
+                                                <option value="Pendiente">Pendiente</option>
+                                                <option value="En proceso">En proceso</option>
+                                                <option value="Finalizada">Finalizada</option>
+                                            </select>
+                                            <div style="display:none;">  
+                                                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                                            </div>
+                                        <button type="submit" class="btn btn-default" ><i class="fa fa-save" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                            </div>
+                          </form>
+
+                          
+
+                     </td>
                     <td> <!-- Boton que muestra un responsable-->
                             
                             <form action="/task/assign/<%=task.id%>" method="POST">
@@ -226,7 +250,7 @@
         </table> <!-- cierre tabla grande-->
     
 
-        <p><%=JSON.stringify(project.status)%></p>
+        <p><%//=JSON.stringify(project.status)%></p>
         <% if (project.status.gantt != "finished") {%>
             <form action="/project/show/<%=project.id%>" method="POST">
                 <button type="submit" class="btn btn-primary btn-block">
