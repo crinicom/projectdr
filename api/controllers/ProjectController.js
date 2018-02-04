@@ -64,13 +64,9 @@ module.exports = {
                 //res.json(users[1].name);
                 res.view({projects:projects, users:users});
         
-            });
-            
-            
-        });
-       
-       
-    },
+            });       
+         });
+       },
 
     show: function(req, res, next) {
         
@@ -90,8 +86,6 @@ module.exports = {
             
             //res.view({project:project, comments:comments});
            //res.json(project);
-       
-        
         });
     },
     // RESPONDO A LA LLAMADA PARA VER LA EDT

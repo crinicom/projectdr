@@ -82,8 +82,18 @@ module.exports = {
             res.redirect("/user/");
         }
         );
-    }
+    },
+    add_to_team: function(req, res, nest) {
+        Project.findOne(req.param('projectsTeam'), function foundObjective(err, project) {
+            if (err) return next(err);
+            if (!project) return next();
 
+            res.view({project:project});  
+        });
+    },
+    rem_from_team: function(req, res, nest) {
+        
+    },
 
 };
 
