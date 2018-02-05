@@ -2,7 +2,7 @@
     <h1><%= user.name %></h1> -<h3> <%= user.email %></h3>
    
     <hr>
-    <H2>Proyectos</H2>
+    <H2>Mis Proyectos</H2>
     <table class="table table-striped table-hover">
         <tr>
             
@@ -131,4 +131,137 @@
     <button type="submit" class="btn btn-large btn-success">Add Project</button>
     <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
+
+<!-- PROYECTOS DE LOS QUE PARTICIPO -->
+
+
+    <hr>
+    <H2>Proyectos en los que participo</H2>
+    <table class="table table-striped table-hover">
+        <tr>
+            
+            <th class="align-middle" style="width: 30%">Name</th>
+            <th class="align-middle" style="width: 30%">Description</th>
+            <th class="align-middle" style="width: 30%">Scope</th>
+            <th class="align-middle" style="width: 30%">Project Charter</th>
+            <th class="align-middle" style="width: 30%">EDT</th>
+            <th class="align-middle" style="width: 30%">Stakeholders</th>
+            <th class="align-middle" style="width: 30%">Risks</th>
+            <th class="align-middle" style="width: 30%">Gantt</th>
+            <thclass="align-middle" style="width: 30%">% de Avance</th>
+            <th class="align-middle" style="width: 30%"></th>
+            
+        </tr>
+        
+         
+                <% _.each(user.participates, function(project) { %>
+                    <tr data-id="<%= project.id%>" data-model="project">
+                        <!-- <td><%=project.id%></td> -->
+                        <td><%=project.name%></td>
+                        <td><%=project.description%></td>
+                        <td><%=project.scope%></td>
+                        <%if (project.status) {%>
+                            <td>
+                                <a href="/project/show/<%=project.id%>">
+                                <% if (project.status.pcharter == "wip") {%>
+                                <i class="fa fa-play" aria-hidden="true"></i>
+                                <% } else {%>
+                                <% if (project.status.pcharter == "finished") {%>
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                <% } else {%>
+                                    <i class="fa fa-question" aria-hidden="true"></i>
+                                    <% }}%>
+                                </a>
+                                </td>
+                        <td>
+                            <a href="/project/edt/<%=project.id%>">
+                            <% if (project.status.edt == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <% } else {%>
+                            <% if (project.status.edt == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <% } else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <% }}%>
+                            </a>
+                        </td>
+                        <td>
+                             <a href="/project/stakeholders/<%=project.id%>">
+                            <% if (project.status.stakeholders == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <%} else {%>
+                            <% if (project.status.stakeholders == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <%} else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <%}}%>
+                             </a>
+                        </td>
+                        <td>
+                                <a href="/project/risks/<%=project.id%>">
+                            <% if (project.status.risks == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <%} else {%>
+                            <% if (project.status.risks == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <%} else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <%}}%>
+                                </a>
+                        </td>
+                        <td>
+                                <a href="/project/gantt/<%=project.id%>">
+                            <% if (project.status.gantt == "wip") {%>
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                            <%} else {%>
+                            <% if (project.status.gantt == "finished") {%>
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            <%} else {%>
+                                <i class="fa fa-question" aria-hidden="true"></i>
+                                <%}}%>
+
+                                <%}%>
+                                </a>
+                        </td>
+                        <td><%=project.advance%>%</td>
+                        <td>
+                        <table class="table table-sm ">
+                            <tr> 
+                               
+                                <form action="/project/show/<%= project.id %>" method="POST">
+                                    <input type="hidden" name="owner" value="<%= project.owner %>" >
+                                    <input type="hidden" name="_method" value="edit" >
+                                    <button type="submit" class="btn btn-sm btn-success">
+                                        <i class="fa fa-eye fa-2" aria-hidden="true"></i>
+                                    </button>
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                </form>
+                                <form action="/project/edit/<%= project.id %>" method="POST">
+                                    <input type="hidden" name="owner" value="<%= project.owner %>" >
+                                    <input type="hidden" name="_method" value="edit" >
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-pencil fa-2" aria-hidden="true"></i>
+                                    </button>
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                </form>
+                                <form action="/project/destroy/<%= project.id %>" method="POST">
+                                    <input type="hidden" name="owner" value="<%= project.owner %>" >
+                                    <input type="hidden" name="_method" value="delete" >
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+                                    </button>
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                </form></td>
+                            </tr>
+                        </table>
+                    </tr>
+            <% }); %>
+        
+    </table>
+
+
+
+
 </div>
+
+

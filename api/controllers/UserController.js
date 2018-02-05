@@ -83,12 +83,23 @@ module.exports = {
         }
         );
     },
-    add_to_team: function(req, res, next) {
-        Project.findOne(req.param('projectsTeam'), function foundProject(err, project) {
-            if (err) return next(err);
+    add_to_team: function(req, res, next) { //Recibe de la view: belongs_to_project que identifica al proyecto
+        Project.findOne(req.param('belongs_to_project'), function foundProject(err, project) {
+            
+            if (err) {
+                console.log(JSON.stringify(err)); 
+                req.session.flash = {
+                    err: err
+                }
+                return res.redirect('/project/show/'+req.param('belongs_to_project'));    
+            }
+
+
+
             if (!project) return next();
 
-                res.view({project:project});  
+        
+            res.view({project:project});  
                 
             });
             
@@ -108,25 +119,35 @@ module.exports = {
         Encontrar el usuario basado en el mail
         (si el usuario no existe, ir a la página de creación y volver!)
         hacer un update del Project, inyectando el usuario encontrado
+        
+        Recibe de view:
+        email
+        new_project o sea el id del nuevo proyecto para agregar a la lista del usuario
         */
 
         User.findOne({email: req.param('email')}, function foundUser(err, user) {
             if (err) return next(err);
-            if (!user) res.redirect("/user/new");
+            
+            if (!user) { res.redirect("/user/new");
+        } else {
 
-            user.projectsTeam.add(req.param('projectsTeam'));
-            console.log("Agrego a team: " + user.projectsTeam);
+            user.participates.add(req.param('new_project'));
+            console.log("Agrego a proyecto a lista de proyectos: " + user.participates);
         user.save(function(err){
             if (err) {
                 console.log(err);
-            } else {
+            } else 
+            {
                 console.log(" User advance saved");
-               
-              res.redirect("/project/show/"+project.id);
+               console.log(user);
+              res.redirect("/project/show/"+req.param('new_project'));
                 
-            }});
+            }
+            
         });
-
+        }
+        });
+    
     },
 
 };

@@ -28,9 +28,9 @@ module.exports = {
       model: 'user',
       required: true
     },
-    team_members: {
+    team: {
       collection: 'user',
-      via: 'projectsTeam'
+      via: 'participates'
     },
     guests: {
       collection: 'user',

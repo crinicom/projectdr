@@ -34,6 +34,7 @@ module.exports.policies = {
     show: "userCanSeeProfile",
     edit: "userCanSeeProfile",
     update: "userCanSeeProfile",
+    add_to_team: "flash",
     '*': "admin" 
   },
   

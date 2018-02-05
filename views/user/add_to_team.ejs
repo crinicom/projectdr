@@ -1,3 +1,13 @@
+<!--
+Recibe del controller:
+project
+
+Envía de vuelta:
+new_project, con el id de proyecto
+email, con email de usuario
+
+-->
+
 <div class="container">
     <form action="/user/update_team" method="POST" id="new-teammember-form" class="form-new-teammember">
     <h2 class="form-signin-heading">Add team member</h2>
@@ -11,7 +21,7 @@
         </ul>
 
     <% } %>
-    <input type="hidden" name="projectsTeam" value="<%=project.id%>" />
+    <input type="hidden" name="new_project" value="<%=project.id%>" />
     <div class="control-group">
     <input type="email" class="form-control" placeholder="email" name="email" autofocus></br>
     </div>

@@ -253,6 +253,9 @@
     </form>
  
     <hr>
+
+
+
     
 <!-- Seccion de EQUIPO -->
     <hr>
@@ -266,7 +269,7 @@
             <th></th>
             <th></th>
         </tr>
-        <% _.each(project.team_members, function(user) { %>
+        <% _.each(project.team, function(user) { %>
             <tr data-id="<%= user.id%>" data-model="user">
                 <td><%= user.id%></td>
                 <td><%= user.name%></td>
@@ -287,7 +290,7 @@
     <% }); %>
     </table>
    
-        <!-- Comentarios sección de OBJETIVOS -->
+        <!-- Comentarios sección de Team -->
         <p><div class="pull-right"> 
             <a class="btn btn-primary" data-toggle="collapse" href="#collapseTeamComments" aria-expanded="false" aria-controls="collapseObjectiveComments">
                 <% if (comments.filter(function thisSection(comment) { return comment.section == 'team'}).length > 0) {%>
@@ -361,7 +364,7 @@
 
 
     <form action="/user/add_to_team" method="POST">
-    <input type="hidden" value="<%=project.id%>" name="projectsTeam">
+    <input type="hidden" name="belongs_to_project" value="<%=project.id%>" >
     <input type="submit" class="btn btn-sm btn-success" value="Add Team member">
     <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>

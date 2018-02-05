@@ -33,9 +33,9 @@ schema: true,
       collection: 'project',
       via: 'owner' 
     },
-    projectsTeam: {
+    participates: {
       collection: 'project',
-      via: 'team_members'
+      via: 'team'
     },
     projectsGuest: {
       collection: 'project',
