@@ -1,0 +1,23 @@
+<div class="container">
+    <form action="/user/update_team" method="POST" id="new-teammember-form" class="form-new-teammember">
+    <h2 class="form-signin-heading">Add team member</h2>
+
+    <% if (flash && flash.err) { %>
+        <ul class="alert alert-success">
+            <li>Existe flash</li>
+            <% Object.keys(flash.err).forEach(function(error) {%>
+            <li><%- JSON.stringify(flash.err[error]) %></li>
+            <% }); %>
+        </ul>
+
+    <% } %>
+    <input type="hidden" name="projectsTeam" value="<%=project.id%>" />
+    <div class="control-group">
+    <input type="email" class="form-control" placeholder="email" name="email" autofocus></br>
+    </div>
+    
+    
+    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create Objective">
+    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+    </form>
+</div>

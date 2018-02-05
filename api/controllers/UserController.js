@@ -83,16 +83,50 @@ module.exports = {
         }
         );
     },
-    add_to_team: function(req, res, nest) {
-        Project.findOne(req.param('projectsTeam'), function foundObjective(err, project) {
+    add_to_team: function(req, res, next) {
+        Project.findOne(req.param('projectsTeam'), function foundProject(err, project) {
             if (err) return next(err);
             if (!project) return next();
 
-            res.view({project:project});  
-        });
+                res.view({project:project});  
+                
+            });
+            
     },
     rem_from_team: function(req, res, nest) {
         
+    },
+    update_team:function(req, res, next) {
+     //Recibo email y projectsTeam (id de proyecto)  
+        /* El modelo de Project espera una colección de USERS
+        Sólo puedo inyecta el usuario si existe en la base como tal
+        Si el usuario no existe, voy a la pàgina de creación de usuario
+        y regreso para inyectar, ok?
+        
+        Qué tengo que lograr aquí?
+        Encontrar el proyecto
+        Encontrar el usuario basado en el mail
+        (si el usuario no existe, ir a la página de creación y volver!)
+        hacer un update del Project, inyectando el usuario encontrado
+        */
+
+        User.findOne({email: req.param('email')}, function foundUser(err, user) {
+            if (err) return next(err);
+            if (!user) res.redirect("/user/new");
+
+            user.projectsTeam.add(req.param('projectsTeam'));
+            console.log("Agrego a team: " + user.projectsTeam);
+        user.save(function(err){
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(" User advance saved");
+               
+              res.redirect("/project/show/"+project.id);
+                
+            }});
+        });
+
     },
 
 };
