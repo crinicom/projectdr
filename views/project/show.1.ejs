@@ -1,6 +1,4 @@
 <div class="container">
- <div class="row">
-     <div class="col-xs-12 col-md-6 col-lg-6">
     <h1><%= project.name %></h1>
     <br>
 
@@ -102,10 +100,6 @@
         </button>
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
-</div> <!-- fin col-->
-
-
-<div class="col-xs-12 col-md-6 col-lg-6">
 
 
     <hr>
@@ -375,15 +369,15 @@
     <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
 
-</div> <!-- fin col-->
-</div> <!-- fin row -->
 
 
 
 
 
 
-<div class="row">
+
+
+
 
 
     <% if (project.status.pcharter != "finished") {%>
@@ -421,5 +415,4 @@
      <br><br><br>
     <%- partial('../navbuttons.ejs') %>
 
-</div> <!-- fin row-->
-</div> <!-- fin container-->
+</div>
