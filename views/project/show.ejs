@@ -108,7 +108,7 @@
 <div class="col-xs-12 col-md-6 col-lg-6">
 
 
-    <hr>
+    
     <H2>Objectives</H2>
     <table class="table table-sm table-hover table-bordered table-striped">
         <tr>
@@ -222,7 +222,7 @@
     <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
 
-    <hr>
+    
     <H2>Milestones</H2>
     <table class="table table-sm table-striped table-hover">
         <tr>
@@ -258,13 +258,13 @@
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
  
-    <hr>
+    
 
 
 
     
 <!-- Seccion de EQUIPO -->
-    <hr>
+    
     <H2>Equipo</H2>
     <table class="table table-sm table-hover table-bordered table-striped">
         <tr>
@@ -380,10 +380,11 @@
 
 
 
-
+<br><br>
 
 
 <div class="row">
+    <div class="col-12">
 
 
     <% if (project.status.pcharter != "finished") {%>
@@ -413,8 +414,9 @@
             <%}%>            
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
-
-
+</div>
+</div>
+<div class="row">
 
     <!-- <p><%=JSON.stringify(project.status)%></p>
      -->

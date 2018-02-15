@@ -141,14 +141,14 @@
         <tr>
             
             <th class="align-middle" style="width: 30%">Name</th>
-            <th class="align-middle" style="width: 30%">Description</th>
-            <th class="align-middle" style="width: 30%">Scope</th>
-            <th class="align-middle" style="width: 30%">Project Charter</th>
-            <th class="align-middle" style="width: 30%">EDT</th>
-            <th class="align-middle" style="width: 30%">Stakeholders</th>
-            <th class="align-middle" style="width: 30%">Risks</th>
-            <th class="align-middle" style="width: 30%">Gantt</th>
-            <thclass="align-middle" style="width: 30%">% de Avance</th>
+            <th class="align-middle d-none d-md-block d-lg-none" style="width: 30%">Description</th>
+            <th class="align-middle hidden-sm-down" style="width: 30%">Scope</th>
+            <th class="align-middle hidden-sm-down" style="width: 30%">Project Charter</th>
+            <th class="align-middle hidden-sm-down" style="width: 30%">EDT</th>
+            <th class="align-middle hidden-sm-down" style="width: 30%">Stakeholders</th>
+            <th class="align-middle hidden-sm-down" style="width: 30%">Risks</th>
+            <th class="align-middle hidden-sm-down" style="width: 30%">Gantt</th>
+            <th class="align-middle" style="width: 30%">% de Avance</th>
             <th class="align-middle" style="width: 30%"></th>
             
         </tr>
@@ -158,10 +158,10 @@
                     <tr data-id="<%= project.id%>" data-model="project">
                         <!-- <td><%=project.id%></td> -->
                         <td><%=project.name%></td>
-                        <td><%=project.description%></td>
-                        <td><%=project.scope%></td>
+                        <td class="d-none d-md-block d-lg-none"><%=project.description%></td>
+                        <td class="hidden-sm-down"><%=project.scope%></td>
                         <%if (project.status) {%>
-                            <td>
+                            <td class="hidden-sm-down">
                                 <a href="/project/show/<%=project.id%>">
                                 <% if (project.status.pcharter == "wip") {%>
                                 <i class="fa fa-play" aria-hidden="true"></i>
@@ -173,7 +173,7 @@
                                     <% }}%>
                                 </a>
                                 </td>
-                        <td>
+                        <td class="hidden-sm-down">
                             <a href="/project/edt/<%=project.id%>">
                             <% if (project.status.edt == "wip") {%>
                             <i class="fa fa-play" aria-hidden="true"></i>
@@ -185,7 +185,7 @@
                                 <% }}%>
                             </a>
                         </td>
-                        <td>
+                        <td class="hidden-sm-down">
                              <a href="/project/stakeholders/<%=project.id%>">
                             <% if (project.status.stakeholders == "wip") {%>
                             <i class="fa fa-play" aria-hidden="true"></i>
@@ -197,7 +197,7 @@
                                 <%}}%>
                              </a>
                         </td>
-                        <td>
+                        <td class="hidden-sm-down">
                                 <a href="/project/risks/<%=project.id%>">
                             <% if (project.status.risks == "wip") {%>
                             <i class="fa fa-play" aria-hidden="true"></i>
@@ -209,7 +209,7 @@
                                 <%}}%>
                                 </a>
                         </td>
-                        <td>
+                        <td class="hidden-sm-down">
                                 <a href="/project/gantt/<%=project.id%>">
                             <% if (project.status.gantt == "wip") {%>
                             <i class="fa fa-play" aria-hidden="true"></i>
