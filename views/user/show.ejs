@@ -21,7 +21,7 @@
             <th class="align-middle">RSK</th>
             <th class="align-middle">GANTT</th>
             <th class="align-middle" style="width: 30%">Avance</th>
-            <th>Onomatopeya</th>
+            <th class"w-25">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
             
         </tr></thead>
         <tbody id="myTable">
@@ -96,11 +96,11 @@
                                 </a>
                         </td>
                         <td data-title="Advance" class="align-middle mx-auto"><%=project.advance%>%</td>
-                        <td class="w-50 align-middle mx-auto">
+                        <td class="align-middle">
                         <table class="table table-sm ">
-                            <tr> 
+                           <!--  <tr>  -->
                                                                 
-                                <form class="form-inline" action="/project/show/<%= project.id %>" method="POST">
+                                <form action="/project/show/<%= project.id %>" method="POST">
                                     <button type="submit" class="btn btn-sm btn-success">
                                         <i class="fa fa-eye fa-2" aria-hidden="true"></i>
                                     </button>
@@ -110,7 +110,7 @@
                                         <input type="hidden" name="_method" value="edit" >
                                     </div>
                                 </form>
-                                <form class="form-inline" action="/project/edit/<%= project.id %>" method="POST">
+                                <form action="/project/edit/<%= project.id %>" method="POST">
                                     <button type="submit" class="btn btn-sm btn-primary">
                                         <i class="fa fa-pencil fa-2" aria-hidden="true"></i>
                                     </button>
@@ -120,7 +120,7 @@
                                         <input type="hidden" name="_method" value="edit" >
                                     </div>
                                 </form>
-                                <form class="form-inline" action="/project/destroy/<%= project.id %>" method="POST">
+                                <form action="/project/destroy/<%= project.id %>" method="POST">
                                     <button type="submit" class="btn btn-sm btn-danger">
                                         <i class="fa fa-trash fa-2" aria-hidden="true"></i>
                                     </button>
@@ -131,7 +131,7 @@
                                     </div>
                                 </form>
                             
-                            </tr>
+                          <!--   </tr> -->
                         </table>
                     </td>
                     </tr>
@@ -151,7 +151,12 @@
 
     <hr>
     <H2>Proyectos en los que participo</H2>
-    <table class="table table-striped table-hover">
+
+    <input class="form-control" id="myInput2" type="text" placeholder="Search..">
+    <br>
+    <div id="no-more-tables">
+    <table class="table table-striped table-hover col-md-12 table-condensed cf">
+        <thead class="cf">
         <tr>
             
             <th class="align-middle" style="width: 30%">Name</th>
@@ -163,19 +168,19 @@
             <th class="align-middle hidden-sm-down" style="width: 30%">Risks</th>
             <th class="align-middle hidden-sm-down" style="width: 30%">Gantt</th>
             <th class="align-middle" style="width: 30%">% de Avance</th>
-            <th class="align-middle" style="width: 30%"></th>
+            <th class="align-middle" style="width: 30%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
             
         </tr>
-        
-         
+    </thead>
+         <tbody id="myTable2">
                 <% _.each(user.participates, function(project) { %>
                     <tr data-id="<%= project.id%>" data-model="project">
                         <!-- <td><%=project.id%></td> -->
-                        <td><%=project.name%></td>
-                        <td class="d-none d-md-block d-lg-none"><%=project.description%></td>
-                        <td class="hidden-sm-down"><%=project.scope%></td>
+                        <td data-title="Name"><%=project.name%></td>
+                        <td data-title="Description" class="d-none d-md-block d-lg-none"><%=project.description%></td>
+                        <td data-title="Scope" class="hidden-sm-down"><%=project.scope%></td>
                         <%if (project.status) {%>
-                            <td class="hidden-sm-down">
+                            <td data-title="Project Charter" class="hidden-sm-down">
                                 <a href="/project/show/<%=project.id%>">
                                 <% if (project.status.pcharter == "wip") {%>
                                 <i class="fa fa-play" aria-hidden="true"></i>
@@ -187,7 +192,7 @@
                                     <% }}%>
                                 </a>
                                 </td>
-                        <td class="hidden-sm-down">
+                        <td data-title="EDT" class="hidden-sm-down">
                             <a href="/project/edt/<%=project.id%>">
                             <% if (project.status.edt == "wip") {%>
                             <i class="fa fa-play" aria-hidden="true"></i>
@@ -199,7 +204,7 @@
                                 <% }}%>
                             </a>
                         </td>
-                        <td class="hidden-sm-down">
+                        <td data-title="Stakeholders" class="hidden-sm-down">
                              <a href="/project/stakeholders/<%=project.id%>">
                             <% if (project.status.stakeholders == "wip") {%>
                             <i class="fa fa-play" aria-hidden="true"></i>
@@ -211,7 +216,7 @@
                                 <%}}%>
                              </a>
                         </td>
-                        <td class="hidden-sm-down">
+                        <td data-title="Risks" class="hidden-sm-down">
                                 <a href="/project/risks/<%=project.id%>">
                             <% if (project.status.risks == "wip") {%>
                             <i class="fa fa-play" aria-hidden="true"></i>
@@ -223,7 +228,7 @@
                                 <%}}%>
                                 </a>
                         </td>
-                        <td class="hidden-sm-down">
+                        <td data-title="Gantt" class="hidden-sm-down">
                                 <a href="/project/gantt/<%=project.id%>">
                             <% if (project.status.gantt == "wip") {%>
                             <i class="fa fa-play" aria-hidden="true"></i>
@@ -237,10 +242,10 @@
                                 <%}%>
                                 </a>
                         </td>
-                        <td><%=project.advance%>%</td>
-                        <td>
+                        <td data-title="Advance"><%=project.advance%>%</td>
+                        <td class="align-middle">
                         <table class="table table-sm ">
-                            <tr> 
+                           <!--  <tr>  -->
                                 <form action="/project/show/<%= project.id %>" method="POST">
                                     <input type="hidden" name="owner" value="<%= project.owner %>" >
                                     <input type="hidden" name="_method" value="edit" >
@@ -265,13 +270,13 @@
                                     </button>
                                     <input type="hidden" name="_csrf" value="<%= _csrf%>">
                                 </form>
-                            </tr>
-                        </table>
+                           <!--  </tr> -->
+                        </table> </td>
                     </tr>
             <% }); %>
         </tbody>        
     </table>
-
+    </div>
 
 
 

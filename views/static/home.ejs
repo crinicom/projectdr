@@ -1,22 +1,14 @@
 <div class="container">
     <div class="row">
+        <div class="col-12">
         <div class="jumbotron">       
             
                 <h1>Project Dr.</h1>
                 <h2>Project management in healthcare... easy!</h2>
-                <a href="user/new" class="btn btn-sm btn-success">Sign up!</a>
-                
-                <a href="user" class="btn btn-lg btn-success" >Usuarios</a>
-
-                <form action="/comment/new/" method="POST">
-                    <h2>New comment</h2>
-                    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-                    <input type="hidden" name="comes_from" value="<%=req.url%>" />
-                    <input  type="submit" value="new Comment"/>
-                   
-                </form>
+                Sign in above or... <a href="user/new" class="btn btn-sm btn-success">Sign up!</a>
+               
             </div>
-        
+        </div>
     </div>
 
    
