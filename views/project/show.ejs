@@ -4,7 +4,7 @@
     <h1><%= project.name %></h1>
     <br>
 
-    <H2>Sponsors</H2>
+    <H2><%= __('project.show.sponsors')%></H2>
     <table>
         <% _.each(project.sponsors, function(sponsor) { %>
             <tr data-id="<%= project.id%>" data-model="project">
@@ -17,9 +17,9 @@
     </table>
 
 
-    <h3>Description: </h3>
+    <h3><%= __('project.show.description')%> </h3>
     <h4><%= project.description %></p>
-    <h3>Scope: </h3>
+    <h3><%= __('project.show.scope')%></h3>
     <p><%= project.scope %></p>
       <!-- Comentarios de DATOS BASICOS -->  
     <p><div class="pull-right"> 
@@ -98,7 +98,7 @@
     <form action="/project/edit/<%=project.id%>" method="POST">
         <button type="submit" class="btn btn-primary">
             <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
-            Editar
+            <%= __('project.show.editheader')%>
         </button>
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
@@ -109,13 +109,13 @@
 
 
     
-    <H2>Objectives</H2>
+    <H2><%= __('project.show.objectives.title')%></H2>
     <table class="table table-sm table-hover table-bordered table-striped">
         <tr>
-            <th>ID</th>
-            <th>Objective</th>
-            <th>Formula</th>
-            <th>Goal</th>
+            <th><%= __('project.show.objectives.id')%></th>
+            <th><%= __('project.show.objectives.objective')%></th>
+            <th><%= __('project.show.objectives.formula')%></th>
+            <th><%= __('project.show.objectives.goal')%></th>
             <th></th>
             <th></th>
             <th></th>
@@ -127,7 +127,7 @@
                 <td><%= objective.formula%></td>
                 <td><%= objective.goal%></td>
                 <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
-                <td><a href="/objective/edit/<%=objective.id%>">Edit</a></td>
+                <td><a href="/objective/edit/<%=objective.id%>"><%= __('project.show.objectives.edit')%></a></td>
                 <td>
                         <form action="/objective/destroy/<%= objective.id %>" method="POST">
                             <input type="submit" class="btn btn-sm btn-danger" value="X">
@@ -208,7 +208,7 @@
                     </tr>
                   <% }}); %> <!-- fin de ciclo -->
                 <% } else {%>
-                    <tr><td><p style="color:rgba(184, 180, 180, 0.692);">No hay comentarios para esta sección</p></td></tr>
+                    <tr><td><p style="color:rgba(184, 180, 180, 0.692);"><%= __('nocomments')%></p></td></tr>
                 <%}%>
             </table>
         </div>
@@ -218,17 +218,17 @@
 
     <form action="/objective/new" method="POST">
     <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
-    <input type="submit" class="btn btn-sm btn-success" value="Add Objective">
+    <input type="submit" class="btn btn-sm btn-success" value="<%= __('project.show.objectives.addbutton')%>">
     <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
 
     
-    <H2>Milestones</H2>
+    <H2><%= __('project.show.milestones.title')%></H2>
     <table class="table table-sm table-striped table-hover">
         <tr>
-            <th>ID</th>
-            <th>Milestone</th>
-            <th>Date</th>
+            <th><%= __('project.show.milestones.id')%></th>
+            <th><%= __('project.show.milestones.milestone')%></th>
+            <th><%= __('project.show.milestones.date')%></th>
             
             <th></th>
             <th></th>
@@ -254,7 +254,7 @@
     </table>
     <form action="/milestone/new" method="POST">
         <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
-        <input type="submit" class="btn btn-sm btn-success" value="New Milestone">
+        <input type="submit" class="btn btn-sm btn-success" value="<%= __('project.show.milestones.newbutton')%>">
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
  
@@ -265,12 +265,12 @@
     
 <!-- Seccion de EQUIPO -->
     
-    <H2>Equipo</H2>
+    <H2><%= __('project.show.team.title')%></H2>
     <table class="table table-sm table-hover table-bordered table-striped">
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>E-mail</th>
+            <th><%= __('project.show.team.id')%></th>
+            <th><%= __('project.show.team.name')%></th>
+            <th><%= __('project.show.team.email')%></th>
             <th></th>
             <th></th>
             <th></th>
@@ -280,7 +280,7 @@
                 <td><%= user.id%></td>
                 <td><%= user.name%></td>
                 <td><%= user.email%></td>
-               <td><a href="/user/edit/<%=user.id%>">Edit</a></td>
+               <td><a href="/user/edit/<%=user.id%>"><%= __('project.show.team.editbutton')%></a></td>
                 <td>
                         <form action="/user/rem_from_team/<%= user.id %>" method="POST">
                             <input type="submit" class="btn btn-sm btn-danger" value="X">
@@ -361,7 +361,7 @@
                     </tr>
                   <% }}); %> <!-- fin de ciclo -->
                 <% } else {%>
-                    <tr><td><p style="color:rgba(184, 180, 180, 0.692);">No hay comentarios para esta sección</p></td></tr>
+                    <tr><td><p style="color:rgba(184, 180, 180, 0.692);"><%= __('nocomments')%></p></td></tr>
                 <%}%>
             </table>
         </div>
@@ -371,7 +371,7 @@
 
     <form action="/user/add_to_team" method="POST">
     <input type="hidden" name="belongs_to_project" value="<%=project.id%>" >
-    <input type="submit" class="btn btn-sm btn-success" value="Add Team member">
+    <input type="submit" class="btn btn-sm btn-success" value="<%= __('project.show.team.newbutton')%>">
     <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
 
@@ -391,7 +391,7 @@
     <form action="/project/show/<%=project.id%>" method="POST">
         <button type="submit" class="btn btn-primary btn-block">
             <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-            Guardar y continuar más tarde
+            <%= __('project.show.save_and_continue')%>
         </button>
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form> <%}%>
@@ -400,14 +400,14 @@
         <% if (project.status.pcharter != "finished") {%>
         <button type="submit" class="btn btn-success btn-block">
             <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
-            Guardar y finalizar edición de Project Charter
+            <%= __('project.show.save_and_close')%>
         </button>
         <input type="hidden"  name="key" value="pcharter">
         <input type="hidden"  name="state" value="finished">
         <% } else {%>
             <button type="submit" class="btn btn-success btn-block">
                 <i class="fa fa-unlock fa-2x" aria-hidden="true"></i>    
-                Continuar edición de Project Charter
+                <%= __('project.show.continue_editing')%>
             </button>
             <input type="hidden"  name="key" value="pcharter">
             <input type="hidden"  name="state" value="wip">

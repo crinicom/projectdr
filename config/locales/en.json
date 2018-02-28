@@ -1,4 +1,79 @@
 {
 	"Welcome": "Welcome",
-	"A brand new app.": "A brand new app."
+	"A brand new app.": "A brand new app.",
+	"home.title": "Project Dr.",
+	"home.subtitle": "Project management in healthcare... easy!",
+	"home.signabove":"Sign in above or...",
+	"home.signup":"Sign up!",
+	"navbar.brand":"Project Dr.",
+	"navbar.signin": "Sign in",
+	"navbar.signout": "Sign out",
+	"footer.projectby": "Project Doctor by CM 2017",
+	"navbar.admin":"Users",
+	"navbar.projects":"Projects",
+	"user.show.searchbar":"Search...",
+	"user.show.myprojects.title":"My projects",
+	"user.show.myprojects.name":"Name",
+	"user.show.myprojects.description":"Description",
+	"user.show.myprojects.scope":"Scope",
+	"user.show.myprojects.pc":"PC",
+	"user.show.myprojects.edt":"WBS",
+	"user.show.myprojects.stk":"STK",
+	"user.show.myprojects.rsk":"RSK",
+	"user.show.myprojects.gantt":"GANTT",
+	"user.show.myprojects.advance":"Advance",
+	"user.show.myprojects.addprojectbutton":"Add project",
+	"user.show.others.title":"Projects I participate in",
+	"user.show.others.name":"Name",
+	"user.show.others.description":"Description",
+	"user.show.others.scope":"Scope",
+	"user.show.others.pc":"PC",
+	"user.show.others.edt":"WBS",
+	"user.show.others.stk":"STK",
+	"user.show.others.rsk":"RSK",
+	"user.show.others.gantt":"GANTT",
+	"user.show.others.advance":"Advance",
+	"project.new.title":" New project for user: ",
+	"project.new.name":"Project name",
+	"project.new.description":"Description",
+	"project.new.scope":"Scope",
+	"project.new.newprojectbutton":"Add Project",
+	"project.show.sponsors":"Sponsors",
+	"project.show.description":"Description",
+	"project.show.scope":"Scope",
+	"project.show.editheader":"Edit",
+	"project.show.objectives.title":"Objectives",
+	"project.show.objectives.id":"ID",
+	"project.show.objectives.objective":"Objective description",
+	"project.show.objectives.formula":"Formula",
+	"project.show.objectives.goal":"Goal",
+	"project.show.objectives.edit":"Edit",
+	"nocomments":"There are no comments for this section",
+	"project.show.objectives.addbutton":"Add objective",
+	"project.show.milestones.title":"Milestones",
+	"project.show.milestones.id":"ID",
+	"project.show.milestones.milestone":"Milestone description",
+	"project.show.milestones.date":"Date",
+	"project.show.milestones.newbutton":"Add Milestone",
+	"project.show.team.title":"Team",
+	"project.show.team.id":"ID",
+	"project.show.team.name":"Name",
+	"project.show.team.email":"E-mail",
+	"project.show.team.editbutton":"Edit",
+	"project.show.team.newbutton":"Add team member",
+	"project.show.save_and_continue":"Save and continue editing",
+	"project.show.save_and_close":"Save and close Project Charter",
+	"project.show.continue_editing":"Continue Editing"
+
+//  <%= __('')%>
+
+
+
+
+
+
+
+
+
+
 }

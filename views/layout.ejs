@@ -39,7 +39,7 @@
   <body>
 <!-- <nav class="navbar navbar-inverse bg-inverse fixed-top"> -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="/">Project Dr.</a>
+        <a class="navbar-brand" href="/"><%=__('navbar.brand')%></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>   
@@ -64,15 +64,15 @@
                     <li class="nav-item active"><a class="nav-link" href="/user/show/<%= session.User.id%>"><%= session.User.name%></a> </li>
                 
                     <% if (session.authenticated && session.User.admin) {%>
-                    <li class="nav-item"><a class="nav-link" href="/user">User admin</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/user"><%=__('navbar.admin')%></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/projects"><%=__('navbar.projects')%></a></li>
                
                </ul>  
                 <%}%>
            
             <form class="form-inline my-2 my-lg-0" action="/session/destroy">
                     
-              <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Sign out</button>
+              <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><%=__('navbar.signout')%></button>
               <input type="hidden" name="_csrf" value="<%=_csrf%>"/>
             </form>
           <%}%>
@@ -88,7 +88,7 @@
             
                 <input type="password" placeholder="password" name="password" class="form-control mr-sm-2">
             
-            <button type="submit" class="btn btn-success my-2 my-sm-0">Sign in</button>
+            <button type="submit" class="btn btn-success my-2 my-sm-0"><%=__('navbar.signin')%></button>
           </div>
             <input type="hidden" name="_csrf" value="<%=_csrf%>"/>
           </form>
@@ -105,7 +105,7 @@
       <hr>
       <footer class="footer pull-right">
         <div>
-          <div>Project Doctor by CM 2017</div>
+          <div><%=__('footer.projectby')%></div>
         </div>
       </footer>
     </div>
