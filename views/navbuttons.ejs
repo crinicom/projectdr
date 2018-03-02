@@ -1,106 +1,133 @@
-<table class="table ">
-<td class="span2">
+<div class="container">
+<div class="row">
+</div>
+    <div class="col">
+
+
+
+</div>
+
+</div>
+
+<!-- <table class="table ">
+<td class="span2"> -->
+   
+    <div class="col">
     <form action="/project/show/<%=project.id%>" method="POST">
         <% if (project.status.pcharter == "finished") {%>    
-            <button type="submit" class="btn btn-success">
-            <i class="fa fa-home fa-4x" aria-hidden="true"></i>
-            <i class="fa fa-check fa-4x" aria-hidden="true"></i>    
+            <button type="submit" class="btn btn-success btn-responsive">
+            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-check fa-2x" aria-hidden="true"></i>    
                 
         <%} else if (project.status.edt == "wip") {%>
-            <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-home fa-4x" aria-hidden="true"></i>
-                    <i class="fa fa-play fa-4x " aria-hidden="true"></i>
+            <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-play fa-2x " aria-hidden="true"></i>
                           
         <%} else {%>
-            <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-home fa-4x" aria-hidden="true"></i>
+            <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-home fa-2x" aria-hidden="true"></i>
         <% } %>
-            <br>Project Charter 
+            <br><%=__('navbutton.pc')%> 
         </button>
     <input type="hidden" value="<%=_csrf%>" name="_csrf"> 
 </form>
-</td>
-
-<td class="span2">
+<!-- </td> -->
+</div>
+<div class="col">
+<!-- <td class="span2"> -->
         <form action="/project/edt/<%=project.id%>" method="POST">
             <% if (project.status.edt == "finished") {%>    
-                <button type="submit" class="btn btn-success">
-                <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i>
-                <i class="fa fa-check fa-4x" aria-hidden="true"></i>    
+                <button type="submit" class="btn btn-success btn-responsive">
+                <i class="fa fa-sitemap fa-2x fa-rotate-270 " aria-hidden="true"></i>
+                <i class="fa fa-check fa-2x" aria-hidden="true"></i>    
                     
             <%} else if (project.status.edt == "wip") {%>
-                <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i>
-                        <i class="fa fa-play fa-4x " aria-hidden="true"></i>
+                <button type="submit" class="btn btn-primary btn-responsive">
+                        <i class="fa fa-sitemap fa-2x fa-rotate-270 " aria-hidden="true"></i>
+                        <i class="fa fa-play fa-2x " aria-hidden="true"></i>
                               
             <%} else {%>
-                <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-sitemap fa-4x fa-rotate-270 " aria-hidden="true"></i>
+                <button type="submit" class="btn btn-primary btn-responsive">
+                        <i class="fa fa-sitemap fa-2x fa-rotate-270 " aria-hidden="true"></i>
             <% } %>
-                <br>Estructura de desglose de trabajo 
+                <br><%=__('navbutton.edt')%> 
             </button>
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
-    </td>
-
-<td class="span2">
+ <!--    </td> -->
+</div>
+<div class="col">
+<!-- <td class="span2"> -->
     <form action="/project/stakeholders/<%=project.id%>" method="POST">
         <% if (project.status.stakeholders == "finished") {%>    
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-share-alt fa-4x" aria-hidden="true"></i>
-                <i class="fa fa-check fa-4x" aria-hidden="true"></i>  
+            <button type="submit" class="btn btn-success btn-responsive">
+                <i class="fa fa-share-alt fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-check fa-2x" aria-hidden="true"></i>  
         <%} else if (project.status.stakeholders == "wip") {%>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-share-alt fa-4x" aria-hidden="true"></i>
-                    <i class="fa fa-play fa-4x " aria-hidden="true"></i>
+                <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-share-alt fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-play fa-2x " aria-hidden="true"></i>
         <%} else {%>
-                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-share-alt fa-4x" aria-hidden="true"></i>
+                 <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-share-alt fa-2x" aria-hidden="true"></i>
          <% } %>    
-            <br>Stakeholders y plan de comunicación 
+            <br><%=__('navbutton.stk')%> 
         </button>
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
-</td>
-<td class="span2">
+
+</div>
+<div class="col">
+<!-- </td>
+<td class="span2"> -->
         <form action="/project/risks/<%=project.id%>" method="POST">
             <% if (project.status.risks == "finished") {%>    
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i>
-                <i class="fa fa-check fa-4x" aria-hidden="true"></i>  
+            <button type="submit" class="btn btn-success btn-responsive">
+                <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-check fa-2x" aria-hidden="true"></i>  
             <%} else if (project.status.risks == "wip") {%>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i>
-                    <i class="fa fa-play fa-4x " aria-hidden="true"></i>
+                <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-play fa-2x " aria-hidden="true"></i>
             <%} else {%>
             
-                <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-exclamation-triangle fa-4x" aria-hidden="true"></i>
+                <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
             <% } %>  
                 
-                <br>Riesgos plan de mitigación 
+                <br><%=__('navbutton.rsk')%> 
             </button>
             <input type="hidden" value="<%=_csrf%>" name="_csrf">
         </form>
-    </td>
-    <td class="span2">
+
+    </div>
+    <div class="col">
+<!--     </td>
+    <td class="span2"> -->
             <form action="/project/gantt/<%=project.id%>" method="POST">
                 <% if (project.status.gantt == "finished") {%>   
-                <button type="submit" class="btn btn-success">
-                    <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i>
-                    <i class="fa fa-check fa-4x" aria-hidden="true"></i>  
+                <button type="submit" class="btn btn-success btn-responsive">
+                    <i class="fa fa-tasks fa-2x" aria-hidden="true" align="middle"></i>
+                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>  
                 <%} else if (project.status.gantt == "wip") {%>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i>
-                        <i class="fa fa-play fa-4x " aria-hidden="true"></i>
+                    <button type="submit" class="btn btn-primary btn-responsive">
+                        <i class="fa fa-tasks fa-2x" aria-hidden="true" align="middle"></i>
+                        <i class="fa fa-play fa-2x " aria-hidden="true"></i>
                 <%} else {%>
 
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-tasks fa-4x" aria-hidden="true" align="middle"></i>
+                        <button type="submit" class="btn btn-primary btn-responsive">
+                            <i class="fa fa-tasks fa-2x" aria-hidden="true" align="middle"></i>
                 <% } %>      
-                    <br>Carta Gantt
+                    <br><%=__('navbutton.gantt')%>
                 </button>
                 <input type="hidden" value="<%=_csrf%>" name="_csrf">
             </form>
-        </td>
-</table>
+<!--         </td>
+</table> -->
+
+</div>
+
+</div>
+
+</div>

@@ -124,3 +124,25 @@ Label the data
 */
 #no-more-tables td:before { content: attr(data-title); }
 }
+
+@media (max-width: 768px) {
+    .btn-responsive {
+      padding:2px 4px;
+      /*font-size:80%;*/
+       
+      font-size: 3vw;
+      line-height: 1;
+      border-radius:3px;
+    }
+  }
+  
+  @media (min-width: 769px) and (max-width: 992px) {
+    .btn-responsive {
+      padding:4px 9px;
+     /*  font-size:90%; */
+     
+     font-size: 2vw;
+      line-height: 1.2;
+    }
+  }
+  

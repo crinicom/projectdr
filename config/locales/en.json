@@ -63,12 +63,12 @@
 	"project.show.team.newbutton":"Add team member",
 	"project.show.save_and_continue":"Save and continue editing",
 	"project.show.save_and_close":"Save and close Project Charter",
-	"project.show.continue_editing":"Continue Editing"
-
-//  <%= __('')%>
-
-
-
+	"project.show.continue_editing":"Continue Editing",
+	"navbutton.pc":"Project<br>Charter",
+	"navbutton.edt":"Work Breakdown<br>Structure",
+	"navbutton.stk":"Stakeholders",
+	"navbutton.rsk":"Risks",
+	"navbutton.gantt":"Gantt<br>Chart"
 
 
 
