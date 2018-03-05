@@ -64,11 +64,11 @@
 	"project.show.save_and_continue":"Save and continue editing",
 	"project.show.save_and_close":"Save and close Project Charter",
 	"project.show.continue_editing":"Continue Editing",
-	"navbutton.pc":"Project<br>Charter",
-	"navbutton.edt":"Work Breakdown<br>Structure",
+	"navbutton.pc":"Project\nCharter",
+	"navbutton.edt":"Work Breakdown\nStructure",
 	"navbutton.stk":"Stakeholders",
 	"navbutton.rsk":"Risks",
-	"navbutton.gantt":"Gantt<br>Chart"
+	"navbutton.gantt":"Gantt\nChart"
 
 
 
