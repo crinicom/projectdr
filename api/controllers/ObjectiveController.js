@@ -23,8 +23,8 @@ module.exports = {
                 req.session.flash = {
                     err: err
                 }
-                
-                return res.redirect('/objective/new/');    
+                return res.redirect('/project/show/'+ req.param('belongs_to_project'));
+              //  return res.redirect('/objective/new/');    
             }
             res.redirect('/project/show/' + objective.belongs_to_project ); 
             //res.json(objective);
@@ -42,7 +42,7 @@ module.exports = {
         });
     },
     index: function(req, res, next) {
-     s
+     
         Project
         .findOne(req.param('belongs_to_project'))
         .populateAll()      

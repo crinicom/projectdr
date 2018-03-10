@@ -71,14 +71,14 @@
                                             <input type="hidden" name="_csrf" value="<%= _csrf%>">
                                         </form>
 
-                                        <form action="/lvl1task/new/" method="POST">
-                                            <input type="hidden" name="belongs_to_task" value="<%= task.id%>">
+                                        <!-- <form action="/lvl1task/new/" method="POST">
+                                            <input type="hidden" name="belongs_to_task" value="<%//= task.id%>">
                                             <input type="hidden" name="_method" value="new" >
                                             <button type="submit" class="btn btn-sm btn-success disabled">
                                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                             </button>
-                                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                                        </form>
+                                            <input type="hidden" name="_csrf" value="<%//   = _csrf%>">
+                                        </form> -->
                             
                                         <form action="/task/destroy/<%= task.id %>" method="POST">
                                             <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" >

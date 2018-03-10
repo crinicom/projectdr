@@ -10,7 +10,7 @@ email, con email de usuario
 
 <div class="container">
     <form action="/user/update_team" method="POST" id="new-teammember-form" class="form-new-teammember">
-    <h2 class="form-signin-heading">Add team member</h2>
+    <h2 class="form-signin-heading"><%=__('add_to_team.title')%></h2>
 
     <% if (flash && flash.err) { %>
         <ul class="alert alert-success">
@@ -27,7 +27,7 @@ email, con email de usuario
     </div>
     
     
-    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create Objective">
+    <input type="submit" class="btn btn-lg btn-primary btn-block" value="<%=__('add_to_team.button')%>">
     <input type="hidden" name="_csrf" value="<%=_csrf%>" />
     </form>
 </div>
