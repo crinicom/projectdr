@@ -3,7 +3,9 @@
     <h2><%= project.name %></h2>
    
     <hr>
-    <H2>Tareas de la EDT</H2>
+    <H2>Tareas de la EDT
+   
+    </H2>
     <table class="table table table-sm table-vcenter">
         <tr>
             
@@ -61,7 +63,7 @@
                             <td><%= stakeholder.name%></td>
                             <td><%= stakeholder.comm_plan%></td>
                             <td><%= JSON.stringify(stakeholder.mails)%></td>
-                            <td><%= stakeholder.assoc_task%></td>
+                            <td><%//= stakeholder.assoc_task%></td>
                             <td>
                                 <table class="table table-sm">
                                     <tr>
@@ -110,6 +112,10 @@
     <% }); %>
 
     </table>
+
+
+  
+       
 
      <!-- Comentarios sección de Stakeholders -->
      <p><div class="pull-right"> 
@@ -183,13 +189,6 @@
     </div>
     <!-- FIN comentarios stakeholders -->
 
-    <form action="/objective/new" method="POST">
-    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
-    <input type="submit" value="Add Objective">
-    <input type="hidden" value="<%=_csrf%>" name="_csrf">
-    </form>
-
-    <p><%=JSON.stringify(project.status)%></p>
     <% if (project.status.stakeholders != "finished") {%>
         <form action="/project/show/<%=project.id%>" method="POST">
             <button type="submit" class="btn btn-primary btn-block">
@@ -217,6 +216,7 @@
                 <%}%>            
             <input type="hidden" value="<%=_csrf%>" name="_csrf">
         </form>
-        <br><br><br>
-        <%- partial('../navbuttons.ejs') %>
+       
 </div>
+<br><br><br>
+<%- partial('../navbuttons.ejs') %>

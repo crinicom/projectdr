@@ -1,4 +1,7 @@
 <div class="container">
+
+      
+
  <div class="row">
      <div class="col-xs-12 col-md-6 col-lg-6">
     <h1><%= project.name %></h1>
@@ -86,7 +89,7 @@
                     </tr>
                   <% }}); %> <!-- fin de ciclo -->
                 <% } else {%>
-                    <tr><td><p style="color:rgba(184, 180, 180, 0.692);">No hay comentarios para esta sección</p></td></tr>
+                    <tr><td><p style="color:rgba(184, 180, 180, 0.692);"><%= __('nocomments')%></p></td></tr>
                 <%}%>
             </table>
         </div>
@@ -108,8 +111,24 @@
 <div class="col-xs-12 col-md-6 col-lg-6">
 
 
-    
-    <H2><%= __('project.show.objectives.title')%></H2>
+    <div class="row">
+    <div class="col">
+        <H2><%= __('project.show.objectives.title')%> </H2>
+    </div>
+      <div class="col">
+        <form action="/objective/new" method="POST">
+   
+            <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+        <button type="submit" class="btn btn-sm btn-primary" >
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+              </button>
+        <input type="hidden" value="<%=_csrf%>" name="_csrf">
+        </form>
+    </div>
+</div>
+   
+
+
     <table class="table table-sm table-hover table-bordered table-striped">
         <tr>
             <th><%= __('project.show.objectives.id')%></th>
@@ -118,7 +137,7 @@
             <th><%= __('project.show.objectives.goal')%></th>
             <th></th>
             <th></th>
-            <th></th>
+            
         </tr>
         <% _.each(project.objectives, function(objective) { %>
             <tr data-id="<%= objective.id%>" data-model="objective">
@@ -127,10 +146,25 @@
                 <td><%= objective.formula%></td>
                 <td><%= objective.goal%></td>
                 <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
-                <td><a href="/objective/edit/<%=objective.id%>"><%= __('project.show.objectives.edit')%></a></td>
+                <td>
+                    
+                    <form action="/objective/edit/<%=objective.id%>" method="POST">
+                        <button type="submit" class="btn btn-sm btn-success" >
+                          <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+                        <div class="control-group" style="display:none;"> 
+                             <input type="hidden" name="_method" value="edit" >
+                             <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                             <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                         </div>
+                     </form> 
+                </td>
                 <td>
                         <form action="/objective/destroy/<%= objective.id %>" method="POST">
-                            <input type="submit" class="btn btn-sm btn-danger" value="X">
+                           
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+                            </button>
                             <div class="control-group" style="display:none;">            
                                 <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>">
                                 <input type="hidden" name="_method" value="delete">
@@ -216,14 +250,24 @@
 <!-- FIN comentarios objetivos -->
 
 
-    <form action="/objective/new" method="POST">
-    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
-    <input type="submit" class="btn btn-sm btn-success" value="<%= __('project.show.objectives.addbutton')%>">
-    <input type="hidden" value="<%=_csrf%>" name="_csrf">
-    </form>
+  
 
-    
+<div class="row">
+        <div class="col">
     <H2><%= __('project.show.milestones.title')%></H2>
+        </div>
+        <div class="col">
+                <form action="/milestone/new" method="POST">
+                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                    <button type="submit" class="btn btn-sm btn-primary" >
+                            <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+                     </button>
+                    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                </form>
+
+        </div>
+</div>
+
     <table class="table table-sm table-striped table-hover">
         <tr>
             <th><%= __('project.show.milestones.id')%></th>
@@ -239,12 +283,22 @@
                 <td><%= milestone.id%></td>
                 <td><%= milestone.description%></td>
                 <td><%= milestone.date%></td>
-                <td><a href="/milestone/edit/<%=milestone.id%>">Edit</a></td>
+                <td>
+                    <form action="/milestone/edit/<%=milestone.id%>" method="POST">
+                        
+                        <input type="hidden" name="_method" value="edit" >
+                        <button type="submit" class="btn btn-sm btn-success">
+                                <i class="fa fa-pencil fa-2" aria-hidden="true"></i>
+                        </button>
+                        <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                    </form></td>
                 <td>
                         <form action="/milestone/destroy/<%= milestone.id %>" method="POST">
                             <input type="hidden" name="belongs_to_project" value="<%= milestone.belongs_to_project %>" />
                             <input type="hidden" name="_method" value="delete" />
-                            <input type="submit" class="btn btn-sm btn-danger" value="X" />
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+                            </button>
                             <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
                         </form>
                 </td>
@@ -252,11 +306,7 @@
             </tr>
     <% }); %>
     </table>
-    <form action="/milestone/new" method="POST">
-        <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
-        <input type="submit" class="btn btn-sm btn-success" value="<%= __('project.show.milestones.newbutton')%>">
-        <input type="hidden" value="<%=_csrf%>" name="_csrf">
-    </form>
+   
  
     
 
@@ -264,26 +314,49 @@
 
     
 <!-- Seccion de EQUIPO -->
-    
+<div class="row">
+        <div class="col">
     <H2><%= __('project.show.team.title')%></H2>
-    <table class="table table-sm table-hover table-bordered table-striped">
+        </div>
+        <div class="col">
+                <form action="/user/add_to_team" method="POST">
+                    <input type="hidden" name="belongs_to_project" value="<%=project.id%>" >
+                    <button type="submit" class="btn btn-sm btn-primary" >
+                            <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+                     </button>
+                    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                    </form>
+        </div>
+</div>
+        <table class="table table-sm table-hover table-bordered table-striped">
         <tr>
             <th><%= __('project.show.team.id')%></th>
             <th><%= __('project.show.team.name')%></th>
             <th><%= __('project.show.team.email')%></th>
             <th></th>
             <th></th>
-            <th></th>
+            
         </tr>
         <% _.each(project.team, function(user) { %>
             <tr data-id="<%= user.id%>" data-model="user">
                 <td><%= user.id%></td>
                 <td><%= user.name%></td>
                 <td><%= user.email%></td>
-               <td><a href="/user/edit/<%=user.id%>"><%= __('project.show.team.editbutton')%></a></td>
+               <td>
+                <form action="user/edit/<%=user.id%>" method="POST">
+                    
+                    <input type="hidden" name="_method" value="edit" >
+                    <button type="submit" class="btn btn-sm btn-success">
+                            <i class="fa fa-pencil fa-2" aria-hidden="true"></i>
+                    </button>
+                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                </form>
+            </td>
                 <td>
                         <form action="/user/rem_from_team/<%= user.id %>" method="POST">
-                            <input type="submit" class="btn btn-sm btn-danger" value="X">
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+                            </button>
                             <div class="control-group" style="display:none;">            
                                 <input type="hidden" name="belongs_to_project" value="<%= user.projectsTeam %>">
                                 <input type="hidden" name="_method" value="rem_from_team">
@@ -369,11 +442,7 @@
 <!-- FIN comentarios Team -->
 
 
-    <form action="/user/add_to_team" method="POST">
-    <input type="hidden" name="belongs_to_project" value="<%=project.id%>" >
-    <input type="submit" class="btn btn-sm btn-success" value="<%= __('project.show.team.newbutton')%>">
-    <input type="hidden" value="<%=_csrf%>" name="_csrf">
-    </form>
+   
 
 </div> <!-- fin col-->
 </div> <!-- fin row -->

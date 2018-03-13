@@ -68,10 +68,18 @@
 	"navbutton.edt":"Work Breakdown\nStructure",
 	"navbutton.stk":"Stakeholders",
 	"navbutton.rsk":"Risks",
-	"navbutton.gantt":"Gantt\nChart"
-
-
-
+	"navbutton.gantt":"Gantt\nChart",
+	"add_to_team.button":"Add team member",
+	"add_to_team.title":"Add new team member",
+	"milestone_new.title":"Add milestone",
+	"milestone_new.description":"Description",
+	"milestone_new.date":"Date",
+	"milestone_new.button":"Add milestone",
+	"objective.new.title":"New objective",
+	"objective.new.description":"Description",
+	"objective.new.formula":"Formula",
+	"objective.new.goal":"Goal",
+	"objective.new.button":"Add new objective"
 
 
 

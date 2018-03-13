@@ -1,4 +1,4 @@
-hola loco hasta acá todo bien!
+<div class="container">
 <form action="/objective/update/<%=objective.id%>" method="POST">
     <h2>Modificar objetivo</h2>
     <input value="<%=objective.description%>" type="text" name="description"><br/>
@@ -7,3 +7,4 @@ hola loco hasta acá todo bien!
     <input  type="submit" value="Confirmar"/>
     <input type="hidden" name="_csrf" value="<%=_csrf%>" />
 </form>
+</div>

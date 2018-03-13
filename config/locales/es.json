@@ -68,6 +68,17 @@
 	"navbutton.edt":"Work Breakdown<br>Structure",
 	"navbutton.stk":"Stakeholders",
 	"navbutton.rsk":"Risks",
-	"navbutton.gantt":"Gantt<br>Chart"
+	"navbutton.gantt":"Gantt<br>Chart",
+	"add_to_team.button": "Agregar al equipo",
+	"add_to_team.title":"Agregar nuevo integrante al equipo",
+	"milestone_new.title":"Add milestone",
+	"milestone_new.description":"Description",
+	"milestone_new.date":"Date",
+	"milestone_new.button":"Add milestone",
+	"objective.new.title":"Nuevo objetivo",
+	"objective.new.description":"Descripción",
+	"objective.new.formula":"Fórmula",
+	"objective.new.goal":"Meta",
+	"objective.new.button":"Agrega objetivo"
 
 }
