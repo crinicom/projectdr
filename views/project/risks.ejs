@@ -171,7 +171,6 @@
 <!-- FIN comentarios riesgos -->
 
 
-    <p><%=JSON.stringify(project.status)%></p>
     <% if (project.status.risks != "finished") {%>
         <form action="/project/show/<%=project.id%>" method="POST">
             <button type="submit" class="btn btn-primary btn-block">
@@ -199,7 +198,8 @@
                 <%}%>            
             <input type="hidden" value="<%=_csrf%>" name="_csrf">
         </form>
-        <br><br><br>
-        <%- partial('../navbuttons.ejs') %>
+       
 
 </div>
+<br><br><br>
+<%- partial('../navbuttons.ejs') %>
