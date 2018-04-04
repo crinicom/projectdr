@@ -33,7 +33,8 @@ module.exports = {
             user.save(function (err) {
                 if (err) return next(err);
             
-
+                EmailService.sendWelcomeMail(user);  // <= Here we using
+              /*   res.json(200, {user: user}); */
             res.redirect('/user/show/' + user.id ); 
            // req.session.flash = {};
         });
