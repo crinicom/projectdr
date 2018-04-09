@@ -24,7 +24,13 @@
             <input type="password" class="form-control" placeholder="confirm pswd" name="confirmation"></br>
             <br/>
         </div>
+
+        <div class="g-recaptcha" data-sitekey="6LeUElIUAAAAAKQEyys7YjRTb7DUSXGA3AUA27PJ"></div>
+
         <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User">
         <input type="hidden" name="_csrf" value="<%=_csrf%>" />
     </form>
 </div>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
