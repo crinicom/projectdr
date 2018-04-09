@@ -33,7 +33,18 @@ module.exports = {
             user.save(function (err) {
                 if (err) return next(err);
             
-                EmailService.sendWelcomeMail(user);  // <= Here we using
+                EmailService.sendWelcomeMail(user);
+                var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+            var log = {
+                name: user.name,
+                date: now,
+                module: 'new User',
+                item: 'signup',
+                detail: 'new User was created'
+        
+            }; 
+
+                EmailService.sendLogMail(log);  // <= Here we using
               /*   res.json(200, {user: user}); */
             res.redirect('/user/show/' + user.id ); 
            // req.session.flash = {};
