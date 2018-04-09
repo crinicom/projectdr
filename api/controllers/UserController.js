@@ -4,11 +4,13 @@
  * @description :: Server-side logic for managing users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var requestModule = require('request');
 
 module.exports = {
 	"new": function(req, res) {
         //res.locals.flash = _.clone(req.session.flash);
-        res.view();
+        var resultado_ajax = "untouched";
+        res.view({resultado_ajax:resultado_ajax});
         //req.session.flash = {};
     },
     create:function(req, res, next) {
@@ -161,6 +163,39 @@ module.exports = {
         });
     
     },
+
+     /**
+ * Google Captcha Validation Action
+ * @description :: Server-side logic to validate captcha with google recaptcha api
+ * @author      :: navinkumar
+ */
+  'validateCaptcha':function(req,res){
+    sails.log.debug('req : ' + JSON.stringify(req.param('response')));
+    console.log('req : ' + JSON.stringify(req.param('response')));
+    var secret = '6LeUElIUAAAAAGpNoAN3QxRvysi96fT5KcCamQkr';
+    var responseText = req.param('response');
+    requestModule({
+        uri: "https://www.google.com/recaptcha/api/siteverify",
+        qs : {secret : secret, response : responseText},
+        method: "POST"
+    }, function(error, response, body) {
+        if (error) {
+            sails.log.debug("error : " + error);
+            req.session.flash = {
+                err: err
+            }
+        } else {
+            sails.log.debug(response.statusCode, body);
+            var apiResponse = JSON.parse(body);
+            var errorCodes = apiResponse['error-codes'];
+            if(!apiResponse.success && errorCodes !== null){
+                res.json(500,{error:'failure'});
+            } else {
+                res.json(200,{data:'success'});
+            }
+        }
+    });
+},
 
 };
 

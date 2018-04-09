@@ -1,3 +1,4 @@
+<%- exposeLocalsToBrowser() %>
 <div class="container">
     <form action="/user/create" method="POST" id="sign-up-form" class="form-signin">
         <h2 class="form-signin-heading">Create user</h2>
@@ -24,13 +25,56 @@
             <input type="password" class="form-control" placeholder="confirm pswd" name="confirmation"></br>
             <br/>
         </div>
-
-        <div class="g-recaptcha" data-sitekey="6LeUElIUAAAAAKQEyys7YjRTb7DUSXGA3AUA27PJ"></div>
-
-        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User">
+    <p><%= resultado_ajax%></p>
+        <div class="g-recaptcha" id="captcha_box" data-sitekey="6LeUElIUAAAAAKQEyys7YjRTb7DUSXGA3AUA27PJ"></div>
+        <% if (resultado_ajax == "success") {%>
+        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User" id="submit_button" style="display:none">
         <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+        <%}%>
     </form>
+    <div id="prueba">
+        <p id="texto">prueba</p>
+    </div>
+    <div id="prueba1">
+        <p id="texto1">prueba1</p>
+    </div>
 </div>
 
-<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit" async defer></script>
+<script type='text/javascript'>
+    var captchaContainer = null;
+    var resultado = null;
+    var loadCaptcha = function(resultado){
+      captchaContainer = grecaptcha.render('captcha_box', {
+        'sitekey' : '6LeUElIUAAAAAKQEyys7YjRTb7DUSXGA3AUA27PJ',
+        'callback' : function(response) {
+            $.ajax({
+                url: "/user/validateCaptcha", // add appropriate action and sails.js controller here 
+                data: 'response=' + response,
+                success: function(msg){
+                    
+                    var scope = document.getElementById("prueba");
+                    scope.data = 'success';
+                    scope.querySelector("#texto").innerHTML = scope.data;
+                    scope.IsCaptchaSuccess = true;
+                    scope.responseCode = response;
+                    window.SAILS_LOCALS.resultado_ajax = "success";
+                    
+                },
+                error : function(msg){
+                    grecaptcha.reset();
+                }
+           }).done(function(data) {
+               $.data = "success";
+               var scope = document.getElementById("prueba1");
+            scope.querySelector("#texto1").innerHTML = window.SAILS_LOCALS.resultado_ajax;
+           });
+        }
+      });
+    };
+
+    var scope = document.getElementById("prueba1");
+    scope.querySelector("#texto1").innerHTML = window.SAILS_LOCALS.resultado_ajax;
+
+</script>
 
