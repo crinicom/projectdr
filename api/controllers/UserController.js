@@ -172,7 +172,7 @@ module.exports = {
   'validateCaptcha':function(req,res){
     sails.log.debug('req : ' + JSON.stringify(req.param('response')));
     console.log('req : ' + JSON.stringify(req.param('response')));
-    var secret = '6LeUElIUAAAAAGpNoAN3QxRvysi96fT5KcCamQkr';
+    var secret = '6LfYKlIUAAAAAPFiPrGZi9uy5WJvpxO0Humc_Omu';
     var responseText = req.param('response');
     requestModule({
         uri: "https://www.google.com/recaptcha/api/siteverify",

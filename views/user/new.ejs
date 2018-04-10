@@ -1,4 +1,26 @@
 <%- exposeLocalsToBrowser() %>
+
+<script>
+    function onSubmit(token) {
+      alert('thanks ' + document.getElementById('field').value);
+    }
+  
+    function validate(event) {
+      event.preventDefault();
+      if (!document.getElementById('field').value) {
+        alert("You must add text to the required field");
+      } else {
+        grecaptcha.execute();
+      }
+    }
+  
+    function onload() {
+      var element = document.getElementById('submit');
+      element.onclick = validate;
+    }
+  </script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <div class="container">
     <form action="/user/create" method="POST" id="sign-up-form" class="form-signin">
         <h2 class="form-signin-heading">Create user</h2>
@@ -13,7 +35,7 @@
 
         <% } %>
         <div class="control-group">
-             <input type="text" class="form-control" placeholder="Name" name="name"></br>
+             <input type="text" class="form-control" placeholder="Name" name="name" id="field"></br>
         </div>
         <div class="control-group">
             <input type="text" class="form-control" placeholder="Email" name="email"></br>
@@ -25,13 +47,20 @@
             <input type="password" class="form-control" placeholder="confirm pswd" name="confirmation"></br>
             <br/>
         </div>
-    <p><%= resultado_ajax%></p>
-        <div class="g-recaptcha" id="captcha_box" data-sitekey="6LeUElIUAAAAAKQEyys7YjRTb7DUSXGA3AUA27PJ"></div>
-        <% if (resultado_ajax == "success") {%>
-        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User" id="submit_button" style="display:none">
+   
+        <!-- <div class="g-recaptcha" id="captcha_box" data-sitekey="6LeUElIUAAAAAKQEyys7YjRTb7DUSXGA3AUA27PJ"></div>
+         -->
+         <div id='recaptcha' class="g-recaptcha"
+         data-sitekey="6LfYKlIUAAAAAIZ2K6WwLIzgI1rY-8oCKXSaNgQI
+         "
+         data-callback="onSubmit"
+         data-size="invisible"></div>
+        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User" id="submit" style="display:block">
         <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-        <%}%>
+        
     </form>
+
+    <script>onload();</script>
     <div id="prueba">
         <p id="texto">prueba</p>
     </div>
@@ -40,9 +69,10 @@
     </div>
 </div>
 
-<script src="https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit" async defer></script>
+<!-- <script src="https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit" async defer></script> -->
+
 <script type='text/javascript'>
-    var captchaContainer = null;
+   /* var captchaContainer = null;
     var resultado = null;
     var loadCaptcha = function(resultado){
       captchaContainer = grecaptcha.render('captcha_box', {
@@ -75,6 +105,6 @@
 
     var scope = document.getElementById("prueba1");
     scope.querySelector("#texto1").innerHTML = window.SAILS_LOCALS.resultado_ajax;
-
+*/
 </script>
 
