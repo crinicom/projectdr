@@ -4,7 +4,7 @@
  * @description :: Server-side logic for managing users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-var requestModule = require('request');
+var request = require('request');
 
 module.exports = {
 	"new": function(req, res) {
@@ -14,44 +14,81 @@ module.exports = {
         //req.session.flash = {};
     },
     create:function(req, res, next) {
-        User.create(req.params.all(), function userCreated(err, user) {
-            //if (err) return next(err);
-            if (err) {
-                console.log(JSON.stringify(err)); 
-                req.session.flash = {
-                    err: err
-                }
-                return res.redirect('/user/new/');    
-            }
-            // si logro crear el usuario, ya lo dejo autenticado para la sesión
-            req.session.authenticated = true;
-            req.session.User = user;
-
-            if(req.session.User.admin){
-                res.redirect('/user');
-                return;
-            }
-            user.online =true;
-            user.save(function (err) {
-                if (err) return next(err);
-            
-                EmailService.sendWelcomeMail(user);
-                var now = new Date(Date.now()).toLocaleString().split(', ')[0];
-            var log = {
-                name: user.name,
-                date: now,
-                module: 'new User',
-                item: 'signup',
-                detail: 'new User was created'
+        if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+            return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
+          }
         
-            }; 
+          sails.log.debug('req : ' + JSON.stringify(req.body['g-recaptcha-response']));
+          console.log('req : ' + JSON.stringify(req.param('response')));
+          var secret = '6LeUElIUAAAAAGpNoAN3QxRvysi96fT5KcCamQkr';
+          //var responseText = JSON.stringify(req.body['g-recaptcha-response']);
+          responseText = req.body['g-recaptcha-response'];
+         // var responseText = req.param('response');
+          request({
+              uri: "https://www.google.com/recaptcha/api/siteverify",
+              qs : {secret : secret, response : responseText},
+              method: "POST"
+          }, function(error, response, body) {
+              if (error) {
+                  sails.log.debug("error : " + error);
+                  req.session.flash = {
+                      err: err
+                  }
+              } else {
+                  sails.log.debug(response.statusCode, body);
+                  var apiResponse = JSON.parse(body);
+                  var errorCodes = apiResponse['error-codes'];
+                  if(!apiResponse.success && errorCodes !== null){
+                      console.log("error captcha")
+                      res.json(500,{error:'failure'});
+                  } else {
+                      console.log("success captcha");
+                      //res.json(200,{data:'success'});
+                      User.create(req.params.all(), function userCreated(err, user) {
+                        //if (err) return next(err);
+                        if (err) {
+                            console.log(JSON.stringify(err)); 
+                            req.session.flash = {
+                                err: err
+                            }
+                            return res.redirect('/user/new/');    
+                        }
+                        // si logro crear el usuario, ya lo dejo autenticado para la sesión
+                        req.session.authenticated = true;
+                        req.session.User = user;
+            
+                        if(req.session.User.admin){
+                            res.redirect('/user');
+                            return;
+                        }
+                        user.online =true;
+                        user.save(function (err) {
+                            if (err) return next(err);
+                        
+                            EmailService.sendWelcomeMail(user);
+                            var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+                        var log = {
+                            name: user.name,
+                            date: now,
+                            module: 'new User',
+                            item: 'signup',
+                            detail: 'new User was created'
+                    
+                        }; 
+            
+                            EmailService.sendLogMail(log);  // <= Here we using
+                          
+                          res.redirect('/user/show/' + user.id ); 
+                         // req.session.flash = {};
+                        });
+                    }); 
+                  }
+              }
+          });
 
-                EmailService.sendLogMail(log);  // <= Here we using
-              /*   res.json(200, {user: user}); */
-            res.redirect('/user/show/' + user.id ); 
-           // req.session.flash = {};
-        });
-        });
+
+
+       
     },
 
     show: function(req, res, next) {
@@ -164,38 +201,7 @@ module.exports = {
     
     },
 
-     /**
- * Google Captcha Validation Action
- * @description :: Server-side logic to validate captcha with google recaptcha api
- * @author      :: navinkumar
- */
-  'validateCaptcha':function(req,res){
-    sails.log.debug('req : ' + JSON.stringify(req.param('response')));
-    console.log('req : ' + JSON.stringify(req.param('response')));
-    var secret = '6LfYKlIUAAAAAPFiPrGZi9uy5WJvpxO0Humc_Omu';
-    var responseText = req.param('response');
-    requestModule({
-        uri: "https://www.google.com/recaptcha/api/siteverify",
-        qs : {secret : secret, response : responseText},
-        method: "POST"
-    }, function(error, response, body) {
-        if (error) {
-            sails.log.debug("error : " + error);
-            req.session.flash = {
-                err: err
-            }
-        } else {
-            sails.log.debug(response.statusCode, body);
-            var apiResponse = JSON.parse(body);
-            var errorCodes = apiResponse['error-codes'];
-            if(!apiResponse.success && errorCodes !== null){
-                res.json(500,{error:'failure'});
-            } else {
-                res.json(200,{data:'success'});
-            }
-        }
-    });
-},
+    
 
 };
 

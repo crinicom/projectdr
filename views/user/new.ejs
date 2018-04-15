@@ -1,24 +1,5 @@
-<%- exposeLocalsToBrowser() %>
 
-<script>
-    function onSubmit(token) {
-      alert('thanks ' + document.getElementById('field').value);
-    }
-  
-    function validate(event) {
-      event.preventDefault();
-      if (!document.getElementById('field').value) {
-        alert("You must add text to the required field");
-      } else {
-        grecaptcha.execute();
-      }
-    }
-  
-    function onload() {
-      var element = document.getElementById('submit');
-      element.onclick = validate;
-    }
-  </script>
+
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <div class="container">
@@ -48,63 +29,11 @@
             <br/>
         </div>
    
-        <!-- <div class="g-recaptcha" id="captcha_box" data-sitekey="6LeUElIUAAAAAKQEyys7YjRTb7DUSXGA3AUA27PJ"></div>
-         -->
-         <div id='recaptcha' class="g-recaptcha"
-         data-sitekey="6LfYKlIUAAAAAIZ2K6WwLIzgI1rY-8oCKXSaNgQI
-         "
-         data-callback="onSubmit"
-         data-size="invisible"></div>
+        <div class="g-recaptcha" id="captcha_box" data-sitekey="6LeUElIUAAAAAKQEyys7YjRTb7DUSXGA3AUA27PJ"></div>
+        
         <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User" id="submit" style="display:block">
         <input type="hidden" name="_csrf" value="<%=_csrf%>" />
         
     </form>
-
-    <script>onload();</script>
-    <div id="prueba">
-        <p id="texto">prueba</p>
-    </div>
-    <div id="prueba1">
-        <p id="texto1">prueba1</p>
-    </div>
 </div>
-
-<!-- <script src="https://www.google.com/recaptcha/api.js?onload=loadCaptcha&render=explicit" async defer></script> -->
-
-<script type='text/javascript'>
-   /* var captchaContainer = null;
-    var resultado = null;
-    var loadCaptcha = function(resultado){
-      captchaContainer = grecaptcha.render('captcha_box', {
-        'sitekey' : '6LeUElIUAAAAAKQEyys7YjRTb7DUSXGA3AUA27PJ',
-        'callback' : function(response) {
-            $.ajax({
-                url: "/user/validateCaptcha", // add appropriate action and sails.js controller here 
-                data: 'response=' + response,
-                success: function(msg){
-                    
-                    var scope = document.getElementById("prueba");
-                    scope.data = 'success';
-                    scope.querySelector("#texto").innerHTML = scope.data;
-                    scope.IsCaptchaSuccess = true;
-                    scope.responseCode = response;
-                    window.SAILS_LOCALS.resultado_ajax = "success";
-                    
-                },
-                error : function(msg){
-                    grecaptcha.reset();
-                }
-           }).done(function(data) {
-               $.data = "success";
-               var scope = document.getElementById("prueba1");
-            scope.querySelector("#texto1").innerHTML = window.SAILS_LOCALS.resultado_ajax;
-           });
-        }
-      });
-    };
-
-    var scope = document.getElementById("prueba1");
-    scope.querySelector("#texto1").innerHTML = window.SAILS_LOCALS.resultado_ajax;
-*/
-</script>
 
