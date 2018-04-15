@@ -66,18 +66,24 @@ module.exports = {
                             if (err) return next(err);
                         
                             EmailService.sendWelcomeMail(user);
+                            
                             var now = new Date(Date.now()).toLocaleString().split(', ')[0];
-                        var log = {
-                            name: user.name,
-                            date: now,
-                            module: 'new User',
-                            item: 'signup',
-                            detail: 'new User was created'
-                    
-                        }; 
-            
+                            var log = {
+                                name: user.name,
+                                date: now,
+                                project: 'none',
+                                module: 'new User',
+                                item: 'signup',
+                                detail: 'new User was created'
+                            };   
+                            Applog.create(log, function logCreated(err, applog) {
+                                if (err) { console.log(JSON.stringify(err)); }
+                                console.log(JSON.stringify(applog));
+                            });
+
                             EmailService.sendLogMail(log);  // <= Here we using
-                          
+                            
+
                           res.redirect('/user/show/' + user.id ); 
                          // req.session.flash = {};
                         });
@@ -182,20 +188,33 @@ module.exports = {
             if (!user) { res.redirect("/user/new");
         } else {
 
-            user.participates.add(req.param('new_project'));
-            console.log("Agrego a proyecto a lista de proyectos: " + user.participates);
-        user.save(function(err){
-            if (err) {
-                console.log(err);
-            } else 
-            {
-                console.log(" User advance saved");
-               console.log(user);
-              res.redirect("/project/show/"+req.param('new_project'));
+                user.participates.add(req.param('new_project'));
+                console.log("Agrego a proyecto a lista de proyectos: " + user.participates);
+            user.save(function(err){
+                if (err) {
+                    console.log(err);
+                } else 
+                {
+                    console.log(" User advance saved");
+                console.log(user);
+                res.redirect("/project/show/"+req.param('new_project'));
+                    
+                }
                 
-            }
-            
-        });
+            });
+            var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+            var log = {
+                name: user.name,
+                date: now,
+                project: req.param('new_project'),
+                module: 'Project Charter' ,
+                item: 'Project Team',
+                detail: req.param('email') + ' added to project'
+            };   
+            Applog.create(log, function logCreated(err, applog) {
+                if (err) { console.log(JSON.stringify(err)); }
+                console.log(JSON.stringify(applog));
+            });
         }
         });
     
