@@ -98,6 +98,20 @@ module.exports = {
     destroy: function(req,res,next) {
     Comment.destroy(req.param('id')).exec(function() {
         var comes_from = req.param('comes_from');
+        
+        var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+        var log = {
+            name: session.user+';',
+            date: now+';',
+            project: comes_from +';',
+            module: 'n/a' +';',
+            item: 'n/a'+';',
+            detail: 'Comentario: ' + req.param('id') + '; eliminado' +';'
+        };   
+        Applog.create(log, function logCreated(err, applog) {
+            if (err) { console.log(JSON.stringify(err)); }
+            console.log(JSON.stringify(applog));
+        });
         res.redirect(comes_from);
     });    
     

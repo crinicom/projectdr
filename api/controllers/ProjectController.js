@@ -24,6 +24,23 @@ module.exports = {
             if (err) return next(err);
             
             //res.json(project);
+
+            var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+            var log = {
+                name: session.user+';',
+                date: now+';',
+                project: req.param('belongs_to_project')+';',
+                module: 'nuevo proyecto' +';',
+                item: 'nuevo proyecto' + ';',
+                detail: 'Proyecto creado'+';'
+            };   
+            Applog.create(log, function logCreated(err, applog) {
+                if (err) { console.log(JSON.stringify(err)); }
+                console.log(JSON.stringify(applog));
+            });
+
+
+
          res.redirect('/user/show/'+project.owner);
         });
     },
@@ -45,6 +62,22 @@ module.exports = {
     },
     destroy: function(req,res,next) {
         Project.destroy(req.param('id')).exec(function() {
+
+
+            var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+            var log = {
+                name: session.user+';',
+                date: now+';',
+                project: comes_from +';',
+                module: 'n/a' +';',
+                item: 'n/a'+';',
+                detail: 'Proyecto: ' + req.param('id') + '; eliminado' +';'
+            };   
+            Applog.create(log, function logCreated(err, applog) {
+                if (err) { console.log(JSON.stringify(err)); }
+                console.log(JSON.stringify(applog));
+            });
+
             res.redirect("/user/show/"+req.param('owner'));
         }
         );
