@@ -27,8 +27,8 @@ module.exports = {
 
             var now = new Date(Date.now()).toLocaleString().split(', ')[0];
             var log = {
-                name: session.user+';',
-                date: now+';',
+                name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+                date: now,
                 project: req.param('belongs_to_project')+';',
                 module: 'nuevo proyecto' +';',
                 item: 'nuevo proyecto' + ';',
@@ -66,8 +66,8 @@ module.exports = {
 
             var now = new Date(Date.now()).toLocaleString().split(', ')[0];
             var log = {
-                name: session.user+';',
-                date: now+';',
+                name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+                date: now,
                 project: comes_from +';',
                 module: 'n/a' +';',
                 item: 'n/a'+';',

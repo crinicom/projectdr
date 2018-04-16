@@ -29,8 +29,8 @@ module.exports = {
 
             var now = new Date(Date.now()).toLocaleString().split(', ')[0];
             var log = {
-                name: req.param('user_name') + '; id: ' + req.param('user')+';',
-                date: now+';',
+                name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+                date: now,
                 project: req.param('belongs_to_project')+';',
                 module: req.param('belongs_to') +';',
                 item: req.param('section')+';',
@@ -101,7 +101,7 @@ module.exports = {
             var now = new Date(Date.now()).toLocaleString().split(', ')[0];
             var log = {
                 name: req.param('user_name') + '; id: ' + req.param('user')+';',
-                date: now+';',
+                date: now,
                 project: req.param('belongs_to_project')+';',
                 module: req.param('belongs_to') +';',
                 item: req.param('section')+';',
@@ -125,8 +125,8 @@ module.exports = {
             //res.redirect('/project/show/' + objective.belongs_to_project );
             var now = new Date(Date.now()).toLocaleString().split(', ')[0];
             var log = {
-                name: session.user+';',
-                date: now+';',
+                name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+                date: now,
                 project: comes_from +';',
                 module: 'n/a' +';',
                 item: 'n/a'+';',

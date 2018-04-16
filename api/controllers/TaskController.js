@@ -26,6 +26,21 @@ module.exports = {
                 
                 return res.redirect('/task/new/');    
             }
+
+            var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+            var log = {
+                name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+                date: now,
+                project: req.param('belongs_to_project')+';',
+                module: req.param('belongs_to') +';',
+                item: req.param('section')+';',
+                detail: 'TASK creada: ' + req.param('text') + '; para el obj: ' + req.param('belongs_to_obj')+';'
+            };   
+            Applog.create(log, function logCreated(err, applog) {
+                if (err) { console.log(JSON.stringify(err)); }
+                console.log(JSON.stringify(applog));
+            });
+
             res.redirect('/project/edt/' + req.param('belongs_to_project') ); 
             
             //res.json(objective);
@@ -99,6 +114,21 @@ module.exports = {
     
     destroy: function(req,res,next) {
     Task.destroy(req.param('id')).exec(function() {
+
+        var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+        var log = {
+            name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+            date: now,
+            project: comes_from +';',
+            module: 'n/a' +';',
+            item: 'n/a'+';',
+            detail: 'Task: ' + req.param('id') + '; eliminado' +';'
+        };   
+        Applog.create(log, function logCreated(err, applog) {
+            if (err) { console.log(JSON.stringify(err)); }
+            console.log(JSON.stringify(applog));
+        });
+
         res.redirect('/project/edt/' + req.param('belongs_to_project') );
     });    
     
