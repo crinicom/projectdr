@@ -42,6 +42,8 @@ schema: true,
       via: 'guests'
     },
 
+    retrievepasswordhash: {type: 'string'},
+
     toJSON: function () {
       var obj = this.toObject();
       delete obj.encryptedPassword;

@@ -25,4 +25,12 @@
         <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In">
         <input type="hidden" name="_csrf" value="<%=_csrf%>" />
     </form>
+<p></p>
+    <form action="/user/forgotpassword" method="POST" id="sign-up-form" class="form-signin">
+        
+        <input type="submit" class="btn btn-lg btn-secondary" value="Retrieve Password">
+        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+    </form>
+
+
 </div>

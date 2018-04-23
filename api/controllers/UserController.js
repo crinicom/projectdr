@@ -119,12 +119,87 @@ module.exports = {
     },
     
    
+    forgotpassword: function(req, res, next) {
+      /*   var hash = "12345"
+        User.findOne({email: req.param('email')}, function foundUser(err, user) {
+            if (err) return next(err);
+            if (!user) return next(); 
+            res.view({user:user, hash:hash});*/
+            console.log("llegamos a forgotpassword");
+            res.view();
+
+    },
+
+    forgotpasswordmail: function(req, res, next) {
+        var hash = "12345";
+        console.log("llegamos a forgotpasswordmail");
+          User.findOne({email: req.param('email')}, function foundUser(err, user) {
+              if (err) return next(err);
+              if (!user) return next(); 
+              
+             
+                            
+              var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+              var data = {
+                  name: user.name,
+                  email: user.email,
+                  date: now,
+                  hash: hash,
+                  
+              };   
+              /* 
+              Applog.create(data, function logCreated(err, data) {
+                  if (err) { console.log(JSON.stringify(err)); }
+                  console.log(JSON.stringify(data));
+              });
+ */
+console.log("llegamos a enviar el mail");
+            EmailService.sendPasswordRecoveryMail(data);
+              
+              user.retrievepasswordhash = hash;
+              user.save(function(err){
+                    if (err) {
+                        console.log(err);
+                    } else 
+                    {
+                        console.log(" saved hash: " + hash );
+                    console.log(user);
+                   // return next();                
+                    }
+                });
+              
+              
+              res.view({user:user});
+        });   
+    },
+
+    verifypass: function(req,res,next) {
+        var mail_hash= req.param('hash');
+        console.log(mail_hash);
+
+        User.findOne({retrievepasswordhash : mail_hash},function(err,user) {
+            if (err) {
+                console.log("error", err);
+                return next(err);
+            }
+            if (!user) 
+         {
+            console.log("no user found by hash: ", mail_hash);
+            return next();
+        }
+        return res.redirect('/user/edit/'+ user.id);
+           //res.json(user);
+        });
+
+
+    },
+ 
     edit: function(req, res, next) {
         User.findOne(req.param('id'), function foundUser(err, user) {
             if (err) return next(err);
             if (!user) return next();
             res.view({user:user});
-        }); 
+       }); 
     },
     update: function(req, res, next) {
            User.update(req.param('id'), req.params.all(), function userUpdated(err) {
