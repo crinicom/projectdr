@@ -1,0 +1,38 @@
+<div class="container">
+    <H2>Log</H2>
+  <!-- attributes: {
+    name: {type: 'string' },
+    date: {type: 'date'},
+    module: {type: 'string'},
+    item: {type: 'string'},
+    detail: {type: 'string'}
+  }-->
+  
+    <table class="table table-striped table-hover">
+        <tr>
+            
+            <th>Name</th>
+            <th>Date</th>
+            <th>Module</th>
+            <th>Item</th>
+            <th>Detail</th>
+            
+        </tr>
+        
+         
+                <% _.each(applogs, function(applog) { %>
+                    <tr data-id="<%= applog.id%>" data-model="applog">
+                        
+                        
+                        
+                        <td><%=applog.name%></td>
+                        <td><%=applog.date%></td>
+                        <td><%=applog.module%></td>
+                        <td><%=applog.item%></td>
+                        <td><%=applog.detail%></td>
+                    </tr>
+            <% }); %>
+        
+    </table>
+
+</div>  

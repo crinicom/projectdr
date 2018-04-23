@@ -36,6 +36,21 @@ module.exports = {
             }
             //si está todo bien lo ideal sería redireccionar a la misma URL desde donde salí, incluso como AJAX
             
+            var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+            var log = {
+                name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+                date: now+';',
+                project: req.param('belongs_to_project')+';',
+                module: req.param('belongs_to') +';',
+                item: req.param('section')+';',
+                detail: 'Comentario: ' + req.param('item') + '; ' + req.param('text')+';'
+            };   
+            Applog.create(log, function logCreated(err, applog) {
+                if (err) { console.log(JSON.stringify(err)); }
+                console.log(JSON.stringify(applog));
+            });
+
+
             console.log(req.param("comes_from"));
             res.redirect(req.param("comes_from"));
             
@@ -83,6 +98,20 @@ module.exports = {
     destroy: function(req,res,next) {
     Comment.destroy(req.param('id')).exec(function() {
         var comes_from = req.param('comes_from');
+        
+        var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+        var log = {
+            name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+            date: now+';',
+            project: comes_from +';',
+            module: 'n/a' +';',
+            item: 'n/a'+';',
+            detail: 'Comentario: ' + req.param('id') + '; eliminado' +';'
+        };   
+        Applog.create(log, function logCreated(err, applog) {
+            if (err) { console.log(JSON.stringify(err)); }
+            console.log(JSON.stringify(applog));
+        });
         res.redirect(comes_from);
     });    
     

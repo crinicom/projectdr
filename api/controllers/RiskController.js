@@ -27,6 +27,22 @@ module.exports = {
                  
                  return res.redirect('/risk/new/');    
              }
+             
+             var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+             var log = {
+                name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+                 date: now,
+                 project: req.param('belongs_to_project')+';',
+                 module: req.param('belongs_to') +';',
+                 item: req.param('section')+';',
+                 detail: 'Riesgo creado: ' + req.param('description') + '; ' + req.param('impact')+ req.param('mitigation')+';'
+             };   
+             Applog.create(log, function logCreated(err, applog) {
+                 if (err) { console.log(JSON.stringify(err)); }
+                 console.log(JSON.stringify(applog));
+             });
+             
+             
              res.redirect('/project/risks/' + req.param('belongs_to_project') ); 
              
              //res.json(objective);
@@ -75,7 +91,22 @@ module.exports = {
         }); 
     },
     destroy: function(req,res,next) {
-    Risk.destroy(req.param('id')).exec(function() {
+        Risk.destroy(req.param('id')).exec(function() {
+
+            var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+            var log = {
+                name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+                date: now,
+                project: comes_from +';',
+                module: 'n/a' +';',
+                item: 'n/a'+';',
+                detail: 'Riesgo: ' + req.param('id') + '; eliminado' +';'
+            };   
+            Applog.create(log, function logCreated(err, applog) {
+                if (err) { console.log(JSON.stringify(err)); }
+                console.log(JSON.stringify(applog));
+            });
+
         res.redirect('/project/risks/' + req.param('belongs_to_project') );
     });    
     

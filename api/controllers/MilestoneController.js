@@ -26,6 +26,21 @@ module.exports = {
                 
                 return res.redirect('/milestone/new/');    
             }
+
+            var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+            var log = {
+                name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+                date: now+';',
+                project: req.param('belongs_to_project')+';',
+                module: req.param('belongs_to') +';',
+                item: req.param('section')+';',
+                detail: 'Comentario: ' + req.param('item') + '; ' + req.param('text')+';'
+            };   
+            Applog.create(log, function logCreated(err, applog) {
+                if (err) { console.log(JSON.stringify(err)); }
+                console.log(JSON.stringify(applog));
+            });
+
             res.redirect('/project/show/' + milestone.belongs_to_project ); 
             //res.json(milestone);
            // req.session.flash = {};

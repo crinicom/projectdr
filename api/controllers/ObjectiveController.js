@@ -26,6 +26,21 @@ module.exports = {
                 return res.redirect('/project/show/'+ req.param('belongs_to_project'));
               //  return res.redirect('/objective/new/');    
             }
+
+            var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+            var log = {
+                name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+                date: now,
+                project: req.param('belongs_to_project')+';',
+                module: req.param('belongs_to') +';',
+                item: req.param('section')+';',
+                detail: 'Objetivo creado: ' + req.param('item') + '; ' + req.param('text')+';'
+            };   
+            Applog.create(log, function logCreated(err, applog) {
+                if (err) { console.log(JSON.stringify(err)); }
+                console.log(JSON.stringify(applog));
+            });
+
             res.redirect('/project/show/' + objective.belongs_to_project ); 
             //res.json(objective);
            // req.session.flash = {};
@@ -82,6 +97,21 @@ module.exports = {
             if (err) {
                 return res.redirect('/objective/edit/'+ req.param('id'));
             }
+
+            var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+            var log = {
+                name: req.param('user_name') + '; id: ' + req.param('user')+';',
+                date: now,
+                project: req.param('belongs_to_project')+';',
+                module: req.param('belongs_to') +';',
+                item: req.param('section')+';',
+                detail: 'Objetivo modificado: ' + req.param('item') + '; ' + req.param('text')+';'
+            };   
+            Applog.create(log, function logCreated(err, applog) {
+                if (err) { console.log(JSON.stringify(err)); }
+                console.log(JSON.stringify(applog));
+            });
+
             return res.redirect('/objective/show/'+ req.param('id'));
         }); 
     },
@@ -93,7 +123,19 @@ module.exports = {
         Objective.destroy(req.param('id')).exec(function() {
             //res.redirect("/objective/");
             //res.redirect('/project/show/' + objective.belongs_to_project );
-            
+            var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+            var log = {
+                name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+                date: now,
+                project: comes_from +';',
+                module: 'n/a' +';',
+                item: 'n/a'+';',
+                detail: 'Objetivo eliminado: ' + req.param('id') + '; eliminado' +';'
+            };   
+            Applog.create(log, function logCreated(err, applog) {
+                if (err) { console.log(JSON.stringify(err)); }
+                console.log(JSON.stringify(applog));
+            });
         }
     );
          res.redirect('/project/show/' + project.id );

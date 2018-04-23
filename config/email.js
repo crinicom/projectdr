@@ -7,7 +7,7 @@ module.exports.email = {
         //domain: "sandbox239a897a5c494d2ca34c4a33944bfa15.mailgun.org",
       },
     templateDir: 'views/emailTemplates',
-    from: 'info@mycompany.com',
+    from: 'cristian.menajovsky@gmail.com',
     testMode: false,
     ssl: true
    };
