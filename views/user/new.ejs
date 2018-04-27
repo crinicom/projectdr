@@ -1,6 +1,8 @@
 
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
+
+
 <div class="container">
     <form action="/user/create" method="POST" id="sign-up-form" class="form-signin">
         <h2 class="form-signin-heading">Create user</h2>
@@ -36,3 +38,6 @@
     </form>
 </div>
 
+<script>
+    $("sign-up-form").validate();
+</script>

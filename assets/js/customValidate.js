@@ -1,4 +1,4 @@
-$.(document).ready(function(){
+$(document).ready(function(){
 
     $('#sign-up-form').validate({
         rules: {
@@ -9,13 +9,13 @@ $.(document).ready(function(){
                 required: true,
                 email: true
             },
-            pswd: {
+            password: {
                 minlength: 6,
                 required: true
             },
             confirmation: {
                 minlength: 6,
-                equalTo: "#pswd"
+                equalTo: "#password"
             }
         },
         success: function(element){
