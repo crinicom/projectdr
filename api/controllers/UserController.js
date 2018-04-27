@@ -131,42 +131,68 @@ module.exports = {
     },
 
     forgotpasswordmail: function(req, res, next) {
-        var hash = "12345";
+        
+        var seed = new Date(Date.now()).toLocaleString().split(', ')[0] + 500;
+        var mail_hash = "xxx";
+        
+        
+        //var hash = "12345";
+        console.log(req.headers);
+        console.log(mail_hash);
+        var head = req.headers;
+        console.log('host: ' + head.host);
         console.log("llegamos a forgotpasswordmail");
           User.findOne({email: req.param('email')}, function foundUser(err, user) {
               if (err) return next(err);
               if (!user) return next(); 
               
+              require('bcrypt').hash(seed, 10, function passwordEncrypted(err, hash){
+                if (err) return next(err);
+                user.retrievepasswordhash = hash;
+               console.log('user.retrievepasswordhash:',user.retrievepasswordhash);
+              
+               user.save(function(err){
+                    if (err) {
+                        console.log(err);
+                    } else 
+                    {
+                    console.log(" saved hash: " + user.retrievepasswordhash );
+                    console.log(user);
+                // return next();                
+                    }
+                });
+
+                var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+                var data = {
+                    name: user.name,
+                    email: user.email,
+                    date: now,
+                    hash: user.retrievepasswordhash,
+                    host_base: head.host,
+                };   
+
+
+                console.log("llegamos a enviar el mail", data);
+                
+                EmailService.sendPasswordRecoveryMail(data);
+
+              });
+
+              
+              
              
                             
-              var now = new Date(Date.now()).toLocaleString().split(', ')[0];
-              var data = {
-                  name: user.name,
-                  email: user.email,
-                  date: now,
-                  hash: hash,
-                  
-              };   
+             
               /* 
               Applog.create(data, function logCreated(err, data) {
                   if (err) { console.log(JSON.stringify(err)); }
                   console.log(JSON.stringify(data));
               });
  */
-console.log("llegamos a enviar el mail");
-            EmailService.sendPasswordRecoveryMail(data);
+            
               
-              user.retrievepasswordhash = hash;
-              user.save(function(err){
-                    if (err) {
-                        console.log(err);
-                    } else 
-                    {
-                        console.log(" saved hash: " + hash );
-                    console.log(user);
-                   // return next();                
-                    }
-                });
+              
+              
               
               
               res.view({user:user});
@@ -175,20 +201,38 @@ console.log("llegamos a enviar el mail");
 
     verifypass: function(req,res,next) {
         var mail_hash= req.param('hash');
+        var query = req.query;
         console.log(mail_hash);
-
-        User.findOne({retrievepasswordhash : mail_hash},function(err,user) {
+        console.log(req.query);
+        
+        User.findOne({retrievepasswordhash : query.q},function(err,user) {
             if (err) {
                 console.log("error", err);
                 return next(err);
             }
             if (!user) 
-         {
-            console.log("no user found by hash: ", mail_hash);
-            return next();
-        }
-        return res.redirect('/user/edit/'+ user.id);
-           //res.json(user);
+            {
+                console.log("no user found by hash: ", query.q);
+                return next();
+            }
+            console.log(user);
+            req.session.authenticated = true;
+            req.session.User = user;
+
+            user.retrievepasswordhash = "";
+            user.save(function(err){
+                  if (err) {
+                      console.log(err);
+                  } else 
+                  {
+                      console.log(" saved hash: " + user.retrievepasswordhash );
+                  console.log(user);
+                 // return next();                
+                  }
+              });
+
+            return res.redirect('/user/edit/'+ user.id);
+            //res.json(user);
         });
 
 
@@ -202,6 +246,8 @@ console.log("llegamos a enviar el mail");
        }); 
     },
     update: function(req, res, next) {
+        req.params.updatepass=true;
+        console.log(req.params.updatepass);
            User.update(req.param('id'), req.params.all(), function userUpdated(err) {
             if (err) {
                 return res.redirect('/user/edit/'+ req.param('id'));

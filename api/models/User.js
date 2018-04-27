@@ -78,6 +78,26 @@ schema: true,
       values.encryptedPassword = encryptedPassword;
       next();
     });
+  },
+
+  beforeUpdate: function (values, next) {
+    console.log("ingreso a validacion beforeUpdate");
+    console.log("values.updatepass: ", values.updatepass);
+    if(values.updatepass) {
+        console.log("ingreso a updatepass");
+      if(!values.password || values.password != values.confirmation) {
+        return next({err: ["password mismatch"]});
+      }
+      require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
+        if (err) return next(err);
+        values.encryptedPassword = encryptedPassword;
+        next();
+      });
   }
+  else {
+    console.log("fuera de updatepass");
+    next(); 
+    }
+  },
 };
 

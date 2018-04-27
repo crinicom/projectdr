@@ -19,7 +19,9 @@ module.exports.sendWelcomeMail = function(obj) {
     {
         name: obj.name,
         email: obj.email,
+        date:obj.date,
         hash: obj.hash,
+        host_base:obj.host_base,
         
 
     },

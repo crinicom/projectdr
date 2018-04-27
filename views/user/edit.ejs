@@ -3,8 +3,13 @@
         <h2>Modificar usuario</h2>
         <input value="<%=user.name%>" type="text" name="name"><br/>
         <input value="<%=user.email%>" type="text" name="email"><br/>
-        <input value="<%=user.state%>" type="text" name="state"><br/>
-
+        <div class="control-group">
+            <input type="password" class="form-control" placeholder="password" name="password"></br>
+        </div>
+        <div class="control-group">        
+            <input type="password" class="form-control" placeholder="confirm pswd" name="confirmation"></br>
+            <br/>
+        </div>
         <% if (session.authenticated && session.User.admin) {%>
             <% if (user.admin) {%>
                 <input type="hidden" name="admin" value="unchecked">

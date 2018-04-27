@@ -78,14 +78,16 @@ module.exports = {
 
     },
     destroy: function(req,res,next) {
+        console.log('antes de buscar usuario:');
         User.findOne(req.session.User.id, function (err,user) {
             var userId = req.session.User.id;
-
+            console.log('encuentro usuario:', userId);
             User.update(userId, {online: false}, function(err) {
                 if (err) return next(err);
             
-
-                req.session.destroy();
+                console.log('antes de session.destroy');
+                    req.session.destroy();
+                
                 res.redirect('/session/new');
             });
         });
