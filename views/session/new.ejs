@@ -1,36 +1,50 @@
 <div class="container">
-    <form action="/session/create" method="POST" id="sign-up-form" class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        
-        <% if (flash && flash.err) { %>
-            <ul class="alert alert-success">
-                <li>Existe flash</li>
-                <% Object.keys(flash.err).forEach(function(error) {%>
-                <li><%- JSON.stringify(flash.err[error]) %></li>
-                <% }); %>
-            </ul>
-        <% } %>
 
-        
-        <div class="control-group">
-            <input type="text" class="form-control" placeholder="Email" name="email"></br>
-        </div>
-            <div class="control-group">
-                    <input type="password" class="form-control" placeholder="password" name="password"></br>
-        </div>
-        <!-- <div class="control-group">        
-            <input type="password" class="form-control" placeholder="confirm pswd" name="confirmation"></br>
-             <br/>
-        </div> -->
-        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In">
-        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-    </form>
-<p></p>
-    <form action="/user/forgotpassword" method="POST" id="sign-up-form" class="form-signin">
-        
-        <input type="submit" class="btn btn-lg btn-secondary" value="Retrieve Password">
-        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-    </form>
+        <div class="row">
+            <div class="col"></div>
+                <div class="col-6">
+                    <div class="jumbotron"> 
+                        <form action="/session/create" method="POST" id="sign-up-form" class="form-signin">
+                            <h2 class="form-signin-heading">Iniciar sesión</h2>
+                            
+                            <% if (flash && flash.err) { %>
+                                <ul class="alert alert-danger">
+                                   
+                                    <% Object.keys(flash.err).forEach(function(key) {%>
+                                    <li><%- JSON.stringify(flash.err[key]) %></li>
+                                    <% }); %>
+                                </ul>
+                            <% } %>
+
+                            
+                            <div class="control-group">
+                                <input type="email" class="form-control" placeholder="Email" name="email" id="email"></br>
+                            </div>
+                                <div class="control-group">
+                                        <input type="password" class="form-control" placeholder="password" name="passw" id="passw"></br>
+                            </div>
+                            <!-- <div class="control-group">        
+                                <input type="password" class="form-control" placeholder="confirm pswd" name="confirmation"></br>
+                                <br/>
+                            </div> -->
+                           <div class="row">
+                                 <div class="col">
+                                        <input type="submit" class="btn btn-lg btn-primary btn-block" value="INICIAR SESIÓN">
+                                        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+                                    </form>
+                                </div>
+                            <div class="col">
+                                <form action="/user/forgotpassword" method="POST" id="sign-up-form" class="form-signin">
+                                    
+                                    <input type="submit" class="btn btn-lg btn-outline-secondary" value="Recuperar contraseña">
+                                    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
 
 
 </div>

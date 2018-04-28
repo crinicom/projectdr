@@ -1,5 +1,5 @@
 <div class="container">
-    <form action="/stakeholder/update/<%=stakeholder.id%>" method="POST" id="new-stakeholder-form">
+    <form action="/stakeholder/update/<%=stakeholder.id%>" method="POST" id="stk-form">
         <h2 class="form-signin-heading">Update Stakeholder</h2>
 
         <% if (flash && flash.err) { %>
@@ -17,16 +17,20 @@
 
             <input type="text" class="form-control"  name="name" value="<%=stakeholder.name%>"size="5" autofocus></br>
             <input type="text" class="form-control"  value="<%=stakeholder.comm_plan%>" name="comm_plan" size="100"></br>
-            <input type="textarea" class="form-control" value="<%=stakeholder.mails%>" name="mails" size="100"></br>
+            <input type="email" class="form-control" value="<%=stakeholder.mails%>" name="mails" size="100"></br>
             <label for="<%=assoc_task%>"></label>
             <label for="<%=belongs_to_project%>"></label>
         
         
         <br/>
         
-        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create stakeholder">
+        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Update stakeholder">
         <input type="hidden" name="_csrf" value="<%=_csrf%>" />
      </div>
    </form>
 
 </div>
+
+<script>
+        $(stk-form).validate();
+</script>

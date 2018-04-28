@@ -20,13 +20,13 @@ module.exports = {
         res.view('session/new');    
     },
     create: function (req, res, next) {
-        if (!req.param('email') || !req.param('password')) {
-            var userPassRequiredError = [{name: 'userPassRequiredError', message: 'must provide both user and pass'}];
+        if (!req.param('email') || !req.param('passw')) {
+            var userPassRequiredError = {name: 'userPassRequiredError', message: 'must provide both user and pass'};
 
             req.session.flash = {
                 err: userPassRequiredError
             }
-            res.redirect('/session/new');
+            res.redirect('/session/new');   
             return;
         }
 
@@ -35,7 +35,7 @@ module.exports = {
 
             // si no encuentra el usuario
             if (!user) {
-                var noAccountError = [{name: 'noAccountError', message: 'no user found: ' + req.param('email')}];
+                var noAccountError = {name: 'noAccountError', message: 'no user found: ' + req.param('email')};
                 req.session.flash = {
                     err: noAccountError
                 }
@@ -45,11 +45,11 @@ module.exports = {
 
             // si lo encuentra, compara pass
 
-            bcrypt.compare(req.param('password'), user.encryptedPassword, function (err, valid) {
+            bcrypt.compare(req.param('passw'), user.encryptedPassword, function (err, valid) {
                 if (err) return next(err);
                 // si la pass no coincide
                 if (!valid) {
-                    var userPassMismatchError = [{name: 'userPassMismatchError', message: 'passwords mismatch'}];
+                    var userPassMismatchError = {name: 'userPassMismatchError', message: 'passwords mismatch'};
 
                     req.session.flash = {
                         err: userPassMismatchError

@@ -1,5 +1,5 @@
 <div class="container">
-    <form action="/stakeholder/create" method="POST" id="new-stakeholder-form">
+    <form action="/stakeholder/create" method="POST" id="stk-form">
         <h2 class="form-signin-heading">Create Stakeholder</h2>
 
         <% if (flash && flash.err) { %>
@@ -29,3 +29,7 @@
     </div>
    </form>
 </div>
+
+<script>
+        $(stk-form).validate();
+</script>

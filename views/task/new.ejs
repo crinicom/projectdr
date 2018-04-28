@@ -1,10 +1,10 @@
 <div class="container">
-        <form action="/task/create" method="POST" id="new-task-form" class="form-new-obj">
+        <form action="/task/create" method="POST" id="task-form" class="form-new-obj">
         <h2 class="form-signin-heading">Create task</h2>
     
         <% if (flash && flash.err) { %>
             <ul class="alert alert-success">
-                <li>Existe flash</li>
+               
                 <% Object.keys(flash.err).forEach(function(error) {%>
                 <li><%- JSON.stringify(flash.err[error]) %></li>
                 <% }); %>
@@ -15,17 +15,21 @@
         <input type="hidden" name="belongs_to_project" value="<%=objective.belongs_to_project%>" />
         
         <div class="control-group">
-            <input type="text" class="form-control" placeholder="Description" name="text" autofocus ></br>
+            <input type="text" class="form-control" placeholder="Description" name="text" autofocus required></br>
         </div>
-        
+        <!-- 
         <div class="control-group">
             <input type="number" class="form-control" placeholder="%advance" name="status"></br>
         </div>
-    
+     -->
         <br/>
         
         <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create task">
         <input type="hidden" name="_csrf" value="<%=_csrf%>" />
         </form>
     </div>
+
+ <script>
+            $("task-form").validate();
+ </script>
     

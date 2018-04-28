@@ -78,14 +78,9 @@
                                             <input type="hidden" name="_csrf" value="<%= _csrf%>">
                                         </form>
 
-                                        <form action="/mail/new/" method="POST">
-                                            <input type="hidden" name="belongs_to_stk" value="<%= stakeholder.id%>">
-                                            <input type="hidden" name="_method" value="new" >
-                                            <button type="submit" class="btn btn-sm btn-success disabled">
-                                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                            </button>
-                                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                                        </form>
+                                      <!--   DESACTIVO BOTON + por el momento -->
+
+                                       
                             
                                         <form action="/stakeholder/destroy/<%= stakeholder.id %>" method="POST">
                                             <input type="hidden" name="belongs_to_project" value="<%= project.id %>" >
@@ -95,6 +90,15 @@
                                             </button>
                                             <input type="hidden" name="_csrf" value="<%= _csrf%>">
                                         </form>
+
+                                        <form action="#"  method="POST"> <!-- /mail/new -->
+                                            <input type="hidden" name="belongs_to_stk" value="<%//= stakeholder.id%>">
+                                            <input type="hidden" name="_method" value="new" >
+                                            <button type="submit" class="btn btn-sm btn-success disabled">
+                                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                            </button>
+                                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                        </form> 
                                     </tr>
                                 </table>
                              </td>

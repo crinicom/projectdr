@@ -1,5 +1,5 @@
 
-<form action="/user/create" method="POST" id="sign-up-form" class="form-signin">
+<form action="/user/create" method="POST" id="task-form" class="form-signin">
 <h2 class="form-signin-heading">Create user</h2>
 
 <% if (flash && flash.err) { %>
@@ -27,4 +27,8 @@
 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User">
 <input type="hidden" name="_csrf" value="<%=_csrf%>" />
 </form>
+
+<script>
+        $("task-form").validate();
+    </script>
 

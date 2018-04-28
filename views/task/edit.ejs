@@ -1,9 +1,13 @@
 
-<form action="/task/update/<%=task.id%>" method="POST">
+<form action="/task/update/<%=task.id%>" method="POST" id="task-form">
     <h2>Modificar task</h2>
     <input value="<%=task.text %>" type="text" name="text"><br/>
-    <input value="<%=task.status%>" type="number" name="status"><br/>
+   <!--  <input value="<%//=task.status%>" type="number" name="status"><br/> -->
     <input type="hidden" name="belongs_to_project" value="<%=belongs_to_project%>" />
     <input  type="submit" value="Actualizar"/>
     <input type="hidden" name="_csrf" value="<%=_csrf%>" />
 </form>
+
+<script>
+    $(task-form).validate();
+</script>

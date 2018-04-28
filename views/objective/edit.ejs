@@ -1,5 +1,5 @@
 <div class="container">
-<form action="/objective/update/<%=objective.id%>" method="POST">
+<form action="/objective/update/<%=objective.id%>" method="POST" id="new-obj-form">
     <h2>Modificar objetivo</h2>
     <input value="<%=objective.description%>" type="text" name="description"><br/>
     <input value="<%=objective.formula%>" type="text" name="formula"><br/>
@@ -8,3 +8,7 @@
     <input type="hidden" name="_csrf" value="<%=_csrf%>" />
 </form>
 </div>
+
+<script>
+        $("new-obj-form").validate();
+</script>
