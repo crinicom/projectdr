@@ -108,15 +108,27 @@ module.exports = {
                 
                 return res.redirect('/project/gantt/' + req.param('belongs_to_project') );
             }
-            
+            res.status(200);
             res.redirect('/project/gantt/' + req.param('belongs_to_project') );
         }); 
     },
+    update_status_ajax: function(req, res, next) {
+       console.log("entrè a update_status_ajax");
+        Stakeholder.update(req.param('id'), req.params.all(), function stakeholderkUpdated(err) {
+            if (err) {
+                
+                return res.serverError(err);
+            }
+            return res.ok();
+        }); 
+    },
+
     update: function(req, res, next) {
            Stakeholder.update(req.param('id'), req.params.all(), function stakeholderkUpdated(err) {
             if (err) {
                 return res.redirect('/stakeholder/edit/'+ req.param('id'));
             }
+            
             res.redirect('/project/stakeholders/' + req.param('belongs_to_project') );
         }); 
     },

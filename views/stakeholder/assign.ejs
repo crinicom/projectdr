@@ -13,9 +13,9 @@
         <% } %>
         <div class="form-group">
             
-            <input type="text" class="form-control"  name="name" value="<%=stakeholder.name%>"size="5" autofocus></br>
-            <input type="text" class="form-control"  value="<%=stakeholder.comm_plan%>" name="comm_plan" size="100"></br>
-            <input type="text" class="form-control" value="<%=stakeholder.responsible%>" name="responsible" size="100"></br>
+            <p><%=stakeholder.name%></p>
+            <p><%=stakeholder.comm_plan%></p>
+            <input type="text" class="form-control" value="<% if(stakeholder.responsible){%> <%= stakeholder.responsible %> <%} else {%><%}%>" name="responsible" size="100"></br>
 
         <br/>
         
