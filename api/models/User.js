@@ -47,7 +47,7 @@ schema: true,
     toJSON: function () {
       var obj = this.toObject();
       delete obj.encryptedPassword;
-      delete obj.password;
+      delete obj.passw;
       delete obj.confirmation;
       delete obj._csrf;
       return obj;
@@ -70,10 +70,10 @@ schema: true,
   },
 
   beforeCreate: function (values, next) {
-    if(!values.password || values.password != values.confirmation) {
+    if(!values.passw || values.passw != values.confirmation) {
       return next({err: ["password mismatch"]});
     }
-    require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
+    require('bcrypt').hash(values.passw, 10, function passwordEncrypted(err, encryptedPassword){
       if (err) return next(err);
       values.encryptedPassword = encryptedPassword;
       next();
