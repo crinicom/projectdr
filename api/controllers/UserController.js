@@ -65,7 +65,7 @@ module.exports = {
                         user.save(function (err) {
                             if (err) return next(err);
                         
-                            EmailService.sendWelcomeMail(user);
+                           // EmailService.sendWelcomeMail(user);
                             
                             var now = new Date(Date.now()).toLocaleString().split(', ')[0];
                             var log = {
@@ -81,7 +81,7 @@ module.exports = {
                                 console.log(JSON.stringify(applog));
                             });
 
-                            EmailService.sendLogMail(log);  // <= Here we using
+                           // EmailService.sendLogMail(log);  // <= Here we using
                             
 
                           res.redirect('/user/show/' + user.id ); 
@@ -174,26 +174,17 @@ module.exports = {
 
                 console.log("llegamos a enviar el mail", data);
                 
-                EmailService.sendPasswordRecoveryMail(data);
+                //EmailService.sendPasswordRecoveryMail(data);
 
               });
 
-              
-              
-             
-                            
-             
+ 
               /* 
               Applog.create(data, function logCreated(err, data) {
                   if (err) { console.log(JSON.stringify(err)); }
                   console.log(JSON.stringify(data));
               });
  */
-            
-              
-              
-              
-              
               
               res.view({user:user});
         });   

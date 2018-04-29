@@ -9,7 +9,7 @@ module.exports = {
 
   attributes: {
     name: {type: 'string' },
-    date: {type: 'date'},
+    date: {type: 'string'},
     project: {type: 'string'},
     module: {type: 'string'},
     item: {type: 'string'},
