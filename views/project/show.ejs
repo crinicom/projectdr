@@ -25,7 +25,8 @@
     <h3><%= __('project.show.scope')%></h3>
     <p><%= project.scope %></p>
       <!-- Comentarios de DATOS BASICOS -->  
-    <p><div class="pull-right"> 
+    <p>
+        <div class="pull-right"> 
         <a class="btn btn-primary" data-toggle="collapse" href="#collapseHeaderComments" aria-expanded="false" aria-controls="collapseHeaderComments">
             <% if (comments.filter(function thisSection(comment) { return comment.section == 'header'}).length > 0) {%>
                  <i class="fa fa-comments" aria-hidden="true"></i>
@@ -33,7 +34,8 @@
                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
             <% }%>
         </a>
-    </div> </p>
+    </div> 
+</p>
     
     <div class="collapse" id="collapseHeaderComments">
         <div class="card card-body">
@@ -105,6 +107,57 @@
         </button>
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
+
+    
+    <div class="pull-right"> 
+        <a class="btn btn-primary" data-toggle="collapse" href="#AllowEditURL" aria-expanded="false" aria-controls="AllowEditURL">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+    </div> 
+
+        <div class="collapse in" id="AllowEditURL">
+                <div class="card card-body">
+                    <%if (project.url) { %>
+                        <a href="<%=project.url%>" > Acceder a carpeta compartida</a>
+                    <%} else {%>
+                        Editar URL de carpeta compartida
+                    <%}%>
+                   
+                </div>
+            </div>
+    <div class="collapse" id="EditURL">
+        <div class="card card-body">
+                <form action="/project/update/<%=project.id%>" method="POST">
+                    <input type="hidden" name="owner" value="<%=project.owner.id%>" />
+                    <input cols="100" type="text" value="<%=project.url%>"  name="url" id="url_input"><br/>
+                    <input type="submit" value="Update" class="btn btn-sm btn-success" />
+                    <a data-toggle="collapse" href="#AllowEditURL" aria-expanded="false" aria-controls="AllowEditURL" class="btn btn-sm btn-danger">Cancel</a>
+                    
+                    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+                    
+            
+                </form>
+        </div>
+    </div>
+
+
+    <script>
+        $('document').ready(function(){
+            $('#AllowEditURL').collapse('show');
+        });
+    $('#AllowEditURL').on('hide.bs.collapse', function () {
+        $('#EditURL').collapse('show');
+        $('#url_input').focus();
+  // do something…
+    })
+    $('#AllowEditURL').on('show.bs.collapse', function () {
+        $('#EditURL').collapse('hide');
+  // do something…
+    })
+    
+    </script>
+     
+
 </div> <!-- fin col-->
 
 
@@ -494,3 +547,4 @@
 
 </div> <!-- fin row-->
 </div> <!-- fin container-->
+

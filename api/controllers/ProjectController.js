@@ -54,6 +54,7 @@ module.exports = {
     update: function(req, res, next) {
            Project.update(req.param('id'), req.params.all(), function projectUpdated(err) {
             if (err) {
+                console.log(err);
                 return res.redirect('/project/edit/'+ req.param('id'));
             }
             return res.redirect('/project/show/'+ req.param('id'));
@@ -113,6 +114,7 @@ module.exports = {
                 console.log(comments);
                 //return comments;
                 //res.json(users[1].name);
+                console.log(project);
                 res.view({project:project, comments:revcoms});
         
             });
