@@ -112,7 +112,7 @@ module.exports = {
                 console.log(JSON.stringify(applog));
             });
 
-            return res.redirect('/objective/show/'+ req.param('id'));
+            res.redirect('/project/show/' + req.param('belongs_to_project') ); 
         }); 
     },
     destroy: function(req,res,next) {

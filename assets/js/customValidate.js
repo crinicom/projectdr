@@ -136,4 +136,41 @@ $(document).ready(function(){
 
     });
 
+
+$('#risk-form').validate({
+    rules: {
+        description: {
+            required: true
+        },
+        impact: {
+            required: true
+            
+        },
+        mitigation: {
+            required: true
+        }
+       
+    },
+    messages: {
+        description: {
+            required: "Debe describir el riesgo percibido"
+        },
+        impact: {
+            required: "Debe especificar cómo impacta el riesgo, de ocurrir, en este proyecto en particular"
+            
+        },
+        mitigation: {
+            
+            required: "Debe ingresar un plan de mitigación de efectos del riesgo o el plan para eliminar o bajar la probabilidad de ocurrencia."
+        }
+    },
+    success: function(element){
+        element
+        .text('OK!').addClass('valid')
+
+    }
+
 });
+
+
+}); // FIN DE LA FUNCION VALIDATE

@@ -1,31 +1,31 @@
 <div class="container">
     <form action="/objective/create" method="POST" id="new-obj-form" class="form-new-obj">
-    <h2 class="form-signin-heading"><%=__('objective.new.title')%></h2>
+        <h2 class="form-signin-heading"><%=__('objective.new.title')%></h2>
 
-    <% if (flash && flash.err) { %>
-        <ul class="alert alert-success">
-            <li>Existe flash</li>
-            <% Object.keys(flash.err).forEach(function(error) {%>
-            <li><%- JSON.stringify(flash.err[error]) %></li>
-            <% }); %>
-        </ul>
+        <% if (flash && flash.err) { %>
+            <ul class="alert alert-success">
+                <li>Existe flash</li>
+                <% Object.keys(flash.err).forEach(function(error) {%>
+                <li><%- JSON.stringify(flash.err[error]) %></li>
+                <% }); %>
+            </ul>
 
-    <% } %>
-    <input type="hidden" name="belongs_to_project" value="<%=project.id%>" />
-    <div class="control-group">
-    <input type="text" class="form-control" placeholder="<%=__('objective.new.description')%>" name="description" autofocus></br>
-    </div>
-    <div class="control-group">
-        <input type="text" class="form-control" placeholder="<%=__('objective.new.formula')%>" name="formula"></br>
-    </div>
-        <div class="control-group">
-                <input type="text" class="form-control" placeholder="<%=__('objective.new.goal')%>" name="goal"></br>
-    </div>
+        <% } %>
+            <input type="hidden" name="belongs_to_project" value="<%=project.id%>" />
+            <div class="control-group">
+            <input type="text" class="form-control" placeholder="<%=__('objective.new.description')%>" name="description" autofocus></br>
+            </div>
+            <div class="control-group">
+                <input type="text" class="form-control" placeholder="<%=__('objective.new.formula')%>" name="formula"></br>
+            </div>
+            <div class="control-group">
+                    <input type="text" class="form-control" placeholder="<%=__('objective.new.goal')%>" name="goal"></br>
+            </div>
 
-    <br/>
-    </div>
-    <input type="submit" class="btn btn-lg btn-primary btn-block" value="<%=__('objective.new.button')%>">
-    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+        <br/>
+        
+        <input type="submit" class="btn btn-lg btn-primary btn-block" value="<%=__('objective.new.button')%>">
+        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
     </form>
 </div>
 

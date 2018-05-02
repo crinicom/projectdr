@@ -1,12 +1,26 @@
 <div class="container">
-<form action="/objective/update/<%=objective.id%>" method="POST" id="new-obj-form">
-    <h2>Modificar objetivo</h2>
-    <input value="<%=objective.description%>" type="text" name="description"><br/>
-    <input value="<%=objective.formula%>" type="text" name="formula"><br/>
-    <input value="<%=objective.goal%>" type="text" name="goal"><br/>
-    <input  type="submit" value="Confirmar"/>
-    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-</form>
+    <form action="/objective/update/<%=objective.id%>" method="POST" id="new-obj-form">
+        <h2>Modificar objetivo</h2>
+
+        <% if (flash && flash.err) { %>
+            <ul class="alert alert-success">
+                <li>Existe flash</li>
+                <% Object.keys(flash.err).forEach(function(error) {%>
+                <li><%- JSON.stringify(flash.err[error]) %></li>
+                <% }); %>
+            </ul>
+
+        <% } %>
+
+        <input type="hidden" name="belongs_to_project" value="<%=objective.belongs_to_project%>" />
+        <div class="control-group">
+            <input class="form-control" value="<%=objective.description%>" type="text" name="description" autofocus><br/>
+            <input class="form-control" value="<%=objective.formula%>" type="text" name="formula"><br/>
+            <input class="form-control" value="<%=objective.goal%>" type="text" name="goal"><br/>
+        </div>
+        <input  class="btn btn-lg btn-primary btn-block" type="submit" value="Confirmar"/>
+        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+    </form>
 </div>
 
 <script>

@@ -1,5 +1,5 @@
 <div class="container">
-    <form action="/risk/update/<%=risk.id%>" method="POST" id="new-risk-form">
+    <form action="/risk/update/<%=risk.id%>" method="POST" id="risk-form">
         <h2 class="form-signin-heading">Create Risk</h2>
 
         <% if (flash && flash.err) { %>
@@ -28,3 +28,7 @@
     </div>
    </form>
 </div>
+
+<script>
+    $(risk-form).validate();
+</script>
