@@ -37,13 +37,41 @@ $(document).ready(function(){
                 equalTo: "Ingrese la misma contraseña en el campo de comprobación"
             }
         },
-        success: function(element){
-            element
-            .text('OK!').addClass('valid')
+        errorElement: "em",
+        errorPlacement: function ( error, element ) {
+            // Add the `help-block` class to the error element
+            error.addClass( "help-block" );
 
+            // Add `has-feedback` class to the parent div.form-group
+            // in order to add icons to inputs
+            element.parents( ".col-sm-5" ).addClass( "has-feedback" );
+
+            if ( element.prop( "type" ) === "checkbox" ) {
+                error.insertAfter( element.parent( "label" ) );
+            } else {
+                error.insertAfter( element );
+            }
+
+            // Add the span element, if doesn't exists, and apply the icon classes to it.
+            if ( !element.next( "span" )[ 0 ] ) {
+                $( "<span class='fa fa-times form-control-feedback'></span>" ).insertAfter( element );
+            }
+        },
+        success: function ( label, element ) {
+            // Add the span element, if doesn't exists, and apply the icon classes to it.
+            if ( !$( element ).next( "span" )[ 0 ] ) {
+                $( "<span class='fa fa-check form-control-feedback'></span>" ).insertAfter( $( element ) );
+            }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+            $( element ).next( "span" ).addClass( "fa-times" ).removeClass( "fa-check" );
+        },
+        unhighlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+            $( element ).next( "span" ).addClass( "fa-check" ).removeClass( "fa-times" );
         }
-
-    });
+    } );
 
     $('#stk-form').validate({
         rules: {
@@ -71,13 +99,41 @@ $(document).ready(function(){
                 required: "Debe indicar cómo gesionará este stakeholder"
             }
         },
-        success: function(element){
-            element
-            .text('OK!').addClass('valid')
+        errorElement: "em",
+        errorPlacement: function ( error, element ) {
+            // Add the `help-block` class to the error element
+            error.addClass( "help-block" );
 
+            // Add `has-feedback` class to the parent div.form-group
+            // in order to add icons to inputs
+            element.parents( ".col-sm-5" ).addClass( "has-feedback" );
+
+            if ( element.prop( "type" ) === "checkbox" ) {
+                error.insertAfter( element.parent( "label" ) );
+            } else {
+                error.insertAfter( element );
+            }
+
+            // Add the span element, if doesn't exists, and apply the icon classes to it.
+            if ( !element.next( "span" )[ 0 ] ) {
+                $( "<span class='fa fa-times form-control-feedback'></span>" ).insertAfter( element );
+            }
+        },
+        success: function ( label, element ) {
+            // Add the span element, if doesn't exists, and apply the icon classes to it.
+            if ( !$( element ).next( "span" )[ 0 ] ) {
+                $( "<span class='fa fa-check form-control-feedback'></span>" ).insertAfter( $( element ) );
+            }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+            $( element ).next( "span" ).addClass( "fa-times" ).removeClass( "fa-check" );
+        },
+        unhighlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+            $( element ).next( "span" ).addClass( "fa-check" ).removeClass( "fa-times" );
         }
-
-    });
+    } );
 
 
     $('#new-obj-form').validate({
@@ -107,13 +163,41 @@ $(document).ready(function(){
                 required: "Debe ingresar una meta esperada"
             }
         },
-        success: function(element){
-            element
-            .text('OK!').addClass('valid')
+        errorElement: "em",
+        errorPlacement: function ( error, element ) {
+            // Add the `help-block` class to the error element
+            error.addClass( "help-block" );
 
+            // Add `has-feedback` class to the parent div.form-group
+            // in order to add icons to inputs
+            element.parents( ".col-sm-5" ).addClass( "has-feedback" );
+
+            if ( element.prop( "type" ) === "checkbox" ) {
+                error.insertAfter( element.parent( "label" ) );
+            } else {
+                error.insertAfter( element );
+            }
+
+            // Add the span element, if doesn't exists, and apply the icon classes to it.
+            if ( !element.next( "span" )[ 0 ] ) {
+                $( "<span class='fa fa-times form-control-feedback'></span>" ).insertAfter( element );
+            }
+        },
+        success: function ( label, element ) {
+            // Add the span element, if doesn't exists, and apply the icon classes to it.
+            if ( !$( element ).next( "span" )[ 0 ] ) {
+                $( "<span class='fa fa-check form-control-feedback'></span>" ).insertAfter( $( element ) );
+            }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+            $( element ).next( "span" ).addClass( "fa-times" ).removeClass( "fa-check" );
+        },
+        unhighlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+            $( element ).next( "span" ).addClass( "fa-check" ).removeClass( "fa-times" );
         }
-
-    });
+    } );
 
 
     $('#task-form').validate({
@@ -128,13 +212,41 @@ $(document).ready(function(){
                 required: "Debe describir la tarea"
             }
         },
-        success: function(element){
-            element
-            .text('OK!').addClass('valid')
+        errorElement: "em",
+        errorPlacement: function ( error, element ) {
+            // Add the `help-block` class to the error element
+            error.addClass( "help-block" );
 
+            // Add `has-feedback` class to the parent div.form-group
+            // in order to add icons to inputs
+            element.parents( ".col-sm-5" ).addClass( "has-feedback" );
+
+            if ( element.prop( "type" ) === "checkbox" ) {
+                error.insertAfter( element.parent( "label" ) );
+            } else {
+                error.insertAfter( element );
+            }
+
+            // Add the span element, if doesn't exists, and apply the icon classes to it.
+            if ( !element.next( "span" )[ 0 ] ) {
+                $( "<span class='fa fa-times form-control-feedback'></span>" ).insertAfter( element );
+            }
+        },
+        success: function ( label, element ) {
+            // Add the span element, if doesn't exists, and apply the icon classes to it.
+            if ( !$( element ).next( "span" )[ 0 ] ) {
+                $( "<span class='fa fa-check form-control-feedback'></span>" ).insertAfter( $( element ) );
+            }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+            $( element ).next( "span" ).addClass( "fa-times" ).removeClass( "fa-check" );
+        },
+        unhighlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+            $( element ).next( "span" ).addClass( "fa-check" ).removeClass( "fa-times" );
         }
-
-    });
+    } );
 
 
 $('#risk-form').validate({
@@ -164,13 +276,46 @@ $('#risk-form').validate({
             required: "Debe ingresar un plan de mitigación de efectos del riesgo o el plan para eliminar o bajar la probabilidad de ocurrencia."
         }
     },
-    success: function(element){
-        element
-        .text('OK!').addClass('valid')
+    errorElement: "em",
+        errorPlacement: function ( error, element ) {
+            // Add the `help-block` class to the error element
+            error.addClass( "help-block" );
 
-    }
+            // Add `has-feedback` class to the parent div.form-group
+            // in order to add icons to inputs
+            element.parents( ".col-sm-5" ).addClass( "has-feedback" );
 
-});
+            if ( element.prop( "type" ) === "checkbox" ) {
+                error.insertAfter( element.parent( "label" ) );
+            } else {
+                error.insertAfter( element );
+            }
+
+            // Add the span element, if doesn't exists, and apply the icon classes to it.
+            if ( !element.next( "span" )[ 0 ] ) {
+                $( "<span class='fa fa-times form-control-feedback'></span>" ).insertAfter( element );
+            }
+        },
+        success: function ( label, element ) {
+            // Add the span element, if doesn't exists, and apply the icon classes to it.
+            if ( !$( element ).next( "span" )[ 0 ] ) {
+                $( "<span class='fa fa-check form-control-feedback'></span>" ).insertAfter( $( element ) );
+            }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+            $( element ).next( "span" ).addClass( "fa-times" ).removeClass( "fa-check" );
+        },
+        unhighlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+            $( element ).next( "span" ).addClass( "fa-check" ).removeClass( "fa-times" );
+        }
+    } );
+
+
+
 
 
 }); // FIN DE LA FUNCION VALIDATE
+
+
