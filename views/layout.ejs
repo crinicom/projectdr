@@ -104,7 +104,7 @@
 
 
 <!-- <nav class="navbar navbar-inverse bg-inverse fixed-top"> -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top justify-content-between">
         <a class="navbar-brand" href="/"><%=__('navbar.brand')%><strong><%=__('navbar.brand2')%></strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -125,43 +125,74 @@
         
            <!--  <div class="nav navbar-nav"> -->
                 <% if (session.authenticated) {%>
-                  <div class="navbar-collapse collapse ">
-                   <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                  <div class="navbar-collapse collapse">
+                   <ul class="navbar-nav ml-auto mt-2 mt-md-0"> <!-- mr-auto mt-2 mt-md-0  -->
           
-                    <li class="nav-item active"><a class="nav-link" href="/user/show/<%= session.User.id%>"><%= session.User.name%></a> </li>
+                   <!--  <li class="nav-item active"><a class="nav-link" href="/user/show/<%= session.User.id%>"><%= session.User.name%></a> </li> -->
                 
-                    <% if (session.authenticated && session.User.admin) {%>
-                    <li class="nav-item"><a class="nav-link" href="/user"><%=__('navbar.admin')%></a></li>
+                   
+                   <!--  <li class="nav-item"><a class="nav-link" href="/user"><%=__('navbar.admin')%></a></li>
                     <li class="nav-item"><a class="nav-link" href="/projects"><%=__('navbar.projects')%></a></li>
+                     -->
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        BIENVENIDO<strong><%= (session.User.name).toUpperCase()%></strong>
+                      </a>
+                      <div class="dropdown-menu dropdown-dark" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/user/show/<%= session.User.id%>">Mis Proyectos</a>
+                       
+                        <% if (session.authenticated && session.User.admin) {%>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="/user"><%=__('navbar.admin')%></a>
+                          <a class="dropdown-item" href="/project"><%=__('navbar.projects')%></a>
+                          <%}%>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/user/edit/<%= session.User.id%>">Mi perfil</a>
+                        <div class="dropdown-divider"></div>
+                        <form  action="/session/destroy"> <!-- class="form-inline my-2 my-lg-0 align-center" -->
+                          
+                          <button type="submit" class="btn btn-outline-success btn-block"><%=__('navbar.signout')%></button>
                     
-               </ul>  
-                <%}%>
+                          <input type="hidden" name="_csrf" value="<%=_csrf%>"/>
+                        </form>
+                      </div>
+                    </li>
+               
+                  </ul> 
+                
+               
            
-            <form class="form-inline my-2 my-lg-0" action="/session/destroy">
+           <!--  <form class="form-inline my-2 my-lg-0" action="/session/destroy">
                     
               <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><%=__('navbar.signout')%></button>
               <input type="hidden" name="_csrf" value="<%=_csrf%>"/>
-            </form>
+            </form> -->
           <%}%>
-
+          
           
          
           <%if (!session.authenticated) {%>
           <div class="navbar-collapse collapse">   
-          <form class="form-inline my-2 my-lg-0" action="/session/create">
-            <div class="form-group">
-              <input type="text" placeholder="email" name="email" class="form-control mr-sm-2">
+            <form class="form-inline my-2 my-lg-0" action="/session/create">
+              <div class="form-group">
+                <input type="text" placeholder="email" name="email" class="form-control mr-sm-2">
+              
+              
+                  <input type="password" placeholder="password" name="passw" class="form-control mr-sm-2">
+              
+              <button type="submit" class="btn btn-success my-2 my-sm-0"><%=__('navbar.signin')%></button>
+            </div>
+              <input type="hidden" name="_csrf" value="<%=_csrf%>"/>
+            </form>
+
+           
             
-            
-                <input type="password" placeholder="password" name="passw" class="form-control mr-sm-2">
-            
-            <button type="submit" class="btn btn-success my-2 my-sm-0"><%=__('navbar.signin')%></button>
           </div>
-            <input type="hidden" name="_csrf" value="<%=_csrf%>"/>
-          </form>
+
+          <ul class="navbar-nav ml-auto mt-2 mt-md-0">
+              <li> <a href="user/new" class="btn btn-danger">REGISTRARSE</a></li>
+            </ul>
           <%}%>
-     </div>
-     
    <!--  </div> -->
 
   </nav>

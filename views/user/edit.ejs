@@ -4,10 +4,10 @@
         <input value="<%=user.name%>" type="text" name="name"><br/>
         <input value="<%=user.email%>" type="text" name="email"><br/>
         <div class="control-group">
-            <input type="password" class="form-control" placeholder="password" name="password"></br>
+            <input type="password" class="form-control" placeholder="password" name="passw" id="passw"></br>
         </div>
         <div class="control-group">        
-            <input type="password" class="form-control" placeholder="confirm pswd" name="confirmation"></br>
+            <input type="password" class="form-control" placeholder="confirm pswd" name="confirmation" id="confirmation"></br>
             <br/>
         </div>
         <% if (session.authenticated && session.User.admin) {%>

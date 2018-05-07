@@ -241,6 +241,10 @@ module.exports = {
         console.log(req.params.updatepass);
            User.update(req.param('id'), req.params.all(), function userUpdated(err) {
             if (err) {
+                req.session.flash = {
+                    err: err
+                }
+                console.log(err);
                 return res.redirect('/user/edit/'+ req.param('id'));
             }
             return res.redirect('/user/show/'+ req.param('id'));

@@ -85,12 +85,13 @@ schema: true,
     console.log("values.updatepass: ", values.updatepass);
     if(values.updatepass) {
         console.log("ingreso a updatepass");
-      if(!values.password || values.password != values.confirmation) {
+      if(!values.passw || values.passw != values.confirmation) {
         return next({err: ["password mismatch"]});
       }
-      require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword){
+      require('bcrypt').hash(values.passw, 10, function passwordEncrypted(err, encryptedPassword){
         if (err) return next(err);
         values.encryptedPassword = encryptedPassword;
+        console.log(values.encryptedPassword);
         next();
       });
   }

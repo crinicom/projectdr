@@ -34,7 +34,7 @@ $(document).ready(function(){
             confirmation: {
                 minlength:  "La contraseña debe tener mínimo 3 caracteres",
                 required: "Debe comprobar una contraseña",
-                equalTo: "Ingrese la misma contraseña en el campo de comprobación"
+                equalTo: 'Las contraseñas ingresadas no coinciden'
             }
         },
         errorElement: "em",
