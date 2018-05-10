@@ -4,13 +4,13 @@
   <div id="wrapper">
 	
     <div class="container--box-login">
-        <h1 class="title--page-login"><%= __(signup.title)%>></h1> <!-- Registrarse -->
+        <h1 class="title--page-login"><%= __('signup.title')%></h1> <!-- Registrarse -->
         <form>
             <div class="container--2col-form">
                 <div class="col-form">
                     <div class="item-form">
-                        <input id="name" name="name" type="text" placeholder="NOMBRE" required>
-                        <label for="name">Nombre</label>
+                        <input id="name" name="name" type="text" placeholder="<%= __('signup.name_placeholder')%>" required>
+                        <label for="name"><%= __('signup.name_label')%></label>
                     </div>
                 </div>
                 <div class="col-form">

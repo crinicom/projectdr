@@ -12,6 +12,10 @@ schema: true,
       type: 'string',
       required: true
     },
+    last_name: {
+      type: 'string',
+      required: true
+    },
     email: {
       type: 'string',
       email: true
