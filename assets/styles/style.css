@@ -1,0 +1,411 @@
+/* 
+=================================================
+	Theme Name: Project Doctor
+	Author: Oscar Madrid V.
+=================================================
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700');
+
+*,
+body {
+	margin: 0px;
+	padding: 0px
+}
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
+div,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+	display: block;
+}
+
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+img {
+	border: none;
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	text-align: none;
+	text-decoration: none;
+	-webkit-transition: all linear 0.15s;
+	-moz-transition: all linear 0.15s;
+	-ms-transition: all linear 0.15s;
+	-o-transition: all linear 0.15s;
+	transition: all linear 0.15s
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+input,
+textarea {
+	border: 1px solid #ccc;
+	width: 100%;
+	font-size: 14px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+input {
+	height: 60px;
+	padding: 0 12px;
+	margin: 0;
+}
+
+header {
+	float: left;
+	width: 100%;
+	background: #343a40;
+	padding: 0 0;
+	position: relative;
+}
+
+figure.logotipo {
+	width: 300px;
+	float: left;
+	margin-left: 20px;
+	line-height: 0;
+}
+
+figure.logotipo img {
+	height: 60px;
+}
+
+.user-account {
+	float: right;
+}
+
+.user-account a {
+	float: left;
+	height: 60px;
+	line-height: 60px;
+	color: #fff;
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: 300;
+	padding: 0 20px;
+	border-left: 1px solid #515457;
+	letter-spacing: 1px;
+}
+
+.user-login {
+	font-size: 14px;
+	font-weight: 300;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin-top: 14px;
+}
+
+.user-login span {
+	text-transform: lowercase;
+	font-size: 12px;
+}
+
+.btn-menu {
+	float: right;
+	width: 60px;
+	height: 60px;
+	cursor: pointer;
+	position: relative;
+	margin-left: 20px;
+	border-left: 1px solid #515457;
+}
+
+.btn-menu:before,
+.btn-menu:after,
+.btn-menu span {
+	background: #fff;
+	content: '';
+	display: block;
+	width: 32px;
+	height: 2px;
+	position: absolute;
+	left: 16px;
+	-webkit-transition: all linear 0.2s;
+	-moz-transition: all linear 0.2s;
+	transition: all linear 0.2s;
+}
+
+.btn-menu:before {
+	top: 20px;
+}
+
+.btn-menu span {
+	top: 29px;
+}
+
+.btn-menu:after {
+	top: 38px;
+}
+
+.btn-menu.mm-opening:before,
+.btn-menu.mm-opening:after {
+	top: 33px;
+}
+
+.btn-menu.mm-opening:before {
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.btn-menu.mm-opening span {
+	left: -50px;
+	opacity: 0;
+	-moz-opacity: .0;
+	filter: alpha(opacity=0);
+}
+
+.btn-menu.mm-opening:after {
+	-moz-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.container--menu {
+	display: none;
+	width: 350px;
+	position: absolute;
+	top: 100%;
+	right: 0;
+	background: #343a40;
+	border-top: 1px solid #515457;
+}
+
+.container--menu ul {
+	display: block;
+	overflow: hidden;
+}
+
+.container--menu ul li {
+	overflow: hidden;
+	height: 60px;
+	line-height: 60px;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 300;
+	border-bottom: 1px solid #515457;
+}
+
+.container--menu ul li a {
+	display: block;
+	padding: 0 20px;
+	color: #fff;
+}
+
+.container--menu ul li:hover a {
+	display: block;
+	padding: 0 20px 0 35px;
+	color: #fff;
+}
+
+#wrapper {
+	max-width:1170px;
+	margin:0 auto;
+	padding:0 20px;
+	position: relative;
+	z-index: 20;
+	overflow: hidden;
+}
+
+
+/*
+===================
+       LOGIN
+===================
+*/
+
+.container--box-login {
+	overflow: hidden;
+	width: 520px;
+	margin: 0 auto;
+	padding-top: 95px;
+	text-align: center;
+}
+
+h1.title--page-login {
+	font-size: 36px;
+	text-transform: uppercase;
+	font-weight: 300;
+	letter-spacing: 1px;
+	color: #303030;
+	margin: 0 0 65px;
+}
+
+p.txt--page-login {
+	font-size: 15px;
+	line-height: 17px;
+	margin-bottom: 20px;
+}
+
+.item-form {
+	display: block;
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.container--2col-form {
+	overflow: hidden;
+	margin-left: -20px;
+}
+
+.col-form {
+	width: 50%;
+	float: left;
+}
+
+.col-form .item-form {
+	margin-left: 20px;
+}
+
+.item-form label {
+	position: absolute;
+	left: 12px;
+	top: 3px;
+	cursor: text;
+	font-size: 12px;
+	opacity: 1;
+	transition: all .2s;
+	color: #343a40;
+}
+
+.item-form input::-webkit-input-placeholder {
+	opacity: 1;
+	transition: all .2s;
+}
+
+.item-form input:-ms-input-placeholder {
+	opacity: 1;
+	transition: all .2s;
+}
+
+.item-form input::-ms-input-placeholder {
+	opacity: 1;
+	transition: all .2s;
+}
+
+.item-form input::placeholder {
+	opacity: 1;
+	transition: all .2s;
+}
+
+.item-form input:placeholder-shown:not(:focus)::-webkit-input-placeholder {
+	opacity: 0;
+}
+
+.item-form input:placeholder-shown:not(:focus):-ms-input-placeholder {
+	opacity: 0;
+}
+
+.item-form input:placeholder-shown:not(:focus)::-ms-input-placeholder {
+	opacity: 0;
+}
+
+.item-form input:placeholder-shown:not(:focus)::placeholder {
+	opacity: 0;
+}
+
+.item-form input:placeholder-shown:not(:focus) + * {
+	font-size: 14px;
+	opacity: .5;
+	top: 21px;
+	left: 12px;
+	text-transform: uppercase;
+}
+
+.item-form input:focus {
+	outline: none;
+}
+
+input[type="submit"].submit {
+	background: #343a40;
+	color: #fff;
+	width: 200px;
+	text-transform: uppercase;
+	font-weight: 300;
+	font-size: 17px;
+	letter-spacing: 1px;
+	border: none;
+}
+
+input[type="submit"].reset-pass {
+	background: #fff;
+	color: #303030;
+	width: auto;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 11px;
+	border: none;
+	text-decoration: underline;
+	text-align: right;
+	padding: 0;
+}
+
+.item-form p {
+	font-size: 13px;
+	color: #303030;
+	text-align: left;
+	padding-top: 3px;
+}
+
+p.change-password {
+	font-size: 13px;
+	color: #303030;
+	text-align: left;
+	margin-bottom: 5px;
+}
+
+a.btn--return {
+	display: inline-block;
+	height: 60px;
+	line-height: 60px;
+	padding: 0 20px;
+	background: #343a40;
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: 300;
+	font-size: 17px;
+	letter-spacing: 1px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}

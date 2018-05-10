@@ -1,3 +1,4 @@
+/*
 $(document).ready(function(){
 
     $('#sign-up-form').validate({
@@ -316,6 +317,8 @@ $('#risk-form').validate({
 
 
 
-}); // FIN DE LA FUNCION VALIDATE
+}); 
+*/
+// FIN DE LA FUNCION VALIDATE
 
 

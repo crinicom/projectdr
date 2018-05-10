@@ -1,50 +1,45 @@
-<div class="container">
 
-        <div class="row">
-            <div class="col"></div>
-                <div class="col-6">
-                    <div class="jumbotron"> 
-                        <form action="/session/create" method="POST" id="sign-up-form" class="form-signin">
-                            <h2 class="form-signin-heading">Iniciar sesión</h2>
-                            
-                            <% if (flash && flash.err) { %>
-                                <ul class="alert alert-danger">
-                                   
-                                    <% Object.keys(flash.err).forEach(function(key) {%>
-                                    <li><%- JSON.stringify(flash.err[key]) %></li>
-                                    <% }); %>
-                                </ul>
-                            <% } %>
-
-                            
-                            <div class="control-group">
-                                <input type="email" class="form-control" placeholder="Email" name="email" id="email"></br>
-                            </div>
-                                <div class="control-group">
-                                        <input type="password" class="form-control" placeholder="password" name="passw" id="passw"></br>
-                            </div>
-                            <!-- <div class="control-group">        
-                                <input type="password" class="form-control" placeholder="confirm pswd" name="confirmation"></br>
-                                <br/>
-                            </div> -->
-                           <div class="row">
-                                 <div class="col">
-                                        <input type="submit" class="btn btn-lg btn-dark btn-block" value="INICIAR SESIÓN">
-                                        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-                                    </form>
-                                </div>
-                            <div class="col">
-                                <form action="/user/forgotpassword" method="POST" id="sign-up-form" class="form-signin">
-                                    
-                                    <input type="submit" class="btn btn-lg btn-outline-secondary" value="Recuperar contraseña">
-                                    <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+	<div id="wrapper">
+	
+		<div class="container--box-login">
+            <h1 class="title--page-login"><%= __('login.title')%></h1>
+            <% if (flash && flash.err) { %>
+                <ul class="alert alert-danger">
+                   
+                    <% Object.keys(flash.err).forEach(function(key) {%>
+                    <li><%- JSON.stringify(flash.err[key]) %></li>
+                    <% }); %>
+                </ul>
+            <% } %>
+			<form action="/session/create" method="POST" id="sign-up-form" class="form-signin">
+				<div class="item-form">
+					<input id="email" name="email" type="email" placeholder="correo@correo.cl" required>
+					<label for="email"><%=__('login.email_label')%></label>
+				</div>
+				<div class="item-form">
+					<input id="passw" name="passw" type="password" placeholder="••••••••" required>
+					<label for="password"><%=__('login.password_label')%></label>
+				</div>
+				<div class="item-form">
+					<input type="submit" class="submit fl" value="<%=__('login.login_btn')%>">
+					
                 </div>
-                <div class="col"></div>
-            </div>
+                <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+            </form>
+            <form action="/user/forgotpassword" method="POST" id="sign-up-form" class="form-signin">
+                                        
+                <input type="submit" class="reset-pass fr" value="<%=__('login.retrieve_pass_btn')%>">
+                <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+            </form>
+		</div>
+
+        
+      
 
 
-</div>
+
+	</div>
+
+
+
+

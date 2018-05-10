@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Project Doctor - Registrarse</title>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width">
+	
+	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
+	<link href="css/tooltip.css" rel="stylesheet">
+	<link href="css/media.css" rel="stylesheet">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="js/tooltip.min.js"></script>
+
+</head>
+
+<body>
+	
+	<header>
+		<figure class="logotipo"><img src="images/logotipo.svg" alt="Poject Doctor" /></figure>
+		<div class="user-account">
+			<a href="#">Iniciar Sesión</a>
+			<a href="#">Registrarse</a>
+		</div>
+	</header>
+	
+	<div id="wrapper">
+	
+		<div class="container--box-login">
+			<h1 class="title--page-login">Registrarse</h1>
+			<form>
+				<div class="container--2col-form">
+					<div class="col-form">
+						<div class="item-form">
+							<input id="name" name="name" type="text" placeholder="NOMBRE" required>
+							<label for="name">Nombre</label>
+						</div>
+					</div>
+					<div class="col-form">
+						<div class="item-form">
+							<input id="last-name" name="last-name" type="text" placeholder="APELLIDO" required>
+							<label for="last-name">Apellido</label>
+						</div>
+					</div>
+				</div>
+				<div class="item-form">
+					<input id="email" name="email" type="email" placeholder="correo@correo.cl" required>
+					<label for="email">Email</label>
+					<p>Este se usará para iniciar sesión</p>
+				</div>
+				<div class="item-form">
+					<input id="password" name="password" type="password" placeholder="••••••••" required>
+					<label for="password">Contraseña</label>
+				</div>
+				<div class="item-form">
+					<input id="repeat-password" name="repeat-password" type="password" placeholder="••••••••" required>
+					<label for="repeat-password">Repetir Contraseña</label>
+				</div>
+				<div class="item-form">
+					<input type="submit" class="submit fl" value="Registrarse">
+				</div>
+			</form>
+		</div>
+		
+	</div>
+	
+</body>
+</html>

@@ -1,7 +1,45 @@
 
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-
+  <div id="wrapper">
+	
+    <div class="container--box-login">
+        <h1 class="title--page-login"><%= __(signup.title)%>></h1> <!-- Registrarse -->
+        <form>
+            <div class="container--2col-form">
+                <div class="col-form">
+                    <div class="item-form">
+                        <input id="name" name="name" type="text" placeholder="NOMBRE" required>
+                        <label for="name">Nombre</label>
+                    </div>
+                </div>
+                <div class="col-form">
+                    <div class="item-form">
+                        <input id="last-name" name="last-name" type="text" placeholder="APELLIDO" required>
+                        <label for="last-name">Apellido</label>
+                    </div>
+                </div>
+            </div>
+            <div class="item-form">
+                <input id="email" name="email" type="email" placeholder="correo@correo.cl" required>
+                <label for="email">Email</label>
+                <p>Este se usará para iniciar sesión</p>
+            </div>
+            <div class="item-form">
+                <input id="password" name="password" type="password" placeholder="••••••••" required>
+                <label for="password">Contraseña</label>
+            </div>
+            <div class="item-form">
+                <input id="repeat-password" name="repeat-password" type="password" placeholder="••••••••" required>
+                <label for="repeat-password">Repetir Contraseña</label>
+            </div>
+            <div class="item-form">
+                <input type="submit" class="submit fl" value="Registrarse">
+            </div>
+        </form>
+    </div>
+    
+</div>
 
 <div class="container">
     <form action="/user/create" method="POST" id="sign-up-form" class="form-signin">
