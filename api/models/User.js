@@ -18,7 +18,8 @@ schema: true,
     },
     email: {
       type: 'string',
-      email: true
+      email: true,
+      isEmail: true
     },
     admin: {
       type:'boolean',

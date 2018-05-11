@@ -2,10 +2,18 @@
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
   <div id="wrapper">
-	
+    <% if (flash && flash.err) { %>
+        <ul class="alert alert-success">
+            <li>Existe flash</li>
+            <% Object.keys(flash.err).forEach(function(error) {%>
+            <li><%- JSON.stringify(flash.err[error]) %></li>
+            <% }); %>
+        </ul>
+
+    <% } %>
     <div class="container--box-login">
         <h1 class="title--page-login"><%= __('signup.title')%></h1> <!-- Registrarse -->
-        <form>
+        <form action="/user/create" method="POST">
             <div class="container--2col-form">
                 <div class="col-form">
                     <div class="item-form">
@@ -15,65 +23,37 @@
                 </div>
                 <div class="col-form">
                     <div class="item-form">
-                        <input id="last-name" name="last-name" type="text" placeholder="APELLIDO" required>
-                        <label for="last-name">Apellido</label>
+                        <input id="last-name" name="last_name" type="text" placeholder="<%= __('signup.last_name_placeholder')%>" required>
+                        <label for="last-name"><%= __('signup.last_name_label')%></label>
                     </div>
                 </div>
             </div>
             <div class="item-form">
                 <input id="email" name="email" type="email" placeholder="correo@correo.cl" required>
-                <label for="email">Email</label>
-                <p>Este se usará para iniciar sesión</p>
+                <label for="email"><%= __('signup.email_label')%></label>
+                <p><%= __('signup.email_info')%></p> <!-- Este se usará para iniciar sesión -->
             </div>
             <div class="item-form">
-                <input id="password" name="password" type="password" placeholder="••••••••" required>
-                <label for="password">Contraseña</label>
+                <input id="passw" name="passw" type="password" placeholder="••••••••" required>
+                <label for="passw"><%= __('signup.passw_label')%></label>
             </div>
             <div class="item-form">
-                <input id="repeat-password" name="repeat-password" type="password" placeholder="••••••••" required>
-                <label for="repeat-password">Repetir Contraseña</label>
+                <input id="confirmation" name="confirmation" type="password" placeholder="••••••••" required>
+                <label for="confirmation"><%= __('signup.confirmation_label')%></label>
             </div>
+
+            <div class="g-recaptcha" id="captcha_box" data-sitekey="6LeUElIUAAAAAKQEyys7YjRTb7DUSXGA3AUA27PJ"></div>
+        
+           <!--  <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User" id="submit" style="display:block"> -->
+            <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+            
+
             <div class="item-form">
-                <input type="submit" class="submit fl" value="Registrarse">
+                <input type="submit" class="submit fl" value="<%= __('signup.register_btn')%>" id="submit" style="display:block">
             </div>
         </form>
     </div>
     
-</div>
-
-<div class="container">
-    <form action="/user/create" method="POST" id="sign-up-form" class="form-signin">
-        <h2 class="form-signin-heading">Create user</h2>
-
-        <% if (flash && flash.err) { %>
-            <ul class="alert alert-success">
-                <li>Existe flash</li>
-                <% Object.keys(flash.err).forEach(function(error) {%>
-                <li><%- JSON.stringify(flash.err[error]) %></li>
-                <% }); %>
-            </ul>
-
-        <% } %>
-        <div class="control-group">
-             <input type="text" class="form-control" placeholder="Name" name="name" id="field"></br>
-        </div>
-        <div class="control-group">
-            <input type="email" class="form-control" placeholder="Email" name="email" id="email"></br>
-        </div>
-        <div class="control-group">
-            <input type="password" class="form-control" placeholder="password" name="passw" id="passw"></br>
-        </div>
-        <div class="control-group">        
-            <input type="password" class="form-control" placeholder="confirm pswd" name="confirmation" id="confirmation"></br>
-            <br/>
-        </div>
-   
-        <div class="g-recaptcha" id="captcha_box" data-sitekey="6LeUElIUAAAAAKQEyys7YjRTb7DUSXGA3AUA27PJ"></div>
-        
-        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User" id="submit" style="display:block">
-        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-        
-    </form>
 </div>
 
 <script>
