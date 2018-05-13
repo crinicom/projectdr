@@ -1,7 +1,8 @@
 <div class="container">
 <h1>Users</h1>
 
-<table>
+<table id="myTable">
+<thead>
 <tr>
     <th>Status</th>
     <th>ID</th>
@@ -11,7 +12,9 @@
     <th>a</th>
     <th>b</th>
     <th>c</th>
-</tr>
+
+</tr></thead>
+<tbody>
 <% _.each(users, function(user) { %>
 <tr data-id="<%= user.id%>" data-model="user">
     <%if (user.online) {%>
@@ -37,6 +40,7 @@
     </form></td>
 </tr>
 <% }) %>
+</tbody>
 </table>
 
 </div>
