@@ -6,6 +6,15 @@ $(document).ready(function(){
 
     
         $('#myTable').DataTable();
+
+        $('#other_projects_table').DataTable();
+
+        $('#subTable').DataTable({
+            searching: false,
+            ordering:  false,
+            paging: false,
+            bInfo : false
+        });
     
 
 });

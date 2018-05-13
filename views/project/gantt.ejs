@@ -17,7 +17,7 @@ function submit_stk_status(select, project_id) {
 
 </script>
 
-<div class="container">
+<div id="wrapper">
         <h1>Carta Gantt</h1>
         <h2><%= project.name %></h2>
         <div class="pull-right">
@@ -33,8 +33,8 @@ function submit_stk_status(select, project_id) {
         <hr>
         <H2>Plan de trabajo</H2>
         
-        <table class="table table table-sm table-vcenter">
-           
+        <table class="table table table-sm table-vcenter" id="myTable">
+           <thead>
             <tr>
                 <th class="align-middle" style="width: 30%">Tarea</th>
                 <th class="align-middle" style="width: 15%"></th>
@@ -43,8 +43,8 @@ function submit_stk_status(select, project_id) {
                 <th class="align-middle" style="width: 50%"></th>
                 
             </tr>
-            
-         
+        </thead>
+         <tbody>
 
         <% _.each(project.stakeholders, function(stakeholder) { %>
             <tr data-id="<%= stakeholder.id%>" data-model="stakeholder">
@@ -108,6 +108,11 @@ function submit_stk_status(select, project_id) {
         </td> <!-- FIN botón nuevo vomentario-->
      <td>
          <table class="table table-sm table-borderless table-condensed">
+            <thead>
+                <th></th>
+                <th></th>
+            </thead>
+           <tbody>
             <tr>   <!-- muestro badge y texto de último comentario cronológico, si existe-->
                   <% if (comments.filter(function thisSection(comment) { return (comment.section == 'stakeholders' && comment.item == stakeholder.id)}).length > 0) {%>
                     <td>  
@@ -143,12 +148,17 @@ function submit_stk_status(select, project_id) {
                 <div class="card card-body">
                     
                     <table class="table table-sm table-borderless table-condensed">
-                       
-                    
+                       <thead>
+                           <th></th>
+                           <th></th>
+                           <th></th>
+                        </thead>
+                    <tbody>
                         <% _.each(comments, function(comment) { if(comment.section == 'stakeholders' && comment.item == stakeholder.id) { %>
                             <tr data-id="<%= comment.id%>" data-model="comment">
                                 <td><span class="badge badge-default"><%= comment.user_name%></span>
-                                    <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                                    <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p>
+                                </td>
                                 <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
                                 <td>
                                     <form action="/comment/edit/<%= comment.id %>" method="POST">
@@ -177,7 +187,7 @@ function submit_stk_status(select, project_id) {
                             
                             </tr>
                         <% }}); %> <!-- fin de ciclo -->
-                        
+                    </tbody>
                     </table>
                 
                 </div>
@@ -187,7 +197,7 @@ function submit_stk_status(select, project_id) {
     <% } else {%>
         <tr><td><p style="color:rgba(184, 180, 180, 0.692);"><%= __('nocomments')%></p></td></tr>
     <% } %>
-   
+    </tbody>
     </table>
     </td> <!--FIN DE COMENTARIOS ///////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
@@ -260,6 +270,11 @@ function submit_stk_status(select, project_id) {
                     </td> <!-- FIN botón nuevo vomentario-->
                  <td>
                      <table class="table table-sm table-borderless table-condensed">
+                         <thead>
+                             <th></th>
+                             <th></th>
+                            </thead>
+                         <tbody>
                         <tr>   <!-- muestro badge y texto de último comentario cronológico, si existe-->
                               <% if (comments.filter(function thisSection(comment) { return (comment.section == 'risks' && comment.item == risk.id)}).length > 0) {%>
                                 <td>  
@@ -295,12 +310,19 @@ function submit_stk_status(select, project_id) {
                             <div class="card card-body">
                                 
                                 <table class="table table-sm table-borderless table-condensed">
-                                   
+                                   <thead>
+                                       <th></th>
+                                       <th></th>
+                                       <th></th>
+                                      
+                                    </thead>
+                                   <tbody>
                                 
                                     <% _.each(comments, function(comment) { if(comment.section == 'risks' && comment.item == risk.id) { %>
                                         <tr data-id="<%= comment.id%>" data-model="comment">
                                             <td><span class="badge badge-default"><%= comment.user_name%></span>
-                                                <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                                                <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p>
+                                            </td>
                                             <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
                                             <td>
                                                 <form action="/comment/edit/<%= comment.id %>" method="POST">
@@ -329,7 +351,7 @@ function submit_stk_status(select, project_id) {
                                         
                                         </tr>
                                     <% }}); %> <!-- fin de ciclo -->
-                                    
+                                </tbody>
                                 </table>
                             
                             </div>
@@ -339,7 +361,7 @@ function submit_stk_status(select, project_id) {
                 <% } else {%>
                     <tr><td><p style="color:rgba(184, 180, 180, 0.692);"><%= __('nocomments')%></p></td></tr>
                 <% } %>
-               
+            </tbody>
                 </table>
                 </td> <!--FIN DE COMENTARIOS ///////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
@@ -420,6 +442,10 @@ function submit_stk_status(select, project_id) {
                             </td> <!-- FIN botón nuevo vomentario-->
                          <td>
                              <table class="table table-sm table-borderless table-condensed">
+                                 <thead><th></th>
+                                    <th></th>
+                                </thead>
+                                 <tbody>
                                 <tr>   <!-- muestro badge y texto de último comentario cronológico, si existe-->
                                       <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
                                         <td>  
@@ -455,8 +481,10 @@ function submit_stk_status(select, project_id) {
                                     <div class="card card-body">
                                         
                                         <table class="table table-sm table-borderless table-condensed">
-                                           
-                                        
+                                           <thead><th></th>
+                                            <th></th>
+                                            <th></th></thead>
+                                        <tbody>
                                             <% _.each(comments, function(comment) { if(comment.section == 'objectives' && comment.item == task.id) { %>
                                                 <tr data-id="<%= comment.id%>" data-model="comment">
                                                     <td><span class="badge badge-default"><%= comment.user_name%></span>
@@ -489,7 +517,7 @@ function submit_stk_status(select, project_id) {
                                                 
                                                 </tr>
                                             <% }}); %> <!-- fin de ciclo -->
-                                            
+                                            </body>    
                                         </table>
                                     
                                     </div>
@@ -499,7 +527,7 @@ function submit_stk_status(select, project_id) {
                         <% } else {%>
                             <tr><td><p style="color:rgba(184, 180, 180, 0.692);"><%= __('nocomments')%></p></td></tr>
                         <% } %>
-                       
+                       </tbody>
                         </table>
                         </td> <!--FIN DE COMENTARIOS ///////////////////////////////////////////////////////////////////////////////////////////////////////// -->
                     </tr>
@@ -511,7 +539,7 @@ function submit_stk_status(select, project_id) {
             
               <% }); %> <!--fin ciclo objetivos-->
     
-    
+            </tbody>
         </table> <!-- cierre tabla grande-->
     
 

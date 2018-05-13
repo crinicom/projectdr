@@ -1,10 +1,11 @@
-<div class="container">
+<div id="wrapper">
     <h1>EDT</h1>
     <h2><%= project.name %></h2>
    
     <hr>
     <H2>Objectives</H2>
-    <table class="table table table-sm table-vcenter">
+    <table class="table table table-sm table-vcenter" id="myTable">
+       <thead>
         <tr>
             
             <th class="align-middle">Objective</th>
@@ -13,7 +14,8 @@
             <th></th>
             
         </tr>
-        
+    </thead>
+    <tbody>
         <% _.each(project.objectives, function(objective) { %>
             <tr data-id="<%= objective.id%>" data-model="objective">
                 
@@ -47,12 +49,17 @@
                             </form>
                        
                         </tr>
-                    </table>
+                    
+                </table>
                     <% }%>
                 </td>
                
-                <td class="align-middle"><table class="table table-hover table-striped table-sm">
-                    
+                <td class="align-middle"><table class="table table-hover table-striped table-sm" id="subTable">
+                    <thead><th></th>
+                    <th></th>
+                    <th></th>
+                    </thead>
+                    <tbody>
                     <% _.each(objective.tasks, function(task) { %>
                          <tr data-id="<%= task.id%>" data-model="task" valign="middle">
                             
@@ -89,6 +96,7 @@
                                             <input type="hidden" name="_csrf" value="<%= _csrf%>">
                                         </form>
                                     </tr>
+                                </tbody>
                                 </table> <%}%>
                              </td>
                             </tr> 
@@ -98,6 +106,7 @@
              </tr>    
         </tr> 
     <% }); %>
+</tbody>
     </table>
 
      <!-- Comentarios sección de EDT -->

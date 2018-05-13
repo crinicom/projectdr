@@ -80,7 +80,39 @@
 	"objective.new.description":"Description",
 	"objective.new.formula":"Formula",
 	"objective.new.goal":"Goal",
-	"objective.new.button":"Add new objective"
+	"objective.new.button":"Add new objective",
+
+	"navbar.welcome": "WELCOME",
+	"navbar.myaccount": "My account",
+	"navbar.myprojects":"My projects",
+	"navbar.projects_i_participate":"Other projects",
+	"navbar.signup":"Sing up!",
+	"signup.title":"Sign up",
+	"signup.name_label": "Name",
+	"signup.last_name_label":"Last name",
+	"signup.email_label":"E-mail",
+	"signup.email_info":"It will be required to sign in",
+	"signup.passw_label": "Password",
+	"signup.confirmation_label": "Confirm password",
+	"signup.register_btn":"Sign up",
+	"login.title": "Sign in",
+	"login.password_label":"Password",
+	"login.email_label":"User e-mail for login",
+	"login.login_btn":"Sign in",
+	"login.retrieve_pass_btn": "Forgot password?",
+	"retrieve_pass.title":"Retrieve password",
+	"retrieve_pass.info":"Please enter user's e-mail to retrieve the password",
+	"retrieve_pass.email_lab":"User's e-mail",
+	"retrieve_pass.btn":"Send mail",
+	"retrieve_mail_sent.title":"Retrieve password",
+	"retrieve_mail_sent.mail_sent_to":"We sent a e-mail to: ",
+	"retrieve_mail_sent.back_btn":"Back to Home Page"
+
+
+
+
+
+	
 
 
 

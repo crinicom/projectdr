@@ -4,16 +4,16 @@
     <hr>
     <H3><%=__('user.show.myprojects.title')%></H3>
 
-    <input class="form-control" id="myInput" type="text" placeholder="<%=__('user.show.searchbar')%>">
-    <br>
-    <span class="pull-right">
+    <!-- <input class="form-control" id="myInput" type="text" placeholder="<%//=__('user.show.searchbar')%>">
+     --><br>
+    <span class="pull-left">
     <form action="/project/new" method="POST">
         <input type="hidden" value="<%=user.id%>" name="owner">
         <button type="submit" class="btn btn-large btn-success"><%=__('user.show.myprojects.addprojectbutton')%></button>
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
         </form>
     </span>
-
+<p></p>
     <div id="no-more-tables">
     <table class="table table-striped table-hover col-md-12 table-condensed cf" id="myTable">
         <thead class="cf">
@@ -155,10 +155,10 @@
     <hr>
     <H3><%=__('user.show.others.title')%></H3>
 
-    <input class="form-control" id="myInput2" type="text" placeholder="<%=__('user.show.searchbar')%>">
-    <br>
+   <!--  <input class="form-control" id="myInput2" type="text" placeholder="<%//=__('user.show.searchbar')%>">
+    --> <br>
     <div id="no-more-tables">
-    <table class="table table-striped table-hover col-md-12 table-condensed cf">
+    <table class="table table-striped table-hover col-md-12 table-condensed cf" id="other_projects_table">
         <thead class="cf">
         <tr>
             

@@ -17,6 +17,7 @@ module.exports = {
         
         req.session.authenticated = true;
         console.log(req.session); */
+        req.session.flash = { };
         res.view('session/new');    
     },
     create: function (req, res, next) {
