@@ -233,6 +233,12 @@ module.exports = {
         User.findOne(req.param('id'), function foundUser(err, user) {
             if (err) return next(err);
             if (!user) return next();
+            if (err) {
+                req.session.flash = {
+                    err: err
+                }
+                console.log(err);
+            }
             res.view({user:user});
        }); 
     },

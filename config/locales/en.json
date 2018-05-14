@@ -106,7 +106,9 @@
 	"retrieve_pass.btn":"Send mail",
 	"retrieve_mail_sent.title":"Retrieve password",
 	"retrieve_mail_sent.mail_sent_to":"We sent a e-mail to: ",
-	"retrieve_mail_sent.back_btn":"Back to Home Page"
+	"retrieve_mail_sent.back_btn":"Back to Home Page",
+	"myaccount.title":"My account",
+	"myaccount.accept_btn":"Update account"
 
 
 

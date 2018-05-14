@@ -110,6 +110,8 @@
 	"retrieve_pass.btn":"Enviar correo",
 	"retrieve_mail_sent.title":"Recuperar contraseña",
 	"retrieve_mail_sent.mail_sent_to":"Enviamos un correo de recuperación de contraseña a",
-	"retrieve_mail_sent.back_btn":"Volver al Inicio"
+	"retrieve_mail_sent.back_btn":"Volver al Inicio",
+	"myaccount.title":"Mi cuenta",
+	"myaccount.accept_btn":"Actualizar"
 
 }

@@ -1,29 +1,57 @@
-<div id="wrapper">
-    <form action="/user/update/<%=user.id%>" method="POST" id="sign-up-form">
-        <h2>Modificar usuario</h2>
-        <input value="<%=user.name%>" type="text" name="name"><br/>
-        <input value="<%=user.email%>" type="text" name="email"><br/>
-        <div class="control-group">
-            <input type="password" class="form-control" placeholder="password" name="passw" id="passw"></br>
-        </div>
-        <div class="control-group">        
-            <input type="password" class="form-control" placeholder="confirm pswd" name="confirmation" id="confirmation"></br>
-            <br/>
-        </div>
-        <% if (session.authenticated && session.User.admin) {%>
-            <% if (user.admin) {%>
-                <input type="hidden" name="admin" value="unchecked">
-                <label class="checkbox"><input type="checkbox" name="admin" checked>Admin</label>
-            <%} else {%>
-                <input type="hidden" name="admin" value="unchecked">
-                <label class="checkbox"><input type="checkbox" name="admin">Admin</label>
-        <%}%>
-        <%}%>
 
-        <input  type="submit" value="Editar Usuario" class="btn btn-lg btn-primary btn-block"/>
-        <input type="hidden" name="_csrf" value="<%=_csrf%>" />
-    </form>
-</div>
+<div id="wrapper">
+       
+        <div class="container--box-login">
+            <h1 class="title--page-login"><%= __('myaccount.title')%></h1> <!-- Registrarse -->
+            <form action="/user/update/<%=user.id%>"  method="POST">
+                <div class="container--2col-form">
+                    <div class="col-form">
+                        <div class="item-form">
+                            <input id="name" name="name" type="text" value="<%= user.name%>" required>
+                            <label for="name"><%= __('signup.name_label')%></label>
+                        </div>
+                    </div>
+                    <div class="col-form">
+                        <div class="item-form">
+                            <input id="last-name" name="last_name" type="text" value="<%= user.last_name%>" required>
+                            <label for="last-name"><%= __('signup.last_name_label')%></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-form">
+                    <input id="email" name="email" type="email" value="<%=user.email%>" required>
+                    <label for="email"><%= __('signup.email_label')%></label>
+                    <p><%= __('signup.email_info')%></p> <!-- Este se usará para iniciar sesión -->
+                </div>
+                <div class="item-form">
+                    <input id="passw" name="passw" type="password" placeholder="••••••••" required>
+                    <label for="passw"><%= __('signup.passw_label')%></label>
+                </div>
+                <div class="item-form">
+                    <input id="confirmation" name="confirmation" type="password" placeholder="••••••••" required>
+                    <label for="confirmation"><%= __('signup.confirmation_label')%></label>
+                </div>
+    
+            
+               <!--  <input type="submit" class="btn btn-lg btn-primary btn-block" value="Create User" id="submit" style="display:block"> -->
+                <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+                <% if (session.authenticated && session.User.admin) {%>
+                    <% if (user.admin) {%>
+                        <input type="hidden" name="admin" value="unchecked">
+                        <label class="checkbox"><input type="checkbox" name="admin" checked>Admin</label>
+                    <%} else {%>
+                        <input type="hidden" name="admin" value="unchecked">
+                        <label class="checkbox"><input type="checkbox" name="admin">Admin</label>
+                <%}%>
+                <%}%>
+    
+                <div class="item-form">
+                    <input type="submit" class="submit fl" value="<%= __('myaccount.accept_btn')%>" id="submit" style="display:block">
+                </div>
+            </form>
+        </div>
+        
+    </div>
 
 <script>
     $("sign-up-form").validate();
