@@ -20,5 +20,7 @@ module.exports = {
   // models: {
   //   connection: 'someMongodbServer'
   // }
-  hookTimeout: 40000
+  hookTimeout: 40000,
+  MAILGUN_SMTP_LOGIN: "postmaster@sandbox9b2a9ec5d4be42709bda7c03a97fd7b9.mailgun.org", 
+  MAILGUN_SMTP_PASSWORD: "f4188e12667eb874599cda9ff080716c-bdd08c82-17ecd52a"
 };

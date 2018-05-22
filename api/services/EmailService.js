@@ -1,3 +1,4 @@
+//require('dotenv').config()
 // EmailService.js
 module.exports.sendWelcomeMail = function(obj) {
     sails.hooks.email.send(

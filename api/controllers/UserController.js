@@ -143,9 +143,27 @@ module.exports = {
         console.log('host: ' + head.host);
         console.log("llegamos a forgotpasswordmail");
           User.findOne({email: req.param('email')}, function foundUser(err, user) {
-              if (err) return next(err);
-              if (!user) return next(); 
-              
+            if (err) {
+                console.log(JSON.stringify(err)); 
+                req.session.flash = {
+                    err: err
+                }
+                return res.redirect('/user/forgotpassword');    
+            } 
+            if (!user) {
+                err = {"noUserFound":"No user found by that email"};
+                console.log(JSON.stringify(err)); 
+                
+                req.session.flash = {
+                    err: err
+                }
+                return res.redirect('/user/forgotpassword');    
+            }   
+           
+            /* 
+            if (err) return next(err);
+              if (!user) return next(err); 
+             */  
               require('bcrypt').hash(seed, 10, function passwordEncrypted(err, hash){
                 if (err) return next(err);
                 user.retrievepasswordhash = hash;
@@ -174,7 +192,9 @@ module.exports = {
 
                 console.log("llegamos a enviar el mail", data);
                 
-                //EmailService.sendPasswordRecoveryMail(data);
+                console.log(sails.config.mailgun.MAILGUN_SMTP_LOGIN,"-config->", sails.config.mailgun.MAILGUN_SMTP_PASSWORD);
+                console.log(process.env.MAILGUN_SMTP_LOGIN ," process.env ->",process.env.MAILGUN_SMTP_PASSWORD);
+                EmailService.sendPasswordRecoveryMail(data);
 
               });
 
