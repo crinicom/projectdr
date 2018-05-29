@@ -192,7 +192,7 @@ module.exports = {
 
                 console.log("llegamos a enviar el mail", data);
                 
-                console.log(sails.config.mailgun.MAILGUN_SMTP_LOGIN,"-config->", sails.config.mailgun.MAILGUN_SMTP_PASSWORD);
+                //console.log(sails.config.mailgun.MAILGUN_SMTP_LOGIN,"-config->", sails.config.mailgun.MAILGUN_SMTP_PASSWORD);
                 console.log(process.env.MAILGUN_SMTP_LOGIN ," process.env ->",process.env.MAILGUN_SMTP_PASSWORD);
                 EmailService.sendPasswordRecoveryMail(data);
 
