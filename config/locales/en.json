@@ -108,7 +108,8 @@
 	"retrieve_mail_sent.mail_sent_to":"We sent a e-mail to: ",
 	"retrieve_mail_sent.back_btn":"Back to Home Page",
 	"myaccount.title":"My account",
-	"myaccount.accept_btn":"Update account"
+	"myaccount.accept_btn":"Update account",
+	"forgotpasswordmail.click_to_retrieve": "Please click this link to retrieve your password for ProjectDoctor.online"
 
 
 

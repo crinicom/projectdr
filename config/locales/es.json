@@ -112,6 +112,7 @@
 	"retrieve_mail_sent.mail_sent_to":"Enviamos un correo de recuperación de contraseña a",
 	"retrieve_mail_sent.back_btn":"Volver al Inicio",
 	"myaccount.title":"Mi cuenta",
-	"myaccount.accept_btn":"Actualizar"
+	"myaccount.accept_btn":"Actualizar",
+	"forgotpasswordmail.click_to_retrieve": "Haga click aquí para recuperar la contraseña para ProjectDoctor.online"
 
 }
