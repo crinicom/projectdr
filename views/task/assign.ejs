@@ -1,6 +1,6 @@
 <div id="wrapper">
-        <form action="/task/update_assign" method="POST" id="new-task-form" class="form-new-obj">
-        <h2 class="form-signin-heading">Create task</h2>
+        <form action="/task/update_assign/<%=task.id%>" method="POST" id="new-task-form" class="form-new-obj">
+        <h2 class="form-signin-heading">Assign task</h2>
     
         <% if (flash && flash.err) { %>
             <ul class="alert alert-success">
@@ -13,6 +13,7 @@
         <% } %>
         <!-- <input type="hidden" name="belongs_to_obj" value="<%//=objective.id%>" /> -->
         <input type="hidden" name="belongs_to_project" value="<%=belongs_to_project%>" />
+        
          
         <div class="control-group">
             <input type="text" class="form-control" placeholder="Assign responsible" name="responsible" autofocus ></br>

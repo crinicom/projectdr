@@ -12,8 +12,8 @@ module.exports = {
     text: {type: 'string', required:true},
     lvl1tasks: {collection: 'lvl1task', via:'belongs_to_task'},
     status: {type: 'string', defaultsTo:'Pendiente'},
-    //responsible: {model: 'user', required:false},
-    responsible: {type: 'string', required:false, defaults_to:'pendiente'}
+    responsible: {model: 'user', required:false}
+    //responsible: {type: 'string', required:false, defaults_to:'pendiente'}
   }
 };
 

@@ -45,6 +45,10 @@ schema: true,
       collection: 'project',
       via: 'guests'
     },
+    pending_tasks: {
+      collection: 'task',
+      via: 'responsible'
+    },
 
     retrievepasswordhash: {type: 'string'},
 

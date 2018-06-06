@@ -292,7 +292,8 @@ module.exports = {
             
             var risks = Risk.find({
               "belongs_to_project": project.id
-          })
+          });
+           //var team = User.find(project.team).then(function(team) {return team;});
           
           return [project, objectives, stakeholders, risks,comments];
         })

@@ -15,6 +15,21 @@ function submit_stk_status(select, project_id) {
                });
 }
 
+function assign_task(select, project_id) {
+    var task_id = select.id;
+    window.alert("entre a script"+task_id+" pid"+project_id);
+    $.ajax({
+                    url: "/task/assign_ajax/"+task_id, // add appropriate action and sails.js controller here 
+                    data: 'responsible=' + select.value+'&belongs_to_project='+project_id,
+                    success: function(msg){
+                        window.alert("ok:"+stk_id+msg);
+                    },
+                    error : function(msg){
+                        window.alert("error:"+stk_id+msg);
+                    }
+               });
+}
+
 </script>
 
 <div id="wrapper">
@@ -49,7 +64,7 @@ function submit_stk_status(select, project_id) {
         <% _.each(project.stakeholders, function(stakeholder) { %>
             <tr data-id="<%= stakeholder.id%>" data-model="stakeholder">
            
-                    <td class="vert-aligned"><%= stakeholder.name%> <-- <%=stakeholder.comm_plan%></td>
+                    <td class="vert-aligned"><%=stakeholder.comm_plan%> <p style="color:rgba(95, 93, 93, 0.692);"><small><%= stakeholder.name%></small></p></td>
                     <td>
                             <form action="/stakeholder/update_status/<%=stakeholder.id%>" method="POST" id="status<%=stakeholder.id%>">
                                 <div class="form-inline">
@@ -211,7 +226,7 @@ function submit_stk_status(select, project_id) {
        <% _.each(project.risks, function(risk) { %>
         <tr data-id="<%= risk.id%>" data-model="risk">
        
-                <td class="vert-aligned"><%= risk.description%> <-- <%=risk.mitigation%></td>
+                <td class="vert-aligned"><%=risk.mitigation%> <p style="color:rgba(95, 93, 93, 0.692);"><small><%= risk.description%></small></p></td>
                 <td>
                     
                         <form action="/risk/update_status/<%=risk.id%>" method="POST" id="status<%=risk.id%>">
@@ -377,7 +392,7 @@ function submit_stk_status(select, project_id) {
                 <% _.each(objective.tasks, function(task) { %>
                     <%if (task.text) {%>  
                     <tr data-id="<%= task.id%>" data-model="task">
-                    <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%>
+                    <td class="vert-aligned"><%=task.text%> <p style="color:rgba(95, 93, 93, 0.692);"><small><%= objective.description%></small></p>
                        
                     </td>
                      <td> <!--ESTADO DE AVANCE-->
@@ -403,22 +418,39 @@ function submit_stk_status(select, project_id) {
                     
                      <td> <!-- Boton que muestra un responsable-->
                             
-                            <form action="/task/assign/<%=task.id%>" method="POST">
-                                
-                                <button type="submit" class="btn btn-sm btn-primary">
-                                    <%if (task.responsible) {%>        
-                                        <%=task.responsible%>
-                                    <%} else {%> 
-                                    ?
-                                    <%}%>
-                                </button>
-                                <div class="control-group" style="display:none;">  
-                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                                    <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
-                                    <input type="hidden" name="_method" value="edit" >
+                           
+                  
+                            <form action="/task/update_assign/<%=task.id%>">
+                                <div class="form-inline">
+                                        <div class="form-group">
+                                            
+                                                <select name="responsible" width="100" style="width: 100px" onchange="submit()">
+                                                    <%if(task.responsible)  {%>
+                                                   
+                                                        <% _.each(project.team, function(team_member) { %>
+                                                            <%if(task.responsible==team_member.id)  {%> 
+                                                                <option value="<%=team_member.id%>"><%=team_member.name%> <%=team_member.last_name%> </option>
+                                                            <%}%>
+                                                        <% });%>
+                                                    <%} else {%>
+                                                            <option value="">no asignado</option>
+                                                    <%}%> 
+                                                    
+                                                    <% _.each(project.team, function(team_member) { %>
+                                                    <option value="<%=team_member.id%>"><%=team_member.name%> <%=team_member.last_name%> </option>  
+                                                    <% });%>
+                                                    
+                                                </select>
+                                                <div style="display:none;">  
+                                                        <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                                                </div>
+                                           <!--  <button type="submit" class="btn btn-default" ><i class="fa fa-save" aria-hidden="true"></i> -->
+                                            </button>
+                                        </div>
                                 </div>
-                            </form>
-                            
+                              </form>
+
+
                         </td><!-- fin de boton de responsable-->
                         
                         <!-- SECCION DE COMENTARIOS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
