@@ -4,8 +4,8 @@
    
     <hr>
     <H2>Objectives</H2>
-    <table class="table table table-sm table-vcenter" id="myTable">
-       <thead>
+    <table class="table table-striped table-hover col-md-12 table-condensed cf pretty" id="myTable">
+        <thead class="cf">
         <tr>
             
             <th class="align-middle">Objective</th>
@@ -15,7 +15,7 @@
             
         </tr>
     </thead>
-    <tbody>
+    <tbody id="myTable">
         <% _.each(project.objectives, function(objective) { %>
             <tr data-id="<%= objective.id%>" data-model="objective">
                 
@@ -24,6 +24,7 @@
                 <td>
                         <% if (project.status.edt != "finished") {%>
                     <table class="table table-sm ">
+                        
                         <tr> 
                           
                             <a href="/objective/edit/<%=objective.id%>" class="btn btn-sm btn-primary" role="button">
@@ -49,17 +50,18 @@
                             </form>
                        
                         </tr>
-                    
+                        
                 </table>
                     <% }%>
                 </td>
                
                 <td class="align-middle"><table class="table table-hover table-striped table-sm" id="subTable">
-                    <thead><th></th>
+                    <thead id="nohead"><th></th>
                     <th></th>
                     <th></th>
                     </thead>
-                    <tbody>
+                    
+                    <tbody id="subTable">
                     <% _.each(objective.tasks, function(task) { %>
                          <tr data-id="<%= task.id%>" data-model="task" valign="middle">
                             

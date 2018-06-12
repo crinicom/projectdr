@@ -15,7 +15,7 @@ module.exports = {
     mails: {type: "array"},
     status: {type: 'string', defaultsTo:'Pendiente'},
     assoc_task: {model: 'task', via: 'id'},
-    responsible: {type: 'string'}
+    responsible: {model: 'user', required:false}
   }
 };
 

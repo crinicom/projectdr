@@ -64,6 +64,7 @@ module.exports = {
         }); 
      
     },
+
     update_assign: function(req, res, next) {
         Risk.update(req.param('id'), req.params.all(), function riskkUpdated(err) {
             if (err) {

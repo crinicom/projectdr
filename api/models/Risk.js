@@ -14,7 +14,7 @@ module.exports = {
     mitigation: {type: 'string', required:true},
     status: {type: 'string', defaultsTo:'Pendiente'},
     assoc_stakeholder: {type: 'string'},
-    responsible: {type: 'string', required:false}
+    responsible: {model: 'user', required:false}
   }
 };
 

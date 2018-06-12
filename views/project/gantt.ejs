@@ -87,20 +87,45 @@ function assign_task(select, project_id) {
                             </form>
                              
                     </td>
-                    <td>
-                            <form action="/stakeholder/assign/<%=stakeholder.id%>" method="POST">
-                                <button type="submit" class="btn btn-sm btn-primary">
-                                    <%if (stakeholder.responsible) {%>        
-                                        <%=stakeholder.responsible%>
-                                    <%} else {%> Responsable?  <%}%>
-                                </button>
-                                <div class="control-group" style="display:none;">  
-                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                                    <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
-                                    <input type="hidden" name="_method" value="edit" >
-                                </div>
-                            </form>
-                    </td>
+                    
+                    <td> <!-- Boton que muestra un responsable-->
+                        <form action="/stakeholder/update_assign/<%=stakeholder.id%>">
+                            <div class="form-inline">
+                                    <div class="form-group">
+                                        
+                                            <select name="responsible" width="100" style="width: 100px" onchange="submit()">
+                                                <%if(stakeholder.responsible)  {%>
+                                               
+                                                    <% _.each(project.team, function(team_member) { %>
+                                                        <%if(stakeholder.responsible==team_member.id)  {%> 
+                                                            <option value="<%=team_member.id%>"><%=team_member.name%> <%=team_member.last_name%> </option>
+                                                        <%}%>
+                                                    <% });%>
+                                                <%} else {%>
+                                                        <option value="">no asignado</option>
+                                                <%}%> 
+                                                
+                                                <% _.each(project.team, function(team_member) { %>
+                                                <option value="<%=team_member.id%>"><%=team_member.name%> <%=team_member.last_name%> </option>  
+                                                <% });%>
+                                                
+                                            </select>
+                                            <div style="display:none;">  
+                                                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                            </div>
+                                       <!--  <button type="submit" class="btn btn-default" ><i class="fa fa-save" aria-hidden="true"></i> -->
+                                        
+                                    </div>
+                            </div>
+                          </form>
+    
+    
+                    </td><!-- fin de boton de responsable-->
+                    
+                    
+                    
+                  
 
     <!-- SECCION DE COMENTARIOS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
     <td>
@@ -249,20 +274,44 @@ function assign_task(select, project_id) {
                             </div>
                         </form>
                 </td>
-                <td>
-                        <form action="/risk/assign/<%=risk.id%>" method="POST">
-                            <button type="submit" class="btn btn-sm btn-primary">
-                                <%if (risk.responsible) {%>        
-                                    <%=risk.responsible%>
-                                <%} else {%> ?  <%}%>
-                            </button>
-                            <div class="control-group" style="display:none;">  
-                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                                <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
-                                <input type="hidden" name="_method" value="edit" >
-                            </div>
-                        </form>
-                </td>
+                
+                <td> <!-- Boton que muestra un responsable-->
+                    <form action="/risk/update_assign/<%=risk.id%>">
+                        <div class="form-inline">
+                                <div class="form-group">
+                                    
+                                        <select name="responsible" width="100" style="width: 100px" onchange="submit()">
+                                            <%if(risk.responsible)  {%>
+                                           
+                                                <% _.each(project.team, function(team_member) { %>
+                                                    <%if(risk.responsible==team_member.id)  {%> 
+                                                        <option value="<%=team_member.id%>"><%=team_member.name%> <%=team_member.last_name%> </option>
+                                                    <%}%>
+                                                <% });%>
+                                            <%} else {%>
+                                                    <option value="">no asignado</option>
+                                            <%}%> 
+                                            
+                                            <% _.each(project.team, function(team_member) { %>
+                                            <option value="<%=team_member.id%>"><%=team_member.name%> <%=team_member.last_name%> </option>  
+                                            <% });%>
+                                            
+                                        </select>
+                                        <div style="display:none;">  
+                                                <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                        </div>
+                                   <!--  <button type="submit" class="btn btn-default" ><i class="fa fa-save" aria-hidden="true"></i> -->
+                                    
+                                </div>
+                        </div>
+                      </form>
+
+
+                </td><!-- fin de boton de responsable-->
+                
+                
+               
 
                  <!-- SECCION DE COMENTARIOS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
                  <td>
@@ -417,9 +466,6 @@ function assign_task(select, project_id) {
                      </td> <!--FIN ESTADO DE AVANCE-->
                     
                      <td> <!-- Boton que muestra un responsable-->
-                            
-                           
-                  
                             <form action="/task/update_assign/<%=task.id%>">
                                 <div class="form-inline">
                                         <div class="form-group">
@@ -443,9 +489,10 @@ function assign_task(select, project_id) {
                                                 </select>
                                                 <div style="display:none;">  
                                                         <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                                                        <input type="hidden" name="_csrf" value="<%= _csrf%>">
                                                 </div>
                                            <!--  <button type="submit" class="btn btn-default" ><i class="fa fa-save" aria-hidden="true"></i> -->
-                                            </button>
+                                            
                                         </div>
                                 </div>
                               </form>

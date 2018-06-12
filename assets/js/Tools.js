@@ -14,6 +14,7 @@ $(document).ready(function(){
             ordering:  false,
             paging: false,
             bInfo : false
+           
         });
     
 
