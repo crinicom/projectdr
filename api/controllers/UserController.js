@@ -210,6 +210,59 @@ module.exports = {
         });   
     },
 
+    sendpending: function(req, res, next) {
+        
+        
+          User.findOne({email: 'cristian.menajovsky@gmail.com'}, function foundUser(err, user) {
+            if (err) {
+                console.log(JSON.stringify(err)); 
+                req.session.flash = {
+                    err: err
+                }
+                return res.redirect('/user/forgotpassword');    
+            } 
+            if (!user) {
+                err = {"noUserFound":"No user found by that email"};
+                console.log(JSON.stringify(err)); 
+                
+                req.session.flash = {
+                    err: err
+                }
+                return res.redirect('/user/forgotpassword');    
+            }   
+           
+           
+
+                var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+                var data = {
+                    name: user.name,
+                    email: user.email,
+                    date: now,
+                    hash: user.retrievepasswordhash,
+                    host_base: head.host,
+                };   
+
+
+                console.log("llegamos a enviar el mail", data);
+                
+                //console.log(sails.config.mailgun.MAILGUN_SMTP_LOGIN,"-config->", sails.config.mailgun.MAILGUN_SMTP_PASSWORD);
+                console.log(process.env.MAILGUN_SMTP_LOGIN ," process.env ->",process.env.MAILGUN_SMTP_PASSWORD);
+                EmailService.sendPasswordRecoveryMail(data);
+
+              });
+
+ 
+              /* 
+              Applog.create(data, function logCreated(err, data) {
+                  if (err) { console.log(JSON.stringify(err)); }
+                  console.log(JSON.stringify(data));
+              });
+ */
+              
+              next();
+         
+    },
+
     verifypass: function(req,res,next) {
         var mail_hash= req.param('hash');
         var query = req.query;
