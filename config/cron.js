@@ -5,43 +5,20 @@ module.exports.cron = {
       schedule: '* * * * * *',
       onTick: function () {
         console.log('You will see this every second');
-        var mySails = new yourSails();
-        mySails.lift({  port: 1339},
-          function(err) {
-            if (err) {
-              console.error('Failed to lift app.  Details:', err);
-              return;
-            }
+        
+ 
+        request('http://localhost:1337/user/pendingtasks', { json: true }, (err, res, body) => {
+         // if (err) { return console.log(err); }
+          //console.log(body);
+          //users = JSON.parse(body);
+          var users = body;
+          console.log(users[0]);
+       /*  for (user in users) {
+          console.log(user.id);
+        } */
           
-            // --•
-            // Make a request using the "request" library and display the response.
-            // Note that you still must have an `api/controllers/FooController.js` file
-            // under the current working directory, with an `index` action,
-            // or a `/foo` or `POST /foo` route set up in `config/routes.js`.
-
-            mySails.request({url:'/user/sendpending', method: 'post'}, function (err, response) {
-                if (err) {
-                  console.log('Could not send virtual request.  Details:', err);
-                }
-                else {
-                  console.log('Got response:', response);
-                }
-            });
-
-         /*  mySails.controllers.user.sendpending(null, function (data) {
-              console.log("entré en el sendpending");
-          }); */
-          mySails.lower(function (err) {
-            if (err) {
-              console.log('Could not lower Sails app.  Details:',err);
-              return;
-            }
-      
-            // --•
-            console.log('Successfully lowered Sails app.');
-      
-          });//</lower sails app>
         });
+       
     
   }
 }

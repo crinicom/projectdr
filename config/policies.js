@@ -27,6 +27,7 @@ module.exports.policies = {
   ***************************************************************************/
 
  '*': "flash",
+ 'user/pendingtasks': true,
 
   user: {
     'new': "flash",
@@ -38,7 +39,8 @@ module.exports.policies = {
     edit: "userCanSeeProfile",
     update: "userCanSeeProfile",
     add_to_team: "flash",
-    '*': "admin" 
+    '*': "admin",
+    'pendingtasks': true 
   },
   
 

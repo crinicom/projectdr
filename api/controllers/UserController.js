@@ -213,7 +213,7 @@ module.exports = {
     sendpending: function(req, res, next) {
         
         
-          User.findOne({email: 'cristian.menajovsky@gmail.com'}, function foundUser(err, user) {
+          User.findOne({email: "cristian.menajovsky@gmail.com"}, function foundUser(err, user) {
             if (err) {
                 console.log(JSON.stringify(err)); 
                 req.session.flash = {
@@ -246,7 +246,7 @@ module.exports = {
                 console.log("llegamos a enviar el mail", data);
                 
                 //console.log(sails.config.mailgun.MAILGUN_SMTP_LOGIN,"-config->", sails.config.mailgun.MAILGUN_SMTP_PASSWORD);
-                console.log(process.env.MAILGUN_SMTP_LOGIN ," process.env ->",process.env.MAILGUN_SMTP_PASSWORD);
+               // console.log(process.env.MAILGUN_SMTP_LOGIN ," process.env ->",process.env.MAILGUN_SMTP_PASSWORD);
                 EmailService.sendPasswordRecoveryMail(data);
 
               });
@@ -259,9 +259,28 @@ module.exports = {
               });
  */
               
-              next();
+              //next();
          
     },
+
+    pendingtasks: function(req, res, next) {
+        
+        User.find().populateAll().then(function foundUsers(users) {
+            
+           // return  res.json(users);
+           //console.log('USUARIOS: ' ,users);
+           return res.json(users);
+
+        })
+        .catch(function(err) {
+            if (err) {
+                console.log("error ---------------", err);
+                return next(err);
+            }
+            
+        });
+ 
+  },
 
     verifypass: function(req,res,next) {
         var mail_hash= req.param('hash');
