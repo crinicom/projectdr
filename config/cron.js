@@ -12,7 +12,7 @@ module.exports.cron = {
           //console.log(body);
           //users = JSON.parse(body);
           var users = body;
-          console.log(users[0]);
+          console.log(users);
        /*  for (user in users) {
           console.log(user.id);
         } */
