@@ -7,12 +7,18 @@ module.exports.cron = {
         console.log('You will see this every second');
         
  
-        request('http://localhost:1337/user/pendingtasks', { json: true }, (err, res, body) => {
+        request('http://localhost:1337/user/todo/22', { json: true }, (err, res, body) => {
          // if (err) { return console.log(err); }
           //console.log(body);
           //users = JSON.parse(body);
+        /*  FUNCIONA!
           var users = body;
-          console.log(users);
+          var found = users.find(function(user) {
+            return user.id === 22;
+          }); */
+          var found = body;
+         
+          console.log(found);
        /*  for (user in users) {
           console.log(user.id);
         } */

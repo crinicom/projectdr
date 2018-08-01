@@ -282,6 +282,19 @@ module.exports = {
  
   },
 
+  todo: function(req, res, next) {
+        
+    User.findOne(req.param('id')).populateAll().exec(function(err,user) {
+        
+        if (err) return next(err);
+        if (!user) return next();
+       return res.json(user.pending_tasks);
+
+    });
+   
+
+},
+
     verifypass: function(req,res,next) {
         var mail_hash= req.param('hash');
         var query = req.query;
