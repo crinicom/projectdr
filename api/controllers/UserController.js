@@ -288,11 +288,20 @@ module.exports = {
         
         if (err) return next(err);
         if (!user) return next();
-      
-        var tasks = user.pending_tasks;
-
-        for (var task in tasks) {
-            console.log(task.belongs_to_obj);
+        
+        var projects = Project.find(function foundProjects(err, projects) {
+            if (err) return next(err);
+            
+           return (projects);
+        });
+        console.log(projects);
+        
+        var tasks = {};
+         tasks = user.pending_tasks;
+        console.log(tasks);
+        for (var i in tasks) {
+            console.log("------------");
+            console.log(projects[tasks[i].belongs_to_project].name);
         };
       
         return res.json(user.pending_tasks);
