@@ -288,7 +288,16 @@ module.exports = {
         
         if (err) return next(err);
         if (!user) return next();
-       return res.json(user.pending_tasks);
+      
+        var tasks = user.pending_tasks;
+
+        for (var task in tasks) {
+            console.log(task.belongs_to_obj);
+        };
+      
+        return res.json(user.pending_tasks);
+
+      
 
     });
    
