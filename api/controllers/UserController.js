@@ -283,30 +283,45 @@ module.exports = {
   },
 
   todo: function(req, res, next) {
-        
-    User.findOne(req.param('id')).populateAll().exec(function(err,user) {
+    var ppj =  Project.find({},function foundProjects(err, projects) {
+        if (err) {
+            console.log(err);
+            return next(err);
+        }
+       // projects_gl = projects;
+      // console.log("ppj:", projects);
+
+       User.findOne(req.param('id')).populateAll().exec(function(err,user) {
         
         if (err) return next(err);
         if (!user) return next();
-        
-        var projects = Project.find(function foundProjects(err, projects) {
-            if (err) return next(err);
-            
-           return (projects);
-        });
-        console.log(projects);
-        
+                
         var tasks = {};
          tasks = user.pending_tasks;
-        console.log(tasks);
-        for (var i in tasks) {
-            console.log("------------");
-            console.log(projects[tasks[i].belongs_to_project].name);
+       // console.log("TASKS", tasks);
+       console.log("------------"); 
+       for (var i in tasks) {
+           
+
+          //  console.log(projects[0].name);
+            for (var p in projects)
+            {
+                if ((p.id == i.belongs_to_project)&&(p.id)) {
+                    console.log("Task: ", i.name," proyecto: ", p.name );
+                }
+            };
         };
       
         return res.json(user.pending_tasks);
 
       
+
+
+
+       return projects;
+    });
+    console.log("projects: ", ppj);
+   
 
     });
    
