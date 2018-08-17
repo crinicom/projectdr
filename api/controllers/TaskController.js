@@ -58,7 +58,16 @@ module.exports = {
         });
     },
     index: function(req, res, next) {
-        Project.findOne(req.param('belongs_to_project'), function foundObjective(err, project) {
+        Task.find({responsible: req.session.User}, function foundTasks(err, tasks) {
+            if (err) return next(err);
+            if (!tasks) return next();
+
+            res.view({tasks:tasks});
+        });
+
+
+
+       /*  Project.findOne(req.param('belongs_to_project'), function foundObjective(err, project) {
             if (err) return next(err);
             if (!project) return next();
 
@@ -68,7 +77,7 @@ module.exports = {
                 
                 res.view({objectives:objectives});
            });
-        });
+        }); */
     },
     
    
