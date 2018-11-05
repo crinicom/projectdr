@@ -1,0 +1,326 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Project Doctor - Registrarse</title>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width">
+	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link href="style.css" rel="stylesheet">
+	<link href="css/tooltipster.css" rel="stylesheet">
+	<link href="css/media.css" rel="stylesheet">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="js/jquery.tooltipster.min.js"></script>
+	
+	<script>
+        $(document).ready(function() {
+			$('.tooltip').tooltipster({
+				animation  : 'grow',
+				delay      : 100,
+				delayTouch : 100,
+				trigger    : 'hover'
+			});
+        });
+    </script>
+
+</head>
+
+<body>
+	
+	<header>
+		<figure class="logotipo"><img src="images/logotipo.svg" alt="Poject Doctor" /></figure>
+		<div class="user-account">
+			<div class="user-login fl">Bienvenido <strong>Oscar Madrid</strong><br /><span>oscar.madrid.v@gmail.com</span></div>
+			<div class="btn-menu"><span></span></div>
+		</div>
+		<div class="container--menu">
+			<ul>
+				<li><a href="#">Mi cuenta</a></li>
+				<li><a href="#">Mis Proyectos</a></li>
+				<li><a href="#">Proyectos en los que participo</a></li>
+				<li><a href="#">Cerra sesión</a></li>
+			</ul>
+		</div>
+	</header>
+	
+	<div id="wrapper">
+		
+		<div class="row-fluid top-project-charter">
+			<ul>
+				<li class="active">
+					<form action="/project/show/9" method="POST">
+						<button type="submit">
+							<i class="fas fa-home"></i><span>Project Charter</span>
+						</button>
+						<input type="hidden" value="FrYUZZbP-1PoaBYWWRHHy7x87-lBAfwTwFrI" name="_csrf"> 
+					</form>
+				</li>
+				<li>
+					<form action="/project/edt/9" method="POST">
+						<button type="submit" class="btn btn-success btn-responsive">
+							<i class="fas fa-project-diagram"></i><span>Work Breakdown Structure</span>
+							</button>
+						<input type="hidden" value="FrYUZZbP-1PoaBYWWRHHy7x87-lBAfwTwFrI" name="_csrf">
+					</form>
+				</li>
+				<li>
+					<form action="/project/stakeholders/9" method="POST">
+						<button type="submit" class="btn btn-success btn-responsive">
+							<i class="far fa-handshake"></i><span>Stakeholders</span>
+						</button>
+						<input type="hidden" value="FrYUZZbP-1PoaBYWWRHHy7x87-lBAfwTwFrI" name="_csrf">
+					</form>
+				</li>
+				<li>
+					<form action="/project/risks/9" method="POST">
+						<button type="submit">
+							<i class="fas fa-exclamation-triangle"></i><span>Riesgos</span>
+						</button>
+						<input type="hidden" value="FrYUZZbP-1PoaBYWWRHHy7x87-lBAfwTwFrI" name="_csrf">
+					</form>
+				</li>
+				<li>
+					<form action="/project/gantt/9" method="POST">
+						<button type="submit" class="btn btn-success btn-responsive">
+							<i class="fas fa-tasks"></i><span>Carta Gantt</span>
+						</button>
+						<input type="hidden" value="FrYUZZbP-1PoaBYWWRHHy7x87-lBAfwTwFrI" name="_csrf">
+					</form>
+				</li>
+			</ul>
+		</div>
+	
+		<div class="row-fluid top-page">
+			<h1 class="title--project-charter"><span>Proyecto</span>Nombre Proyecto</h1>
+			<table class="top-page-table col-8" width="100%">
+				<tr>
+					<td width="140"><strong>DESCRIPCIÓN:</strong></td>
+					<td>Descripción general del proyecto, objetivos en glosa</td>
+				</tr>
+				<tr>
+					<td><strong>ALCANCE:</strong></td>
+					<td>Alcance, exclusiones, etc</td>
+				</tr>
+			</table>
+			<div class="container--actions-project-charter">
+				<button type="submit" class="btn-action green-line"><i class="fas fa-edit fl"></i> &nbsp;&nbsp;Editar</button>
+				<a class="btn-action gray-line" data-toggle="collapse" href="#collapseHeaderComments" aria-expanded="false" aria-controls="collapseHeaderComments">
+					Ver comentarios&nbsp;&nbsp;&nbsp; <i class="far fa-comments fr"></i>
+				</a>
+			</div>
+		</div>
+		
+		<div class="row-fluid container--projects-table">
+			<h2 class="subtitle-page">Objetivos</h2>
+			<table class="projects-table" width="100%" style="margin-bottom: 20px;">
+				<thead>
+					<tr>
+						<th width="65">ID</th>
+						<th>DESCRIPCIÓN DEL OBJETIVO</th>
+						<th>FÓRUMULA</th>
+						<th>META</th>
+						<th style="border-right: none;" width="100">ACCIONES</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="center"><strong>6</strong></td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td align="center">0</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Objetivo"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Objetivo"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td align="center"><strong>7</strong></td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td align="center">0</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Objetivo"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Objetivo"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td align="center"><strong>8</strong></td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td align="center">100</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Objetivo"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Objetivo"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td align="center"><strong>9</strong></td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td align="center">0</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Objetivo"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Objetivo"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td align="center"><strong>100</strong></td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td align="center">0</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Objetivo"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Objetivo"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="container--actions-project-charter">
+				<button type="submit" class="btn-action green-line">Agregar objetivo&nbsp;&nbsp;&nbsp; <i class="fas fa-plus fr"></i></button>
+			</div>
+		</div>
+		
+		<div class="row-fluid container--projects-table">
+			<h2 class="subtitle-page">Hitos</h2>
+			<table class="projects-table" width="100%" style="margin-bottom: 20px;">
+				<thead>
+					<tr>
+						<th width="65">ID</th>
+						<th>DESCRIPCIÓN DEL Hito</th>
+						<th>Fecha</th>
+						<th style="border-right: none;" width="100">ACCIONES</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="center"><strong>6</strong></td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td>Sábado 31 de Marzo de 2018</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Hito"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Hito"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td align="center"><strong>6</strong></td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td>Sábado 31 de Marzo de 2018</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Hito"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Hito"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td align="center"><strong>6</strong></td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td>Sábado 31 de Marzo de 2018</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Hito"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Hito"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td align="center"><strong>6</strong></td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td>Jueves 31 de mayo de 2018</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Hito"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Hito"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td align="center"><strong>6</strong></td>
+						<td>Desarrollar la herramienta sin fallos</td>
+						<td>Domingo 24 de junio de 2018</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Hito"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Hito"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="container--actions-project-charter">
+				<button type="submit" class="btn-action green-line">Agregar hito&nbsp;&nbsp;&nbsp; <i class="fas fa-plus fr"></i></button>
+				<a class="btn-action gray-line" data-toggle="collapse" href="#collapseHeaderComments" aria-expanded="false" aria-controls="collapseHeaderComments">
+					Ver comentarios&nbsp;&nbsp;&nbsp; <i class="far fa-comments fr"></i>
+				</a>
+			</div>
+		</div>
+		
+		<div class="row-fluid container--projects-table">
+			<h2 class="subtitle-page">Equipo</h2>
+			<table class="projects-table" width="100%" style="margin-bottom: 20px;">
+				<thead>
+					<tr>
+						<th width="65">ID</th>
+						<th>Nombre</th>
+						<th>E-mail</th>
+						<th style="border-right: none;" width="100">ACCIONES</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="center"><strong>6</strong></td>
+						<td>Oscar Madrid Vargas</td>
+						<td>oscar.madrid.v@gmail.com</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Participante"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Participante"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td align="center"><strong>6</strong></td>
+						<td>Oscar Madrid Vargas</td>
+						<td>oscar.madrid.v@gmail.com</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Participante"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Participante"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td align="center"><strong>6</strong></td>
+						<td>Cris</td>
+						<td>cris@mena.com</td>
+						<td class="actions">
+							<button type="submit" class="edit-project tooltip" title="Editar Participante"><i class="far fa-edit"></i></button>
+							<button type="submit" class="delete-project tooltip" title="Eliminar Participante"><i class="fas fa-trash-alt"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="container--actions-project-charter">
+				<button type="submit" class="btn-action green-line">Agregar participante&nbsp;&nbsp;&nbsp; <i class="fas fa-plus fr"></i></button>
+				<a class="btn-action gray-line" data-toggle="collapse" href="#collapseHeaderComments" aria-expanded="false" aria-controls="collapseHeaderComments">
+					Ver comentarios&nbsp;&nbsp;&nbsp; <i class="far fa-comments fr"></i>
+				</a>
+			</div>
+		</div>
+		
+		<div class="row-fluid container--global-actions-project-charter">
+			<button type="submit" class="btn--return">Volver</button>
+			<button type="submit" class="btn--save-and">Guardar</button>
+			<button type="submit" class="btn--continue">Continuar &raquo;</button>
+		</div>
+		
+	</div>
+	
+	<footer>
+		<div class="txt-footer">Project Doctor CREADO por CM 2018</div>
+	</footer>
+	
+	<script>
+		
+		$('.btn-menu').click(function() {
+			$('.btn-menu').toggleClass('mm-opening');
+			$('.container--menu').slideToggle('fast');
+		})
+		
+	</script>
+	
+</body>
+</html>
