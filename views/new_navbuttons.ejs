@@ -1,0 +1,166 @@
+
+    <div class="row-fluid top-project-charter">
+        <ul>
+            <li class="actual">
+                <form action="/project/show/9" method="POST">
+                    <button type="submit">
+                        <i class="fa fa-home"></i><span>Project Charter</span>
+                    </button>
+                    <input type="hidden" value="FrYUZZbP-1PoaBYWWRHHy7x87-lBAfwTwFrI" name="_csrf"> 
+                </form>
+            </li>
+            <li class="active">
+                <form action="/project/edt/9" method="POST">
+                    <button type="submit">
+                        <i class="fas fa-project-diagram"></i><span>Work Breakdown Structure</span>
+                        </button>
+                    <input type="hidden" value="FrYUZZbP-1PoaBYWWRHHy7x87-lBAfwTwFrI" name="_csrf">
+                </form>
+            </li>
+            <li class="done">
+                <form action="/project/stakeholders/9" method="POST">
+                    <button type="submit">
+                        <i class="fas fa-handshake"></i><span>Stakeholders</span>
+                    </button>
+                    <input type="hidden" value="FrYUZZbP-1PoaBYWWRHHy7x87-lBAfwTwFrI" name="_csrf">
+                </form>
+            </li>
+            <li>
+                <form action="/project/risks/9" method="POST">
+                    <button type="submit"  class="btn btn-success btn-responsive">
+                        <i class="fas fa-exclamation-triangle"></i><span>Riesgos</span>
+                    </button>
+                    <input type="hidden" value="FrYUZZbP-1PoaBYWWRHHy7x87-lBAfwTwFrI" name="_csrf">
+                </form>
+            </li>
+            <li>
+                <form action="/project/gantt/9" method="POST">
+                    <button type="submit" class="btn btn-success btn-responsive">
+                        <i class="fas fa-tasks"></i><span>Carta Gantt</span>
+                    </button>
+                    <input type="hidden" value="FrYUZZbP-1PoaBYWWRHHy7x87-lBAfwTwFrI" name="_csrf">
+                </form>
+            </li>
+        </ul>
+    </div>
+    <!--
+
+    <div class="row">
+
+
+   
+    <div class="col">
+    <form action="/project/show/<%=project.id%>" method="POST">
+        <% if (project.status.pcharter == "finished") {%>    
+            <button type="submit" class="btn btn-success btn-responsive">
+            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-check fa-2x" aria-hidden="true"></i>    
+                
+        <%} else if (project.status.edt == "wip") {%>
+            <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-play fa-2x " aria-hidden="true"></i>
+                          
+        <%} else {%>
+            <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+        <% } %>
+            <br><%=__('navbutton.pc')%> 
+        </button>
+    <input type="hidden" value="<%=_csrf%>" name="_csrf"> 
+</form>
+
+</div>
+<div class="col">
+
+        <form action="/project/edt/<%=project.id%>" method="POST">
+            <% if (project.status.edt == "finished") {%>    
+                <button type="submit" class="btn btn-success btn-responsive">
+                <i class="fa fa-sitemap fa-2x fa-rotate-270 " aria-hidden="true"></i>
+                <i class="fa fa-check fa-2x" aria-hidden="true"></i>    
+                    
+            <%} else if (project.status.edt == "wip") {%>
+                <button type="submit" class="btn btn-primary btn-responsive">
+                        <i class="fa fa-sitemap fa-2x fa-rotate-270 " aria-hidden="true"></i>
+                        <i class="fa fa-play fa-2x " aria-hidden="true"></i>
+                              
+            <%} else {%>
+                <button type="submit" class="btn btn-primary btn-responsive">
+                        <i class="fa fa-sitemap fa-2x fa-rotate-270 " aria-hidden="true"></i>
+            <% } %>
+                <br><%=__('navbutton.edt')%> 
+            </button>
+        <input type="hidden" value="<%=_csrf%>" name="_csrf">
+    </form>
+
+</div>
+<div class="col">
+
+    <form action="/project/stakeholders/<%=project.id%>" method="POST">
+        <% if (project.status.stakeholders == "finished") {%>    
+            <button type="submit" class="btn btn-success btn-responsive">
+                <i class="fa fa-share-alt fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-check fa-2x" aria-hidden="true"></i>  
+        <%} else if (project.status.stakeholders == "wip") {%>
+                <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-share-alt fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-play fa-2x " aria-hidden="true"></i>
+        <%} else {%>
+                 <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-share-alt fa-2x" aria-hidden="true"></i>
+         <% } %>    
+            <br><%=__('navbutton.stk')%> 
+        </button>
+        <input type="hidden" value="<%=_csrf%>" name="_csrf">
+    </form>
+
+</div>
+<div class="col">
+
+        <form action="/project/risks/<%=project.id%>" method="POST">
+            <% if (project.status.risks == "finished") {%>    
+            <button type="submit" class="btn btn-success btn-responsive">
+                <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-check fa-2x" aria-hidden="true"></i>  
+            <%} else if (project.status.risks == "wip") {%>
+                <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+                    <i class="fa fa-play fa-2x " aria-hidden="true"></i>
+            <%} else {%>
+            
+                <button type="submit" class="btn btn-primary btn-responsive">
+                    <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+            <% } %>  
+                
+                <br><%=__('navbutton.rsk')%> 
+            </button>
+            <input type="hidden" value="<%=_csrf%>" name="_csrf">
+        </form>
+
+    </div>
+    <div class="col">
+
+            <form action="/project/gantt/<%=project.id%>" method="POST">
+                <% if (project.status.gantt == "finished") {%>   
+                <button type="submit" class="btn btn-success btn-responsive">
+                    <i class="fa fa-tasks fa-2x" aria-hidden="true" align="middle"></i>
+                    <i class="fa fa-check fa-2x" aria-hidden="true"></i>  
+                <%} else if (project.status.gantt == "wip") {%>
+                    <button type="submit" class="btn btn-primary btn-responsive">
+                        <i class="fa fa-tasks fa-2x" aria-hidden="true" align="middle"></i>
+                        <i class="fa fa-play fa-2x " aria-hidden="true"></i>
+                <%} else {%>
+
+                        <button type="submit" class="btn btn-primary btn-responsive">
+                            <i class="fa fa-tasks fa-2x" aria-hidden="true" align="middle"></i>
+                <% } %>      
+                    <br><%=__('navbutton.gantt')%>
+                </button>
+                <input type="hidden" value="<%=_csrf%>" name="_csrf">
+            </form>
+
+
+</div>
+
+</div>
+-->
