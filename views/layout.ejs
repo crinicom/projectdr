@@ -147,8 +147,20 @@
 
 
         
-        
-         
+    <script>
+        $('document').ready(function(){
+            $('#AllowEditURL').collapse('show');
+        });
+    $('#AllowEditURL').on('hide.bs.collapse', function () {
+        $('#EditURL').collapse('show');
+        $('#url_input').focus();
+    // do something…
+    })
+    $('#AllowEditURL').on('show.bs.collapse', function () {
+        $('#EditURL').collapse('hide');
+    // do something…
+    })    
+  </script>  
     
     <%- body %>
 
