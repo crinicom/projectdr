@@ -108,6 +108,8 @@ module.exports = {
             if (err) return next(err);
             if (!project) return next();
            
+ sails.controllers.project.save_state1(project.id, "pcharter", "active",next);
+
             var comments = Comment.find({belongs_to_project: req.param('id'), belongs_to:"project"}, function foundComments(err, comments) {
                 if (err) return next(err);
                 var revcoms=comments.reverse();
@@ -413,6 +415,33 @@ module.exports = {
                 return res.redirect('/project/'+ req.param('key')+"/"+ req.param('id'));
             }  else return res.redirect('/project/show/'+ req.param('id'));
         //res.json({status});
+
+    }); 
+},
+
+save_state1: function(id, key, state, next) {
+    Project.findOne(id, function foundProject(err, project) {
+        if (err) {console.log("error");return next(err);
+        }
+        if (!project) {console.log("!project");return next();}
+        
+        //var project_obj = project.toObject();
+        //var status = {};
+        project.status[key] = state;
+
+        //project.status = status;
+
+        project.save(function(err){
+            if (err) {
+                return res.json({err});
+            } else {
+                console.log( '\n', key,'\n');
+                console.log( '\n',state,'\n');
+                console.log( '\n', project.status,'\n');
+            }
+        });
+          
+            next();//res.json({status});
 
     }); 
 }

@@ -847,16 +847,16 @@ a.paginate-button.current {
 	color: #ccaf2e;
 }
 
-.top-project-charter ul > li.done button {
+.top-project-charter ul > li.finished button {
 	cursor: no-drop;
 }
 
-.top-project-charter ul > li.done button i {
+.top-project-charter ul > li.finished button i {
 	border-color: #0a6801;
 	color: #0a6801;
 }
 
-.top-project-charter ul > li.done button span {
+.top-project-charter ul > li.finished button span {
 	color: #0a6801;
 }
 
