@@ -40,7 +40,7 @@ module.exports = {
                 if (err) { console.log(JSON.stringify(err)); }
                 console.log(JSON.stringify(applog));
             });
-
+            
             res.redirect('/project/show/' + objective.belongs_to_project ); 
             //res.json(objective);
            // req.session.flash = {};

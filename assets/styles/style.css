@@ -834,16 +834,16 @@ a.paginate-button.current {
 	color: #2ecc71;
 }
 
-.top-project-charter ul > li.active button {
+.top-project-charter ul > li.wip button {
 	cursor: no-drop;
 }
 
-.top-project-charter ul > li.active button i {
+.top-project-charter ul > li.wip button i {
 	border-color: #ccaf2e;
 	color: #ccaf2e;
 }
 
-.top-project-charter ul > li.active button span {
+.top-project-charter ul > li.wip button span {
 	color: #ccaf2e;
 }
 
