@@ -41,6 +41,10 @@ module.exports = {
                 console.log(JSON.stringify(applog));
             });
             
+//save state of the project
+var state_saved = await sails.helpers.save_state(belongs_to_project, "pcharter", "finished");
+console.log(state_saved);
+
             res.redirect('/project/show/' + objective.belongs_to_project ); 
             //res.json(objective);
            // req.session.flash = {};
@@ -143,4 +147,3 @@ module.exports = {
     
     }
 };
-

@@ -389,16 +389,12 @@ module.exports = {
     },
 
    
- save_state: function(req, res, next) {
+ save_state: function (req, res, next) {
     Project.findOne(req.param('id'), function foundProject(err, project) {
         if (err) return next(err);
         if (!project) return next();
         
-        //var project_obj = project.toObject();
-        //var status = {};
         project.status[req.param('key')] = req.param('state');
-
-        //project.status = status;
 
         project.save(function(err){
             if (err) {
@@ -417,34 +413,6 @@ module.exports = {
         //res.json({status});
 
     }); 
-},
-
-save_state1: function(id, key, state, next) {
-    Project.findOne(id, function foundProject(err, project) {
-        if (err) {console.log("error");return next(err);
-        }
-        if (!project) {console.log("!project");return next();}
-        
-        //var project_obj = project.toObject();
-        //var status = {};
-        project.status[key] = state;
-
-        //project.status = status;
-
-        project.save(function(err){
-            if (err) {
-                return res.json({err});
-            } else {
-                console.log( '\n', key,'\n');
-                console.log( '\n',state,'\n');
-                console.log( '\n', project.status,'\n');
-            }
-        });
-          
-            next();//res.json({status});
-
-    }); 
 }
-    
 };
 
