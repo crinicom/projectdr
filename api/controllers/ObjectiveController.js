@@ -42,7 +42,10 @@ module.exports = {
             });
             
 //save state of the project
-var state_saved = await sails.helpers.save_state(belongs_to_project, "pcharter", "finished");
+//var state_saved =  sails.helpers.save_state(belongs_to_project, "pcharter", "finished");
+
+var state_saved= StateService.SetState({id:  req.param('belongs_to_project'), key: "pcharter", state: "finished"})
+
 console.log(state_saved);
 
             res.redirect('/project/show/' + objective.belongs_to_project ); 

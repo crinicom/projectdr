@@ -108,7 +108,7 @@ module.exports = {
             if (err) return next(err);
             if (!project) return next();
            
- sails.controllers.project.save_state1(project.id, "pcharter", "active",next);
+ //sails.controllers.project.save_state1(project.id, "pcharter", "active",next);
 
             var comments = Comment.find({belongs_to_project: req.param('id'), belongs_to:"project"}, function foundComments(err, comments) {
                 if (err) return next(err);
