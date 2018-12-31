@@ -19,15 +19,15 @@
         </div> <!-- fin row-->
     
     <div class="row-fluid top-page">
-    <h1 class="title--project-charter"><span>Proyecto</span>Nombre Proyecto</h1>
+    <h1 class="title--project-charter"><span>Proyecto</span><%= project.name %></h1>
         <table class="top-page-table col-8" width="100%">
             <tr>
-                <td width="140"><strong>DESCRIPCIÓN:</strong></td>
-                <td>Descripción general del proyecto, objetivos en glosa</td>
+                <td width="140"><strong><%= __('project.show.description')%></strong></td>
+                <td><%= project.description %></td>
             </tr>
             <tr>
-                <td><strong>ALCANCE:</strong></td>
-                <td>Alcance, exclusiones, etc</td>
+                <td><strong><%= __('project.show.scope')%></strong></td>
+                <td><%= project.scope %></td>
             </tr>
         </table>
         <div class="container--actions-project-charter">
@@ -38,35 +38,176 @@
         </div>
     </div>
     
-    
+    <!-- Comentarios básicos -->
+    <div class="collapse" id="collapseHeaderComments">
+        <div class="card card-body">
+            <div class="pull-right">    
+                <form action="/comment/new" method="POST">
+                    <div class="control-group" style="display:none;">    
+                        <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                        <input type="hidden" value="project" name="belongs_to">
+                        <input type="hidden" value="header" name="section">
+                        <input type="hidden" value=0 name="item">
+                        <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                        <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-success" >
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </div>
+            
+            <table class="table table-sm table-hover table-striped">
+                <% if (comments.filter(function thisSection(comment) { return comment.section == 'header'}).length > 0) {%>
+             
+                <% _.each(comments, function(comment) { if(comment.section == 'header') {%>
+                    <tr data-id="<%= comment.id%>" data-model="comment">
+                        <td><span class="badge badge-default"><%= comment.user_name%></span>
+                            <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                        <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
+                        <td>
+                            <form action="/comment/edit/<%= comment.id %>" method="POST">
+                               <button type="submit" class="btn btn-sm btn-success" >
+                                 <i class="fa fa-pencil" aria-hidden="true"></i>
+                               </button>
+                               <div class="control-group" style="display:none;"> 
+                                    <input type="hidden" name="_method" value="edit" >
+                                    <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                                </div>
+                            </form> 
+                         </td>
+                        <td>
+                                <form action="/comment/destroy/<%= comment.id %>" method="POST">
+                                    <button type="submit" class="btn btn-sm btn-danger" >
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                <div class="control-group" style="display:none;">    
+                                    <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                                    <input type="hidden" name="_method" value="delete" />
+                                    <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                                </div>
+                                </form>
+                        </td>
+                    
+                    </tr>
+                  <% }}); %> <!-- fin de ciclo -->
+                <% } else {%>
+                    <tr><td><p style="color:rgba(184, 180, 180, 0.692);"><%= __('nocomments')%></p></td></tr>
+                <%}%>
+            </table>
+        </div>
+    </div>
+<!-- FIN comentarios datos básicos -->
+
+<!-- URL de drive -->
+<!-- Boton de edición de los datos básicos de proyecto, lleva a update -->
+   
+<form action="/project/edit/<%=project.id%>" method="POST">
+    <button type="submit" class="btn btn-primary">
+        <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
+        <%= __('project.show.editheader')%>
+    </button>
+    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+</form>
+
+
+<div class="pull-right"> 
+    <a class="btn btn-primary" data-toggle="collapse" href="#AllowEditURL" aria-expanded="false" aria-controls="AllowEditURL">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+    </a>
+</div> 
+
+    <div class="collapse in" id="AllowEditURL">
+            <div class="card card-body">
+                <%if (project.url) { %>
+                    <a href="<%=project.url%>" > Acceder a carpeta compartida</a>
+                <%} else {%>
+                    Editar URL de carpeta compartida
+                <%}%>
+               
+            </div>
+        </div>
+<div class="collapse" id="EditURL">
+    <div class="card card-body">
+            <form action="/project/update/<%=project.id%>" method="POST">
+                <input type="hidden" name="owner" value="<%=project.owner.id%>" />
+                <input cols="100" type="text" value="<%=project.url%>"  name="url" id="url_input"><br/>
+                <input type="submit" value="Update" class="btn btn-sm btn-success" />
+                <a data-toggle="collapse" href="#AllowEditURL" aria-expanded="false" aria-controls="AllowEditURL" class="btn btn-sm btn-danger">Cancel</a>
+                
+                <input type="hidden" name="_csrf" value="<%=_csrf%>" />
+                
+        
+            </form>
+    </div>
+</div>
+<!-- FIN URL drive -->
+
+
+
 
     <div class="row-fluid container--projects-table">
-        <h2 class="subtitle-page">Objetivos</h2>
+        <h2 class="subtitle-page"><%= __('project.show.objectives.title')%></h2>
         <table class="projects-table" width="100%" style="margin-bottom: 20px;">
             <thead>
                 <tr>
-                    <th width="65">ID</th>
-                    <th>DESCRIPCIÓN DEL OBJETIVO</th>
-                    <th>FÓRUMULA</th>
-                    <th>META</th>
+                    <th width="65"><%= __('project.show.objectives.id')%></th>
+                    <th><%= __('project.show.objectives.objective')%></th>
+                    <th><%= __('project.show.objectives.formula')%></th>
+                    <th><%= __('project.show.objectives.goal')%></th>
                     <th style="border-right: none;" width="100">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td align="center"><strong>6</strong></td>
-                    <td>Desarrollar la herramienta sin fallos</td>
-                    <td>Desarrollar la herramienta sin fallos</td>
-                    <td align="center">0</td>
+                 <% _.each(project.objectives, function(objective) { %>
+                 <tr data-id="<%= objective.id%>" data-model="objective">
+                    <td align="center"><strong><%= objective.id%></strong></td>
+                    <td><%= objective.description%></td>
+                    <td><%= objective.formula%></td>
+                    <td align="center"><%= objective.goal%></td>
                     <td class="actions">
-                        <button type="submit" class="edit-project tooltip" title="Editar Objetivo"><i class="far fa-edit"></i></button>
-                        <button type="submit" class="delete-project tooltip" title="Eliminar Objetivo"><i class="fas fa-trash-alt"></i></button>
+                        <!-- <button type="submit" class="edit-project tooltip" title="Editar Objetivo"><i class="far fa-edit"></i></button> -->
+                        <form action="/objective/edit/<%=objective.id%>" method="POST">
+                            <button type="submit" class="edit-project tooltip" title="Editar Objetivo" >
+                              <i class="far fa-edit" aria-hidden="true"></i>
+                            </button>
+                            <div class="control-group" style="display:none;"> 
+                                 <input type="hidden" name="_method" value="edit" >
+                                 <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                             </div>
+                         </form> 
+                       
+                       
+                        <!-- <button type="submit" class="delete-project tooltip" title="Eliminar Objetivo"><i class="fas fa-trash-alt"></i></button> -->
+                        <form action="/objective/destroy/<%= objective.id %>" method="POST">
+                           
+                            <button type="submit" class="delete-project tooltip" title="Eliminar Objetivo">
+                                <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                            </button>
+                            <div class="control-group" style="display:none;">            
+                                <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>">
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </div>
+                        </form>
                     </td>
                 </tr>
+                <% }); %>
             </tbody>
         </table>
         <div class="container--actions-project-charter">
-            <button type="submit" class="btn-action green-line">Agregar objetivo&nbsp;&nbsp;&nbsp; <i class="fas fa-plus fr"></i></button>
+            <!-- <button type="submit" class="btn-action green-line">Agregar objetivo&nbsp;&nbsp;&nbsp; <i class="fas fa-plus fr"></i></button> -->
+            <form action="/objective/new" method="POST">
+   
+                <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+            <button type="submit" class="btn-action green-line">
+                    Agregar objetivo&nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-plus fr" aria-hidden="true"></i>
+                  </button>
+            <input type="hidden" value="<%=_csrf%>" name="_csrf">
+            </form>
         </div>
     </div>
     

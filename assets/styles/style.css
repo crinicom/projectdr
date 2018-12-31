@@ -821,21 +821,22 @@ a.paginate-button.current {
 	text-transform: uppercase;
 }
 
-.top-project-charter ul > li.actual button {
-	cursor: pointer;
+.top-project-charter ul > li.no button {
+	cursor: not-allowed;
+	pointer-events: none;
 }
 
-.top-project-charter ul > li.actual button i {
-	border-color: #2ecc71;
-	color: #2ecc71;
+.top-project-charter ul > li.no button i {
+	border-color: #9da09e;
+	color: #9da09e;
 }
 
-.top-project-charter ul > li.actual button span {
-	color: #2ecc71;
+.top-project-charter ul > li.no button span {
+	color: #9da09e;
 }
 
 .top-project-charter ul > li.wip button {
-	cursor: no-drop;
+	cursor: pointer;
 }
 
 .top-project-charter ul > li.wip button i {
@@ -848,7 +849,7 @@ a.paginate-button.current {
 }
 
 .top-project-charter ul > li.finished button {
-	cursor: no-drop;
+	cursor: pointer;
 }
 
 .top-project-charter ul > li.finished button i {

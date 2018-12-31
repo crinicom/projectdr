@@ -107,7 +107,7 @@ module.exports = {
         Project.findOne(req.param('id')).populateAll().exec(function(err,project) {
             if (err) return next(err);
             if (!project) return next();
-           
+           console.log("en show:", project.status);
  //sails.controllers.project.save_state1(project.id, "pcharter", "active",next);
 
             var comments = Comment.find({belongs_to_project: req.param('id'), belongs_to:"project"}, function foundComments(err, comments) {
@@ -116,7 +116,7 @@ module.exports = {
                 console.log(comments);
                 //return comments;
                 //res.json(users[1].name);
-                console.log(project);
+                console.log(project.status);
                 res.view({project:project, comments:revcoms});
         
             });
