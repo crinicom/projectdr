@@ -211,31 +211,143 @@
         </div>
     </div>
     
+ <!-- Comentarios sección de OBJETIVOS -->
+ <p><div class="pull-right"> 
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseObjectiveComments" aria-expanded="false" aria-controls="collapseObjectiveComments">
+            <% if (comments.filter(function thisSection(comment) { return comment.section == 'objectives'}).length > 0) {%>
+                 <i class="fa fa-comments" aria-hidden="true"></i>
+            <% } else {%>
+                 <i class="fa fa-commenting-o" aria-hidden="true"></i>
+            <% }%>
+        </a>
+    </div> </p>
+
+    <div class="collapse" id="collapseObjectiveComments">
+    <div class="card card-body">
+        <div class="pull-right">    
+            <form action="/comment/new" method="POST">
+                <div class="control-group" style="display:none;">    
+                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                    <input type="hidden" value="project" name="belongs_to">
+                    <input type="hidden" value="objectives" name="section">
+                    <input type="hidden" value=0 name="item">
+                    <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                </div>
+                <button type="submit" class="btn btn-sm btn-success" >
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+        
+        <table class="table table-sm table-hover table-striped">
+            <% if (comments.filter(function thisSection(comment) { return comment.section == 'objectives'}).length > 0) {%>
+         
+            <% _.each(comments, function(comment) { if(comment.section == 'objectives') { %>
+                <tr data-id="<%= comment.id%>" data-model="comment">
+                    <td><span class="badge badge-default"><%= comment.user_name%></span>
+                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                    <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
+                    <td>
+                        <form action="/comment/edit/<%= comment.id %>" method="POST">
+                           <button type="submit" class="btn btn-sm btn-success" >
+                             <i class="fa fa-pencil" aria-hidden="true"></i>
+                           </button>
+                           <div class="control-group" style="display:none;"> 
+                                <input type="hidden" name="_method" value="edit" >
+                                <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </div>
+                        </form> 
+                     </td>
+                    <td>
+                            <form action="/comment/destroy/<%= comment.id %>" method="POST">
+                                <button type="submit" class="btn btn-sm btn-danger" >
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            <div class="control-group" style="display:none;">    
+                                <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                                <input type="hidden" name="_method" value="delete" />
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                            </div>
+                            </form>
+                    </td>
+                
+                </tr>
+              <% }}); %> <!-- fin de ciclo -->
+            <% } else {%>
+                <tr><td><p style="color:rgba(184, 180, 180, 0.692);"><%= __('nocomments')%></p></td></tr>
+            <%}%>
+        </table>
+    </div>
+</div>
+<!-- FIN comentarios objetivos -->
+
+
+
+
+
+
     <div class="row-fluid container--projects-table">
-        <h2 class="subtitle-page">Hitos</h2>
+        <h2 class="subtitle-page"><%= __('project.show.milestones.title')%></h2>
         <table class="projects-table" width="100%" style="margin-bottom: 20px;">
             <thead>
                 <tr>
-                    <th width="65">ID</th>
-                    <th>DESCRIPCIÓN DEL Hito</th>
-                    <th>Fecha</th>
+                    <th width="65"><%= __('project.show.milestones.id')%></th>
+                    <th><%= __('project.show.milestones.milestone')%></th>
+                    <th><%= __('project.show.milestones.date')%></th>
                     <th style="border-right: none;" width="100">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td align="center"><strong>6</strong></td>
-                    <td>Desarrollar la herramienta sin fallos</td>
-                    <td>Sábado 31 de Marzo de 2018</td>
+                    <% _.each(project.milestones, function(milestone) { %>
+                        <tr data-id="<%= milestone.id%>" data-model="milestone">
+                            
+                    <td align="center"><strong><%= milestone.id%></strong></td>
+                    <td><%= milestone.description%></td>
+                    <td><%= milestone.date%></td>
                     <td class="actions">
                         <button type="submit" class="edit-project tooltip" title="Editar Hito"><i class="far fa-edit"></i></button>
+                        <form action="/milestone/edit/<%=milestone.id%>" method="POST">
+                        
+                            <input type="hidden" name="_method" value="edit" >
+                            <button type="submit" class="edit-project tooltip" title="Editar Hito">
+                                    <i class="far fa-edit" aria-hidden="true"></i>
+                            </button>
+                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                        </form>
+                        
+                        
+                        
                         <button type="submit" class="delete-project tooltip" title="Eliminar Hito"><i class="fas fa-trash-alt"></i></button>
+                        <form action="/milestone/destroy/<%= milestone.id %>" method="POST">
+                            <input type="hidden" name="belongs_to_project" value="<%= milestone.belongs_to_project %>" />
+                            <input type="hidden" name="_method" value="delete" />
+                            <button type="submit" class="delete-project tooltip" title="Eliminar Hito">
+                                <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                            </button>
+                            <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                        </form>
+                   
+                   
                     </td>
                 </tr>
+                <% }); %>
             </tbody>
         </table>
         <div class="container--actions-project-charter">
             <button type="submit" class="btn-action green-line">Agregar hito&nbsp;&nbsp;&nbsp; <i class="fas fa-plus fr"></i></button>
+            <form action="/milestone/new" method="POST">
+                <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                <button type="submit" class="btn-action green-line" >
+                        Agregar hito&nbsp;&nbsp;&nbsp; <i class="fas fa-plus fr"></i>
+                 </button>
+                <input type="hidden" value="<%=_csrf%>" name="_csrf">
+            </form>
+           
+           
+           
+           
             <a class="btn-action gray-line" data-toggle="collapse" href="#collapseHeaderComments" aria-expanded="false" aria-controls="collapseHeaderComments">
                 Ver comentarios&nbsp;&nbsp;&nbsp; <i class="far fa-comments fr"></i>
             </a>
@@ -243,34 +355,142 @@
     </div>
 
     <div class="row-fluid container--projects-table">
-        <h2 class="subtitle-page">Equipo</h2>
+        <h2 class="subtitle-page"><%= __('project.show.team.title')%></h2>
         <table class="projects-table" width="100%" style="margin-bottom: 20px;">
             <thead>
                 <tr>
-                    <th width="65">ID</th>
-                    <th>Nombre</th>
-                    <th>E-mail</th>
+                    <th width="65"><%= __('project.show.team.id')%></th>
+                    <th><%= __('project.show.team.name')%></th>
+                    <th><%= __('project.show.team.email')%></th>
                     <th style="border-right: none;" width="100">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td align="center"><strong>6</strong></td>
-                    <td>Oscar Madrid Vargas</td>
-                    <td>oscar.madrid.v@gmail.com</td>
+                    <% _.each(project.team, function(user) { %>
+                        <tr data-id="<%= user.id%>" data-model="user">
+                            
+                    <td align="center"><strong><%= user.id%></strong></td>
+                    <td><%= user.name%></td>
+                    <td>><%= user.email%></td>
                     <td class="actions">
-                        <button type="submit" class="edit-project tooltip" title="Editar Participante"><i class="far fa-edit"></i></button>
+                        <!-- <button type="submit" class="edit-project tooltip" title="Editar Participante"><i class="far fa-edit"></i></button> -->
+                        <form action="user/edit/<%=user.id%>" method="POST">
+                    
+                            <input type="hidden" name="_method" value="edit" >
+                            <button type="submit" class="edit-project tooltip" title="Editar Participante">
+                                    <i class="far fa-edit" aria-hidden="true"></i>
+                            </button>
+                            <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                        </form>
+                        
                         <button type="submit" class="delete-project tooltip" title="Eliminar Participante"><i class="fas fa-trash-alt"></i></button>
+                        <form action="/user/rem_from_team/<%= user.id %>" method="POST">
+                            <button type="submit" class="delete-project tooltip" title="Eliminar Participante">
+                                <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                            </button>
+                            <div class="control-group" style="display:none;">            
+                                <input type="hidden" name="belongs_to_project" value="<%= user.projectsTeam %>">
+                                <input type="hidden" name="_method" value="rem_from_team">
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </div>
+                        </form>
                     </td>
                 </tr>
+                <% }); %>
             </tbody>
         </table>
         <div class="container--actions-project-charter">
             <button type="submit" class="btn-action green-line">Agregar participante&nbsp;&nbsp;&nbsp; <i class="fas fa-plus fr"></i></button>
+            <form action="/user/add_to_team" method="POST">
+                <input type="hidden" name="belongs_to_project" value="<%=project.id%>" >
+                <button type="submit"  class="btn-action green-line" >
+                        Agregar participante&nbsp;&nbsp;&nbsp; <i class="fas fa-plus fr" aria-hidden="true"></i>
+                 </button>
+                <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                </form>
+
+            
             <a class="btn-action gray-line" data-toggle="collapse" href="#collapseHeaderComments" aria-expanded="false" aria-controls="collapseHeaderComments">
                 Ver comentarios&nbsp;&nbsp;&nbsp; <i class="far fa-comments fr"></i>
             </a>
+
+ <!-- Comentarios sección de Team -->
+ <p><div class="pull-right"> 
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseTeamComments" aria-expanded="false" aria-controls="collapseObjectiveComments">
+            <% if (comments.filter(function thisSection(comment) { return comment.section == 'team'}).length > 0) {%>
+                 <i class="fa fa-comments" aria-hidden="true"></i>
+            <% } else {%>
+                 <i class="fa fa-commenting-o" aria-hidden="true"></i>
+            <% }%>
+        </a>
+    </div> </p>
+
+    <div class="collapse" id="collapseTeamComments">
+    <div class="card card-body">
+        <div class="pull-right">    
+            <form action="/comment/new" method="POST">
+                <div class="control-group" style="display:none;">    
+                    <input type="hidden" value="<%=project.id%>" name="belongs_to_project">
+                    <input type="hidden" value="project" name="belongs_to">
+                    <input type="hidden" value="team" name="section">
+                    <input type="hidden" value=0 name="item">
+                    <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                </div>
+                <button type="submit" class="btn btn-sm btn-success" >
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </form>
         </div>
+        
+        <table class="table table-sm table-hover table-striped">
+            <% if (comments.filter(function thisSection(comment) { return comment.section == 'team'}).length > 0) {%>
+         
+            <% _.each(comments, function(comment) { if(comment.section == 'team') { %>
+                <tr data-id="<%= comment.id%>" data-model="comment">
+                    <td><span class="badge badge-default"><%= comment.user_name%></span>
+                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                    <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
+                    <td>
+                        <form action="/comment/edit/<%= comment.id %>" method="POST">
+                           <button type="submit" class="btn btn-sm btn-success" >
+                             <i class="fa fa-pencil" aria-hidden="true"></i>
+                           </button>
+                           <div class="control-group" style="display:none;"> 
+                                <input type="hidden" name="_method" value="edit" >
+                                <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>">
+                            </div>
+                        </form> 
+                     </td>
+                    <td>
+                            <form action="/comment/destroy/<%= comment.id %>" method="POST">
+                                <button type="submit" class="btn btn-sm btn-danger" >
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            <div class="control-group" style="display:none;">    
+                                <input type="hidden" value="/project/show/<%=project.id%>" name="comes_from">
+                                <input type="hidden" name="_method" value="delete" />
+                                <input type="hidden" name="_csrf" value="<%= _csrf%>"/>
+                            </div>
+                            </form>
+                    </td>
+                
+                </tr>
+              <% }}); %> <!-- fin de ciclo -->
+            <% } else {%>
+                <tr><td><p style="color:rgba(184, 180, 180, 0.692);"><%= __('nocomments')%></p></td></tr>
+            <%}%>
+        </table>
+    </div>
+</div>
+<!-- FIN comentarios Team -->
+
+
+
+
+        </div>
+
     </div>
     <div class="row-fluid container--global-actions-project-charter">
         <button type="submit" class="btn--return">Volver</button>
