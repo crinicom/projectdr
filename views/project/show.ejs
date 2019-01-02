@@ -143,8 +143,9 @@
             <form action="/project/update/<%=project.id%>" method="POST">
                 <input type="hidden" name="owner" value="<%=project.owner.id%>">
                 <input cols="100" type="text" value="<%=project.url%>"  name="url" id="url_input">
-                <input type="submit" value="Update" class="btn-action green-line">
-                <a data-toggle="collapse" href="#AllowEditURL" aria-expanded="false" aria-controls="AllowEditURL" class="btn btn-sm btn-danger">Cancel</a>
+                <!-- <input type="submit" value="Update" class="btn-action green-line"> -->
+                <input type="submit" value="Update" class="btn-success" aria-expanded="false">
+                <a data-toggle="collapse" href="#EditURL" aria-expanded="false" aria-controls="EditURL" class="btn btn-sm btn-danger">Cancel</a>
                 
                 <input type="hidden" name="_csrf" value="<%=_csrf%>" />
                 
@@ -218,11 +219,24 @@
                   </button>
             <input type="hidden" value="<%=_csrf%>" name="_csrf">
             </form>
+
+            <a class="btn-action gray-line" data-toggle="collapse" href="#collapseObjectiveComments" aria-expanded="false" aria-controls="collapseObjectiveComments">
+                    Ver comentarios&nbsp;&nbsp;&nbsp;
+                     <!-- <i class="far fa-comments fr"></i> -->
+                     <% if (comments.filter(function thisSection(comment) { return comment.section == 'objectives'}).length > 0) {%>
+                        <i class="fa fa-comments fr" aria-hidden="true"></i>
+                   <% } else {%>
+                        <i class="fa fa-commenting-o fr" aria-hidden="true"></i>
+                   <% }%>
+                    </a>
         </div>
     </div>
     
+  
+
+
  <!-- Comentarios sección de OBJETIVOS -->
- <p><div class="pull-right"> 
+ <!-- <p><div class="pull-right"> 
         <a class="btn btn-primary" data-toggle="collapse" href="#collapseObjectiveComments" aria-expanded="false" aria-controls="collapseObjectiveComments">
             <% if (comments.filter(function thisSection(comment) { return comment.section == 'objectives'}).length > 0) {%>
                  <i class="fa fa-comments" aria-hidden="true"></i>
@@ -230,7 +244,7 @@
                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
             <% }%>
         </a>
-    </div> </p>
+    </div> </p> -->
 
     <div class="collapse" id="collapseObjectiveComments">
     <div class="card card-body">
@@ -358,9 +372,7 @@
            
            
            
-            <a class="btn-action gray-line" data-toggle="collapse" href="#collapseHeaderComments" aria-expanded="false" aria-controls="collapseHeaderComments">
-                Ver comentarios&nbsp;&nbsp;&nbsp; <i class="far fa-comments fr"></i>
-            </a>
+          
         </div>
     </div>
 
