@@ -16,7 +16,7 @@ body {
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
 	margin: 0;
 	padding: 0;
-	vertical-align: baseline;
+	vertical-align: middle;
 }
 
 div,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
@@ -655,13 +655,17 @@ table.projects-table tbody td.percentage {
 
 table.projects-table tbody td.actions {
 	text-align: center;
+	white-space: nowrap;
+	display: inline-flex;
 }
 
 table.projects-table tbody td.actions button {
 	border: none;
-	background: transparent;
-	margin: 0 4px;
+	background: transparent; 
+	margin: 0 4px; 
+	/* margin: 0 0px; */
 	font-size: 24px;
+	/* font-size: 12px; */
 }
 
 button.view-project {
@@ -670,6 +674,11 @@ button.view-project {
 
 button.edit-project {
 	color: #2ecc71;
+}
+
+.tooltip {
+	opacity:50;
+	position: relative;
 }
 
 button.delete-project {
@@ -893,7 +902,7 @@ table.top-page-table td {
 }
 
 .container--actions-project-charter {
-	overflow: hidden;
+	overflow: hidden; 
 	position: relative;
 }
 
@@ -1000,7 +1009,7 @@ body {
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
 	margin: 0;
 	padding: 0;
-	vertical-align: baseline;
+	vertical-align: center;
 }
 
 div,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {

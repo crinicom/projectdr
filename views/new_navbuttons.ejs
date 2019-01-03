@@ -1,15 +1,15 @@
 
     <div class="row-fluid top-project-charter">
         <ul>
-            <li class="<%=project.status[0].pcharter%>">
+            <li class="<%=project.status.pcharter%>">
                 <form action="/project/show/<%=project.id%>" method="POST">
                     <button type="submit">
-                        <i class="fa fa-home"></i><span>Project Charter class <%=project.status[0].pcharter%></span>
+                        <i class="fa fa-home"></i><span>Project Charter class <%=project.status.pcharter%></span>
                     </button>
                     <input type="hidden" value="<%=_csrf%>" name="_csrf"> 
                 </form>
             </li>
-            <li class="<%=project.status[0].edt%>">
+            <li class="<%=project.status.edt%>">
                 <form action="/project/edt/<%=project.id%>" method="POST">
                     <button type="submit">
                         <i class="fas fa-project-diagram"></i><span>Work Breakdown Structure</span>
@@ -17,7 +17,7 @@
                     <input type="hidden" value="<%=_csrf%>" name="_csrf">
                 </form>
             </li>
-            <li class="<%=project.status[0].stakeholders%>">
+            <li class="<%=project.status.stakeholders%>">
                 <form action="/project/stakeholders/<%=project.id%>" method="POST">
                     <button type="submit">
                         <i class="fas fa-handshake"></i><span>Stakeholders</span>
@@ -25,7 +25,7 @@
                     <input type="hidden" value="<%=_csrf%>" name="_csrf">
                 </form>
             </li>
-            <li class="<%=project.status[0].risks%>">
+            <li class="<%=project.status.risks%>">
                 <form action="/project/risks/<%=project.id%>" method="POST">
                     <button type="submit">
                         <i class="fas fa-exclamation-triangle"></i><span>Riesgos</span>
@@ -33,7 +33,7 @@
                     <input type="hidden" value="<%=_csrf%>" name="_csrf">
                 </form>
             </li>
-            <li class="<%=project.status[0].gantt%>">
+            <li class="<%=project.status.gantt%>">
                 <form action="/project/gantt/<%=project.id%>" method="POST">
                     <button type="submit" >
                         <i class="fas fa-tasks"></i><span>Carta Gantt</span>

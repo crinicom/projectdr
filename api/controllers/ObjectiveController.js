@@ -43,11 +43,12 @@ module.exports = {
             
             //save state of the project
             //var state_saved =  sails.helpers.save_state(belongs_to_project, "pcharter", "finished");
+            StateService.SetState({id:  req.param('belongs_to_project'), key: "edt", state: "wip"});
 
-            var SetStatePcharter_FINISHED= StateService.SetState({id:  req.param('belongs_to_project'), key: "pcharter", state: "finished"})
-            console.log(SetStatePcharter_FINISHED);
-            var SetStateEDT_WIP= StateService.SetState({id:  req.param('belongs_to_project'), key: "edt", state: "wip"})
-            console.log(SetStateEDT_WIP);
+            StateService.SetState({id:  req.param('belongs_to_project'), key: "pcharter", state: "finished"});
+            //console.log(SetStatePcharter_FINISHED);
+            
+            //console.log(SetStateEDT_WIP);
 
             res.redirect('/project/show/' + objective.belongs_to_project ); 
             //res.json(objective);
