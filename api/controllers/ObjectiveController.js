@@ -43,15 +43,22 @@ module.exports = {
                 console.log(JSON.stringify(applog));
             });
             
+
+            var estados = [ {key: "pcharter", state: "finished"},
+                    {key: "edt", state: "wip"} ];
+
             //save state of the project
+            StateService.SetState(req.param('belongs_to_project'), estados);
+
+            
             //var state_saved =  sails.helpers.save_state(belongs_to_project, "pcharter", "finished");
-            StateService.SetState({id:  req.param('belongs_to_project'), key: "edt", state: "wip"});
+            // StateService.SetState({id:  req.param('belongs_to_project'), key: "edt", state: "wip"});
 
-            console.log("setee EDT");
+            // console.log("setee EDT");
 
-            StateService.SetState({id:  req.param('belongs_to_project'), key: "pcharter", state: "finished"});
+            // StateService.SetState({id:  req.param('belongs_to_project'), key: "pcharter", state: "finished"});
 
-            console.log("setee PCHARTER");
+            // console.log("setee PCHARTER");
             
             //console.log(SetStatePcharter_FINISHED);
             
@@ -166,11 +173,17 @@ module.exports = {
         console.log("\ncuantos obj quedan? FUERA THEN", project.objectives.length,'\n');
         console.log("queda: ", project.objectives);
         if(project.objectives.length == 1) {
-           console.log("en el if:", project.objectives.length);
-            var SetStatePcharter_WIP= StateService.SetState({id:  project.id, key: "pcharter", state: "wip"});
-            console.log(SetStatePcharter_WIP);
-            var SetStateEDT_NO= StateService.SetState({id:  project.id, key: "edt", state: "no"});
-            console.log(SetStateEDT_NO);
+        //    console.log("en el if:", project.objectives.length);
+        //     var SetStatePcharter_WIP= StateService.SetState({id:  project.id, key: "pcharter", state: "wip"});
+        //     console.log(SetStatePcharter_WIP);
+        //     var SetStateEDT_NO= StateService.SetState({id:  project.id, key: "edt", state: "no"});
+        //     console.log(SetStateEDT_NO);
+
+        var estados = [ {key: "pcharter", state: "wip"},
+                    {key: "edt", state: "no"} ];
+
+            //save state of the project
+            StateService.SetState(project.id, estados);
         }
         res.redirect('/project/show/' + project.id );  
         }); 

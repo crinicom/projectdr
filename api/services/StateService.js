@@ -1,8 +1,9 @@
 //var Promise = require('bluebird');
 
-module.exports.SetState = function(obj = {}) {
+module.exports.SetState = function(ref_id = 0, states=[]) {
     // console.log("obj en setstate antes del set: ", obj);
-    var pro = Project.findOne({id:obj.id}, function foundProject(err, project) {
+    console.log(states);
+    var pro = Project.findOne({id:ref_id}, function foundProject(err, project) {
         if (err) return next(err);
         if (!project) return next();
         console.log(project);
@@ -10,15 +11,32 @@ module.exports.SetState = function(obj = {}) {
         var stat={};
         
         stat = project.status;
-        stat[obj.key] = obj.state;
-        Project.update({id: obj.id},{status: stat}).exec(function afterwards(err, updated){
+        
+        console.log(states);
+
+        for(var i=0;i < states.length; i++) {
+            console.log("onestate ", states[i].key, " ", states[i].state);
+            project.status[states[i].key]=states[i].state;
+        }
+                
+        Project.update({id: ref_id},{status: project.status}).exec(function afterwards(err, updated){
            if (err) return;
            
-           console.log("status en setstate, antes: ", obj);
-            console.log("status en setstate, despues ", updated);
-            
-        //return "ok";
+                     
+        return "ok";
         });
+
+        // project.save(function(err, savedProject){
+        //     if (err) {
+        //         console.log(err);
+        //         return err;
+        //     } else {
+        //         console.log("antes de salir del SAVE: ", project.status);
+        //         return savedProject;
+        //     }
+        // });
+
+
     });
     
     
