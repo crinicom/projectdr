@@ -5,7 +5,7 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-save_state = require('../helpers/save_state')
+
 
 module.exports = {
 	'new': function(req, res, err) {
@@ -47,15 +47,23 @@ module.exports = {
             //var state_saved =  sails.helpers.save_state(belongs_to_project, "pcharter", "finished");
             StateService.SetState({id:  req.param('belongs_to_project'), key: "edt", state: "wip"});
 
+            console.log("setee EDT");
+
             StateService.SetState({id:  req.param('belongs_to_project'), key: "pcharter", state: "finished"});
+
+            console.log("setee PCHARTER");
+            
             //console.log(SetStatePcharter_FINISHED);
             
             //console.log(SetStateEDT_WIP);
 
-            res.redirect('/project/show/' + objective.belongs_to_project ); 
+            //res.redirect('/project/show/' + objective.belongs_to_project ); 
             //res.json(objective);
            // req.session.flash = {};
         });
+        res.redirect('/project/show/' + req.param('belongs_to_project')); 
+
+        
     },
 
     show: function(req, res, next) {
