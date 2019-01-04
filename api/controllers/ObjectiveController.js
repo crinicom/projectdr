@@ -5,6 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+save_state = require('../helpers/save_state')
+
 module.exports = {
 	'new': function(req, res, err) {
         Project.findOne(req.param('belongs_to_project'), function foundObjective(err, project) {
@@ -42,7 +44,8 @@ module.exports = {
             });
             
 //save state of the project
-var state_saved = await sails.helpers.save_state(belongs_to_project, "pcharter", "finished");
+await sails.helpers.save_state('abc123');
+var state_saved = await save_state(belongs_to_project, "pcharter", "finished");
 console.log(state_saved);
 
             res.redirect('/project/show/' + objective.belongs_to_project ); 
