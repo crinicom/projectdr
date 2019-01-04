@@ -4,7 +4,7 @@
             <li class="<%=project.status.pcharter%>">
                 <form action="/project/show/<%=project.id%>" method="POST">
                     <button type="submit">
-                        <i class="fa fa-home"></i><span>Project Charter</span>
+                        <i class="fa fa-home"></i><span>Project Charter class <%=project.status.pcharter%></span>
                     </button>
                     <input type="hidden" value="<%=_csrf%>" name="_csrf"> 
                 </form>
@@ -27,7 +27,7 @@
             </li>
             <li class="<%=project.status.risks%>">
                 <form action="/project/risks/<%=project.id%>" method="POST">
-                    <button type="submit"  class="btn btn-success btn-responsive">
+                    <button type="submit">
                         <i class="fas fa-exclamation-triangle"></i><span>Riesgos</span>
                     </button>
                     <input type="hidden" value="<%=_csrf%>" name="_csrf">
@@ -35,7 +35,7 @@
             </li>
             <li class="<%=project.status.gantt%>">
                 <form action="/project/gantt/<%=project.id%>" method="POST">
-                    <button type="submit" class="btn btn-success btn-responsive">
+                    <button type="submit" >
                         <i class="fas fa-tasks"></i><span>Carta Gantt</span>
                     </button>
                     <input type="hidden" value="<%=_csrf%>" name="_csrf">

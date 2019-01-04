@@ -69,7 +69,7 @@ module.exports = {
             var log = {
                 name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
                 date: now,
-                project: comes_from +';',
+                project: req.param("comes_from") +';',
                 module: 'n/a' +';',
                 item: 'n/a'+';',
                 detail: 'Proyecto: ' + req.param('id') + '; eliminado' +';'
@@ -107,16 +107,16 @@ module.exports = {
         Project.findOne(req.param('id')).populateAll().exec(function(err,project) {
             if (err) return next(err);
             if (!project) return next();
-           
- sails.controllers.project.save_state1(project.id, "pcharter", "active",next);
+           console.log("en show:", project.status);
+ //sails.controllers.project.save_state1(project.id, "pcharter", "active",next);
 
             var comments = Comment.find({belongs_to_project: req.param('id'), belongs_to:"project"}, function foundComments(err, comments) {
                 if (err) return next(err);
                 var revcoms=comments.reverse();
-                console.log(comments);
+                //console.log(comments);
                 //return comments;
                 //res.json(users[1].name);
-                console.log(project);
+                console.log("status desde show:", project.status);
                 res.view({project:project, comments:revcoms});
         
             });

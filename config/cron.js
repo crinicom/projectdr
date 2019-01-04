@@ -4,10 +4,10 @@ module.exports.cron = {
     myFirstJob: {
       schedule: '* * * * * *',
       onTick: function () {
-        console.log('You will see this every second');
+      // FUNCIONABA  console.log('You will see this every second');
         
  
-        request('http://localhost:1337/user/todo/22', { json: true }, (err, res, body) => {
+       // FUNCIONABA request('http://localhost:1337/user/todo/22', { json: true }, (err, res, body) => {
          // if (err) { return console.log(err); }
           //console.log(body);
           //users = JSON.parse(body);
@@ -16,14 +16,14 @@ module.exports.cron = {
           var found = users.find(function(user) {
             return user.id === 22;
           }); */
-          var found = body;
+         // FUNCIONABA var found = body;
          
          //->>>>>>>>>>>>>>>>>< console.log(found);
        /*  for (user in users) {
           console.log(user.id);
         } */
           
-        });
+       // fin REQUEST });
        
     
   }

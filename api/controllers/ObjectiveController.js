@@ -43,10 +43,14 @@ module.exports = {
                 console.log(JSON.stringify(applog));
             });
             
-//save state of the project
-await sails.helpers.save_state('abc123');
-var state_saved = await save_state(belongs_to_project, "pcharter", "finished");
-console.log(state_saved);
+            //save state of the project
+            //var state_saved =  sails.helpers.save_state(belongs_to_project, "pcharter", "finished");
+            StateService.SetState({id:  req.param('belongs_to_project'), key: "edt", state: "wip"});
+
+            StateService.SetState({id:  req.param('belongs_to_project'), key: "pcharter", state: "finished"});
+            //console.log(SetStatePcharter_FINISHED);
+            
+            //console.log(SetStateEDT_WIP);
 
             res.redirect('/project/show/' + objective.belongs_to_project ); 
             //res.json(objective);
@@ -123,18 +127,23 @@ console.log(state_saved);
         }); 
     },
     destroy: function(req,res,next) {
-       Project.findOne(req.param('belongs_to_project'), function foundObjective(err, project) {
-            if (err) return next(err);
-            if (!project) return next();
-
-        Objective.destroy(req.param('id')).exec(function() {
+       var project =  Project
+        .findOne(req.param('belongs_to_project'))
+        .populateAll()      
+        .then(function (project){
+            // if (err) return next(err);
+            // if (!project) return next();
+        
+           
+           // return project;
+           Objective.destroy(req.param('id')).then(function() {
             //res.redirect("/objective/");
             //res.redirect('/project/show/' + objective.belongs_to_project );
             var now = new Date(Date.now()).toLocaleString().split(', ')[0];
             var log = {
                 name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
                 date: now,
-                project: comes_from +';',
+                project: project.id +';',
                 module: 'n/a' +';',
                 item: 'n/a'+';',
                 detail: 'Objetivo eliminado: ' + req.param('id') + '; eliminado' +';'
@@ -143,10 +152,50 @@ console.log(state_saved);
                 if (err) { console.log(JSON.stringify(err)); }
                 console.log(JSON.stringify(applog));
             });
+           
+         });
+       
+        console.log("\ncuantos obj quedan? FUERA THEN", project.objectives.length,'\n');
+        console.log("queda: ", project.objectives);
+        if(project.objectives.length == 1) {
+           console.log("en el if:", project.objectives.length);
+            var SetStatePcharter_WIP= StateService.SetState({id:  project.id, key: "pcharter", state: "wip"});
+            console.log(SetStatePcharter_WIP);
+            var SetStateEDT_NO= StateService.SetState({id:  project.id, key: "edt", state: "no"});
+            console.log(SetStateEDT_NO);
         }
-    );
-         res.redirect('/project/show/' + project.id );
-    });    
+        res.redirect('/project/show/' + project.id );  
+        }); 
+        }
+           
+            
+      
+       
+        // Project.findOne(req.param('belongs_to_project'), function foundObjective(err, project) {
+        //     if (err) return next(err);
+        //     if (!project) return next();
+
+    //     Objective.destroy(req.param('id')).exec(function() {
+    //         //res.redirect("/objective/");
+    //         //res.redirect('/project/show/' + objective.belongs_to_project );
+    //         var now = new Date(Date.now()).toLocaleString().split(', ')[0];
+    //         var log = {
+    //             name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
+    //             date: now,
+    //             project: project.id +';',
+    //             module: 'n/a' +';',
+    //             item: 'n/a'+';',
+    //             detail: 'Objetivo eliminado: ' + req.param('id') + '; eliminado' +';'
+    //         };   
+    //         Applog.create(log, function logCreated(err, applog) {
+    //             if (err) { console.log(JSON.stringify(err)); }
+    //             console.log(JSON.stringify(applog));
+    //         });
+    //     }
+    // );
+    //    console.log("cuantos obj quedan? ", project.objectives.length);
+    //      res.redirect('/project/show/' + project.id );
+    // });    
     
-    }
+    
 };
