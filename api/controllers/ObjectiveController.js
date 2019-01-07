@@ -43,32 +43,20 @@ module.exports = {
                 console.log(JSON.stringify(applog));
             });
             
-
+            function RenderView() {
+                res.redirect('/project/show/' + req.param('belongs_to_project'));
+            }
+            
             var estados = [ {key: "pcharter", state: "finished"},
                     {key: "edt", state: "wip"} ];
 
             //save state of the project
-            StateService.SetState(req.param('belongs_to_project'), estados);
+            StateService.SetState(req.param('belongs_to_project'), estados, RenderView);
 
             
-            //var state_saved =  sails.helpers.save_state(belongs_to_project, "pcharter", "finished");
-            // StateService.SetState({id:  req.param('belongs_to_project'), key: "edt", state: "wip"});
-
-            // console.log("setee EDT");
-
-            // StateService.SetState({id:  req.param('belongs_to_project'), key: "pcharter", state: "finished"});
-
-            // console.log("setee PCHARTER");
             
-            //console.log(SetStatePcharter_FINISHED);
-            
-            //console.log(SetStateEDT_WIP);
-
-            //res.redirect('/project/show/' + objective.belongs_to_project ); 
-            //res.json(objective);
-           // req.session.flash = {};
         });
-        res.redirect('/project/show/' + req.param('belongs_to_project')); 
+         
 
         
     },
@@ -179,13 +167,21 @@ module.exports = {
         //     var SetStateEDT_NO= StateService.SetState({id:  project.id, key: "edt", state: "no"});
         //     console.log(SetStateEDT_NO);
 
-        var estados = [ {key: "pcharter", state: "wip"},
-                    {key: "edt", state: "no"} ];
+            function RenderView() {
+                res.redirect('/project/show/' + project.id );
+            }
+            
+        
+            var estados = [ {key: "pcharter", state: "wip"},
+                        {key: "edt", state: "no"},
+                        {key: "stakeholders", state: "no"},
+                        {key: "risks", state: "no"},
+                        {key: "gantt", state: "no"} ];
 
-            //save state of the project
-            StateService.SetState(project.id, estados);
+                //save state of the project
+                StateService.SetState(project.id, estados , RenderView);
         }
-        res.redirect('/project/show/' + project.id );  
+            
         }); 
         }
            

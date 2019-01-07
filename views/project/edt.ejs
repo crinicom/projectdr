@@ -1,9 +1,30 @@
 <div id="wrapper">
+        <div class="row">      
+                <%- partial('../new_navbuttons.ejs') %>    
+               
+            </div> <!-- fin row-->
+    
+    <div class="row-fluid top-page">
+            <% if (project.status.edt == "wip" || project.status.edt == "no") {%>
+                <div class="alert alert-primary" role="alert">
+                    Agrega por lo menos<strong> una tarea a cada objetivo</strong> para avanzar a la siguient fase de planificación.
+                </div>
+             <%} else {%>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Bien!</strong> Ya puedes continuar a la fase de Análisis de Interesados.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <%};%>
+
+    </div>
+    
     <h1>EDT</h1>
     <h2><%= project.name %></h2>
    
     <hr>
-    <H2>Objectives</H2>
+    <H2>Tareas necesarias para lograr los Objetivos</H2>
     <table class="table table-striped table-hover col-md-12 table-condensed cf pretty" id="myTable">
         <thead class="cf">
         <tr>
@@ -22,14 +43,14 @@
                 <td class="vert-aligned"><%= objective.description%></td>
                
                 <td>
-                        <% if (project.status.edt != "finished") {%>
+                        <%// if (project.status.edt != "finished") {%>
                     <table class="table table-sm ">
                         
                         <tr> 
                           
-                            <a href="/objective/edit/<%=objective.id%>" class="btn btn-sm btn-primary" role="button">
+                            <!-- <a href="/objective/edit/<%=objective.id%>" class="btn btn-sm btn-primary" role="button">
                                 <i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i>                                
-                            </a>
+                            </a> -->
                            <form action="/task/new/" method="POST">
                                 <input type="hidden" name="belongs_to_obj" value="<%= objective.id%>" >
                                 <input type="hidden" name="_method" value="new" >
@@ -40,19 +61,19 @@
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
                             </form>
                         
-                            <form action="/objective/destroy/<%= objective.id %>" method="POST">
+                            <!-- <form action="/objective/destroy/<%= objective.id %>" method="POST">
                                 <input type="hidden" name="belongs_to_project" value="<%= objective.belongs_to_project %>" >
                                 <input type="hidden" name="_method" value="delete" >
                                 <button type="submit" class="btn btn-sm btn-danger">
                                     <i class="fa fa-trash fa-2" aria-hidden="true"></i>
                                 </button>
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                            </form>
+                            </form> -->
                        
                         </tr>
                         
                 </table>
-                    <% }%>
+                    <%// }%>
                 </td>
                
                 <td class="align-middle"><table class="table table-hover table-striped table-sm" id="subTable">
@@ -67,7 +88,7 @@
                             
                             <td><%= task.text%></td>
                             <td><%= task.status%></td>
-                            <td> <% if (project.status.edt != "finished") {%>
+                            <td> <%// if (project.status.edt != "finished") {%>
                                 <table class="table table-sm">
                                     <tr>
                                         
@@ -99,7 +120,7 @@
                                         </form>
                                     </tr>
                                 </tbody>
-                                </table> <%}%>
+                                </table> <%//}%>
                              </td>
                             </tr> 
                         <% }); %>
@@ -185,7 +206,7 @@
 
 
 
-   <%//=JSON.stringify(project.status)%></p>
+   <!-- <%//=JSON.stringify(project.status)%></p>
     <% if (project.status.edt != "finished") {%>
     <form action="/project/show/<%=project.id%>" method="POST">
         <button type="submit" class="btn btn-primary btn-block">
@@ -214,7 +235,7 @@
         <input type="hidden" value="<%=_csrf%>" name="_csrf">
     </form>
     <br><br><br>
-    <%- partial('../navbuttons.ejs') %>
+    <%//- partial('../navbuttons.ejs') %> -->
 
 
 </div>

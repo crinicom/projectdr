@@ -148,21 +148,52 @@ module.exports = {
         .spread(function (project, objectives){
             project = project.toObject(); // <- HERE IS THE CHANGE!
             project.objectives = objectives; // It will work now
+            console.log("tareas: ", project.objectives[0].tasks);
+            console.log("objetivos: ", project.objectives);
+            
+            
             //project.status = { "pcharter":"no", "edt":"no", "stk": "no", "risk_page": "no", "gantt_page": "no", "work": 0};
             //res.json(project);
-
-            var comments = Comment.find({belongs_to_project: project.id, belongs_to:"edt"}, function foundComments(err, comments) {
-                if (err) return next(err);
-                var revcoms=comments.reverse();
-                console.log(comments);
-                //return comments;
-                //res.json(users[1].name);
-                res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress, comments:revcoms});
+            
+                console.log("entro a RenderView:", project.status)
+                var comments = Comment.find({belongs_to_project: project.id, belongs_to:"edt"}, function foundComments(err, comments) {
+                    if (err) return next(err);
+                    var revcoms=comments.reverse();
+                    console.log(comments);
+                    //return comments;
+                    //res.json(users[1].name);
+                    
+                    var ok_para_seguir = 1;
+                    for (var i = 0; i < project.objectives.length; i++) {
+                        if (project.objectives[i].tasks.length == 0) {
+                            ok_para_seguir = ok_para_seguir*0;
+                        }
+                    }
+                    if (ok_para_seguir) {
+                        var estados = [ {key: "edt", state: "finished"},
+                        {key: "stakeholders", state: "wip"} ];
         
-            });
-
-
-
+                        //save state of the project
+                        console.log("antes de setState OK PARA SEGUIR")
+                        StateService.SetState(project.id, estados, RenderView);
+                    } else {
+                        var estados = [ {key: "edt", state: "wip"},
+                        {key: "stakeholders", state: "no"},
+                        {key: "risks", state: "no"},
+                        {key: "gantt", state: "no"} ];
+                        console.log("antes de setState NO OK")
+                        //save state of the project
+                        StateService.SetState(project.id, estados, RenderView);
+                        
+                    }    
+                    
+                    
+                    function RenderView() {
+                        res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress, comments:revcoms});
+                    }
+                }); 
+            
+               
             //res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress});
         }).catch(function (err){
             if (err) return res.serverError(err);
