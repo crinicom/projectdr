@@ -130,7 +130,6 @@ module.exports = {
         // https://stackoverflow.com/questions/26535727/sails-js-waterline-populate-deep-nested-association
         var edt_in_progress ="";
         
-        //if (req.param('edt_in_progress') == "finished") { edt_in_progres = "finished"}
         Project
         .findOne(req.param('id'))
         .populateAll()      
@@ -144,115 +143,251 @@ module.exports = {
                 return objectives;
             });
             return [project, objectives];
-        })
-        .spread(function (project, objectives){
+        }).spread(function (project, objectives){
             project = project.toObject(); // <- HERE IS THE CHANGE!
-            project.objectives = objectives; // It will work now
-            console.log("tareas: ", project.objectives[0].tasks);
-            console.log("objetivos: ", project.objectives);
+            project.objectives = objectives;
+
+        var ok_para_seguir = 1;
+        for (var i = 0; i < project.objectives.length; i++) {
+            if (project.objectives[i].tasks.length == 0) {
+                ok_para_seguir = ok_para_seguir*0;
+            }
+        }
+        if (ok_para_seguir) {
+            var estados = [ {key: "edt", state: "finished"},
+            {key: "stakeholders", state: "wip"} ];
+
+            //save state of the project
+            console.log("antes de setState OK PARA SEGUIR")
+            StateService.SetState(project.id, estados, RenderView);
+        } else {
+            var estados = [ {key: "edt", state: "wip"},
+            {key: "stakeholders", state: "no"},
+            {key: "risks", state: "no"},
+            {key: "gantt", state: "no"} ];
+            console.log("antes de setState NO OK")
+            //save state of the project
+            StateService.SetState(project.id, estados, RenderView);
+            
+        }    
+        });
+        function RenderView() {
+            //if (req.param('edt_in_progress') == "finished") { edt_in_progres = "finished"}
+            Project
+            .findOne(req.param('id'))
+            .populateAll()      
+            .then(function (project){
+                var objectives = Objective.find({
+                    "belongs_to_project": project.id
+                })
+                .populate('tasks')
+                //.populate('lvl1tasks')
+                .then(function (objectives){
+                    return objectives;
+                });
+                return [project, objectives];
+            })
+            .spread(function (project, objectives){
+                project = project.toObject(); // <- HERE IS THE CHANGE!
+                project.objectives = objectives; // It will work now
+                console.log("tareas: ", project.objectives[0].tasks);
+                console.log("objetivos: ", project.objectives);
+                
+                
+                //project.status = { "pcharter":"no", "edt":"no", "stk": "no", "risk_page": "no", "gantt_page": "no", "work": 0};
+                //res.json(project);
+                
+                    console.log("entro a RenderView:", project.status)
+                    var comments = Comment.find({belongs_to_project: project.id, belongs_to:"edt"}, function foundComments(err, comments) {
+                        if (err) return next(err);
+                        var revcoms=comments.reverse();
+                        console.log(comments);
+                        //return comments;
+                        //res.json(users[1].name);
+                        
+                    
+                        
+                        
+                    
+                            res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress, comments:revcoms});
+                        
+                    }); 
+                
+                
+                //res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress});
+            }).catch(function (err){
+                if (err) return res.serverError(err);
+            });
+        }
+    },
+ // RESPONDO A LA LLAMADA PARA VER LA STAKEHOLDERS
+    stakeholders: function(req, res, next) {
+      
+        Project
+        .findOne(req.param('id'))
+        .populateAll()      
+        .then(function (project){
+            var objectives = Objective.find({
+                "belongs_to_project": project.id
+            })
+            .populate('tasks')
+            //.populate('lvl1tasks')
+            .then(function (objectives){
+                return objectives;
+            });
+            var stakeholders = Stakeholder.find({
+                "belongs_to_project": project.id
+            }).then(function (stakeholders) {
+            var ok_para_seguir = 1;
             
             
-            //project.status = { "pcharter":"no", "edt":"no", "stk": "no", "risk_page": "no", "gantt_page": "no", "work": 0};
-            //res.json(project);
-            
-                console.log("entro a RenderView:", project.status)
-                var comments = Comment.find({belongs_to_project: project.id, belongs_to:"edt"}, function foundComments(err, comments) {
+            if(stakeholders.length == 0) {
+                ok_para_seguir = ok_para_seguir*0;
+            }
+            // for (var i = 0; i < stakeholders.length; i++) {
+            //     if (project.objectives[i].tasks.length == 0) {
+            //         ok_para_seguir = ok_para_seguir*0;
+            //     }
+            // }
+            if (ok_para_seguir) {
+                var estados = [ {key: "stakeholders", state: "finished"},
+                {key: "risks", state: "wip"} ];
+
+                //save state of the project
+                console.log("antes de setState OK stk PARA SEGUIR")
+                StateService.SetState(project.id, estados, RenderView);
+            } else {
+                var estados = [ {key: "stakeholders", state: "wip"},
+                {key: "risks", state: "no"},
+                {key: "gantt", state: "no"} ];
+                console.log("antes de setState NO OK")
+                //save state of the project
+                StateService.SetState(project.id, estados, RenderView);
+                
+            }    
+        });
+    });
+
+
+    function RenderView() {
+            Project
+            .findOne(req.param('id'))
+            .populateAll()      
+            .then(function (project){
+                var objectives = Objective.find({
+                    "belongs_to_project": project.id
+                })
+                .populate('tasks')
+                //.populate('lvl1tasks')
+                .then(function (objectives){
+                    return objectives;
+                });
+                var stakeholders = Stakeholder.find({
+                    "belongs_to_project": project.id
+                })
+                //.populate('mails')
+                .then(function (stakeholders){
+                    return stakeholders;
+                });
+                return [project, objectives, stakeholders];
+            })
+            .spread(function (project, objectives, stakeholders){
+                project = project.toObject(); // <- HERE IS THE CHANGE!
+                project.objectives = objectives; // It will work now
+                project.stakeholders = stakeholders;
+                //res.json(project);
+                
+                var comments = Comment.find({belongs_to_project: project.id, belongs_to:"stk"}, function foundComments(err, comments) {
                     if (err) return next(err);
                     var revcoms=comments.reverse();
                     console.log(comments);
                     //return comments;
                     //res.json(users[1].name);
-                    
-                    var ok_para_seguir = 1;
-                    for (var i = 0; i < project.objectives.length; i++) {
-                        if (project.objectives[i].tasks.length == 0) {
-                            ok_para_seguir = ok_para_seguir*0;
-                        }
-                    }
-                    if (ok_para_seguir) {
-                        var estados = [ {key: "edt", state: "finished"},
-                        {key: "stakeholders", state: "wip"} ];
-        
-                        //save state of the project
-                        console.log("antes de setState OK PARA SEGUIR")
-                        StateService.SetState(project.id, estados, RenderView);
-                    } else {
-                        var estados = [ {key: "edt", state: "wip"},
-                        {key: "stakeholders", state: "no"},
-                        {key: "risks", state: "no"},
-                        {key: "gantt", state: "no"} ];
-                        console.log("antes de setState NO OK")
-                        //save state of the project
-                        StateService.SetState(project.id, estados, RenderView);
-                        
-                    }    
-                    
-                    
-                    function RenderView() {
-                        res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress, comments:revcoms});
-                    }
-                }); 
+                    res.view({objectives:objectives, project:project, stakeholders:stakeholders,comments:revcoms});
             
-               
-            //res.view({objectives:objectives, project:project, edt_in_progress:edt_in_progress});
-        }).catch(function (err){
-            if (err) return res.serverError(err);
-        });
-         
-    },
- // RESPONDO A LA LLAMADA PARA VER LA STAKEHOLDERS
-    stakeholders: function(req, res, next) {
-      
-         Project
-         .findOne(req.param('id'))
-         .populateAll()      
-         .then(function (project){
-             var objectives = Objective.find({
-                 "belongs_to_project": project.id
-             })
-             .populate('tasks')
-             //.populate('lvl1tasks')
-             .then(function (objectives){
-                 return objectives;
-             });
-             var stakeholders = Stakeholder.find({
-                 "belongs_to_project": project.id
-             })
-             //.populate('mails')
-             .then(function (stakeholders){
-                return stakeholders;
+                });
+                
+                
+                
+                
+                }).catch(function (err){
+                if (err) return res.serverError(err);
             });
-             return [project, objectives, stakeholders];
-         })
-         .spread(function (project, objectives, stakeholders){
-             project = project.toObject(); // <- HERE IS THE CHANGE!
-             project.objectives = objectives; // It will work now
-             project.stakeholders = stakeholders;
-             //res.json(project);
-             
-             var comments = Comment.find({belongs_to_project: project.id, belongs_to:"stk"}, function foundComments(err, comments) {
-                if (err) return next(err);
-                var revcoms=comments.reverse();
-                console.log(comments);
-                //return comments;
-                //res.json(users[1].name);
-                res.view({objectives:objectives, project:project, stakeholders:stakeholders,comments:revcoms});
-        
-            });
-             
-             
-             
-            
-            }).catch(function (err){
-             if (err) return res.serverError(err);
-         });
-          
+        }     
      },
 
      // RESPONDO A LA LLAMADA PARA VER RIESGOS
     risks: function(req, res, next) {
      
-          Project
+
+        Project
+        .findOne(req.param('id'))
+        .populateAll()      
+        .then(function (project){
+            var stakeholders = Stakeholder.find({
+                "belongs_to_project": project.id
+            })
+            //.populate('tasks')
+            //.populate('lvl1tasks')
+            .then(function (stakeholders){
+                return stakeholders;
+            });
+            var risks = Risk.find({
+              "belongs_to_project": project.id
+          })
+          //.populate('tasks')
+          //.populate('lvl1tasks')
+          .then(function (risks){
+              return risks;
+          });
+            return [project, stakeholders, risks];
+        }).spread(function (project, stakeholders, risks){
+            project = project.toObject(); // <- HERE IS THE CHANGE!
+            project.stakeholders = stakeholders;
+            project.risks = risks; // It will work now
+
+
+            var ok_para_seguir =true;
+            // if (project.stakeholders.length > project.risks.) {
+            //     ok_para_seguir = ok_para_seguir*0;
+            // }
+            function hayRiesgoAsociado(curr,idx, array) {
+                // console.log("curr id ", curr.id);
+                // for (r in project.risks) console.log("R",project.risks[r]);
+                stat = stat*project.risks.some(x => x.assoc_stakeholder == curr.id+0);
+                return stat;
+            }
+            var stat = true;
+            ok_para_seguir = project.stakeholders.some(hayRiesgoAsociado);
+
+                    
+            console.log("ok para seguir? ", ok_para_seguir)
+           
+
+
+            console.log("RIESGOS", project.risks);
+            console.log("Stakeholders ", project.stakeholders);
+        
+        if (ok_para_seguir) {
+            var estados = [ {key: "risks", state: "finished"},
+            {key: "gantt", state: "wip"} ];
+
+            //save state of the project
+            console.log("antes de setState OK stk PARA SEGUIR")
+            StateService.SetState(project.id, estados, RenderView);
+        } else {
+            var estados = [ {key: "risks", state: "wip"},
+           
+            {key: "gantt", state: "no"} ];
+            console.log("antes de setState NO OK")
+            //save state of the project
+            StateService.SetState(project.id, estados, RenderView);
+            
+        }      
+    });
+        
+ function RenderView() {       
+        Project
           .findOne(req.param('id'))
           .populateAll()      
           .then(function (project){
@@ -295,7 +430,7 @@ module.exports = {
              }).catch(function (err){
               if (err) return res.serverError(err);
           });
-           
+        }
       },
 
        // RESPONDO A LA LLAMADA PARA VER GANTT----

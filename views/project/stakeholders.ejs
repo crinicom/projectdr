@@ -1,12 +1,30 @@
 <div id="wrapper">
-    <h1>Stakeholders y plan de comunicación</h1>
-    <h2><%= project.name %></h2>
+    <div class="row">      
+        <%- partial('../new_navbuttons.ejs') %>    
+       
+    </div> <!-- fin row-->
+
+<div class="row-fluid top-page">
+    <% if (project.status.stakeholders == "wip" || project.status.stakeholders == "no") {%>
+        <div class="alert alert-primary" role="alert">
+            Agrega por lo menos<strong> un interesado</strong> para avanzar a la siguiente fase de planificación.
+        </div>
+     <%} else {%>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Bien!</strong> Ya puedes continuar a la fase de Análisis de Riesgos.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <%};%>
+
+</div>
+    
+    <h2 class="subtitle-page">Interesados y plan de comunicación</h2>
+    
    
-    <hr>
-    <H2>Tareas de la EDT
-   
-    </H2>
-    <table class="table table table-sm table-vcenter">
+    
+    <table class="projects-table" width="100%" style="margin-bottom: 20px;">
         <tr>
             
             <th class="align-middle">Tarea</th>
@@ -28,7 +46,7 @@
                     <table class="table table-sm ">
                         <tr> 
                           
-                            <a href="/task/edit/<%=task.id%>" class="btn btn-sm btn-primary" role="button">
+                            <!-- <a href="/task/edit/<%=task.id%>" class="btn btn-sm btn-primary" role="button">
                                 <i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i>                                
                             </a>
                            
@@ -40,7 +58,7 @@
                                     <i class="fa fa-trash fa-2" aria-hidden="true"></i>
                                 </button>
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                            </form>
+                            </form> -->
                             <form action="/stakeholder/new/" method="POST">
                                 <input type="hidden" name="belongs_to_project" value="<%= project.id%>" >
                                 <input type="hidden" name="assoc_task" value="<%= task.id%>" >
@@ -192,35 +210,3 @@
         </div>
     </div>
     <!-- FIN comentarios stakeholders -->
-
-    <% if (project.status.stakeholders != "finished") {%>
-        <form action="/project/show/<%=project.id%>" method="POST">
-            <button type="submit" class="btn btn-primary btn-block">
-                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-                Guardar y continuar más tarde
-            </button>
-            <input type="hidden" value="<%=_csrf%>" name="_csrf">
-        </form> <%}%>
-    
-        <form action="/project/save_state/<%=project.id%>" method="POST">
-            <% if (project.status.stakeholders != "finished") {%>
-            <button type="submit" class="btn btn-success btn-block">
-                <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
-                Guardar y finalizar edición
-            </button>
-            <input type="hidden"  name="key" value="stakeholders">
-            <input type="hidden"  name="state" value="finished">
-            <% } else {%>
-                <button type="submit" class="btn btn-success btn-block">
-                    <i class="fa fa-unlock fa-2x" aria-hidden="true"></i>    
-                    Continuar edición
-                </button>
-                <input type="hidden"  name="key" value="stakeholders">
-                <input type="hidden"  name="state" value="wip">
-                <%}%>            
-            <input type="hidden" value="<%=_csrf%>" name="_csrf">
-        </form>
-       
-</div>
-<br><br><br>
-<%- partial('../navbuttons.ejs') %>

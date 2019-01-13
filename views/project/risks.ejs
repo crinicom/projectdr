@@ -1,4 +1,27 @@
 <div id="wrapper">
+    <div class="row">      
+        <%- partial('../new_navbuttons.ejs') %>    
+       
+    </div> <!-- fin row-->
+
+<div class="row-fluid top-page">
+    <% if (project.status.risks == "wip" || project.status.risks == "no") {%>
+        <div class="alert alert-primary" role="alert">
+            Agrega por lo menos<strong> un riesgo a cada interesado</strong> para avanzar a la siguiente fase de planificación.
+            En caso de no percibir riesgo asociado a un interesado, indicar "sin riesgo percibido".
+        </div>
+     <%} else {%>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Bien!</strong> Ya puedes continuar a la fase de Análisis de Interesados.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <%};%>
+
+</div>
+   
+   
     <h1>Risks</h1>
     <h2><%= project.name %></h2>
    
