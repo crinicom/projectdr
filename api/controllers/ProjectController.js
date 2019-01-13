@@ -358,8 +358,8 @@ module.exports = {
                 return stat;
             }
             var stat = true;
-            ok_para_seguir = project.stakeholders.some(hayRiesgoAsociado);
-
+            var resultado = project.stakeholders.map(hayRiesgoAsociado);
+             ok_para_seguir = resultado.every(x => x != 0); 
                     
             console.log("ok para seguir? ", ok_para_seguir)
            
