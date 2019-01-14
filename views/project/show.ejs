@@ -97,7 +97,7 @@
                 <% _.each(comments, function(comment) { if(comment.section == 'header') {%>
                     <tr data-id="<%= comment.id%>" data-model="comment">
                         <td><span class="badge badge-default"><%= comment.user_name%></span>
-                            <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                            <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date.toLocaleString()%></small></p></td>
                         <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
                         <td>
                             <form action="/comment/edit/<%= comment.id %>" method="POST">
@@ -160,6 +160,7 @@
                     <form action="/project/update/<%=project.id%>" method="POST">
                         <input type="hidden" name="owner" value="<%=project.owner.id%>">
                         <input cols="100" type="text" value="<%=project.url%>"  name="url" id="url_input">
+                        
                         <!-- <input type="submit" value="Update" class="btn-action green-line"> -->
                         <input type="submit" value="Update" class="btn-success" aria-expanded="false">
                         <a data-toggle="collapse" href="#EditURL" aria-expanded="false" aria-controls="EditURL" class="btn btn-sm btn-danger">Cancel</a>
@@ -292,7 +293,7 @@
             <% _.each(comments, function(comment) { if(comment.section == 'objectives') { %>
                 <tr data-id="<%= comment.id%>" data-model="comment">
                     <td><span class="badge badge-default"><%= comment.user_name%></span>
-                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date.toLocaleString()%></small></p></td>
                     <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
                     <td>
                         <form action="/comment/edit/<%= comment.id %>" method="POST">
@@ -351,7 +352,7 @@
                             
                     <td align="center"><strong><%= milestone.id%></strong></td>
                     <td><%= milestone.description%></td>
-                    <td><%= milestone.date%></td>
+                    <td><%= milestone.date.toLocaleString()%></td>
                     <td class="actions">
                         <button type="submit" class="edit-project tooltip" title="Editar Hito"><i class="far fa-edit"></i></button>
                         <form action="/milestone/edit/<%=milestone.id%>" method="POST">
@@ -498,7 +499,7 @@
             <% _.each(comments, function(comment) { if(comment.section == 'team') { %>
                 <tr data-id="<%= comment.id%>" data-model="comment">
                     <td><span class="badge badge-default"><%= comment.user_name%></span>
-                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date.toLocaleString()%></small></p></td>
                     <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
                     <td>
                         <form action="/comment/edit/<%= comment.id %>" method="POST">

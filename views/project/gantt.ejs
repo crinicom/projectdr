@@ -33,8 +33,31 @@ function assign_task(select, project_id) {
 </script>
 
 <div id="wrapper">
-        <h1>Carta Gantt</h1>
-        <h2><%= project.name %></h2>
+        <div class="row">      
+            <%- partial('../new_navbuttons.ejs') %>    
+           
+        </div> <!-- fin row-->
+    
+    <div class="row-fluid top-page">
+        <% if (project.status.gantt == "wip" || project.status.gantt == "no") {%>
+            <div class="alert alert-primary" role="alert">
+                Recuerda<strong> asignar un responsable por tarea</strong>, marcar cada tarea como "en proceso" o "finalizada" y
+                registrar comentarios de seguimiento para cada una. 
+            </div>
+         <%} else {%>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>¡Felicidades!</strong> ¡Este Proyecto ha sido un éxito! Recuerda recomendar esta aplicación a tus colegas.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            <%};%>
+    
+    </div>
+ 
+ 
+   
+   
         <div class="pull-right">
             
         </div>
@@ -48,6 +71,17 @@ function assign_task(select, project_id) {
         <hr>
         <H2>Plan de trabajo</H2>
         
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+// SECCIÓN DE STAKEHOLDERS
+//
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
         <table class="table table table-sm table-vcenter" id="myTable">
            <thead>
             <tr>
@@ -147,7 +181,7 @@ function assign_task(select, project_id) {
             </div>
         </td> <!-- FIN botón nuevo vomentario-->
      <td>
-         <table class="table table-sm table-borderless table-condensed">
+         <table class="table table-sm table-borderless table-condensed projects-table">
             <thead>
                 <th></th>
                 <th></th>
@@ -162,7 +196,7 @@ function assign_task(select, project_id) {
                         <%= comments.find(function thisSection(comment) { return (comment.section == 'stakeholders' && comment.item == stakeholder.id)}).text %>
                         <p style="color:rgba(184, 180, 180, 0.692);">
                             <small>
-                                    <%= comments.find(function thisSection(comment) { return (comment.section == 'stakeholders' && comment.item == stakeholder.id)}).date %>      
+                                    <%= comments.find(function thisSection(comment) { return (comment.section == 'stakeholders' && comment.item == stakeholder.id)}).date.toLocaleString() %>      
                             </small>
                         </p>
                     
@@ -197,7 +231,7 @@ function assign_task(select, project_id) {
                         <% _.each(comments, function(comment) { if(comment.section == 'stakeholders' && comment.item == stakeholder.id) { %>
                             <tr data-id="<%= comment.id%>" data-model="comment">
                                 <td><span class="badge badge-default"><%= comment.user_name%></span>
-                                    <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p>
+                                    <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date.toLocaleString()%></small></p>
                                 </td>
                                 <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
                                 <td>
@@ -243,7 +277,15 @@ function assign_task(select, project_id) {
 
 
 
-
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+// SECCIÓN DE RIESGOS
+//
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 
              </tr>  <% }); %>
@@ -348,7 +390,7 @@ function assign_task(select, project_id) {
                                     <%= comments.find(function thisSection(comment) { return (comment.section == 'risks' && comment.item == risk.id)}).text %>
                                     <p style="color:rgba(184, 180, 180, 0.692);">
                                         <small>
-                                                <%= comments.find(function thisSection(comment) { return (comment.section == 'risks' && comment.item == risk.id)}).date %>      
+                                                <%= comments.find(function thisSection(comment) { return (comment.section == 'risks' && comment.item == risk.id)}).date.toLocaleString() %>      
                                         </small>
                                     </p>
                                 
@@ -385,7 +427,7 @@ function assign_task(select, project_id) {
                                     <% _.each(comments, function(comment) { if(comment.section == 'risks' && comment.item == risk.id) { %>
                                         <tr data-id="<%= comment.id%>" data-model="comment">
                                             <td><span class="badge badge-default"><%= comment.user_name%></span>
-                                                <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p>
+                                                <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date.toLocaleString()%></small></p>
                                             </td>
                                             <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
                                             <td>
@@ -432,6 +474,16 @@ function assign_task(select, project_id) {
 
 
          </tr>    <% }); %>
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+// SECCIÓN DE TAREAS
+//
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 
          <% _.each(project.objectives, function(objective) { %> 
@@ -520,7 +572,7 @@ function assign_task(select, project_id) {
                                 </div>
                             </td> <!-- FIN botón nuevo vomentario-->
                          <td>
-                             <table class="table table-sm table-borderless table-condensed">
+                             <table class="table table-sm table-borderless table-condensed projects-table">
                                  <thead><th></th>
                                     <th></th>
                                 </thead>
@@ -534,7 +586,7 @@ function assign_task(select, project_id) {
                                             <%= comments.find(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).text %>
                                             <p style="color:rgba(184, 180, 180, 0.692);">
                                                 <small>
-                                                        <%= comments.find(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).date %>      
+                                                        <%= comments.find(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).date.toLocaleString() %>      
                                                 </small>
                                             </p>
                                         
@@ -567,7 +619,7 @@ function assign_task(select, project_id) {
                                             <% _.each(comments, function(comment) { if(comment.section == 'objectives' && comment.item == task.id) { %>
                                                 <tr data-id="<%= comment.id%>" data-model="comment">
                                                     <td><span class="badge badge-default"><%= comment.user_name%></span>
-                                                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                                                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date.toLocaleString()%></small></p></td>
                                                     <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
                                                     <td>
                                                         <form action="/comment/edit/<%= comment.id %>" method="POST">
@@ -622,36 +674,7 @@ function assign_task(select, project_id) {
         </table> <!-- cierre tabla grande-->
     
 
-        <p><%//=JSON.stringify(project.status)%></p>
-        <% if (project.status.gantt != "finished") {%>
-            <form action="/project/show/<%=project.id%>" method="POST">
-                <button type="submit" class="btn btn-primary btn-block">
-                    <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-                    Guardar y continuar más tarde
-                </button>
-                <input type="hidden" value="<%=_csrf%>" name="_csrf">
-            </form> <%}%>
         
-            <form action="/project/save_state/<%=project.id%>" method="POST">
-                <% if (project.status.gantt != "finished") {%>
-                <button type="submit" class="btn btn-success btn-block">
-                    <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
-                    Guardar y finalizar edición
-                </button>
-                <input type="hidden"  name="key" value="gantt">
-                <input type="hidden"  name="state" value="finished">
-                <% } else {%>
-                    <button type="submit" class="btn btn-success btn-block">
-                        <i class="fa fa-unlock fa-2x" aria-hidden="true"></i>    
-                        Continuar edición
-                    </button>
-                    <input type="hidden"  name="key" value="gantt">
-                    <input type="hidden"  name="state" value="wip">
-                    <%}%>            
-                <input type="hidden" value="<%=_csrf%>" name="_csrf">
-            </form>
-            <br><br><br>
-            <%- partial('../navbuttons.ejs') %>
     
     
     </div>

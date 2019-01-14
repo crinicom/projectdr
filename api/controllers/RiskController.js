@@ -98,7 +98,7 @@ module.exports = {
             var log = {
                 name: req.session.User.email+';' + ' id: ' + req.session.User.id+';',
                 date: now,
-                project: comes_from +';',
+                project: req.param('belongs_to_project') +';',
                 module: 'n/a' +';',
                 item: 'n/a'+';',
                 detail: 'Riesgo: ' + req.param('id') + '; eliminado' +';'

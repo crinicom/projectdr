@@ -167,7 +167,7 @@
             <% _.each(comments, function(comment) { if(comment.section == 'edt') { %>
                 <tr data-id="<%= comment.id%>" data-model="comment">
                     <td><span class="badge badge-default"><%= comment.user_name%></span>
-                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date.toLocaleString()%></small></p></td>
                     <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
                     <td>
                         <form action="/comment/edit/<%= comment.id %>" method="POST">

@@ -9,6 +9,14 @@
                     <input type="hidden" value="<%=_csrf%>" name="_csrf"> 
                 </form>
             </li>
+            <li class="<%=project.status.sharedfolder%>">
+                <form action="<%=project.url%>" method="POST">
+                    <button type="submit" >
+                        <i class="fas fa-folder-open"></i><span>Carpeta Compartida</span>
+                    </button>
+                    <input type="hidden" value="<%=_csrf%>" name="_csrf">
+                </form>
+            </li>
             <li class="<%=project.status.edt%>">
                 <form action="/project/edt/<%=project.id%>" method="POST">
                     <button type="submit">
@@ -41,6 +49,7 @@
                     <input type="hidden" value="<%=_csrf%>" name="_csrf">
                 </form>
             </li>
+           
         </ul>
         
     </div>

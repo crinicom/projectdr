@@ -46,7 +46,7 @@
                     <table class="table table-sm ">
                         <tr> 
                           
-                            <form action="/stakeholder/edit/<%=stakeholder.id%>" method="POST">
+                            <!-- <form action="/stakeholder/edit/<%=stakeholder.id%>" method="POST">
                                 <input type="hidden" name="belongs_to_project" value="<%= project.id%>">
                                 <input type="hidden" name="_method" value="edit" >
                                 <input type="hidden" name="assoc_task" value="<%= stakeholder.assoc_task%>" >
@@ -63,7 +63,7 @@
                                     <i class="fa fa-trash fa-2" aria-hidden="true"></i>
                                 </button>
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                            </form>
+                            </form> -->
                             
                             <form action="/risk/new/" method="POST">
                                 <input type="hidden" name="belongs_to_project" value="<%= project.id%>" >
@@ -156,7 +156,7 @@
             <% _.each(comments, function(comment) { if(comment.section == 'risks') { %>
                 <tr data-id="<%= comment.id%>" data-model="comment">
                     <td><span class="badge badge-default"><%= comment.user_name%></span>
-                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date%></small></p></td>
+                        <%= comment.text%> - <p style="color:rgba(184, 180, 180, 0.692);"><small> <%= comment.date.toLocaleString()%></small></p></td>
                     <!-- <td><a href="/project/show/<%=project.id%>">Show</a></td> -->
                     <td>
                         <form action="/comment/edit/<%= comment.id %>" method="POST">
@@ -194,35 +194,5 @@
 <!-- FIN comentarios riesgos -->
 
 
-    <% if (project.status.risks != "finished") {%>
-        <form action="/project/show/<%=project.id%>" method="POST">
-            <button type="submit" class="btn btn-primary btn-block">
-                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-                Guardar y continuar más tarde
-            </button>
-            <input type="hidden" value="<%=_csrf%>" name="_csrf">
-        </form> <%}%>
-    
-        <form action="/project/save_state/<%=project.id%>" method="POST">
-            <% if (project.status.risks != "finished") {%>
-            <button type="submit" class="btn btn-success btn-block">
-                <i class="fa fa-lock fa-2x" aria-hidden="true"></i>    
-                Guardar y finalizar edición
-            </button>
-            <input type="hidden"  name="key" value="risks">
-            <input type="hidden"  name="state" value="finished">
-            <% } else {%>
-                <button type="submit" class="btn btn-success btn-block">
-                    <i class="fa fa-unlock fa-2x" aria-hidden="true"></i>    
-                    Continuar edición
-                </button>
-                <input type="hidden"  name="key" value="risks">
-                <input type="hidden"  name="state" value="wip">
-                <%}%>            
-            <input type="hidden" value="<%=_csrf%>" name="_csrf">
-        </form>
-       
-
+   
 </div>
-<br><br><br>
-<%- partial('../navbuttons.ejs') %>

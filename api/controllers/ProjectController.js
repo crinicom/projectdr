@@ -57,8 +57,24 @@ module.exports = {
                 console.log(err);
                 return res.redirect('/project/edit/'+ req.param('id'));
             }
-            return res.redirect('/project/show/'+ req.param('id'));
+            function RenderView() {
+                return res.redirect('/project/show/'+ req.param('id'));
             //return res.redirect('/project/edit/'+ req.param('id'));
+            }
+            
+            
+            if (req.param('url')) {
+            var estados = [ {key: "sharedfolder", state: "finished"}];
+
+            //save state of the project
+           
+            } else {
+                var estados = [ {key: "sharedfolder", state: "no"}];
+            }
+            console.log("antes de setState OK stk PARA SEGUIR")
+            StateService.SetState(req.param('id'), estados, RenderView); 
+            
+           
         }); 
     },
     destroy: function(req,res,next) {
