@@ -5,8 +5,8 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
-    //"bcrypt": "^1.0.3",
-    "bcrypt": "^3",
+    "bcrypt": "^1.0.3",
+    
     "bcryptjs": "^2.4.3",
     "dotenv": "^5.0.1",
     "ejs": "2.5.5",
