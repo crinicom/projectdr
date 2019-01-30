@@ -70,8 +70,8 @@
                                 <input type="hidden" name="assoc_stakeholder" value="<%= stakeholder.id%>" >
                                 <input type="hidden" name="_method" value="new" >
                              
-                                <button type="submit" class="btn btn-sm btn-success" >   
-                                <i class="fa fa-plus-square-o fa-2" aria-hidden="true"></i></button>
+                                <button type="submit" class="btn-action green-line" >   
+                                <i class="fa fa-plus-square-o fa-2" aria-hidden="true"></i> Nuevo riesgo</button>
                                 
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
                             </form>
@@ -123,7 +123,8 @@
 
 <!-- Comentarios sección de Riesgos -->
 <p><div class="pull-right"> 
-        <a class="btn btn-primary" data-toggle="collapse" href="#collapseRiskComments" aria-expanded="false" aria-controls="collapseRiskComments">
+        <a class="btn-action gray-line" data-toggle="collapse" href="#collapseRiskComments" aria-expanded="false" aria-controls="collapseRiskComments">
+            Ver comentarios
             <% if (comments.filter(function thisSection(comment) { return comment.section == 'risks'}).length > 0) {%>
                  <i class="fa fa-comments" aria-hidden="true"></i>
             <% } else {%>

@@ -10,7 +10,7 @@ module.exports = {
   attributes: {
     belongs_to_project: {model: 'project', required:true},
     name: {type: 'string', required:true},
-    comm_plan: {type: 'string', required:true},
+    comm_plan: {type: 'string', required:false},
     //mails: {collection: 'mail', via:'stk'},
     mails: {type: "array"},
     status: {type: 'string', defaultsTo:'Pendiente'},

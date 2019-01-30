@@ -181,14 +181,14 @@ function assign_task(select, project_id) {
             </div>
         </td> <!-- FIN botón nuevo vomentario-->
      <td>
-         <table class="table table-sm table-borderless table-condensed projects-table">
-            <thead>
+         <table class="table table-sm table-borderless table-condensed">
+            <!-- <thead>
                 <th></th>
                 <th></th>
-            </thead>
+            </thead> -->
            <tbody>
-            <tr>   <!-- muestro badge y texto de último comentario cronológico, si existe-->
-                  <% if (comments.filter(function thisSection(comment) { return (comment.section == 'stakeholders' && comment.item == stakeholder.id)}).length > 0) {%>
+               <% if (comments.filter(function thisSection(comment) { return (comment.section == 'stakeholders' && comment.item == stakeholder.id)}).length > 0) {%>
+                <tr>   <!-- muestro badge y texto de último comentario cronológico, si existe-->
                     <td>  
                          <span class="badge badge-default">
                                 <%= comments.find(function thisSection(comment) { return (comment.section == 'stakeholders' && comment.item == stakeholder.id)}).user_name %>
@@ -201,24 +201,24 @@ function assign_task(select, project_id) {
                         </p>
                     
                     </td>
-                    <td>  <!-- BOTON QUE DESPLIEGA COMENTARIOS: SE MUESTRA SÓLO SI HAY COMENTARIOS!! -->
-                         <% if (comments.filter(function thisSection(comment) { return (comment.section == 'stakeholders' && comment.item == stakeholder.id)}).length > 0) {%>
-                        <div class="pull-right"> <!-- Boton que despliega lista de comentarios históricos-->
-                            <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapse<%=stakeholder.id%>" aria-expanded="false" aria-controls="collapse<%=stakeholder.id%>">
+                        <% if (comments.filter(function thisSection(comment) { return (comment.section == 'stakeholders' && comment.item == stakeholder.id)}).length > 0) {%>
+                            <td>  <!-- BOTON QUE DESPLIEGA COMENTARIOS: SE MUESTRA SÓLO SI HAY COMENTARIOS!! -->
+                                <div class="pull-right"> <!-- Boton que despliega lista de comentarios históricos-->
+                            <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapsestk<%=stakeholder.id%>" aria-expanded="false" aria-controls="collapsestk<%=stakeholder.id%>">
                                     <i class="fa fa-comments" aria-hidden="true">
                                     </i> 
                                 </a>
                         </div>    <!-- FIN Boton que despliega lista de comentarios históricos-->     
-                    <% }%>
+                  
                   </td>
-                <% } %>
+                  <% }%>
             </tr> <!--FIN último comentario y botón de más comentarios-->
-        
+            <% } %>
          <!--COMENTARIOS COLAPSABLES-->   
          <% if (comments.filter(function thisSection(comment) { return (comment.section == 'stakeholders' && comment.item == stakeholder.id)}).length > 0) {%>
          <tr>
             <td>
-            <div class="collapse" id="collapse<%=stakeholder.id%>">
+            <div class="collapse" id="collapsestk<%=stakeholder.id%>">
                 <div class="card card-body">
                     
                     <table class="table table-sm table-borderless table-condensed">
@@ -376,13 +376,13 @@ function assign_task(select, project_id) {
                     </td> <!-- FIN botón nuevo vomentario-->
                  <td>
                      <table class="table table-sm table-borderless table-condensed">
-                         <thead>
+                         <!-- <thead>
                              <th></th>
                              <th></th>
-                            </thead>
+                            </thead> -->
                          <tbody>
-                        <tr>   <!-- muestro badge y texto de último comentario cronológico, si existe-->
-                              <% if (comments.filter(function thisSection(comment) { return (comment.section == 'risks' && comment.item == risk.id)}).length > 0) {%>
+                           <% if (comments.filter(function thisSection(comment) { return (comment.section == 'risks' && comment.item == risk.id)}).length > 0) {%>
+                            <tr>   <!-- muestro badge y texto de último comentario cronológico, si existe-->
                                 <td>  
                                      <span class="badge badge-default">
                                             <%= comments.find(function thisSection(comment) { return (comment.section == 'risks' && comment.item == risk.id)}).user_name %>
@@ -395,24 +395,25 @@ function assign_task(select, project_id) {
                                     </p>
                                 
                                 </td>
-                                <td>  <!-- BOTON QUE DESPLIEGA COMENTARIOS: SE MUESTRA SÓLO SI HAY COMENTARIOS!! -->
                                      <% if (comments.filter(function thisSection(comment) { return (comment.section == 'risks' && comment.item == risk.id)}).length > 0) {%>
-                                    <div class="pull-right"> <!-- Boton que despliega lista de comentarios históricos-->
-                                        <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapse<%=risk.id%>" aria-expanded="false" aria-controls="collapse<%=risk.id%>">
+                                        <td>  <!-- BOTON QUE DESPLIEGA COMENTARIOS: SE MUESTRA SÓLO SI HAY COMENTARIOS!! -->
+                                            <div class="pull-right"> <!-- Boton que despliega lista de comentarios históricos-->
+                                        <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapserisk<%=risk.id%>" aria-expanded="false" aria-controls="collapserisk<%=risk.id%>">
                                                 <i class="fa fa-comments" aria-hidden="true">
                                                 </i> 
                                             </a>
                                     </div>    <!-- FIN Boton que despliega lista de comentarios históricos-->     
-                                <% }%>
-                              </td>
-                            <% } %>
+                                </td>
+                                  <% }%>
+                              
+                           
                         </tr> <!--FIN último comentario y botón de más comentarios-->
-                    
+                        <% } %>
                      <!--COMENTARIOS COLAPSABLES-->   
                      <% if (comments.filter(function thisSection(comment) { return (comment.section == 'risks' && comment.item == risk.id)}).length > 0) {%>
                      <tr>
                         <td>
-                        <div class="collapse" id="collapse<%=risk.id%>">
+                        <div class="collapse" id="collapserisk<%=risk.id%>">
                             <div class="card card-body">
                                 
                                 <table class="table table-sm table-borderless table-condensed">
@@ -572,14 +573,14 @@ function assign_task(select, project_id) {
                                 </div>
                             </td> <!-- FIN botón nuevo vomentario-->
                          <td>
-                             <table class="table table-sm table-borderless table-condensed projects-table">
-                                 <thead><th></th>
+                             <table class="table table-sm table-borderless table-condensed">
+                                 <!-- <thead><th></th>
                                     <th></th>
-                                </thead>
+                                </thead> -->
                                  <tbody>
-                                <tr>   <!-- muestro badge y texto de último comentario cronológico, si existe-->
-                                      <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
-                                        <td>  
+                                    <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
+                                        <tr>   <!-- muestro badge y texto de último comentario cronológico, si existe-->
+                                            <td>  
                                              <span class="badge badge-default">
                                                     <%= comments.find(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).user_name %>
                                             </span>
@@ -594,21 +595,23 @@ function assign_task(select, project_id) {
                                         <td>  <!-- BOTON QUE DESPLIEGA COMENTARIOS: SE MUESTRA SÓLO SI HAY COMENTARIOS!! -->
                                              <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
                                             <div class="pull-right"> <!-- Boton que despliega lista de comentarios históricos-->
-                                                <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapse<%=task.id%>" aria-expanded="false" aria-controls="collapse<%=task.id%>">
+                                                <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapsetask<%=task.id%>" aria-expanded="false" aria-controls="collapsetask<%=task.id%>">
                                                         <i class="fa fa-comments" aria-hidden="true">
                                                         </i> 
                                                     </a>
                                             </div>    <!-- FIN Boton que despliega lista de comentarios históricos-->     
                                         <% }%>
                                       </td>
-                                    <% } %>
+                                  
                                 </tr> <!--FIN último comentario y botón de más comentarios-->
-                            
+                                <% } %>
                              <!--COMENTARIOS COLAPSABLES-->   
                              <% if (comments.filter(function thisSection(comment) { return (comment.section == 'objectives' && comment.item == task.id)}).length > 0) {%>
-                             <tr>
+                               
+                                    <tr>
+                                
                                 <td>
-                                <div class="collapse" id="collapse<%=task.id%>">
+                                    <div class="collapse" id="collapsetask<%=task.id%>">
                                     <div class="card card-body">
                                         
                                         <table class="table table-sm table-borderless table-condensed">
@@ -652,9 +655,11 @@ function assign_task(select, project_id) {
                                         </table>
                                     
                                     </div>
-                                </div>
+                                
+                                </div>  
                             </td>
-                        </tr>  <!-- FIN COMENTARIOS COLAPSABLES-->  
+                        </tr>  <!-- FIN COMENTARIOS COLAPSABLES-->
+                     
                         <% } else {%>
                             <tr><td><p style="color:rgba(184, 180, 180, 0.692);"><%= __('nocomments')%></p></td></tr>
                         <% } %>

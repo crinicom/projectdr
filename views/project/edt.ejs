@@ -56,7 +56,9 @@
                                 <input type="hidden" name="_method" value="new" >
                              
                                 <button type="submit" class="btn btn-sm btn-success" >   
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                Agregar&nbsp;Tarea
+                            </button>
                                 
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
                             </form>
@@ -77,10 +79,10 @@
                 </td>
                
                 <td class="align-middle"><table class="table table-hover table-striped table-sm" id="subTable">
-                    <thead id="nohead"><th></th>
+                    <!-- <thead id="nohead"><th></th>
                     <th></th>
                     <th></th>
-                    </thead>
+                    </thead> -->
                     
                     <tbody id="subTable">
                     <% _.each(objective.tasks, function(task) { %>
@@ -155,7 +157,8 @@
                     <input type="hidden" value="/project/edt/<%=project.id%>" name="comes_from">
                     <input type="hidden" value="<%=_csrf%>" name="_csrf">
                 </div>
-                <button type="submit" class="btn btn-sm btn-success" >
+                <button type="submit" class="btn btn-sm btn-success"  >
+                      
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
             </form>

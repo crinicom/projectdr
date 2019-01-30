@@ -40,11 +40,11 @@
                 
             <% _.each(objective.tasks, function(task) { %>
                
-                    <td class="vert-aligned"><%= objective.description%> <-- <%=task.text%></td>
+                    <td class="vert-aligned"><%= objective.description%> -> <%=task.text%></td>
                
-                <td>
-                    <table class="table table-sm ">
-                        <tr> 
+                <td class="vert-aligned">
+                    <!-- <table class="table table-sm "> -->
+                        <!-- <tr>  -->
                           
                             <!-- <a href="/task/edit/<%=task.id%>" class="btn btn-sm btn-primary" role="button">
                                 <i class="fa fa-pencil-square-o fa-2" aria-hidden="true"></i>                                
@@ -64,13 +64,14 @@
                                 <input type="hidden" name="assoc_task" value="<%= task.id%>" >
                                 <input type="hidden" name="_method" value="new" >
                              
-                                <button type="submit" class="btn btn-sm btn-success" >   
-                                <i class="fa fa-plus-square-o fa-2" aria-hidden="true"></i></button>
+                                <button type="submit" class="btn-action green-line" >   
+                                <!-- <i class="fa fa-plus-square-o fa-2" aria-hidden="true"></i> -->
+                                    Agregar&nbsp;Interesado</button>
                                 
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
                             </form>
-                        </tr>
-                    </table>
+                        <!-- </tr> -->
+                    <!-- </table> -->
                 </td>
                
                 <td class="align-middle"><table class="table table-hover table-striped table-sm">
@@ -81,7 +82,7 @@
                             <td><%= stakeholder.name%></td>
                             <td><%= stakeholder.comm_plan%></td>
                             <td><%= JSON.stringify(stakeholder.mails)%></td>
-                            <td><%//= stakeholder.assoc_task%></td>
+                            <!-- <td><%//= stakeholder.assoc_task%></td> -->
                             <td>
                                 <table class="table table-sm">
                                     <tr>
@@ -109,14 +110,14 @@
                                             <input type="hidden" name="_csrf" value="<%= _csrf%>">
                                         </form>
 
-                                        <form action="#"  method="POST"> <!-- /mail/new -->
+                                        <!-- <form action="#"  method="POST"> 
                                             <input type="hidden" name="belongs_to_stk" value="<%//= stakeholder.id%>">
                                             <input type="hidden" name="_method" value="new" >
                                             <button type="submit" class="btn btn-sm btn-success disabled">
                                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                             </button>
                                             <input type="hidden" name="_csrf" value="<%= _csrf%>">
-                                        </form> 
+                                        </form>  -->
                                     </tr>
                                 </table>
                              </td>
@@ -141,7 +142,8 @@
 
      <!-- Comentarios sección de Stakeholders -->
      <p><div class="pull-right"> 
-            <a class="btn btn-primary" data-toggle="collapse" href="#collapseSTKComments" aria-expanded="false" aria-controls="collapseSTKComments">
+            <a class="btn-action gray-line" data-toggle="collapse" href="#collapseSTKComments" aria-expanded="false" aria-controls="collapseSTKComments">
+                Ver comentarios
                 <% if (comments.filter(function thisSection(comment) { return comment.section == 'stk'}).length > 0) {%>
                      <i class="fa fa-comments" aria-hidden="true"></i>
                 <% } else {%>

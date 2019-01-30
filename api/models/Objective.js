@@ -10,8 +10,8 @@ module.exports = {
   attributes: {
     belongs_to_project: { model: 'project', required: true},
     description: { type: 'string', required:true},
-    formula: { type: 'string', required:true},
-    goal: { type: 'string', required:true},
+    formula: { type: 'string', required:false},
+    goal: { type: 'string', required:false},
     tasks: {collection: 'task', via: 'belongs_to_obj'}
   }
 };
