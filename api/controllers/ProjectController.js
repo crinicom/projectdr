@@ -72,7 +72,7 @@ module.exports = {
                 var estados = [ {key: "sharedfolder", state: "no"}];
             }
             console.log("antes de setState OK stk PARA SEGUIR")
-            StateService.SetState(req.param('id'), estados, RenderView); 
+            StateService.SetState(req.param('id'), estados, RenderView,2); 
             
            
         }); 
@@ -170,20 +170,22 @@ module.exports = {
             }
         }
         if (ok_para_seguir) {
-            var estados = [ {key: "edt", state: "finished"},
-            {key: "stakeholders", state: "wip"} ];
+            var estados = [ 
+                {key: "edt", state: "finished"},
+                {key: "stakeholders", state: "wip"} ];
 
             //save state of the project
             console.log("antes de setState OK PARA SEGUIR")
-            StateService.SetState(project.id, estados, RenderView);
+            StateService.SetState(project.id, estados, RenderView,2);
         } else {
-            var estados = [ {key: "edt", state: "wip"},
-            {key: "stakeholders", state: "no"},
-            {key: "risks", state: "no"},
-            {key: "gantt", state: "no"} ];
+            var estados = [ 
+                {key: "edt", state: "wip"},
+                {key: "stakeholders", state: "no"},
+                {key: "risks", state: "no"},
+                {key: "gantt", state: "no"} ];
             console.log("antes de setState NO OK")
             //save state of the project
-            StateService.SetState(project.id, estados, RenderView);
+            StateService.SetState(project.id, estados, RenderView,2);
             
         }    
         });
@@ -271,14 +273,14 @@ module.exports = {
 
                 //save state of the project
                 console.log("antes de setState OK stk PARA SEGUIR")
-                StateService.SetState(project.id, estados, RenderView);
+                StateService.SetState(project.id, estados, RenderView,2);
             } else {
                 var estados = [ {key: "stakeholders", state: "wip"},
                 {key: "risks", state: "no"},
                 {key: "gantt", state: "no"} ];
                 console.log("antes de setState NO OK")
                 //save state of the project
-                StateService.SetState(project.id, estados, RenderView);
+                StateService.SetState(project.id, estados, RenderView,2);
                 
             }    
         });
@@ -390,14 +392,14 @@ module.exports = {
 
             //save state of the project
             console.log("antes de setState OK stk PARA SEGUIR")
-            StateService.SetState(project.id, estados, RenderView);
+            StateService.SetState(project.id, estados, RenderView,2);
         } else {
             var estados = [ {key: "risks", state: "wip"},
            
             {key: "gantt", state: "no"} ];
             console.log("antes de setState NO OK")
             //save state of the project
-            StateService.SetState(project.id, estados, RenderView);
+            StateService.SetState(project.id, estados, RenderView,2);
             
         }      
     });
@@ -543,26 +545,31 @@ module.exports = {
         //FIN calculo de avance
 
         advance = parseInt(advance,10);
+        var estados;
+        
 
         //project.status = status;
-        Project.findOne(project.id, function foundProject(err, proj) {
-                if (err) return next(err);
-                if (!proj) return next();
-                proj.advance = 0;
-                proj.advance = advance;
-                console.log("General advance: " + proj.advance + " type: " + typeof proj.advance);
-            proj.save(function(err){
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(" Project advance saved: " + proj.advance );
-                   
-                    res.view({objectives:objectives, project:project, stakeholders:stakeholders, risks:risks, comments:comments, advance:advance});
-                   
-                    
-                }
-            });
-        }); 
+        
+            Project.findOne(project.id, function foundProject(err, proj) {
+                    if (err) return next(err);
+                    if (!proj) return next();
+                    proj.advance = 0;
+                    proj.advance = advance;
+                    console.log("General advance: " + proj.advance + " type: " + typeof proj.advance);
+                proj.save(function(err){
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(" Project advance saved: " + proj.advance );
+                        
+                        function RenderView() {
+                            res.view({objectives:objectives, project:project, stakeholders:stakeholders, risks:risks, comments:comments, advance:advance});
+                        }
+                        StateService.SetState(project.id, estados, RenderView,2);
+                        
+                    }
+                });
+            }); 
         
         }).catch(function (err){
             if (err) return res.serverError(err);

@@ -51,7 +51,7 @@ module.exports = {
                     {key: "edt", state: "wip"} ];
 
             //save state of the project
-            StateService.SetState(req.param('belongs_to_project'), estados, RenderView);
+            StateService.SetState(req.param('belongs_to_project'), estados, RenderView,2);
 
             
             
@@ -160,6 +160,10 @@ module.exports = {
        
         console.log("\ncuantos obj quedan? FUERA THEN", project.objectives.length,'\n');
         console.log("queda: ", project.objectives);
+        function RenderView() {
+            res.redirect('/project/show/' + project.id );
+        }
+
         if(project.objectives.length == 1) {
         //    console.log("en el if:", project.objectives.length);
         //     var SetStatePcharter_WIP= StateService.SetState({id:  project.id, key: "pcharter", state: "wip"});
@@ -167,9 +171,7 @@ module.exports = {
         //     var SetStateEDT_NO= StateService.SetState({id:  project.id, key: "edt", state: "no"});
         //     console.log(SetStateEDT_NO);
 
-            function RenderView() {
-                res.redirect('/project/show/' + project.id );
-            }
+           
             
         
             var estados = [ {key: "pcharter", state: "wip"},
@@ -179,8 +181,9 @@ module.exports = {
                         {key: "gantt", state: "no"} ];
 
                 //save state of the project
-                StateService.SetState(project.id, estados , RenderView);
-        }
+                console.log("estoy en DESTROY a punto de setstate");
+                StateService.SetState(project.id, estados , RenderView,2);
+        } else RenderView();
             
         }); 
         }

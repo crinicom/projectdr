@@ -55,9 +55,10 @@
                                 <input type="hidden" name="belongs_to_obj" value="<%= objective.id%>" >
                                 <input type="hidden" name="_method" value="new" >
                              
-                                <button type="submit" class="btn btn-sm btn-success" >   
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                <button type="submit" class="btn-action green-line" >   
+                                <i class="fa fa-plus-square-o fa-2" aria-hidden="true"></i>
                                 Agregar&nbsp;Tarea
+                                
                             </button>
                                 
                                 <input type="hidden" name="_csrf" value="<%= _csrf%>">
@@ -136,11 +137,12 @@
 
      <!-- Comentarios sección de EDT -->
      <p><div class="pull-right"> 
-        <a class="btn btn-primary" data-toggle="collapse" href="#collapseEDTComments" aria-expanded="false" aria-controls="collapseEDTComments">
+        <a class="btn-action gray-line" data-toggle="collapse" href="#collapseEDTComments" aria-expanded="false" aria-controls="collapseEDTComments">
+            Ver comentarios &nbsp;&nbsp;&nbsp;
             <% if (comments.filter(function thisSection(comment) { return comment.section == 'edt'}).length > 0) {%>
-                 <i class="fa fa-comments" aria-hidden="true"></i>
+                 <i class="fa fa-comments fr" aria-hidden="true"></i>
             <% } else {%>
-                 <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                 <i class="fa fa-commenting-o fr" aria-hidden="true"></i>
             <% }%>
         </a>
     </div> </p>
